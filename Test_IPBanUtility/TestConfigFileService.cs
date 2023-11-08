@@ -6,11 +6,11 @@ namespace Test_IPBanUtility;
 public class TestConfigFileService
 {
      string directoryPath = "C:\\Program Files\\IPBan";
-     private ConfigContextService contextManager;
+     private ConfigFileManager cfgManager;
 
      public TestConfigFileService()
      {
-          contextManager = new ConfigContextService(directoryPath);
+          cfgManager = new(directoryPath);
      }
 
      [TestMethod]

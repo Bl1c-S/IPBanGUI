@@ -17,6 +17,12 @@ public class ConfigFileManager
           GetContext();
           GetKeys();
      }
+     public void WriteContextChanged(IEnumerable<Key> keys)
+     {
+          foreach (var key in keys)
+               Context.Insert(key.Index, key.Context);
+          File.WriteAllLines(_contextPath, Context);
+     }
      public void GetContext() => Context = ReadFile(_contextPath);
      public void GetKeys()
      {
