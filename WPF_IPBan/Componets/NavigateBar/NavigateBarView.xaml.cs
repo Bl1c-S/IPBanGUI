@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for MainWindow.xaml
-     /// </summary>
-     public partial class MainWindow : Window
-     {
-          public MainWindow()
-          {
-               InitializeComponent();
-          }
+    /// <summary>
+    /// Interaction logic for NavigateBarView.xaml
+    /// </summary>
+    public partial class NavigateBarView : UserControl
+    {
+        public NavigateBarView()
+        {
+            InitializeComponent();
+        }
     }
 }

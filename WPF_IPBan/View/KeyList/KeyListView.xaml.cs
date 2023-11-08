@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace WPF_IPBanUtility
 {
      /// <summary>
-     /// Interaction logic for MainWindow.xaml
+     /// Interaction logic for KeyListView.xaml
      /// </summary>
-     public partial class MainWindow : Window
+     public partial class KeyListView : UserControl
      {
-          public MainWindow()
+          public KeyListView()
           {
                InitializeComponent();
           }
-    }
+     }
 }

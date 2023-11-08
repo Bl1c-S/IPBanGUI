@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace WPF_IPBanUtility
 {
      /// <summary>
-     /// Interaction logic for MainWindow.xaml
+     /// Interaction logic for SettingsView.xaml
      /// </summary>
-     public partial class MainWindow : Window
+     public partial class SettingsView : UserControl
      {
-          public MainWindow()
+          public SettingsView()
           {
                InitializeComponent();
           }
-    }
+     }
 }

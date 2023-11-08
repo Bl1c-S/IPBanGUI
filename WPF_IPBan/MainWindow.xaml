@@ -1,12 +1,35 @@
-﻿<Window x:Class="WPF_IPBan.MainWindow"
+﻿<Window x:Class="WPF_IPBanUtility.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_IPBan"
+        xmlns:local="clr-namespace:WPF_IPBanUtility"
         mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Resources>
+            
+            <DataTemplate DataType="{x:Type local:KeyListViewModel}">
+                <local:KeyListView />
+            </DataTemplate>
 
+            <DataTemplate DataType="{x:Type local:SettingsViewModel}">
+                <local:SettingsView />
+            </DataTemplate>
+        </Grid.Resources>
+       
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <local:NavigateBarView DataContext="{Binding NavigateBarViewModel}" Margin="4"/>
+
+        <ContentControl  Content="{Binding CurrentViewModel}" Grid.Row="1" Margin="4" />
     </Grid>
 </Window>
