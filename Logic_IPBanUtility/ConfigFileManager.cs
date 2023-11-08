@@ -1,75 +1,65 @@
-﻿using NLog;
-using System.Text;
+﻿using System.Text;
 
 namespace Logic_IPBanUtility;
 
 public class ConfigFileManager
 {
+     public List<string> Context = new();
+     public List<Key> Keys = new();
+
      private readonly string _contextPath;
-     private readonly string keyNamesPath;
-     private List<string> _context;
+     private readonly string _keyNamesPath;
 
      public ConfigFileManager(string directoryPath)
      {
-          DirectoryCheck(directoryPath);
           _contextPath = Path.Combine(directoryPath, "ipban.config");
-          keyNamesPath = Path.Combine(directoryPath, "keynames.txt");
-          _context = ReadFile(_contextPath);
+          _keyNamesPath = Path.Combine(directoryPath, "keynames.txt");
+          GetContext();
+          GetKeys();
      }
-     public ConfigContextManager CreateConfigContextManager()
+     public void GetContext() => Context = ReadFile(_contextPath);
+     public void GetKeys()
      {
-          var names = ReadFile(keyNamesPath);
-          names = GetCurrentKeyNames(names);
-          var keys = GetKeys(names);
-          return new(this, keys, _context);
+          var names = ReadFile(_keyNamesPath);
+          List<Key> newKeys = new();
+          foreach (var name in names)
+               newKeys.Add(GetKey(name));
+          Keys = newKeys;
      }
-     public List<string> UpdateCfgContext() => ReadFile(_contextPath);
-     private List<Key> GetKeys(IEnumerable<string> keyNames)
+     private Key GetKey(string name)
      {
-          List<Key> keys = new();
-          foreach (var keyName in keyNames)
-               keys.Add(GetKey(keyName));
-          return keys;
-     }
-     private Key GetKey(string keyName)
-     {
-          (string context, int index) = GetKeyContextAndIndex(keyName);
-          string comment = GetKeyComment(index);
-          Key key = new(index, keyName, context, comment);
+          var keyContext = GetKeyContext(name);
+          var index = GetKeyIndex(keyContext);
+          var comment = GetKeyComment(index);
+          Key key = new(index, name, keyContext, comment);
           return key;
+     }
+     private string GetKeyContext(string name)
+     {
+          var keyContext = Context.FirstOrDefault(x => x.Contains($"add key=\"{name}\""));
+          if (keyContext is null)
+               throw new KeyNotFoundException(name);
+          return keyContext;
+     }
+     private int GetKeyIndex(string keyContext)
+     {
+          int index = Context.IndexOf(keyContext);
+          return index;
      }
      private string GetKeyComment(int index)
      {
           List<string> comment = new();
           for (int i = index; ; i--)
           {
-               var str = _context[i];
+               var str = Context[i];
                comment.Add(str);
                if (str.Contains("<!--"))
                     break;
           }
           comment.Reverse();
-          StringBuilder sb = new();
-          foreach (string str in comment)
-               sb.AppendLine(str);
-
-          var result = sb.ToString();
+          //TODO test ToString
+          var result = comment.ToString()!;
           return result;
-     }
-     private (string, int) GetKeyContextAndIndex(string key)
-     {
-          var keyContext = _context.FirstOrDefault(x => x.Contains($"add key=\"{key}\""));
-          if (keyContext is null)
-               throw new KeyNotFoundException(key);
-
-          int index = _context.IndexOf(keyContext);
-          return (keyContext, index);
-     }
-
-     private void DirectoryCheck(string directoryPath)
-     {
-          if (!Directory.Exists(directoryPath))
-               throw new DirectoryNotFoundException();
      }
      private List<string> ReadFile(string filePath)
      {

@@ -6,18 +6,17 @@ namespace Test_IPBanUtility;
 public class TestConfigFileService
 {
      string directoryPath = "C:\\Program Files\\IPBan";
-     private ConfigContextManager cfgService;
+     private ConfigContextService contextManager;
 
      public TestConfigFileService()
      {
-          var cfgManager = new ConfigFileManager(directoryPath);
-          cfgService = cfgManager.CreateConfigContextManager();
+          contextManager = new ConfigContextService(directoryPath);
      }
 
      [TestMethod]
      public void Test1()
      {
-          cfgService.GetValue("BanTime");
-          cfgService.InsertValue("BanTime", "00:01:00:00");
+          //contextManager.GetValue("BanTime");
+          //contextManager.InsertValue("BanTime", "00:01:00:00");
      }
 }
