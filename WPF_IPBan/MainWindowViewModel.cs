@@ -11,15 +11,15 @@ namespace WPF_IPBanUtility
           private readonly NavigateBarViewModel _navigateBarViewModel;
           private readonly NavigationService _navigationService;
 
-          public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
           public NavigateBarViewModel NavigateBarViewModel => _navigateBarViewModel;
+          public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
 
           public MainWindowViewModel(NavigationService navigationService)
           {
                _navigateBarViewModel = new(navigationService);
                _navigationService = navigationService;
 
-               _navigationService.Navigate(new SettingsViewModel());
+               _navigationService.Navigate<SettingsViewModel>();
                _navigationService.OnCurrentChanged += OnNavigateChanged;
           }
           private void OnNavigateChanged()

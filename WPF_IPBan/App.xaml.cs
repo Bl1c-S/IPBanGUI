@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Windows;
 
 namespace WPF_IPBanUtility
@@ -15,14 +12,27 @@ namespace WPF_IPBanUtility
      {
           protected override void OnStartup(StartupEventArgs e)
           {
-               var navigationService = new NavigationService();
-               var mainWindowViewModel = new MainWindowViewModel(navigationService);
-               var mainWindow = new MainWindow();
+               var Services = CreateServiceProvager();
 
-               mainWindow.DataContext = mainWindowViewModel;
+               var mainWindow = new MainWindow();
+               mainWindow.DataContext = Services.GetRequiredService<MainWindowViewModel>();
                mainWindow.Show();
 
                base.OnStartup(e);
+          }
+
+          private IServiceProvider CreateServiceProvager()
+          {
+               IHost host = Host.CreateDefaultBuilder().ConfigureServices(servises =>
+               {
+                    servises.AddSingleton(s => new NavigationService(s));
+                    servises.AddTransient<MainWindowViewModel>();
+                    servises.AddTransient<SettingsViewModel>();
+                    servises.AddTransient<KeyListViewModel>();
+               }).Build();
+               host.Start();
+
+               return host.Services;
           }
      }
 }

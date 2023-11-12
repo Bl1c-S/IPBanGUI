@@ -10,8 +10,8 @@ internal class NavigateBarViewModel : ViewModelBase
      public NavigateBarViewModel(NavigationService navigationService)
      {
           _navigationService = navigationService;
-          NavigateToKeyList = new RelayCommand(() => _navigationService.Navigate(new KeyListViewModel(navigationService)));
-          NavigateToSettings = new RelayCommand(() => _navigationService.Navigate(new SettingsViewModel()));
+          NavigateToKeyList = new RelayCommand(() => _navigationService.Navigate<KeyListViewModel>());
+          NavigateToSettings = new RelayCommand(() => _navigationService.Navigate<SettingsViewModel>());
      }
 
      public ICommand NavigateToKeyList { get; }

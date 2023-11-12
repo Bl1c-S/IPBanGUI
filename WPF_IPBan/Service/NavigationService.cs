@@ -1,21 +1,25 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace WPF_IPBanUtility;
 
 internal class NavigationService
 {
+     private readonly IServiceProvider _serviceProvider;
      private ViewModelBase? _currentViewModel;
+
      public event Action? OnCurrentChanged;
-
      public ViewModelBase? CurrentViewModel => _currentViewModel;
-
-     public void Navigate(ViewModelBase viewModel)
+     public NavigationService(IServiceProvider serviceProvider)
      {
-          if (viewModel != null)
-               _currentViewModel?.Dispose();
+          _serviceProvider = serviceProvider;
+     }
+     public void Navigate<T>() where T : ViewModelBase
+     {
+          var viewModel = _serviceProvider.GetService<T>() as ViewModelBase;
 
+          viewModel?.Dispose();
           _currentViewModel = viewModel;
-
           OnCurrentChanged?.Invoke();
      }
 }
