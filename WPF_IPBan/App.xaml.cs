@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Logic_IPBanUtility;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
@@ -25,6 +26,8 @@ namespace WPF_IPBanUtility
           {
                IHost host = Host.CreateDefaultBuilder().ConfigureServices(servises =>
                {
+                    servises.AddSingleton<Settings>();
+
                     servises.AddSingleton(s => new NavigationService(s));
                     servises.AddSingleton<MainWindowViewModel>();
                     servises.AddTransient<SettingsViewModel>();

@@ -9,14 +9,18 @@ public class ConfigFileManager
 
      private readonly string _contextPath;
      private readonly string _keyNamesPath;
+     private readonly string _settingsPath;
 
-     public ConfigFileManager(string directoryPath)
+     public ConfigFileManager(Settings settings)
      {
+          var directoryPath = settings.DirrectoryPath;
           _contextPath = Path.Combine(directoryPath, "ipban.config");
           _keyNamesPath = Path.Combine(directoryPath, "keynames.txt");
+          _settingsPath = Path.Combine(directoryPath, "settings.txt");
           GetContext();
           GetKeys();
      }
+
      public void WriteContextChanged(IEnumerable<Key> keys)
      {
           foreach (var key in keys)

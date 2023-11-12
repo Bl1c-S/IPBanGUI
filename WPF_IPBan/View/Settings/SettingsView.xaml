@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock  Text="Settings"/>
+        <StackPanel>
+            <Label Content="Dirrectory path"/>
+            <TextBox Text="{Binding DirrectoryPath}"/>
+        </StackPanel>
+
+        <Button Content="Save" Command="{Binding SaveChanged}"/>
     </Grid>
 </UserControl>

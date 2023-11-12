@@ -20,4 +20,8 @@
     <Folder Include="Componets\Key\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Logic_IPBanUtility\Logic_IPBanUtility.csproj" />
+  </ItemGroup>
+
 </Project>
