@@ -18,7 +18,10 @@ internal class NavigationService
      {
           var viewModel = _serviceProvider.GetService<T>() as ViewModelBase;
 
-          viewModel?.Dispose();
+          if (viewModel is null)
+               return;
+
+          _currentViewModel?.Dispose();
           _currentViewModel = viewModel;
           OnCurrentChanged?.Invoke();
      }

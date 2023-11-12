@@ -5,10 +5,10 @@ using System.Windows;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for App.xaml
-     /// </summary>
-     public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
      {
           protected override void OnStartup(StartupEventArgs e)
           {
@@ -26,9 +26,10 @@ namespace WPF_IPBanUtility
                IHost host = Host.CreateDefaultBuilder().ConfigureServices(servises =>
                {
                     servises.AddSingleton(s => new NavigationService(s));
-                    servises.AddTransient<MainWindowViewModel>();
+                    servises.AddSingleton<MainWindowViewModel>();
                     servises.AddTransient<SettingsViewModel>();
                     servises.AddTransient<KeyListViewModel>();
+                    servises.AddTransient<KeyViewModel>();
                }).Build();
                host.Start();
 

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace WPF_IPBanUtility;
 
-namespace WPF_IPBanUtility
+internal class SettingsViewModel : ViewModelBase
 {
-    internal class SettingsViewModel : ViewModelBase
-    {
-    }
+
 }

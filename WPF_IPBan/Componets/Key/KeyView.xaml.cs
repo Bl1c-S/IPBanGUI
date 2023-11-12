@@ -15,19 +15,14 @@ using System.Windows.Shapes;
 
 namespace WPF_IPBanUtility
 {
-    /// <summary>
-    /// Interaction logic for NavigateBarView.xaml
-    /// </summary>
-    public partial class NavigateBarView : UserControl
-    {
-        public NavigateBarView()
-        {
-            InitializeComponent();
-        }
-
-          private void TabItem_Executed(object sender, ExecutedRoutedEventArgs e)
+     /// <summary>
+     /// Interaction logic for KeyView.xaml
+     /// </summary>
+     public partial class KeyView : UserControl
+     {
+          public KeyView()
           {
-
-        }
-    }
+               InitializeComponent();
+          }
+     }
 }

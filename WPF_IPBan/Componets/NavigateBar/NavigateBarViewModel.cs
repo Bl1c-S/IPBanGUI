@@ -10,10 +10,23 @@ internal class NavigateBarViewModel : ViewModelBase
      public NavigateBarViewModel(NavigationService navigationService)
      {
           _navigationService = navigationService;
+          _navigationService.OnCurrentChanged += OnCurrentChanged;
           NavigateToKeyList = new RelayCommand(() => _navigationService.Navigate<KeyListViewModel>());
           NavigateToSettings = new RelayCommand(() => _navigationService.Navigate<SettingsViewModel>());
      }
 
+     public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
+
      public ICommand NavigateToKeyList { get; }
      public ICommand NavigateToSettings { get; }
+
+     private void OnCurrentChanged()
+     {
+          OnPropertyChanged(nameof(CurrentViewModel));
+     }
+     public override void Dispose()
+     {
+          _navigationService.OnCurrentChanged -= OnCurrentChanged;
+          base.Dispose();
+     }
 }
