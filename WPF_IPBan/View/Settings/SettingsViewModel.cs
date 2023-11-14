@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility;
+using System;
 using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
@@ -23,9 +25,20 @@ internal class SettingsViewModel : ViewModelBase
      {
           _settings = settings;
           _dirrectoryPath = _settings.DirrectoryPath;
-          ISaveChangedCommand = new RelayCommand(() => _settings.SaveChanged(_dirrectoryPath));
+          ISaveChangedCommand = new RelayCommand(TrySaveChanged);
      }
      public ICommand ISaveChangedCommand { get; }
 
-
+     private void TrySaveChanged()
+     {
+          try
+          {
+               _settings.SaveChanged(_dirrectoryPath);
+          }
+          catch (Exception e)
+          {
+               InfoMessageBox messageBox = new(e.Message, "Error", "Try again", "Close");
+               messageBox.OpenMassangeBox(TrySaveChanged);
+          }
+     }
 }

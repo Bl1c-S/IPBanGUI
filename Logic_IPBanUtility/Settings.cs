@@ -65,6 +65,9 @@ public class Settings
      public void SaveChanged(string dirrectoryPath)
      {
           DirrectoryPath = dirrectoryPath;
+          SettingsFilePath = Path.Combine(dirrectoryPath, "setting.json");
+          ContextFilePath = Path.Combine(dirrectoryPath, "ipban.config");
+          KeyNamesFilePath = Path.Combine(dirrectoryPath, "keynames.txt");
           SaveSettings();
      }
 }

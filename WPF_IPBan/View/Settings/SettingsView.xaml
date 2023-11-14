@@ -12,6 +12,6 @@
             <TextBox Text="{Binding DirrectoryPath}"/>
         </StackPanel>
 
-        <Button Content="Save" Command="{Binding SaveChanged}"/>
+        <Button Content="Save" Command="{Binding ISaveChangedCommand}"/>
     </Grid>
 </UserControl>
