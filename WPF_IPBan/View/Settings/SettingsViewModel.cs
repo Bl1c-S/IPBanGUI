@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility;
 using System;
+using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
@@ -17,17 +18,33 @@ internal class SettingsViewModel : ViewModelBase
           set
           {
                _dirrectoryPath = value;
-               OnPropertyChanging(nameof(DirrectoryPath));
+               OnPropertyChanged(nameof(DirrectoryPath));
           }
      }
+     public ICommand ISaveChangedCommand { get; }
+     public ICommand IOpenFolderCommand { get; }
 
      public SettingsViewModel(Settings settings)
      {
           _settings = settings;
           _dirrectoryPath = _settings.DirrectoryPath;
           ISaveChangedCommand = new RelayCommand(TrySaveChanged);
+          IOpenFolderCommand = new RelayCommand(SelectFolder);
      }
-     public ICommand ISaveChangedCommand { get; }
+
+     private void SelectFolder()
+     {
+          using (var dialog = new FolderBrowserDialog())
+          {
+               DialogResult result = dialog.ShowDialog();
+
+               if (result == DialogResult.OK)
+               {
+                    string selectedPath = dialog.SelectedPath;
+                    DirrectoryPath = selectedPath;
+               }
+          }
+     }
 
      private void TrySaveChanged()
      {

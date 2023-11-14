@@ -25,11 +25,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:NavigateBarView DataContext="{Binding NavigateBarViewModel}" Margin="4"/>
-
-        <ContentControl  Content="{Binding CurrentViewModel}" Grid.Row="1" Margin="4" />
+        <local:NavigateBarView  Grid.Row="0" DataContext="{Binding NavigateBarViewModel}" Margin="4"/>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0" HorizontalAlignment="Stretch"/>
+        <ContentControl  Content="{Binding CurrentViewModel}" Grid.Row="2" Margin="4" />
     </Grid>
 </Window>

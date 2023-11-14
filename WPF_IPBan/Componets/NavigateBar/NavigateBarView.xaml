@@ -17,10 +17,10 @@
 
             <ui:Button Content="Keys" Icon="TextBulletListSquare24" 
                        Command = "{Binding NavigateToKeyList}"
-                       IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=KeyListViewModel}"/>
+                       IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=KeyListViewModel}" />
 
             <ui:Button Content="Settings" Icon="Settings48" 
-                       Command = "{Binding NavigateToSettings}" Margin="8,0,0,0" 
+                       Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
                        IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=SettingsViewModel}"/>
         </DockPanel>
     </Grid>

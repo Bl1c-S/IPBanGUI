@@ -3,15 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPF_IPBanUtility"
+             xmlns:local="clr-namespace:WPF_IPBanUtility" 
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         <StackPanel>
-            <Label Content="Dirrectory path"/>
-            <TextBox Text="{Binding DirrectoryPath}"/>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Шлях до кореневої папки IPBan" Target="{Binding ElementName=FolderBox}" />
+                <ui:TextBox Grid.Row="1" Grid.Column="0" x:Name="FolderBox" Icon="Folder20"  Text="{Binding DirrectoryPath}"/>
+                <ui:Button Grid.Row="1" Grid.Column="1"  Icon="FolderOpen20" Content="Вибрати папку" Command="{Binding IOpenFolderCommand}" Margin="8,0,0,0"/>
+            </Grid>
         </StackPanel>
 
-        <Button Content="Save" Command="{Binding ISaveChangedCommand}"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Content="Зберегти зміни" Command="{Binding ISaveChangedCommand}"/>
+            <Button Content="Налаштування за завмовчуванням" Command="" Margin="4,0,0,0"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>
