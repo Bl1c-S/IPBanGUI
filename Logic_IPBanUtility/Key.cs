@@ -6,11 +6,12 @@ public class Key
 {
      private const string PATTERN = "value=\"(.*?)\"";
 
-     public int Index;
-     public string Name;
-     public string Context;
-     public string Comment;
-     public string Value => GetValue();
+     public readonly int Index;
+     public readonly string Name;
+     public readonly string Comment;
+
+     public string Context { get; private set; }
+     public string Value { get; private set; }
 
      public Key(int index, string name, string context, string comment)
      {
@@ -18,16 +19,18 @@ public class Key
           Name = name;
           Context = context;
           Comment = comment;
+          Value = GetValue();
      }
      public void InsertValue(string newValue)
      {
+          Value = newValue;
           Context = Regex.Replace(Context, PATTERN, $"value=\"{newValue}\"");
      }
      private string GetValue()
      {
           Match match = Regex.Match(Context, PATTERN);
           if (!match.Success)
-               throw new Exception("Value not found from context key: " + Name);
+               return string.Empty;
 
           return match.Groups[1].Value;
      }

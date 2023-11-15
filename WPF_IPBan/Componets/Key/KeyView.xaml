@@ -8,22 +8,32 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <TextBlock Grid.Row="0" Text="Title" FontSize="16" FontWeight="Bold" Margin="5"/>
+        <StackPanel Grid.Row="0">
+            <DockPanel HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="Bold" Margin="4,0"/>
+                <ui:Button Icon="QuestionCircle24" Command="{Binding IInfoBarOpenCommand}" />
+            </DockPanel>
             
-        </DockPanel>
+            <ContentControl Visibility="{Binding IsInfoBarOpen, Converter={StaticResource BoolToVis}}">
+                <local:InfoBarView DataContext="{Binding InfoBarVM}"  />
+            </ContentControl>
+        </StackPanel>
 
-        <TextBox Grid.Row="1" x:Name="EditableTextBox" Text="Initial Text" Margin="5"/>
+        <TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" Margin="0,4,0,4"/>
 
         <DockPanel  Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Content="Disable Changed" Margin="5"/>
-            <Button Content="Delete Key" Margin="5"/>
+            <Button Content="Disable Changed"/>
+            <Button Content="Delete Key" Margin="4,0,0,0"/>
         </DockPanel>
     </Grid>
 </UserControl>

@@ -12,18 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for KeyView.xaml
-     /// </summary>
-     public partial class KeyView : UserControl
-     {
-          public KeyView()
-          {
-               InitializeComponent();
-          }
-     }
+    /// <summary>
+    /// Interaction logic for InfoBarView.xaml
+    /// </summary>
+    public partial class InfoBarView : UserControl
+    {
+        public InfoBarView()
+        {
+            InitializeComponent();
+        }
+    }
 }

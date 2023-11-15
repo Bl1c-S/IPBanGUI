@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Logic_IPBanUtility;
+﻿namespace Logic_IPBanUtility;
 
 public class ConfigFileManager
 {
@@ -9,14 +7,11 @@ public class ConfigFileManager
 
      private readonly string _contextPath;
      private readonly string _keyNamesPath;
-     private readonly string _settingsPath;
 
      public ConfigFileManager(Settings settings)
      {
-          var directoryPath = settings.DirrectoryPath;
-          _contextPath = Path.Combine(directoryPath, "ipban.config");
-          _keyNamesPath = Path.Combine(directoryPath, "keynames.txt");
-          _settingsPath = Path.Combine(directoryPath, "settings.txt");
+          _contextPath = settings.ContextFilePath;
+          _keyNamesPath = settings.KeyNamesFilePath;
           GetContext();
           GetKeys();
      }
@@ -59,17 +54,36 @@ public class ConfigFileManager
      private string GetKeyComment(int index)
      {
           List<string> comment = new();
-          for (int i = index; ; i--)
+          for (int i = index; ;)
           {
-               var str = Context[i];
-               comment.Add(str);
-               if (str.Contains("<!--"))
+               var str = Context[--i];
+               str = RemoveEmptyLine(str);
+               str = RemoveDoubleSpaces(str);
+               if (str.Contains("\n<!--"))
                     break;
+               else if (str.Contains("<!--"))
+               {
+                    comment.Add(str);
+                    break;
+               }
+               else
+                    comment.Add(str);
           }
           comment.Reverse();
-          //TODO test ToString
-          var result = comment.ToString()!;
+          var result = string.Join(' ', comment);
           return result;
+     }
+     private string RemoveDoubleSpaces(string input)
+     {
+          while (input.Contains("\t"))
+               input = input.Replace("\t", "\n");
+          return input;
+     }
+     private string RemoveEmptyLine(string input)
+     {
+          while (input.Contains("\n"))
+               input = input.Replace("\n", "");
+          return input;
      }
      private List<string> ReadFile(string filePath)
      {

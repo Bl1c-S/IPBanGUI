@@ -15,11 +15,11 @@
 
         <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
 
-            <ui:Button Content="Keys" Icon="TextBulletListSquare24" 
+            <ui:Button Content="Ключі" Icon="TextBulletListSquare24" 
                        Command = "{Binding NavigateToKeyList}"
                        IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=KeyListViewModel}" />
 
-            <ui:Button Content="Settings" Icon="Settings48" 
+            <ui:Button Content="Налаштування" Icon="Settings48" 
                        Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
                        IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=SettingsViewModel}"/>
         </DockPanel>

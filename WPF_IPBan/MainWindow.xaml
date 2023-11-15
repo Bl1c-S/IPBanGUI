@@ -10,9 +10,9 @@
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="8,0">
         <Grid.Resources>
-            
+
             <DataTemplate DataType="{x:Type local:KeyListViewModel}">
                 <local:KeyListView />
             </DataTemplate>
@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
         <local:NavigateBarView  Grid.Row="0" DataContext="{Binding NavigateBarViewModel}" Margin="4"/>
-        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0" HorizontalAlignment="Stretch"/>
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0" HorizontalAlignment="Stretch" Margin="4, 0"/>
         <ContentControl  Content="{Binding CurrentViewModel}" Grid.Row="2" Margin="4" />
     </Grid>
 </Window>
