@@ -8,15 +8,16 @@
              d:DataContext="{d:DesignInstance Type=local:KeyListViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding KeyViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:KeyView DataContext="{Binding}"  />
+                        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,4">
+                            <local:KeyView DataContext="{Binding}"  />
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
-        
+        </ScrollViewer>
     </Grid>
 </UserControl>

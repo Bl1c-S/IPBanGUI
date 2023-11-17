@@ -6,14 +6,12 @@ namespace WPF_IPBanUtility;
 
 public class InfoMessageBox
 {
-     private readonly string _message;
-     private readonly string _title;
      Wpf.Ui.Controls.MessageBox _messageBox;
      public InfoMessageBox(string message, string title, string actionLeftButtonName, string closeRightButtonName)
      {
-          _message = message;
-          _title = title;
           _messageBox = new Wpf.Ui.Controls.MessageBox();
+          _messageBox.Title = title;
+          _messageBox.Content = message;
           _messageBox.ButtonLeftName = actionLeftButtonName;
           _messageBox.ButtonRightName = closeRightButtonName;
      }
@@ -29,7 +27,8 @@ public class InfoMessageBox
           _messageBox.ButtonRightClick += onRight;
 
           _messageBox.Closing += CleanUp(onLeft, onRight);
-          _messageBox.Show(_title, _message);
+          
+          _messageBox.ShowDialog();
      }
 
      private CancelEventHandler CleanUp(RoutedEventHandler? onLeft, RoutedEventHandler onRight)

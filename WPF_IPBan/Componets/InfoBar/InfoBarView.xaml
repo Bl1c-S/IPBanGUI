@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4">
-            <TextBlock Text="{Binding InfoMessage, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding InfoMessage, Mode=OneWay}" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
         </Border>
     </Grid>
 </UserControl>

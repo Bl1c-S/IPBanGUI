@@ -11,29 +11,36 @@
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DockPanel HorizontalAlignment="Left">
-                <TextBlock Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="Bold" Margin="4,0"/>
-                <ui:Button Icon="QuestionCircle24" Command="{Binding IInfoBarOpenCommand}" />
+
+            <DockPanel VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="Bold" Margin="4,0"/>
+
+                <DockPanel HorizontalAlignment="Right">
+                    <ui:Button Icon="QuestionCircle24"  ToolTip="Коментар до ключа" 
+                               Command="{Binding IInfoBarOpenCommand}" />
+                    <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
+                              Command="{Binding ISaveChangedCommand}" />
+                    <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
+                               Command="{Binding IReturnPreviousCommand}"/>
+                    <ui:Button Icon="EyeOff24" ToolTip="Приховати ключ | В налаштуваннях можна знову увімкнути" Margin="4,0,0,0"
+                               Command="{Binding IHideKeyCommand}"/>
+                </DockPanel>
             </DockPanel>
-            
-            <ContentControl Visibility="{Binding IsInfoBarOpen, Converter={StaticResource BoolToVis}}">
+
+            <ContentControl Visibility="{Binding IsInfoBarOpen, Converter={StaticResource BoolToVis}}" Margin="0,4,0,0">
                 <local:InfoBarView DataContext="{Binding InfoBarVM}"  />
             </ContentControl>
+
         </StackPanel>
 
-        <TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" Margin="0,4,0,4"/>
+        <TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" Margin="0,4" TextWrapping="Wrap"/>
 
-        <DockPanel  Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Content="Disable Changed"/>
-            <Button Content="Delete Key" Margin="4,0,0,0"/>
-        </DockPanel>
     </Grid>
 </UserControl>

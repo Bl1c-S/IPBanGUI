@@ -9,7 +9,7 @@
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Torgsoft IPBan Configurator" Height="600" MinHeight="200" Width="800" MinWidth="650">
     <Grid Margin="8,0">
         <Grid.Resources>
 
@@ -29,7 +29,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:NavigateBarView  Grid.Row="0" DataContext="{Binding NavigateBarViewModel}" Margin="4"/>
+        <local:NavigateBarView  Grid.Row="0" DataContext="{Binding NavigateBarViewModel}" Margin="4, 8"/>
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0" HorizontalAlignment="Stretch" Margin="4, 0"/>
         <ContentControl  Content="{Binding CurrentViewModel}" Grid.Row="2" Margin="4" />
     </Grid>
