@@ -1,51 +1,57 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WPF_IPBanUtility;
 
-public class InfoMessageBox
+public static class InfoMessageBox
 {
-     Wpf.Ui.Controls.MessageBox _messageBox;
-     public InfoMessageBox(string message, string title, string actionLeftButtonName, string closeRightButtonName)
+     public static void OpenActionMassangeBox(Action action, string message, string title, string actionLeftButtonName = "Ок", string closeRightButtonName = "Закрити")
      {
-          _messageBox = new Wpf.Ui.Controls.MessageBox();
-          _messageBox.Title = title;
-          _messageBox.Content = message;
-          _messageBox.ButtonLeftName = actionLeftButtonName;
-          _messageBox.ButtonRightName = closeRightButtonName;
-     }
-     public void OpenMassangeBox(Action? action)
-     {
-          RoutedEventHandler? onLeft = null;
-          if (action != null)
+          var textContent = new TextBlock();
+          textContent.Text = message;
+          textContent.TextWrapping = TextWrapping.Wrap;
+
+          var messageBox = new Wpf.Ui.Controls.MessageBox();
+          messageBox.ButtonLeftName = actionLeftButtonName;
+          messageBox.ButtonRightName = closeRightButtonName;
+          messageBox.Title = title;
+          messageBox.Content = textContent;
+
+          var onOk = new RoutedEventHandler((_, _) =>
           {
-               onLeft = ActionInvokeAndCloseEvent(action);
-               _messageBox.ButtonLeftClick += onLeft;
-          }
-          var onRight = CloseEvent();
-          _messageBox.ButtonRightClick += onRight;
+               action?.Invoke();
+               messageBox.Close();
+          });
 
-          _messageBox.Closing += CleanUp(onLeft, onRight);
-          _messageBox.ShowDialog();
-     }
-
-     private CancelEventHandler CleanUp(RoutedEventHandler? onLeft, RoutedEventHandler onRight)
-     {
-          return (_, args) =>
+          var onClose = new RoutedEventHandler((_, _) =>
           {
-               if (onLeft != null)
-                    _messageBox.ButtonLeftClick -= onLeft;
+               messageBox.Close();
+          });
 
-               _messageBox.ButtonRightClick -= onRight;
-          };
+          messageBox.ButtonLeftClick += onOk;
+          messageBox.ButtonRightClick += onClose;
+
+          messageBox.ShowDialog();
      }
-
-     private RoutedEventHandler CloseEvent() => (_, _) => _messageBox.Close();
-
-     private RoutedEventHandler ActionInvokeAndCloseEvent(Action action) => (_, _) =>
+     public static void OpenMassangeBox(string title, string message, string LeftButtonName = "Ок", string closeRightButtonName = "Закрити")
      {
-          action.Invoke();
-          _messageBox.Close();
-     };
+          var textContent = new TextBlock();
+          textContent.Text = message;
+          textContent.TextWrapping = TextWrapping.Wrap;
+
+          var messageBox = new Wpf.Ui.Controls.MessageBox();
+          messageBox.ButtonLeftName = LeftButtonName;
+          messageBox.ButtonRightName = closeRightButtonName;
+          messageBox.Title = title;
+          messageBox.Content = textContent;
+
+          var onOk = new RoutedEventHandler((_, _) => { messageBox.Close(); });
+          var onClose = new RoutedEventHandler((_, _) => { messageBox.Close(); });
+
+          messageBox.ButtonLeftClick += onOk;
+          messageBox.ButtonRightClick += onClose;
+
+          messageBox.ShowDialog();
+     }
 }

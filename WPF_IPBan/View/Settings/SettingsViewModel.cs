@@ -54,8 +54,7 @@ internal class SettingsViewModel : ViewModelBase
           }
           catch (Exception e)
           {
-               InfoMessageBox messageBox = new(e.Message, "Error", "Try again", "Close");
-               messageBox.OpenMassangeBox(TrySaveChanged);
+               InfoMessageBox.OpenMassangeBox("Помилка збереження", e.Message);
           }
      }
 }

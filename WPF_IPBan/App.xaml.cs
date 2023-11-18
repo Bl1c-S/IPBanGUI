@@ -23,8 +23,7 @@ namespace WPF_IPBanUtility
                }
                catch (Exception ex)
                {
-                    var messageBox = new InfoMessageBox(ex.Message, "Не класифікована помилка", "Ок", "Закрити");
-                    messageBox.OpenMassangeBox(null);
+                    InfoMessageBox.OpenMassangeBox("Не класифікована помилка", ex.Message);
                }
 
                base.OnStartup(e);
