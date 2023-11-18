@@ -12,7 +12,7 @@
             <ItemsControl ItemsSource="{Binding KeyViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,4">
+                        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,16">
                             <local:KeyView DataContext="{Binding}"  />
                         </Border>
                     </DataTemplate>

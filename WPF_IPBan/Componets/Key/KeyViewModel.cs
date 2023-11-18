@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Windows.Input;
 
 namespace WPF_IPBanUtility;
 
 internal class KeyViewModel : ViewModelBase
 {
+     public event Action<KeyViewModel>? KeyListChanged;
      public KeyViewModel(Logic_IPBanUtility.Key key)
      {
           InfoBarVM = new(key.Comment);
@@ -84,7 +86,7 @@ internal class KeyViewModel : ViewModelBase
      public ICommand IHideKeyCommand { get; }
      private void HideKey()
      {
-          base.Dispose();
+          KeyListChanged?.Invoke(this);
      }
      #endregion
 }

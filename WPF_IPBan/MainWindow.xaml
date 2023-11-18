@@ -9,7 +9,8 @@
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="Torgsoft IPBan Configurator" Height="600" MinHeight="200" Width="800" MinWidth="650">
+        Title="Torgsoft IPBan Configurator" 
+        Height="600" MinHeight="200" Width="800" MinWidth="650">
     <Grid Margin="8,0">
         <Grid.Resources>
 

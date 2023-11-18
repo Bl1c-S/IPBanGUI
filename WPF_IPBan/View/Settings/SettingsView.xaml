@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Content="Шлях до кореневої папки IPBan"/>
-                <ui:TextBox Grid.Row="1" Grid.Column="0" Icon="Folder20"  Text="{Binding DirrectoryPath}"/>
+                <ui:TextBox Grid.Row="1" Grid.Column="0" Icon="Folder20"  Text="{Binding DirrectoryPath}" IsReadOnly="True"/>
                 <ui:Button Grid.Row="1" Grid.Column="1"  Icon="FolderOpen20" Content="Вибрати папку" Command="{Binding IOpenFolderCommand}" Margin="8,0,0,0"/>
             </Grid>
         </StackPanel>

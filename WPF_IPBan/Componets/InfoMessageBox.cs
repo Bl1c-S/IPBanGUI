@@ -27,7 +27,6 @@ public class InfoMessageBox
           _messageBox.ButtonRightClick += onRight;
 
           _messageBox.Closing += CleanUp(onLeft, onRight);
-          
           _messageBox.ShowDialog();
      }
 
