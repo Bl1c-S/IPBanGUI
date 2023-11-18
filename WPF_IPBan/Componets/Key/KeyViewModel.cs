@@ -7,7 +7,7 @@ namespace WPF_IPBanUtility;
 internal class KeyViewModel : ViewModelBase
 {
      public event Action<KeyViewModel>? KeyListChanged;
-     public KeyViewModel(Logic_IPBanUtility.Key key)
+     public KeyViewModel(Logic_IPBanUtility.Models.Key key)
      {
           InfoBarVM = new(key.Comment);
           IsInfoBarOpen = false;
@@ -22,7 +22,7 @@ internal class KeyViewModel : ViewModelBase
 
      }
 
-     private Logic_IPBanUtility.Key _key;
+     private Logic_IPBanUtility.Models.Key _key;
      public string Name => _key.Name;
      private bool IsChanged => _value != _key.Value;
 

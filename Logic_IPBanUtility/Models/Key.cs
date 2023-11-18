@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Logic_IPBanUtility;
+namespace Logic_IPBanUtility.Models;
 
 public class Key
 {
@@ -9,13 +9,17 @@ public class Key
      public readonly int Index;
      public readonly string Name;
      public readonly string Comment;
+     public bool IsChanged { get; private set; }
 
+     public bool IsHidden { get; set; }
      public string Context { get; private set; }
      public string Value { get; private set; }
 
-     public Key(int index, string name, string context, string comment)
+     public Key(int index, bool isHidden, string name, string context, string comment)
      {
+          IsChanged = false;
           Index = index;
+          IsHidden = isHidden;
           Name = name;
           Context = context;
           Comment = comment;
@@ -25,6 +29,7 @@ public class Key
      {
           Value = newValue;
           Context = Regex.Replace(Context, PATTERN, $"value=\"{newValue}\"");
+          IsChanged = true;
      }
      private string GetValue()
      {

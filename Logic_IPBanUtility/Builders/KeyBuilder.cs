@@ -1,49 +1,37 @@
-﻿namespace Logic_IPBanUtility;
+﻿using Logic_IPBanUtility.Models;
 
-public class ConfigFileManager
+namespace Logic_IPBanUtility.Builders;
+
+public class KeyBuilder
 {
-     public List<string> Context = new();
-     public List<Key> Keys = new();
+     public List<string> Context;
 
-     private readonly string _contextPath;
-     private readonly string _keyNamesPath;
-
-     public ConfigFileManager(Settings settings)
+     public KeyBuilder(List<string> context)
      {
-          _contextPath = settings.ContextFilePath;
-          _keyNamesPath = settings.KeyNamesFilePath;
-          GetContext();
-          GetKeys();
+          Context = context;
      }
 
-     public void WriteContextChanged(IEnumerable<Key> keys)
+     public List<Key> GetKeys(List<KeyIdenti> keyIdentis)
      {
-          foreach (var key in keys)
-               Context.Insert(key.Index, key.Context);
-          File.WriteAllLines(_contextPath, Context);
-     }
-     public void GetContext() => Context = ReadFile(_contextPath);
-     public void GetKeys()
-     {
-          var names = ReadFile(_keyNamesPath);
           List<Key> newKeys = new();
-          foreach (var name in names)
-               newKeys.Add(GetKey(name));
-          Keys = newKeys;
+          foreach (var keyIdenti in keyIdentis)
+               newKeys.Add(GetKey(keyIdenti.Name, keyIdenti.IsHidden));
+          return newKeys;
      }
-     private Key GetKey(string name)
+     private Key GetKey(string name, bool IsHidden)
      {
           var keyContext = GetKeyContext(name);
           var index = GetKeyIndex(keyContext);
           var comment = GetKeyComment(index);
-          Key key = new(index, name, keyContext, comment);
+          Key key = new(index, IsHidden, name, keyContext, comment);
           return key;
      }
      private string GetKeyContext(string name)
      {
           var keyContext = Context.FirstOrDefault(x => x.Contains($"add key=\"{name}\""));
           if (keyContext is null)
-               throw new KeyNotFoundException(name);
+               throw new KeyNotFoundException($"Не знайдено контекст для ключа: {name} " +
+                    $"\n Перевірте наявність ключа в файлі конфігурації IPBan та в списку ключів KeyIdentis");
           return keyContext;
      }
      private int GetKeyIndex(string keyContext)
@@ -51,6 +39,8 @@ public class ConfigFileManager
           int index = Context.IndexOf(keyContext);
           return index;
      }
+
+     #region GetKeyComment
      private string GetKeyComment(int index)
      {
           List<string> comment = new();
@@ -85,15 +75,5 @@ public class ConfigFileManager
                input = input.Replace("\n", "");
           return input;
      }
-     private List<string> ReadFile(string filePath)
-     {
-          if (!File.Exists(filePath))
-               throw new FileNotFoundException();
-
-          var fileData = File.ReadAllLines(filePath).ToList();
-          if (fileData.Count == 0)
-               throw new FileLoadException();
-
-          return fileData;
-     }
+     #endregion
 }

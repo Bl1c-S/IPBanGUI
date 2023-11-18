@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility;
+using Logic_IPBanUtility.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 

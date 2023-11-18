@@ -7,10 +7,10 @@ using System.Windows;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for App.xaml
-     /// </summary>
-     public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
      {
           protected override void OnStartup(StartupEventArgs e)
           {
