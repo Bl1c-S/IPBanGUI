@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Windows.Forms;
-using System.Windows;
 using System.Windows.Input;
+using Logic_IPBanUtility.Setting;
 using Logic_IPBanUtility;
 
 namespace WPF_IPBanUtility;
@@ -27,9 +27,16 @@ internal class SettingsViewModel : ViewModelBase
      public SettingsViewModel(Settings settings)
      {
           _settings = settings;
-          _dirrectoryPath = _settings.DirrectoryPath;
-          ISaveChangedCommand = new RelayCommand(TrySaveChanged);
+          _dirrectoryPath = GetIPBanFolder();
+          ISaveChangedCommand = new RelayCommand(SaveSettings);
           IOpenFolderCommand = new RelayCommand(SelectFolder);
+     }
+
+     private string GetIPBanFolder()
+     {
+          if (_settings.IPBan is null)
+               return string.Empty;
+          else return _settings.IPBan.Folder;
      }
 
      private void SelectFolder()
@@ -37,24 +44,23 @@ internal class SettingsViewModel : ViewModelBase
           using (var dialog = new FolderBrowserDialog())
           {
                DialogResult result = dialog.ShowDialog();
-
                if (result == DialogResult.OK)
-               {
-                    string selectedPath = dialog.SelectedPath;
-                    DirrectoryPath = selectedPath;
-               }
+                    DirrectoryPath = dialog.SelectedPath;
           }
      }
 
-     private void TrySaveChanged()
+     private void SaveSettings()
      {
           try
           {
-               _settings.SaveChanged(_dirrectoryPath);
+               if (GetIPBanFolder() != _dirrectoryPath)
+                    _settings.IPBan = IPBan.Create(_dirrectoryPath);
+
+               _settings.Save();
           }
           catch (Exception e)
           {
-               InfoMessageBox.OpenMassangeBox("Помилка збереження", e.Message);
+               DialogMessageBox.InfoBox("Помилка збереження", e.Message);
           }
      }
 }

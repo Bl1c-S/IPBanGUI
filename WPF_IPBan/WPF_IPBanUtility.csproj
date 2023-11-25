@@ -10,6 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="View\LoadWindow\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="View\LoadWindow\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="TSIP.ico" />
   </ItemGroup>
 
@@ -17,7 +27,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
-    <PackageReference Include="NLog" Version="5.2.5" />
+    <PackageReference Include="NLog" Version="5.2.6" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.5" />
     <PackageReference Include="WPF-UI" Version="2.1.0" />
   </ItemGroup>

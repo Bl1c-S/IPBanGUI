@@ -1,73 +1,26 @@
-﻿using System.Text.Json;
+﻿using Logic_IPBanUtility.Services;
 
-namespace Logic_IPBanUtility;
+namespace Logic_IPBanUtility.Setting;
 
 public class Settings
 {
-    public string DirrectoryPath { get; set; }
-    public string SettingsFilePath { get; set; }
-    public string ContextFilePath { get; set; }
-    public string KeyIdentiFilePath { get; set; }
+     private FileManager _fileManager = new();
+     public Config Config;
+     public IPBan? IPBan;
+          
+     public Settings(Config config)
+     {
+          Config = config;
+     }
 
-    public Settings()
-    {
-        var settings = GetSettings();
-        DirrectoryPath = settings.DirrectoryPath;
-        SettingsFilePath = settings.SettingsFilePath;
-        KeyIdentiFilePath = settings.KeyIdentiFilePath;
-        ContextFilePath = settings.ContextFilePath;
+     public void SetIPBan(string folder)
+     {
+          IPBan = IPBan.Create(folder);
+          Save();
+     }
 
-    }
-    private Settings(string dirrectoryPath)
-    {
-        DirrectoryPath = dirrectoryPath;
-        SettingsFilePath = Path.Combine(dirrectoryPath, "setting.json");
-        ContextFilePath = Path.Combine(dirrectoryPath, "ipban.config");
-        KeyIdentiFilePath = Path.Combine(dirrectoryPath, "keynames.txt");
-    }
-
-    public void SaveSettings(Settings defaultSettings)
-    {
-        string settingsJson = JsonSerializer.Serialize(defaultSettings);
-        File.WriteAllText(defaultSettings.SettingsFilePath, settingsJson);
-    }
-    public void SaveSettings()
-    {
-        string settingsJson = JsonSerializer.Serialize(this);
-        File.WriteAllText(SettingsFilePath, settingsJson);
-    }
-
-    public Settings GetSettings()
-    {
-        if (DirrectoryPath is null)
-            return CreateDefaultSettings();
-        var settings = TryLoadSettings();
-        if (settings is null)
-            return CreateDefaultSettings();
-        return settings;
-    }
-
-    private Settings? TryLoadSettings()
-    {
-        var settingsJson = File.ReadAllText(SettingsFilePath);
-        var settings = JsonSerializer.Deserialize<Settings>(settingsJson);
-        return settings;
-    }
-
-    private Settings CreateDefaultSettings()
-    {
-        DirrectoryPath = Path.Combine("C:\\Program Files\\IPBan");
-        var defaultSettings = new Settings(DirrectoryPath);
-        SaveSettings(defaultSettings);
-        return defaultSettings;
-    }
-
-    public void SaveChanged(string dirrectoryPath)
-    {
-        DirrectoryPath = dirrectoryPath;
-        SettingsFilePath = Path.Combine(dirrectoryPath, "setting.json");
-        ContextFilePath = Path.Combine(dirrectoryPath, "ipban.config");
-        KeyIdentiFilePath = Path.Combine(dirrectoryPath, "keynames.txt");
-        SaveSettings();
-    }
+     public void Save()
+     {
+          _fileManager.SaveJson(Config.Settings, this);
+     }
 }

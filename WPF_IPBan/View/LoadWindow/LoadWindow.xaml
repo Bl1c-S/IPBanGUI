@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPF_IPBanUtility.LoadWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_IPBanUtility"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        d:DataContext="{d:DesignInstance Type=local:LoadWindowModel}"
+        mc:Ignorable="d"
+       Title="Torgsoft IPBan Configurator" 
+       Height="600" MinHeight="200" Width="800" MinWidth="650">
+
+    <Grid>
+        <StackPanel Margin="60,50,50,50" VerticalAlignment="Center">
+            <Image Source="Logo.png" Height="120" Margin="15,0,0,0"/>
+            <TextBlock Text="Torgsoft IPBan Configurator" HorizontalAlignment="Center" Margin="20"/>
+            <ui:ProgressRing IsIndeterminate="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

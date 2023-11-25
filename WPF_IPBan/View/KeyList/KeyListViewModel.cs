@@ -27,6 +27,10 @@ internal class KeyListViewModel : ViewModelBase
      {
           keyViewModel.KeyListChanged -= KeyListChanged;
           _keyViewModels.Remove(keyViewModel);
+          var key = _manager.keyIdentis.Find(x => x.Name == keyViewModel.Name);
+          key.IsHidden = keyViewModel.IsEnable;
+          _manager.keyIdentis.Insert(keyViewModel)
+
           OnPropertyChanged(nameof(KeyViewModels));
      }
 

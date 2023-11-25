@@ -1,11 +1,15 @@
 ﻿using Logic_IPBanUtility.Builders;
 using Logic_IPBanUtility.Models;
+using Logic_IPBanUtility.Services;
+using Logic_IPBanUtility.Setting;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace Logic_IPBanUtility;
 
 public class ConfigFileManager
 {
+     private FileManager _fileManager { get; }
      public List<string> Context = new();
      public List<Key> Keys = new();
      public List<KeyIdenti> keyIdentis = new();
@@ -14,12 +18,13 @@ public class ConfigFileManager
      private readonly string _contextPath;
      private readonly string _keyIdentiPath;
 
-     public ConfigFileManager(Settings settings)
+     public ConfigFileManager(Settings settings, FileManager fileManager)
      {
-          _contextPath = settings.ContextFilePath;
-          _keyIdentiPath = settings.KeyIdentiFilePath;
+          _fileManager = fileManager;
+          _contextPath = settings.IPBan!.Context;
+          _keyIdentiPath = settings.Config.KeyIdenti;
 
-          Context = GetContext();
+          Context = _fileManager.GetStrings(_contextPath).ToList();
           _keyBuilder = new(Context);
 
           keyIdentis = ReadKeyIdenti();
@@ -27,11 +32,7 @@ public class ConfigFileManager
      }
      private List<KeyIdenti> ReadKeyIdenti()
      {
-          if (!File.Exists(_keyIdentiPath))
-               throw new FileNotFoundException();
-
-          var fileData = File.ReadAllText(_keyIdentiPath);
-          var KeyIdentis = JsonSerializer.Deserialize<List<KeyIdenti>>(fileData);
+          var KeyIdentis = _fileManager.GetJson<List<KeyIdenti>>(_keyIdentiPath);
           if (KeyIdentis == null)
                throw new FileLoadException($"Помилка завантаження: KeyIdenti з файлу {_keyIdentiPath} " +
                     $"\nПеревірте цілісність файлу, та спробуйте завантажити цей файл з папки becap");
@@ -47,8 +48,8 @@ public class ConfigFileManager
           keyIdentis.Sort();
           try
           {
-          var serializebleKeyIdenti = JsonSerializer.Serialize(keyIdentis);
-          File.WriteAllText(_keyIdentiPath, serializebleKeyIdenti);
+               var serializebleKeyIdenti = JsonSerializer.Serialize(keyIdentis);
+               File.WriteAllText(_keyIdentiPath, serializebleKeyIdenti);
           }
           catch (Exception ex)
           {
