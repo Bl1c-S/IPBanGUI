@@ -15,15 +15,15 @@ public class KeyBuilder
      {
           List<Key> newKeys = new();
           foreach (var keyIdenti in keyIdentis)
-               newKeys.Add(GetKey(keyIdenti.Name, keyIdenti.IsHidden));
+               newKeys.Add(GetKey(keyIdenti));
           return newKeys;
      }
-     private Key GetKey(string name, bool IsHidden)
+     private Key GetKey(KeyIdenti keyIdenti)
      {
-          var keyContext = GetKeyContext(name);
-          var index = GetKeyIndex(keyContext);
+          var keyContext = GetKeyContext(keyIdenti.Name);
+          var index = Context.IndexOf(keyContext);
           var comment = GetKeyComment(index);
-          Key key = new(index, IsHidden, name, keyContext, comment);
+          Key key = new(index, keyContext, comment, keyIdenti);
           return key;
      }
      private string GetKeyContext(string name)
@@ -33,11 +33,6 @@ public class KeyBuilder
                throw new KeyNotFoundException($"Не знайдено контекст для ключа: {name} " +
                     $"\n Перевірте наявність ключа в файлі конфігурації IPBan та в списку ключів KeyIdentis");
           return keyContext;
-     }
-     private int GetKeyIndex(string keyContext)
-     {
-          int index = Context.IndexOf(keyContext);
-          return index;
      }
 
      #region GetKeyComment

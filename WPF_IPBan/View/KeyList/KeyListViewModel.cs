@@ -16,6 +16,7 @@ internal class KeyListViewModel : ViewModelBase
                OnPropertyChanged(nameof(KeyViewModels));
           }
      }
+
      private readonly ConfigFileManager _manager;
 
      public KeyListViewModel(ConfigFileManager manager)
@@ -23,26 +24,32 @@ internal class KeyListViewModel : ViewModelBase
           _manager = manager;
           _keyViewModels = CreateKeyViewModels(manager.Keys);
      }
-     public void KeyListChanged(KeyViewModel keyViewModel)
-     {
-          keyViewModel.KeyListChanged -= KeyListChanged;
-          _keyViewModels.Remove(keyViewModel);
-          var key = _manager.keyIdentis.Find(x => x.Name == keyViewModel.Name);
-          key.IsHidden = keyViewModel.IsEnable;
-          _manager.keyIdentis.Insert(keyViewModel)
-
-          OnPropertyChanged(nameof(KeyViewModels));
-     }
-
      private ObservableCollection<KeyViewModel> CreateKeyViewModels(List<Key> keys)
      {
           ObservableCollection<KeyViewModel> keyViewModels = new();
           foreach (var key in keys)
           {
+               if (!key.IsHidden)
+                    continue;
+
                var keyVM = new KeyViewModel(key);
-               keyVM.KeyListChanged += KeyListChanged;
+               keyVM.HideKeyEvent += HideKey;
+               keyVM.SaveKeyEvent += SaveKey;
                keyViewModels.Add(keyVM);
           }
           return keyViewModels;
+     } 
+     public void HideKey(KeyViewModel keyViewModel)
+     {
+          keyViewModel.HideKeyEvent -= HideKey;
+          _keyViewModels.Remove(keyViewModel);
+          _manager.WriteKeyIdentiChanged(keyViewModel.Key);
+
+          OnPropertyChanged(nameof(KeyViewModels));
+     }
+
+     public void SaveKey(Key key)
+     {
+          _manager.WriteKey(key);
      }
 }

@@ -13,7 +13,6 @@ public class ConfigFileManager
      public List<string> Context = new();
      public List<Key> Keys = new();
      public List<KeyIdenti> keyIdentis = new();
-     private KeyBuilder _keyBuilder;
 
      private readonly string _contextPath;
      private readonly string _keyIdentiPath;
@@ -25,66 +24,28 @@ public class ConfigFileManager
           _keyIdentiPath = settings.Config.KeyIdenti;
 
           Context = _fileManager.GetStrings(_contextPath).ToList();
-          _keyBuilder = new(Context);
+          keyIdentis = _fileManager.GetJson<List<KeyIdenti>>(_keyIdentiPath);
 
-          keyIdentis = ReadKeyIdenti();
-          Keys = _keyBuilder.GetKeys(keyIdentis);
+          Keys = new KeyBuilder(Context).GetKeys(keyIdentis);
      }
-     private List<KeyIdenti> ReadKeyIdenti()
+     public void WriteKeyIdentiChanged(Key key)
      {
-          var KeyIdentis = _fileManager.GetJson<List<KeyIdenti>>(_keyIdentiPath);
-          if (KeyIdentis == null)
-               throw new FileLoadException($"Помилка завантаження: KeyIdenti з файлу {_keyIdentiPath} " +
-                    $"\nПеревірте цілісність файлу, та спробуйте завантажити цей файл з папки becap");
-          return KeyIdentis;
-     }
-     public void WriteKeyIdentiChanged(KeyIdenti keyIdenti)
-     {
-          var item = keyIdentis.Find(x => x.Name == keyIdenti.Name);
-          if (item == null)
-               throw new Exception($"Під час запису {keyIdenti.Name}, в списку завантажених keyIdentis, не знайдено Відповідного елемента");
-          keyIdentis.Remove(item);
-          keyIdentis.Add(keyIdenti);
-          keyIdentis.Sort();
+          var index = keyIdentis.FindIndex(x => x.Name == key.Name);
+          if (index == -1)
+               throw new Exception($"Під час запису {key.Name}, в списку завантажених keyIdentis, не знайдено Відповідного елемента");
+          key.KeyIdenti.IsHidden = !key.KeyIdenti.IsHidden;
+
           try
           {
-               var serializebleKeyIdenti = JsonSerializer.Serialize(keyIdentis);
-               File.WriteAllText(_keyIdentiPath, serializebleKeyIdenti);
+               var jsonKeyIdenti = JsonSerializer.Serialize(keyIdentis);
+               File.WriteAllText(_keyIdentiPath, jsonKeyIdenti);
           }
-          catch (Exception ex)
-          {
-               throw new Exception($"Під час запису файлу за шляхом: {_keyIdentiPath} виникла помилка:  {ex.Message}");
-          }
+          catch (Exception ex) { throw new Exception($"Під час запису файлу за шляхом: {_keyIdentiPath} виникла помилка:  {ex.Message}"); }
      }
 
-     public void WriteContextChanged(IEnumerable<Key> keys)
+     public void WriteKey(Key key)
      {
-          foreach (var key in keys)
-          {
-               if (key.IsChanged)
-                    Context.Insert(key.Index, key.Context);
-          }
+          Context[key.Index] = key.Context;
           File.WriteAllLines(_contextPath, Context);
-     }
-     public void WriteContextChanged(Key key)
-     {
-          if (key.IsChanged)
-          {
-               Context.Insert(key.Index, key.Context);
-               File.WriteAllLines(_contextPath, Context);
-          }
-     }
-
-     public List<string> GetContext() => ReadFile(_contextPath);
-     private List<string> ReadFile(string filePath)
-     {
-          if (!File.Exists(filePath))
-               throw new FileNotFoundException();
-
-          var fileData = File.ReadAllLines(filePath).ToList();
-          if (fileData.Count == 0)
-               throw new FileLoadException();
-
-          return fileData;
      }
 }

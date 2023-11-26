@@ -24,11 +24,11 @@
 
                 <DockPanel HorizontalAlignment="Right">
                     <ui:Button Icon="QuestionCircle24"  ToolTip="Коментар до ключа" 
-                               Command="{Binding IInfoBarOpenCommand}" />
+                               Command="{Binding IInfoBarCommand}" />
                     <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
-                              Command="{Binding ISaveChangedCommand}" />
+                              Command="{Binding ISaveKeyCommand}" />
                     <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
-                               Command="{Binding IReturnPreviousCommand}"/>
+                               Command="{Binding IPreviousCommand}"/>
                     <ui:Button Icon="EyeOff24" ToolTip="Приховати ключ | В налаштуваннях можна знову увімкнути" Margin="4,0,0,0"
                                Command="{Binding IHideKeyCommand}"/>
                 </DockPanel>

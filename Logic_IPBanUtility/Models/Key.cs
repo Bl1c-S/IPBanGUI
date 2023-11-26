@@ -4,23 +4,23 @@ namespace Logic_IPBanUtility.Models;
 
 public class Key
 {
+     public KeyIdenti KeyIdenti;
+
      private const string PATTERN = "value=\"(.*?)\"";
 
      public readonly int Index;
-     public readonly string Name;
-     public readonly string Comment;
-     public bool IsChanged { get; private set; }
+     public string Name => KeyIdenti.Name;
+     public bool IsHidden => KeyIdenti.IsHidden;
 
-     public bool IsHidden { get; set; }
+     public readonly string Comment;
+
      public string Context { get; private set; }
      public string Value { get; private set; }
 
-     public Key(int index, bool isHidden, string name, string context, string comment)
+     public Key(int index, string context, string comment, KeyIdenti keyIdenti)
      {
-          IsChanged = false;
+          KeyIdenti = keyIdenti;
           Index = index;
-          IsHidden = isHidden;
-          Name = name;
           Context = context;
           Comment = comment;
           Value = GetValue();
@@ -29,7 +29,6 @@ public class Key
      {
           Value = newValue;
           Context = Regex.Replace(Context, PATTERN, $"value=\"{newValue}\"");
-          IsChanged = true;
      }
      private string GetValue()
      {

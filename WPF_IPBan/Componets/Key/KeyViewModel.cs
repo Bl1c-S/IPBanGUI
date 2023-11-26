@@ -1,30 +1,30 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System;
 using System.Windows.Input;
+using System;
 
 namespace WPF_IPBanUtility;
 
 internal class KeyViewModel : ViewModelBase
 {
-     public event Action<KeyViewModel>? KeyListChanged;
      public KeyViewModel(Logic_IPBanUtility.Models.Key key)
      {
           InfoBarVM = new(key.Comment);
           IsInfoBarOpen = false;
           _value = key.Value;
 
-          _key = key;
+          Key = key;
 
-          IInfoBarOpenCommand = new RelayCommand(ChangeInfoBarOpen);
-          ISaveChangedCommand = new RelayCommand(SaveChanged);
-          IReturnPreviousCommand = new RelayCommand(ReturnPreviousValue);
+          IInfoBarCommand = new RelayCommand(InfoBar);
+          IPreviousCommand = new RelayCommand(PreviousValue);
+          ISaveKeyCommand = new RelayCommand(SaveKey);
           IHideKeyCommand = new RelayCommand(HideKey);
-
      }
+     public event Action<KeyViewModel>? HideKeyEvent;
+     public event Action<Logic_IPBanUtility.Models.Key>? SaveKeyEvent;
 
-     private Logic_IPBanUtility.Models.Key _key;
-     public string Name => _key.Name;
-     private bool IsChanged => _value != _key.Value;
+     public Logic_IPBanUtility.Models.Key Key;
+     public string Name => Key.Name;
+     private bool IsChanged => _value != Key.Value;
 
      private string _value;
      public string Value
@@ -36,8 +36,9 @@ internal class KeyViewModel : ViewModelBase
                OnPropertyChanged(nameof(Value));
           }
      }
+
      #region InfoBar
-     public ICommand IInfoBarOpenCommand { get; }
+     public ICommand IInfoBarCommand { get; }
      public InfoBarViewModel? InfoBarVM { get; set; }
 
      private bool _isInfoBarOpen;
@@ -49,7 +50,7 @@ internal class KeyViewModel : ViewModelBase
                _isInfoBarOpen = value;
 
                if (_isInfoBarOpen)
-                    InfoBarVM = new InfoBarViewModel(_key.Comment);
+                    InfoBarVM = new InfoBarViewModel(Key.Comment);
                else
                     InfoBarVM = null;
 
@@ -57,28 +58,31 @@ internal class KeyViewModel : ViewModelBase
                OnPropertyChanged(nameof(IsInfoBarOpen));
           }
      }
-     private void ChangeInfoBarOpen()
+     private void InfoBar()
      {
           IsInfoBarOpen = !IsInfoBarOpen;
      }
      #endregion
 
      #region SaveChanged
-     public ICommand ISaveChangedCommand { get; }
+     public ICommand ISaveKeyCommand { get; }
 
-     private void SaveChanged()
+     private void SaveKey()
      {
-          if (IsChanged)
-               _key.InsertValue(_value);
+          if (!IsChanged)
+               return;
+
+          Key.InsertValue(_value);
+          SaveKeyEvent?.Invoke(Key);
      }
      #endregion
 
      #region ReturnPrevious
-     public ICommand IReturnPreviousCommand { get; }
+     public ICommand IPreviousCommand { get; }
 
-     private void ReturnPreviousValue()
+     private void PreviousValue()
      {
-          Value = _key.Value;
+          Value = Key.Value;
      }
      #endregion
 
@@ -86,7 +90,7 @@ internal class KeyViewModel : ViewModelBase
      public ICommand IHideKeyCommand { get; }
      private void HideKey()
      {
-          KeyListChanged?.Invoke(this);
+          HideKeyEvent?.Invoke(this);
      }
      #endregion
 }
