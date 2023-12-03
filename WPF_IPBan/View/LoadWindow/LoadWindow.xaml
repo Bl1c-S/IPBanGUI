@@ -9,13 +9,13 @@
 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:LoadWindowModel}"
         mc:Ignorable="d"
-       Title="Torgsoft IPBan Configurator" 
+       Title="Torgsoft IPBan GUI" 
        Height="600" MinHeight="200" Width="800" MinWidth="650">
 
     <Grid>
         <StackPanel Margin="60,50,50,50" VerticalAlignment="Center">
             <Image Source="Logo.png" Height="120" Margin="15,0,0,0"/>
-            <TextBlock Text="Torgsoft IPBan Configurator" HorizontalAlignment="Center" Margin="20"/>
+            <TextBlock Text="Torgsoft IPBan GUI" HorizontalAlignment="Center" Margin="20"/>
             <ui:ProgressRing IsIndeterminate="True"/>
         </StackPanel>
     </Grid>

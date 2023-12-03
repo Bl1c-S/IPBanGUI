@@ -17,12 +17,12 @@ public class SettingsBuilder
           Settings = _fileManager.GetJson<Settings>(config.Settings);
           Settings.Config.CheckExist();
      }
-     public void CreateDefaultSettings()
+     public void CreateDefaultSettings(IPBan iPBan)
      {
           Config config = Config.Create();
           _fileManager.CreateDefaultDirectory(config.ConfigFolder);
           CreateDefaultKeyIdenty(config.KeyIdenti);
-          Settings settings = new(config);
+          Settings settings = new(config, iPBan);
           settings.Save();
           config.CheckExist();
           Settings = settings;
@@ -37,6 +37,7 @@ public class SettingsBuilder
           foreach (var name in names)
                keyIdentis.Add(new(true, name));
 
+          keyIdentis = keyIdentis.OrderBy(x => x.Name, StringComparer.CurrentCulture).ToList();
           string JsonKeyIdentiList = JsonSerializer.Serialize(keyIdentis);
           File.WriteAllText(filePath, JsonKeyIdentiList);
      }

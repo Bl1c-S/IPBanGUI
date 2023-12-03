@@ -19,9 +19,18 @@
                        Command = "{Binding NavigateToKeyList}"
                        IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=KeyListViewModel}" />
 
+            <ui:Button Content="Журнал" Icon="DocumentBulletList24" 
+                       Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
+                       IsEnabled="False"/>
+
+            <ui:Button Content="Бекапи" Icon="FolderZip24" 
+           Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
+           IsEnabled="False"/>
+
             <ui:Button Content="Налаштування" Icon="Settings48" 
                        Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
                        IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=SettingsViewModel}"/>
+
         </DockPanel>
     </Grid>
 </UserControl>

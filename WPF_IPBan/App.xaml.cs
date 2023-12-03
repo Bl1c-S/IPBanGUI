@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
+using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
 
 namespace WPF_IPBanUtility
 {
@@ -14,6 +15,7 @@ namespace WPF_IPBanUtility
      public partial class App : Application
      {
           private LoadWindowModel? _loadVM;
+          private SettingsBuilder _sb = new();
           private Settings? _settings;
 
 
@@ -21,43 +23,40 @@ namespace WPF_IPBanUtility
           {
                try
                {
-                    var loadWindow = new LoadWindow();
-                    _loadVM = new LoadWindowModel();
-                    loadWindow.DataContext = _loadVM;
+                    var loadWindow = new LoadWindow() { DataContext = new LoadWindowModel() };
                     loadWindow.Show();
 
                     _settings = LoadSettings(loadWindow);
-                    if (_settings is null)
-                         ApplicationStop();
 
-                    if (_settings!.IPBan is null || !_settings.IPBan.CheckExist())
-                         DialogMessageBox.TwoActionBox(OnSelectFolder, ApplicationStop, "Не вказана тека IPBan", "Попередження", "Вибрати", "Закрити");
-
-                    var mainWindow = new MainWindow();
                     var Services = CreateServiceProvager(_settings);
-                    mainWindow.DataContext = Services.GetRequiredService<MainWindowViewModel>();
+                    var mainWindow = new MainWindow() { DataContext = Services.GetRequiredService<MainWindowViewModel>() };
+
                     loadWindow.Close();
                     mainWindow.Show();
                }
-               catch (Exception ex) { DialogMessageBox.InfoBox("Помилка", ex.Message); }
+               catch (Exception ex) { MessangeBoxCrutch.ErrorBox(ex.Message); }
 
                base.OnStartup(e);
           }
 
-          private void OnSelectFolder()
+          private void SelectIPBanAndCreateDfSettings()
           {
                var path = _loadVM?.SelectFolder();
-               if(path != null)
-                    _settings?.SetIPBan(path);
+               if (path == null) return;
+
+               var iPBan = IPBan.Create(path);
+               _sb.CreateDefaultSettings(iPBan);
           }
 
-          private Settings? LoadSettings(LoadWindow loadWindow)
+          private Settings LoadSettings(LoadWindow loadWindow)
           {
-               var sb = new SettingsBuilder();
-               try { sb.LoadSettings(); }
-               catch (Exception ex) { DialogMessageBox.ActionBox(sb.CreateDefaultSettings, ex.Message, "Помилка завантаження налаштувань", "Скинути налаштування", "Закрити"); }
-
-               return sb.Settings;
+               try { _sb.LoadSettings(); }
+               catch (Exception ex)
+               {
+                    MessangeBoxCrutch.ErrorBox(ex.Message);
+                    MessangeBoxCrutch.TwoActionBoxAndLeftButtonNameSelect(SelectIPBanAndCreateDfSettings, ApplicationStop);
+               }
+               return _sb.Settings!;
           }
 
           private IServiceProvider CreateServiceProvager(Settings settings)
@@ -77,6 +76,7 @@ namespace WPF_IPBanUtility
 
                return host.Services;
           }
+
           private void ApplicationStop()
           {
                Current.Shutdown();

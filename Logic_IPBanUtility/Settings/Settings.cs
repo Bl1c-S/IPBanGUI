@@ -6,11 +6,12 @@ public class Settings
 {
      private FileManager _fileManager = new();
      public Config Config;
-     public IPBan? IPBan;
+     public IPBan IPBan;
           
-     public Settings(Config config)
+     public Settings(Config config, IPBan iPBan)
      {
           Config = config;
+          IPBan = iPBan;
      }
 
      public void SetIPBan(string folder)
