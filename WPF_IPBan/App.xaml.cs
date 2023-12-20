@@ -4,7 +4,9 @@ using Logic_IPBanUtility.Setting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Documents;
 using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
 
 namespace WPF_IPBanUtility
@@ -16,19 +18,18 @@ namespace WPF_IPBanUtility
      {
           private LoadWindowModel? _loadVM;
           private SettingsBuilder _sb = new();
-          private Settings? _settings;
-
 
           protected override void OnStartup(StartupEventArgs e)
           {
                try
                {
-                    var loadWindow = new LoadWindow() { DataContext = new LoadWindowModel() };
+                    _loadVM = new LoadWindowModel();
+                    var loadWindow = new LoadWindow() { DataContext = _loadVM };
                     loadWindow.Show();
 
-                    _settings = LoadSettings(loadWindow);
+                    var settings = LoadSettings();
 
-                    var Services = CreateServiceProvager(_settings);
+                    var Services = CreateServiceProvager(settings);
                     var mainWindow = new MainWindow() { DataContext = Services.GetRequiredService<MainWindowViewModel>() };
 
                     loadWindow.Close();
@@ -48,7 +49,7 @@ namespace WPF_IPBanUtility
                _sb.CreateDefaultSettings(iPBan);
           }
 
-          private Settings LoadSettings(LoadWindow loadWindow)
+          private Settings LoadSettings()
           {
                try { _sb.LoadSettings(); }
                catch (Exception ex)
@@ -61,16 +62,22 @@ namespace WPF_IPBanUtility
 
           private IServiceProvider CreateServiceProvager(Settings settings)
           {
-               IHost host = Host.CreateDefaultBuilder().ConfigureServices(servises =>
+               IHost host = Host.CreateDefaultBuilder().ConfigureServices(services =>
                {
-                    servises.AddSingleton(settings);
-                    servises.AddSingleton<FileManager>();
-                    servises.AddSingleton<ConfigFileManager>();
+                    services.AddSingleton(settings);
+                    services.AddSingleton<FileManager>();
+                    services.AddSingleton<ConfigFileManager>();
 
-                    servises.AddSingleton(s => new NavigationService(s));
-                    servises.AddSingleton<MainWindowViewModel>();
-                    servises.AddTransient<SettingsViewModel>();
-                    servises.AddTransient<KeyListViewModel>();
+                    services.AddTransient(provider =>
+                    {
+                         var configFileManager = provider.GetRequiredService<ConfigFileManager>();
+                         return new SettingsVMsBuilder(settings, configFileManager).Build();
+                    });
+                    services.AddTransient<SettingsViewModel>();
+
+                    services.AddSingleton(s => new NavigationService(s));
+                    services.AddSingleton<MainWindowViewModel>();
+                    services.AddTransient<KeyListViewModel>();
                }).Build();
                host.Start();
 

@@ -17,39 +17,48 @@ internal class KeyListViewModel : ViewModelBase
           }
      }
 
-     private readonly ConfigFileManager _manager;
+     private readonly ConfigFileManager _cfgManager;
 
-     public KeyListViewModel(ConfigFileManager manager)
+     public KeyListViewModel(ConfigFileManager cfgManager)
      {
-          _manager = manager;
-          _keyViewModels = CreateKeyViewModels(manager.Keys);
+          _cfgManager = cfgManager;
+          _keyViewModels = CreateKeyViewModels(cfgManager.CreateKeys());
      }
      private ObservableCollection<KeyViewModel> CreateKeyViewModels(List<Key> keys)
      {
           ObservableCollection<KeyViewModel> keyViewModels = new();
           foreach (var key in keys)
           {
-               if (!key.IsHidden)
-                    continue;
-
-               var keyVM = new KeyViewModel(key);
-               keyVM.HideKeyEvent += HideKey;
-               keyVM.SaveKeyEvent += SaveKey;
-               keyViewModels.Add(keyVM);
+               var keyVM = CreateKeyViewModel(key);
+               if (keyVM != null)
+                    keyViewModels.Add(keyVM);
           }
           return keyViewModels;
-     } 
+     }
+     private KeyViewModel? CreateKeyViewModel(Key key)
+     {
+          if (!key.IsHidden)
+               return null;
+
+          var keyVM = new KeyViewModel(key);
+          keyVM.HideKeyEvent += HideKey;
+          keyVM.SaveKeyEvent += SaveKey;
+          return keyVM;
+     }
      public void HideKey(KeyViewModel keyViewModel)
      {
           keyViewModel.HideKeyEvent -= HideKey;
           _keyViewModels.Remove(keyViewModel);
-          _manager.WriteKeyIdentiChanged(keyViewModel.Key);
+
+          var keyIdenti = keyViewModel.Key.KeyIdenti;
+          keyIdenti.IsHidden = false;
+          _cfgManager.WriteKeyIdentiChanged(keyViewModel.Key.KeyIdenti);
 
           OnPropertyChanged(nameof(KeyViewModels));
      }
 
      public void SaveKey(Key key)
      {
-          _manager.WriteKey(key);
+          _cfgManager.WriteKey(key);
      }
 }

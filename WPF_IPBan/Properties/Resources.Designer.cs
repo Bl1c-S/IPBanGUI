@@ -151,6 +151,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Помилка збереження.
+        /// </summary>
+        public static string SaveError {
+            get {
+                return ResourceManager.GetString("SaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вибрати.
         /// </summary>
         public static string Select {

@@ -117,43 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Backup" xml:space="preserve">
-    <value>Бекапи</value>
+  <data name="ErrorFileWrite" xml:space="preserve">
+    <value>Виникла помилка під час запису файлу:</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Закрити</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Підтвердити</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Помилка</value>
-  </data>
-  <data name="KeysTitle" xml:space="preserve">
-    <value>Ключі</value>
-  </data>
-  <data name="LoadSettingsErrorText" xml:space="preserve">
-    <value>При завантаженні налаштувань виникла помилка. Виберіть теку де розміщується IPBan, після чого IPBan GUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть.</value>
-  </data>
-  <data name="LoadSettingsErrorTitle" xml:space="preserve">
-    <value>Помилка завантаження налаштувань</value>
-  </data>
-  <data name="LogsTitle" xml:space="preserve">
-    <value>Журнал</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>ОК</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Зберегти</value>
-  </data>
-  <data name="SaveError" xml:space="preserve">
-    <value>Помилка збереження</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>Вибрати</value>
-  </data>
-  <data name="SettingsTitle" xml:space="preserve">
-    <value>Налаштування</value>
+  <data name="ErrorWriteKeyIdentiChanged" xml:space="preserve">
+    <value>Під час запису зміни стану ключа, в списку завантажених keyIdentis, не знайдено ключ:</value>
   </data>
 </root>

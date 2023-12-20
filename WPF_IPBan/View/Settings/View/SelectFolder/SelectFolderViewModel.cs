@@ -4,11 +4,10 @@ using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Logic_IPBanUtility.Setting;
-using System.Runtime;
 
 namespace WPF_IPBanUtility;
 
-internal class SelectFolderViewModel : ViewModelBase
+internal class SelectFolderViewModel : ViewModelBase, ISettingsVMComponent
 {
      private Settings _settings;
 
@@ -60,7 +59,7 @@ internal class SelectFolderViewModel : ViewModelBase
           }
           catch (Exception e)
           {
-               DialogMessageBox.InfoBox("Помилка збереження", e.Message);
+               DialogMessageBox.InfoBox(Properties.Resources.SaveError, e.Message);
           }
      }
 }
