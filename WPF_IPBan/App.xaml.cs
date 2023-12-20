@@ -68,11 +68,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<FileManager>();
                     services.AddSingleton<ConfigFileManager>();
 
-                    services.AddTransient(provider =>
-                    {
-                         var configFileManager = provider.GetRequiredService<ConfigFileManager>();
-                         return new SettingsVMsBuilder(settings, configFileManager).Build();
-                    });
+                    services.AddSingleton<SettingsVMsBuilder>();
                     services.AddTransient<SettingsViewModel>();
 
                     services.AddSingleton(s => new NavigationService(s));

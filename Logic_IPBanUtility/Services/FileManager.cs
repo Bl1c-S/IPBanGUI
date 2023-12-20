@@ -6,8 +6,9 @@ public class FileManager
 {
      public void CreateDefaultDirectory(string path)
      {
-          if (!Directory.Exists(path))
-               Directory.CreateDirectory(path);
+          if (Directory.Exists(path))
+               Directory.Delete(path, true);
+          Directory.CreateDirectory(path);
      }
      public void SaveText(string path, string content) => File.WriteAllText(path, content);
      public void SaveJson<T>(string path, T content)
