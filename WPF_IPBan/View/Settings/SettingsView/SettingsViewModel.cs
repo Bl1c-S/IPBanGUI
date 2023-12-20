@@ -7,7 +7,7 @@ namespace WPF_IPBanUtility;
 internal class SettingsViewModel : ViewModelBase
 {
      private readonly SettingsVMsBuilder _settingsVMsBuilder;
-     public List<ISettingsVMComponent> VMs { get => _vMs; }
+     public List<ISettingsVMComponent> VMs  => _vMs; 
      private List<ISettingsVMComponent> _vMs;
 
      public SettingsViewModel(SettingsVMsBuilder settingsVMsBuilder)

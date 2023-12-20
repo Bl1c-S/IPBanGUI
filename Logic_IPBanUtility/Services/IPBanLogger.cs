@@ -6,6 +6,8 @@ namespace Logic_IPBanUtility.Services;
 
 public class IPBanLogger
 {
+     //TODO Внедрити логер
+
     private Logger _logger;
     public IPBanLogger()
     {

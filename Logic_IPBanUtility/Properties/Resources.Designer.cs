@@ -61,6 +61,15 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDist [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string DefaultKey {
+            get {
+                return ResourceManager.GetString("DefaultKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виникла помилка під час запису файлу:.
         /// </summary>
         internal static string ErrorFileWrite {

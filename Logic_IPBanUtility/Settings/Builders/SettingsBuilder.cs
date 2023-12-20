@@ -43,8 +43,8 @@ public class SettingsBuilder
      }
      private string[] GetDefaultKeyNames()
      {
-          string keyNames = "IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nFirewallRulePrefix\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nProcessToRunOnBan\r\nProcessToRunOnUnban\r\nFirewallRules\r\nUseDefaultBannedIPAddressHandler\r\nExternalIPAddressUrl\r\nFirewallUriRules\r\nGetUrlUpdate\r\nGetUrlStart\r\nGetUrlStop\r\nGetUrlConfig\r\nIPBanPro_UrlWebSocket";
-          return keyNames.Split("\r\n");
+          string keyNames = Properties.Resources.DefaultKey;
+          return keyNames.Split("\\r\\n");
      }
      #endregion
 }
