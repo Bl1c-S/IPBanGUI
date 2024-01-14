@@ -120,10 +120,19 @@
   <data name="DefaultKey" xml:space="preserve">
     <value>IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nProcessToRunOnBan\r\nProcessToRunOnUnban\r\nFirewallRules\r\nUseDefaultBannedIPAddressHandler\r\nExternalIPAddressUrl\r\nFirewallUriRules\r\nGetUrlUpdate\r\nGetUrlStart\r\nGetUrlStop\r\nGetUrlConfig\r\nIPBanPro_UrlWebSocket</value>
   </data>
+  <data name="DefaultKeyEnable" xml:space="preserve">
+    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist</value>
+  </data>
+  <data name="DirectoryNotFoundException" xml:space="preserve">
+    <value>Не знайдено теку: </value>
+  </data>
   <data name="ErrorFileWrite" xml:space="preserve">
     <value>Виникла помилка під час запису файлу:</value>
   </data>
   <data name="ErrorWriteKeyIdentiChanged" xml:space="preserve">
     <value>Під час запису зміни стану ключа, в списку завантажених keyIdentis, не знайдено ключ:</value>
+  </data>
+  <data name="FileNotFoundException" xml:space="preserve">
+    <value>Не знайдено файл: </value>
   </data>
 </root>

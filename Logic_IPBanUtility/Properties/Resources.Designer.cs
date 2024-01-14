@@ -70,6 +70,24 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist.
+        /// </summary>
+        internal static string DefaultKeyEnable {
+            get {
+                return ResourceManager.GetString("DefaultKeyEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не знайдено теку: .
+        /// </summary>
+        internal static string DirectoryNotFoundException {
+            get {
+                return ResourceManager.GetString("DirectoryNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виникла помилка під час запису файлу:.
         /// </summary>
         internal static string ErrorFileWrite {
@@ -84,6 +102,15 @@ namespace Logic_IPBanUtility.Properties {
         internal static string ErrorWriteKeyIdentiChanged {
             get {
                 return ResourceManager.GetString("ErrorWriteKeyIdentiChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не знайдено файл: .
+        /// </summary>
+        internal static string FileNotFoundException {
+            get {
+                return ResourceManager.GetString("FileNotFoundException", resourceCulture);
             }
         }
     }

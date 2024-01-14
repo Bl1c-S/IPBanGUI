@@ -26,10 +26,10 @@ public class Config
      public void CheckExist()
      {
           if (!Directory.Exists(ConfigFolder))
-               throw new DirectoryNotFoundException(ConfigFolder);
+               throw new DirectoryNotFoundException(Properties.Resources.DirectoryNotFoundException + ConfigFolder);
           if (!File.Exists(Settings))
-               throw new FileNotFoundException(Settings);
+               throw new FileNotFoundException(Properties.Resources.FileNotFoundException + Settings);
           if (!File.Exists(KeyIdenti))
-               throw new FileNotFoundException(KeyIdenti);
+               throw new FileNotFoundException(Properties.Resources.FileNotFoundException + KeyIdenti);
      }
 }

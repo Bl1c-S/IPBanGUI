@@ -32,10 +32,17 @@ public class SettingsBuilder
      private void CreateDefaultKeyIdenty(string filePath)
      {
           var names = GetDefaultKeyNames();
+          var enableNames = GetEnableDefaultKeyNames();
           List<KeyIdenti> keyIdentis = new();
 
           foreach (var name in names)
-               keyIdentis.Add(new(true, name));
+               keyIdentis.Add(new(false, name));
+
+          foreach (var enableName in enableNames)
+          {
+               var index = keyIdentis.FindIndex(x => x.Name == enableName);
+               keyIdentis[index].IsHidden = true;
+          }
 
           keyIdentis = keyIdentis.OrderBy(x => x.Name, StringComparer.CurrentCulture).ToList();
           string JsonKeyIdentiList = JsonSerializer.Serialize(keyIdentis);
@@ -44,6 +51,11 @@ public class SettingsBuilder
      private string[] GetDefaultKeyNames()
      {
           string keyNames = Properties.Resources.DefaultKey;
+          return keyNames.Split("\\r\\n");
+     }
+     private string[] GetEnableDefaultKeyNames()
+     {
+          string keyNames = Properties.Resources.DefaultKeyEnable;
           return keyNames.Split("\\r\\n");
      }
      #endregion
