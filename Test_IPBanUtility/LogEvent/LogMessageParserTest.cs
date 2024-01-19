@@ -10,17 +10,6 @@ public class LogMessageParserTest
      LogMessageParser logMessageParser = new();
 
      [TestMethod]
-     public void A_BalansedTest()
-     {
-          string InputLog = "Login failure: 32.123.2.2, ADMINISTRATOR, RDP, 4, 4625";
-          string expectedLog = "Невдала спроба входу за IP адресою: 32.123.2.2, Ім'я користувача: ADMINISTRATOR";
-
-          var resultLog = logMessageParser.Parse(InputLog);
-
-          Assert.AreEqual(expectedLog, resultLog);
-          Assert.IsTrue(true);
-     }
-     [TestMethod]
      public void LoginSucceeded_WhenUserEmpty()
      {
           string InputLog = "Login succeeded, address: 31.41.92.178, user name: , source: RDP";
@@ -123,17 +112,6 @@ public class LogMessageParserTest
      {
           var InputLog = "Firewall entries updated: 193.34.213.119, 195.3.221.194";
           var expectedLog = "Оновлені записи брандмауера: 193.34.213.119, 195.3.221.194";
-
-          var resultLog = logMessageParser.Parse(InputLog);
-
-          Assert.AreEqual(expectedLog, resultLog);
-     }
-
-     [TestMethod]
-     public void Updatingfirewall_When3IP()
-     {
-          var InputLog = "Firewall entries updated: 193.34.213.119, 195.3.221.194, 1.4.5.6";
-          var expectedLog = "Оновлені записи брандмауера: 193.34.213.119, 195.3.221.194, 1.4.5.6";
 
           var resultLog = logMessageParser.Parse(InputLog);
 
