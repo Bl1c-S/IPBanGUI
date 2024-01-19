@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BanningIP" xml:space="preserve">
+    <value>Заблоковано IP адресу:</value>
+  </data>
+  <data name="BanTime" xml:space="preserve">
+    <value>Час блокування:</value>
+  </data>
+  <data name="CorrectUsernameFormat" xml:space="preserve">
+    <value>Ім'я користувача:</value>
+  </data>
   <data name="DefaultKey" xml:space="preserve">
     <value>IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nProcessToRunOnBan\r\nProcessToRunOnUnban\r\nFirewallRules\r\nUseDefaultBannedIPAddressHandler\r\nExternalIPAddressUrl\r\nFirewallUriRules\r\nGetUrlUpdate\r\nGetUrlStart\r\nGetUrlStop\r\nGetUrlConfig\r\nIPBanPro_UrlWebSocket</value>
   </data>
   <data name="DefaultKeyEnable" xml:space="preserve">
-    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist</value>
+    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist\r\nBlacklist</value>
   </data>
   <data name="DirectoryNotFoundException" xml:space="preserve">
     <value>Не знайдено теку: </value>
@@ -134,5 +143,26 @@
   </data>
   <data name="FileNotFoundException" xml:space="preserve">
     <value>Не знайдено файл: </value>
+  </data>
+  <data name="FirewallEntriesUpdated" xml:space="preserve">
+    <value>Оновлені записи брандмауера:</value>
+  </data>
+  <data name="ForgettingFailed" xml:space="preserve">
+    <value>Забуто невдалу спробу входу:</value>
+  </data>
+  <data name="IncorrectUsernameFormat" xml:space="preserve">
+    <value>Ім'я користувача неправильного формату</value>
+  </data>
+  <data name="LoginFailure" xml:space="preserve">
+    <value>Невдала спроба входу за IP адресою:</value>
+  </data>
+  <data name="LoginSucceeded" xml:space="preserve">
+    <value>Успішний вхід за IP адресою:</value>
+  </data>
+  <data name="LogonTryCount" xml:space="preserve">
+    <value>Спроб входу:</value>
+  </data>
+  <data name="UnBanningIP" xml:space="preserve">
+    <value>Розблоковано ІР адресу:</value>
   </data>
 </root>

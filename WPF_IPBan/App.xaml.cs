@@ -4,17 +4,15 @@ using Logic_IPBanUtility.Setting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
 using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for App.xaml
-     /// </summary>
-     public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
      {
           private LoadWindowModel? _loadVM;
           private SettingsBuilder _sb = new();

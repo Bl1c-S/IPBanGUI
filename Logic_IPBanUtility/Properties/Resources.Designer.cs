@@ -61,6 +61,33 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заблоковано IP адресу:.
+        /// </summary>
+        internal static string BanningIP {
+            get {
+                return ResourceManager.GetString("BanningIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Час блокування:.
+        /// </summary>
+        internal static string BanTime {
+            get {
+                return ResourceManager.GetString("BanTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ім&apos;я користувача:.
+        /// </summary>
+        internal static string CorrectUsernameFormat {
+            get {
+                return ResourceManager.GetString("CorrectUsernameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDist [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultKey {
@@ -70,7 +97,7 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist.
+        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist\r\nBlacklist.
         /// </summary>
         internal static string DefaultKeyEnable {
             get {
@@ -111,6 +138,69 @@ namespace Logic_IPBanUtility.Properties {
         internal static string FileNotFoundException {
             get {
                 return ResourceManager.GetString("FileNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оновлені записи брандмауера:.
+        /// </summary>
+        internal static string FirewallEntriesUpdated {
+            get {
+                return ResourceManager.GetString("FirewallEntriesUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Забуто невдалу спробу входу:.
+        /// </summary>
+        internal static string ForgettingFailed {
+            get {
+                return ResourceManager.GetString("ForgettingFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ім&apos;я користувача неправильного формату.
+        /// </summary>
+        internal static string IncorrectUsernameFormat {
+            get {
+                return ResourceManager.GetString("IncorrectUsernameFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невдала спроба входу за IP адресою:.
+        /// </summary>
+        internal static string LoginFailure {
+            get {
+                return ResourceManager.GetString("LoginFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успішний вхід за IP адресою:.
+        /// </summary>
+        internal static string LoginSucceeded {
+            get {
+                return ResourceManager.GetString("LoginSucceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спроб входу:.
+        /// </summary>
+        internal static string LogonTryCount {
+            get {
+                return ResourceManager.GetString("LogonTryCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Розблоковано ІР адресу:.
+        /// </summary>
+        internal static string UnBanningIP {
+            get {
+                return ResourceManager.GetString("UnBanningIP", resourceCulture);
             }
         }
     }
