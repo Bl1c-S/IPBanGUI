@@ -6,26 +6,45 @@ public class LogEventBuilder
 {
      private const string DATEFORMAT = "yyyy-MM-dd HH:mm:ss.ffff";
      LogMessageParser logMessageParser = new();
-     public LogEvent? GetLogEvent(string log, int previousId)
+
+     public List<LogEvent> GetLogEvents(List<string> logs, int previousId = 0)
+     {
+          var logEvents = new List<LogEvent>();
+          foreach (var log in logs)
+          {
+               ++previousId;
+               var logEvent = CreateLogEvent(log, previousId);
+               if (logEvent != null)
+                    logEvents.Add(logEvent);
+          }
+          return logEvents;
+     }
+
+     private LogEvent? CreateLogEvent(string log, int id)
+     {
+          (var logDate, var logMessage) = LogSplit(log);
+
+          var dto = logMessageParser.Parse(logMessage);
+          if (dto is null) return null;
+
+          var date = DateParse(logDate);
+
+          var logEvent = new LogEvent(id, date, dto.Message, dto.Type);
+          return logEvent;
+     }
+
+     private (string, string) LogSplit(string log)
      {
           var logParts = log.Split('|');
           var logDate = logParts[0];
           var logMessage = logParts[3];
-
-          var message = logMessageParser.Parse(logMessage);
-          if (message is null)
-               return null;
-
-          var id = previousId + 1;
-          var date = DateParse(logDate);
-
-          var logEvent = new LogEvent(id, date, message);
-          return logEvent;
+          return (logDate, logMessage);
      }
+
      private DateTime DateParse(string logDate)
      {
-          var dateTime = logDate.Trim();
-          var result = DateTime.ParseExact(dateTime, DATEFORMAT, null);
+          var result = DateTime.ParseExact(logDate, DATEFORMAT, null);
+          result.GetDateTimeFormats('g');
           return result;
      }
 }

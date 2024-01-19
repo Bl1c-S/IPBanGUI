@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="View\LoadWindow\Logo.png" />
+    <None Remove="Views\LoadWindow\Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="View\LoadWindow\Logo.png">
+    <Content Include="Views\LoadWindow\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -30,10 +30,6 @@
     <PackageReference Include="NLog" Version="5.2.6" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.5" />
     <PackageReference Include="WPF-UI" Version="2.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Componets\Key\" />
   </ItemGroup>
 
   <ItemGroup>

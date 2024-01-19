@@ -17,7 +17,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.LoginSucceeded, resultLog.Type);
      }
 
      [TestMethod]
@@ -28,7 +30,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.LoginSucceeded, resultLog.Type);
      }
 
      [TestMethod]
@@ -39,7 +43,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.LoginFailure, resultLog.Type);
      }
      [TestMethod]
      public void LoginFailure_WhenUserCurrent()
@@ -49,7 +55,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.LoginFailure, resultLog.Type);
      }
 
      [TestMethod]
@@ -60,7 +68,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.ForgetFailedLogin, resultLog.Type);
      }
 
      [TestMethod]
@@ -71,7 +81,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.BanningIP, resultLog.Type);
      }
 
      [TestMethod]
@@ -82,7 +94,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.UnBanningIP, resultLog.Type);
      }
 
      [TestMethod]
@@ -93,7 +107,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.FirewallEntriesUpdated, resultLog.Type);
      }
 
      [TestMethod]
@@ -104,7 +120,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.FirewallEntriesUpdated, resultLog.Type);
      }
 
      [TestMethod]
@@ -115,7 +133,9 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.FirewallEntriesUpdated, resultLog.Type);
      }
 
      [TestMethod]
@@ -126,6 +146,8 @@ public class LogMessageParserTest
 
           var resultLog = logMessageParser.Parse(InputLog);
 
-          Assert.AreEqual(expectedLog, resultLog);
+          Assert.IsNotNull(resultLog);
+          Assert.AreEqual(expectedLog, resultLog.Message);
+          Assert.AreEqual(LogEventType.FirewallEntriesUpdated, resultLog.Type);
      }
 }

@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Logic_IPBanUtility.Logic.LogFile;
+﻿namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogMessageParser
 {
@@ -18,22 +16,35 @@ public class LogMessageParser
      private const string START_DurationAttribute = "duration: ";
      private const string START_CountAttribute = "count: ";
 
-     public string? Parse(string logMessage)
+     public LogTypeAndMessageDTO? Parse(string logMessage)
      {
           switch (logMessage)
           {
                case var s when s.StartsWith("Login succeeded"):
-                    return LoginSucceeded(logMessage);
+                    return new LogTypeAndMessageDTO(
+                         LogEventType.LoginSucceeded, 
+                         LoginSucceeded(logMessage));
+
                case var s when s.StartsWith("Login failure"):
-                    return LoginFailure(logMessage);
+                    return new LogTypeAndMessageDTO (LogEventType.LoginFailure, 
+                         LoginFailure(logMessage));
+
                case var s when s.StartsWith("Forgetting failed"):
-                    return ForgetFailedLogin(logMessage);
+                    return new LogTypeAndMessageDTO(LogEventType.ForgetFailedLogin, 
+                         ForgetFailedLogin(logMessage));
+
                case var s when s.StartsWith("Banning ip"):
-                    return BanningIP(logMessage);
+                    return new LogTypeAndMessageDTO(LogEventType.BanningIP, 
+                         BanningIP(logMessage));
+
                case var s when s.StartsWith("Un-banning"):
-                    return UnBanningIP(logMessage);
+                    return new LogTypeAndMessageDTO(LogEventType.UnBanningIP, 
+                         UnBanningIP(logMessage));
+
                case var s when s.StartsWith("Firewall entries"):
-                    return FirewallEntriesUpdated(logMessage);
+                    return new LogTypeAndMessageDTO(LogEventType.FirewallEntriesUpdated, 
+                         FirewallEntriesUpdated(logMessage));
+
                default : return null;
           }
      }

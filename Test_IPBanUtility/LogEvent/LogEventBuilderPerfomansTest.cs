@@ -15,10 +15,9 @@ public class LogEventBuilderPerfomansTest
 
           var LogEventB = new LogEventBuilder();
           for (int i = 0; i < testCount; i++)
-               foreach (var log in logEventsTxt)
-               {
-                    var logEvent = LogEventB.GetLogEvent(log, 0);
-               }
+          {
+               var logEvent = LogEventB.GetLogEvents(logEventsTxt);
+          }
 
           stopwatch.Stop();
           var time = stopwatch.ElapsedMilliseconds;
@@ -33,11 +32,8 @@ public class LogEventBuilderPerfomansTest
           stopwatch.Start();
 
           var LogEventB = new LogEventBuilder();
-          for (int i = 0; i < testCount; i++)
-               foreach (var log in logEventsTxt)
-               {
-                    var logEvent = LogEventB.GetLogEvent(log, 0);
-               }
+          for (int i = 0; i < testCount; i++) 
+               LogEventB.GetLogEvents(logEventsTxt);
 
           stopwatch.Stop();
           var time = stopwatch.ElapsedMilliseconds;

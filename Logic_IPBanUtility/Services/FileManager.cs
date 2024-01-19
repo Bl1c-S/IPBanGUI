@@ -24,7 +24,7 @@ public class FileManager
           }
      }
 
-     public IEnumerable<string> GetStrings(string filePath) => File.ReadAllLines(filePath);
+     public List<string> ReadFileToList(string filePath) => File.ReadAllLines(filePath).ToList();
      public T GetJson<T>(string path)
      {
           var json = File.ReadAllText(path);

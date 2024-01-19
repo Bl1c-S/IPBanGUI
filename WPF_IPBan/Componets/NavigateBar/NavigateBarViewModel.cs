@@ -13,12 +13,14 @@ internal class NavigateBarViewModel : ViewModelBase
           _navigationService.OnCurrentChanged += OnCurrentChanged;
           NavigateToKeyList = new RelayCommand(() => _navigationService.Navigate<KeyListViewModel>());
           NavigateToSettings = new RelayCommand(() => _navigationService.Navigate<SettingsViewModel>());
+          NavigateToEvents = new RelayCommand(() => _navigationService.Navigate<EventsViewModel>());
      }
 
      public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
 
      public ICommand NavigateToKeyList { get; }
      public ICommand NavigateToSettings { get; }
+     public ICommand NavigateToEvents { get; }
 
      private void OnCurrentChanged()
      {
