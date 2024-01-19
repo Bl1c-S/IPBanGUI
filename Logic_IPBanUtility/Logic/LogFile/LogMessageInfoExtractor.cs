@@ -4,7 +4,7 @@ public class LogMessageInfoExtractor
 {
      public string? ExtractStringFromStartAtributeToEndString(string logMessage, string startAttribute)
      {
-          int startIndex = logMessage.IndexOf(startAttribute) + startAttribute.Length;
+          var startIndex = logMessage.IndexOf(startAttribute) + startAttribute.Length;
 
           if (startIndex == logMessage.Length)
                return null;

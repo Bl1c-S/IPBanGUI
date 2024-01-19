@@ -18,7 +18,27 @@ public class LogMessageParser
      private const string START_DurationAttribute = "duration: ";
      private const string START_CountAttribute = "count: ";
 
-     public string LoginSucceeded(string logMessage)
+     public string? Parse(string logMessage)
+     {
+          switch (logMessage)
+          {
+               case var s when s.StartsWith("Login succeeded"):
+                    return LoginSucceeded(logMessage);
+               case var s when s.StartsWith("Login failure"):
+                    return LoginFailure(logMessage);
+               case var s when s.StartsWith("Forgetting failed"):
+                    return ForgetFailedLogin(logMessage);
+               case var s when s.StartsWith("Banning ip"):
+                    return BanningIP(logMessage);
+               case var s when s.StartsWith("Un-banning"):
+                    return UnBanningIP(logMessage);
+               case var s when s.StartsWith("Firewall entries"):
+                    return FirewallEntriesUpdated(logMessage);
+               default : return null;
+          }
+     }
+
+     private string LoginSucceeded(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeColon, END_Attribute);
           var user = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_NameAttributeColon, END_Attribute);
@@ -29,7 +49,7 @@ public class LogMessageParser
                return $"{Properties.Resources.LoginSucceeded} {IpAddres}, {Properties.Resources.CorrectUsernameFormat} {user}";
      }
 
-     public string LoginFailure(string logMessage)
+     private string LoginFailure(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeFailure, END_Attribute);
           var user = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_NameAttributeСomma, END_Attribute);
@@ -40,13 +60,13 @@ public class LogMessageParser
                return $"{Properties.Resources.LoginFailure}{IpAddres}, {Properties.Resources.CorrectUsernameFormat} {user}";
      }
 
-     public string ForgetFailedLogin(string logMessage)
+     private string ForgetFailedLogin(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeSpace, END_Attribute);
           return $"{Properties.Resources.ForgettingFailed} {IpAddres}";
      }
 
-     public string BanningIP(string logMessage)
+     private string BanningIP(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeColon, END_Attribute);
           var count = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_CountAttribute, END_Attribute);
@@ -55,13 +75,13 @@ public class LogMessageParser
           return $"{Properties.Resources.BanningIP} {IpAddres}, {Properties.Resources.LogonTryCount} {count}, {Properties.Resources.BanTime} {duration}";
      }
 
-     public string UnBanningIP(string logMessage)
+     private string UnBanningIP(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeSpace, END_Attribute);
           return $"{Properties.Resources.UnBanningIP} {IpAddres}";
      }
 
-     public string FirewallEntriesUpdated(string logMessage)
+     private string FirewallEntriesUpdated(string logMessage)
      {
           var IpAddreses = logInfoExtractor.ExtractStringFromStartAtributeToEndString(logMessage, Start_IpAttributeUpdated);
 
