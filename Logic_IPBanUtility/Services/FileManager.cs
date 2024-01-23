@@ -24,7 +24,13 @@ public class FileManager
           }
      }
 
-     public List<string> ReadFileToList(string filePath) => File.ReadAllLines(filePath).ToList();
+     public List<string> ReadAllLines(string filePath) => File.ReadAllLines(filePath).ToList();
+
+     public List<string> ReadAllLinesFromIndexToEnd(string filePath, int startLineIndex)
+     {
+          var newLines = File.ReadLines(filePath).Skip(startLineIndex - 1);
+          return newLines.ToList();
+     }
      public T GetJson<T>(string path)
      {
           var json = File.ReadAllText(path);

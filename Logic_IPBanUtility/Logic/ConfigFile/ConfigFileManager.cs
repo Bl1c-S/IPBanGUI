@@ -19,7 +19,7 @@ public class ConfigFileManager
         _contextPath = settings.IPBan.Context;
         _keyIdentiPath = settings.Config.KeyIdenti;
 
-        Context = _fileManager.ReadFileToList(_contextPath);
+        Context = _fileManager.ReadAllLines(_contextPath);
     }
     public List<Key> CreateKeys()
     {

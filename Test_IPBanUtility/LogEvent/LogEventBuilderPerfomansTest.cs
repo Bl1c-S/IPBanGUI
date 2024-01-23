@@ -1,13 +1,14 @@
-﻿using System.Diagnostics;
+﻿using Logic_IPBanUtility.Logic.LogFile;
+using System.Diagnostics;
 
-namespace Test_IPBanUtility;
+namespace Test_IPBanUtility.LogEvent;
 [TestClass]
 public class LogEventBuilderPerfomansTest
 {
      List<string> logEventsTxt = File.ReadAllLines("C:\\Users\\Bl1c\\Desktop\\logfile.txt").ToList();
 
      [TestMethod]
-     public void PerfomansTest10()
+     public void GetLogEventsTest10()
      {
           int testCount = 10;
           Stopwatch stopwatch = new Stopwatch();
@@ -25,7 +26,7 @@ public class LogEventBuilderPerfomansTest
      }
 
      [TestMethod]
-     public void PerfomansTest50()
+     public void GetLogEventsTest50()
      {
           int testCount = 50;
           Stopwatch stopwatch = new Stopwatch();
