@@ -14,7 +14,6 @@ public class LogMessageParser
      private const string START_NameAttributeСomma = ", ";
 
      private const string START_DurationAttribute = "duration: ";
-     private const string START_CountAttribute = "count: ";
 
      public LogTypeAndMessageDTO? Parse(string logMessage)
      {
@@ -80,10 +79,9 @@ public class LogMessageParser
      private string BanningIP(string logMessage)
      {
           var IpAddres = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_IpAttributeColon, END_Attribute);
-          var count = logInfoExtractor.ExtractStringFromStartAtributeToEndAttribute(logMessage, START_CountAttribute, END_Attribute);
           var duration = logInfoExtractor.ExtractStringFromStartAtributeToEndString(logMessage, START_DurationAttribute);
 
-          return $"{Properties.Resources.BanningIP} {IpAddres}, {Properties.Resources.LogonTryCount} {count}, {Properties.Resources.BanTime} {duration}";
+          return $"{Properties.Resources.BanningIP} {IpAddres}, {Properties.Resources.BanTime} {duration}";
      }
 
      private string UnBanningIP(string logMessage)

@@ -187,15 +187,6 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Спроб входу:.
-        /// </summary>
-        internal static string LogonTryCount {
-            get {
-                return ResourceManager.GetString("LogonTryCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Розблоковано ІР адресу:.
         /// </summary>
         internal static string UnBanningIP {
