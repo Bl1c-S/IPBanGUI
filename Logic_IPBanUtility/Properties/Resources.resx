@@ -159,9 +159,6 @@
   <data name="LoginSucceeded" xml:space="preserve">
     <value>Успішний вхід за IP адресою:</value>
   </data>
-  <data name="LogonTryCount" xml:space="preserve">
-    <value>Спроб входу:</value>
-  </data>
   <data name="UnBanningIP" xml:space="preserve">
     <value>Розблоковано ІР адресу:</value>
   </data>

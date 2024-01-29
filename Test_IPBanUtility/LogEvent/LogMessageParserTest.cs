@@ -75,7 +75,7 @@ public class LogMessageParserTest
      public void BanningIP_WhenCurrent()
      {
           string InputLog = "Banning ip address: 185.16.39.70, user name: , config blacklisted: False, count: 3, extra info: , duration: 00:05:00";
-          string expectedLog = "Заблоковано IP адресу: 185.16.39.70, Спроб входу: 3, Час блокування: 00:05:00";
+          string expectedLog = "Заблоковано IP адресу: 185.16.39.70, Час блокування: 00:05:00";
 
           var resultLog = logMessageParser.Parse(InputLog);
 

@@ -5,7 +5,14 @@ namespace Test_IPBanUtility.LogEvent;
 [TestClass]
 public class LogEventBuilderPerfomansTest
 {
-     List<string> logEventsTxt = File.ReadAllLines("C:\\Users\\Bl1c\\Desktop\\logfile.txt").ToList();
+     private List<string> logEventsTxt;
+
+     public LogEventBuilderPerfomansTest()
+     {
+          var programFolder = AppDomain.CurrentDomain.BaseDirectory;
+          var path = $"{programFolder}\\TestLogs\\logfile_10000.txt";
+          logEventsTxt = File.ReadAllLines(path).ToList();
+     }
 
      [TestMethod]
      public void GetLogEventsTest10()

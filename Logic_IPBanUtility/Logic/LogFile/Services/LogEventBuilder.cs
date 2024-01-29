@@ -7,15 +7,16 @@ public class LogEventBuilder
      private const string DATEFORMAT = "yyyy-MM-dd HH:mm:ss.ffff";
      LogMessageParser logMessageParser = new();
 
-     public List<LogEvent>? GetLogEvents(List<string> logs, int previousId = 0)
+     public List<LogEvent>? GetLogEvents(List<string> logs, int previousId = 1)
      {
           var logEvents = new List<LogEvent>();
           foreach (var log in logs)
           {
-               ++previousId;
                var logEvent = CreateLogEvent(log, previousId);
-               if (logEvent != null)
-                    logEvents.Add(logEvent);
+               if (logEvent is null)
+                    continue;
+               logEvents.Add(logEvent);
+               ++previousId;
           }
           if (logEvents.Count > 0)
                return logEvents;

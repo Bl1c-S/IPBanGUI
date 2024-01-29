@@ -106,7 +106,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to При завантаженні налаштувань виникла помилка. Виберіть теку де розміщується IPBan, після чого IPBan GUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть..
+        ///   Looks up a localized string similar to Виберіть теку де розміщується IPBan, після чого IPBanGUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть..
         /// </summary>
         public static string LoadSettingsErrorText {
             get {

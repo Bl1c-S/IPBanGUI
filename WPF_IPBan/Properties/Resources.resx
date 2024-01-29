@@ -133,7 +133,7 @@
     <value>Ключі</value>
   </data>
   <data name="LoadSettingsErrorText" xml:space="preserve">
-    <value>При завантаженні налаштувань виникла помилка. Виберіть теку де розміщується IPBan, після чого IPBan GUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть.</value>
+    <value>Виберіть теку де розміщується IPBan, після чого IPBanGUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть.</value>
   </data>
   <data name="LoadSettingsErrorTitle" xml:space="preserve">
     <value>Помилка завантаження налаштувань</value>
