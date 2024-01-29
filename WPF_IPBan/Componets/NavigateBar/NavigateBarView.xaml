@@ -10,26 +10,23 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
-            <local:CurrentViewToActiveConverter x:Key="IsEnableKeyList"/>
+            <local:CurrentViewToActiveConverter x:Key="IsViewEnable"/>
+            <local:CurrentPageNameToActiveConverter x:Key="CurrentPageName"/>
         </Grid.Resources>
 
         <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
 
-            <ui:Button Content="Ключі" Icon="TextBulletListSquare24" 
-                       Command = "{Binding NavigateToKeyList}"
-                       IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=KeyListViewModel}" />
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Ключі}" Icon="TextBulletListSquare24" 
+                       Command = "{Binding NavigateToKeyList}"/>
 
-            <ui:Button Content="Події" Icon="ChartMultiple24" 
-                       Command = "{Binding NavigateToEventsView}" Margin="4,0,0,0" 
-                       IsEnabled="False"/>
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Події}" Icon="ChartMultiple24" 
+                       Command = "{Binding NavigateToEvents}" Margin="4,0,0,0"/>
 
             <!--<ui:Button Content="Бекапи" Icon="FolderZip24" 
-           Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
-           IsEnabled="False"/>-->
+           Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"/>-->
 
-            <ui:Button Content="Налаштування" Icon="Settings48" 
-                       Command = "{Binding NavigateToSettings}" Margin="4,0,0,0" 
-                       IsEnabled="{Binding CurrentViewModel, Converter={StaticResource IsEnableKeyList}, ConverterParameter=SettingsViewModel}"/>
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Налаштування}" Icon="Settings48" 
+                       Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"/>
 
         </DockPanel>
     </Grid>
