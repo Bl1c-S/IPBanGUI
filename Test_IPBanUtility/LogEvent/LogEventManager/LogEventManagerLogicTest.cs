@@ -20,6 +20,6 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void Test1()
      {
-          var logEvents = LE_Manager.ReadAll();
+          var logEvents = LE_Manager.ReadAllLogEvents();
      }
 }

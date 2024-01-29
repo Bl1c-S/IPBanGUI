@@ -16,13 +16,13 @@ public class LogEventManager
           _fileManager = fileManager;
      }
 
-     public List<LogEvent>? ReadAll()
+     public List<LogEvent> ReadAllLogEvents()
      {
           var logs = _fileManager.ReadAllLines(_logFilePath);
           return _logEventBuilder.GetLogEvents(logs);
      }
 
-     public List<LogEvent>? ReadNewLines()
+     public List<LogEvent>? ReadNewLogEvents()
      {
           var newLogs = _fileManager.ReadAllLinesFromIndexToEnd(_logFilePath, _lastLogFileStringCount);
           if (newLogs is null)

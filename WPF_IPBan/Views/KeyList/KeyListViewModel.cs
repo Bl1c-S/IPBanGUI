@@ -2,10 +2,11 @@
 using Logic_IPBanUtility.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
-internal class KeyListViewModel : ViewModelBase
+internal class KeyListViewModel : PageViewModel
 {
      private ObservableCollection<KeyViewModel> _keyViewModels;
      public ObservableCollection<KeyViewModel> KeyViewModels
@@ -19,7 +20,7 @@ internal class KeyListViewModel : ViewModelBase
 
      private readonly ConfigFileManager _cfgManager;
 
-     public KeyListViewModel(ConfigFileManager cfgManager)
+     public KeyListViewModel(ConfigFileManager cfgManager) : base(Properties.PageName.KeyList)
      {
           _cfgManager = cfgManager;
           _keyViewModels = CreateKeyViewModels(cfgManager.CreateKeys());

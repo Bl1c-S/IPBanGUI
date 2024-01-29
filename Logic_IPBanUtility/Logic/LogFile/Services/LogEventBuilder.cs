@@ -7,7 +7,7 @@ public class LogEventBuilder
      private const string DATEFORMAT = "yyyy-MM-dd HH:mm:ss.ffff";
      LogMessageParser logMessageParser = new();
 
-     public List<LogEvent>? GetLogEvents(List<string> logs, int previousId = 1)
+     public List<LogEvent> GetLogEvents(List<string> logs, int previousId = 1)
      {
           var logEvents = new List<LogEvent>();
           foreach (var log in logs)
@@ -18,10 +18,7 @@ public class LogEventBuilder
                logEvents.Add(logEvent);
                ++previousId;
           }
-          if (logEvents.Count > 0)
-               return logEvents;
-
-          return null;
+          return logEvents;
      }
 
      private LogEvent? CreateLogEvent(string log, int id)
@@ -48,7 +45,6 @@ public class LogEventBuilder
      private DateTime DateParse(string logDate)
      {
           var result = DateTime.ParseExact(logDate, DATEFORMAT, null);
-          result.GetDateTimeFormats('g');
           return result;
      }
 }

@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility;
+using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,6 +66,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton(settings);
                     services.AddSingleton<FileManager>();
                     services.AddSingleton<ConfigFileManager>();
+                    services.AddSingleton<LogEventManager>();
 
                     services.AddSingleton<SettingsVMsBuilder>();
                     services.AddTransient<SettingsViewModel>();
@@ -72,6 +74,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton(s => new NavigationService(s));
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<KeyListViewModel>();
+                    services.AddTransient<EventsViewModel>();
                }).Build();
                host.Start();
 

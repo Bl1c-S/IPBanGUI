@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WPF_IPBanUtility;
 
@@ -16,7 +17,8 @@ internal class NavigateBarViewModel : ViewModelBase
           NavigateToEvents = new RelayCommand(() => _navigationService.Navigate<EventsViewModel>());
      }
 
-     public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
+     public PageViewModel? CurrentViewModel => _navigationService.CurrentViewModel;
+     public string? CurrentPageName => CurrentViewModel?.PageName;
 
      public ICommand NavigateToKeyList { get; }
      public ICommand NavigateToSettings { get; }
@@ -25,6 +27,7 @@ internal class NavigateBarViewModel : ViewModelBase
      private void OnCurrentChanged()
      {
           OnPropertyChanged(nameof(CurrentViewModel));
+          OnPropertyChanged(nameof(CurrentPageName));
      }
      public override void Dispose()
      {
