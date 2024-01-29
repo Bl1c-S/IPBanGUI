@@ -9,7 +9,7 @@
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="IPBanGUI v0.7.0-beta" 
+        Title="IPBanGUI v0.8.0-beta" 
         Height="600" MinHeight="200" Width="900" MinWidth="650">
     <Grid Margin="8,0">
         <Grid.Resources>
