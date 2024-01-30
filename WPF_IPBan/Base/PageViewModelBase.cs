@@ -14,7 +14,7 @@ internal class PageViewModelBase : ViewModelBase
      public string PageName { get; set; }
      public ObservableCollection<Button> PageButtons { get; set; }
 
-     public virtual void CreatePageButtons()
+     protected virtual void CreatePageButtons()
      {
      }
 }

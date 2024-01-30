@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Controls;
+
 namespace WPF_IPBanUtility;
 
 internal class SettingsViewModel : PageViewModelBase
@@ -16,13 +18,13 @@ internal class SettingsViewModel : PageViewModelBase
           _settingsVMsBuilder = settingsVMsBuilder;
           _vMs = settingsVMsBuilder.Build();
           ISaveChangedCommand = new RelayCommand(SaveChanged);
-          ISetDefaultSettingsCommand = new RelayCommand(SetDefaultSettings);
+          ISetDefaultSettingsCommand = new RelayCommand(ConfirmationSetDefaultSettings);
           CreatePageButtons();
      }
 
      #region SaveChanged
      public ICommand ISaveChangedCommand { get; }
-     public void SaveChanged()
+     private void SaveChanged()
      {
           foreach (var vm in VMs)
                vm.Save();
@@ -30,7 +32,14 @@ internal class SettingsViewModel : PageViewModelBase
      #endregion
 
      public ICommand ISetDefaultSettingsCommand { get; }
-     public void SetDefaultSettings()
+
+     private void ConfirmationSetDefaultSettings()
+     {
+          var result = System.Windows.MessageBox.Show(Properties.Messages.SetDefaultSettingsText, Properties.Messages.SetDefaultSettingsTitle, MessageBoxButton.YesNo, MessageBoxImage.Information);
+          if (result == MessageBoxResult.Yes)
+               SetDefaultSettings();
+     }
+     private void SetDefaultSettings()
      {
           var sb = new SettingsBuilder();
           sb.LoadSettings();
@@ -40,8 +49,8 @@ internal class SettingsViewModel : PageViewModelBase
           OnPropertyChanged(nameof(VMs));
      }
 
-     public override void CreatePageButtons()
-     {
+     protected override void CreatePageButtons()
+          {
           PageButtons.Add(new Button { Content = Properties.ButtonNames.Save, Command = ISaveChangedCommand , 
                Icon = Wpf.Ui.Common.SymbolRegular.SaveMultiple24 });
           PageButtons.Add(new Button { Content = Properties.ButtonNames.Default, Command = ISetDefaultSettingsCommand, 

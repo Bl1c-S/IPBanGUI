@@ -95,5 +95,23 @@ namespace WPF_IPBanUtility.Properties {
                 return ResourceManager.GetString("SaveError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Встановлення налаштувать за замовчування вплине тільки на IPBanGUI. На налаштування ключів у вікні &quot;Ключі&quot; це ніяк не вплине..
+        /// </summary>
+        public static string SetDefaultSettingsText {
+            get {
+                return ResourceManager.GetString("SetDefaultSettingsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Скидання налаштувань.
+        /// </summary>
+        public static string SetDefaultSettingsTitle {
+            get {
+                return ResourceManager.GetString("SetDefaultSettingsTitle", resourceCulture);
+            }
+        }
     }
 }
