@@ -126,6 +126,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Підтвердити</value>
   </data>
+  <data name="Default" xml:space="preserve">
+    <value>Замовчуванням</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>ОК</value>
   </data>

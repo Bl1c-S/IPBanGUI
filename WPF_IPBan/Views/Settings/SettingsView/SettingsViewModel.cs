@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Windows.Input;
 using Wpf.Ui.Controls;
 namespace WPF_IPBanUtility;
@@ -43,7 +42,9 @@ internal class SettingsViewModel : PageViewModelBase
 
      public override void CreatePageButtons()
      {
-          PageButtons.Add(new Button { Content = "Зберегти зміни", Command = ISaveChangedCommand });
-          PageButtons.Add(new Button { Content = "Налаштування за завмовчуванням", Command = ISetDefaultSettingsCommand, Margin = new(4,0,0,0)});
+          PageButtons.Add(new Button { Content = Properties.ButtonNames.Save, Command = ISaveChangedCommand , 
+               Icon = Wpf.Ui.Common.SymbolRegular.SaveMultiple24 });
+          PageButtons.Add(new Button { Content = Properties.ButtonNames.Default, Command = ISetDefaultSettingsCommand, 
+               Icon = Wpf.Ui.Common.SymbolRegular.LauncherSettings24, Margin = new(4,0,0,0)});
      }
 }
