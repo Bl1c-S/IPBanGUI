@@ -129,4 +129,10 @@
   <data name="SaveError" xml:space="preserve">
     <value>Помилка збереження</value>
   </data>
+  <data name="SetDefaultSettingsText" xml:space="preserve">
+    <value>Встановлення налаштувать за замовчування вплине тільки на IPBanGUI. На налаштування ключів у вікні "Ключі" це ніяк не вплине.</value>
+  </data>
+  <data name="SetDefaultSettingsTitle" xml:space="preserve">
+    <value>Скидання налаштувань</value>
+  </data>
 </root>
