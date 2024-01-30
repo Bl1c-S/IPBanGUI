@@ -37,27 +37,36 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\PageName.Designer.cs">
-      <DependentUpon>PageName.resx</DependentUpon>
+    <Compile Update="Properties\ButtonNames.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ButtonNames.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\PageNames.Designer.cs">
+      <DependentUpon>PageNames.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Messages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\PageName.resx">
+    <EmbeddedResource Update="Properties\ButtonNames.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ButtonNames.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\PageNames.resx">
       <SubType>Designer</SubType>
-      <LastGenOutput>PageName.Designer.cs</LastGenOutput>
+      <LastGenOutput>PageNames.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

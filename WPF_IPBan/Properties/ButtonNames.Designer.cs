@@ -22,24 +22,24 @@ namespace WPF_IPBanUtility.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class ButtonNames {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ButtonNames() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.ButtonNames", typeof(ButtonNames).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace WPF_IPBanUtility.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Бекапи.
         /// </summary>
-        public static string Backup {
+        internal static string Backup {
             get {
                 return ResourceManager.GetString("Backup", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Закрити.
         /// </summary>
-        public static string Close {
+        internal static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
             }
@@ -81,61 +81,16 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Підтвердити.
         /// </summary>
-        public static string Confirm {
+        internal static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Помилка.
-        /// </summary>
-        public static string Error {
-            get {
-                return ResourceManager.GetString("Error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ключі.
-        /// </summary>
-        public static string KeysTitle {
-            get {
-                return ResourceManager.GetString("KeysTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Виберіть теку де розміщується IPBan, після чого IPBanGUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть..
-        /// </summary>
-        public static string LoadSettingsErrorText {
-            get {
-                return ResourceManager.GetString("LoadSettingsErrorText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Помилка завантаження налаштувань.
-        /// </summary>
-        public static string LoadSettingsErrorTitle {
-            get {
-                return ResourceManager.GetString("LoadSettingsErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Журнал.
-        /// </summary>
-        public static string LogsTitle {
-            get {
-                return ResourceManager.GetString("LogsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ОК.
         /// </summary>
-        public static string OK {
+        internal static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
             }
@@ -144,36 +99,18 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Зберегти.
         /// </summary>
-        public static string Save {
+        internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Помилка збереження.
-        /// </summary>
-        public static string SaveError {
-            get {
-                return ResourceManager.GetString("SaveError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Вибрати.
         /// </summary>
-        public static string Select {
+        internal static string Select {
             get {
                 return ResourceManager.GetString("Select", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Налаштування.
-        /// </summary>
-        public static string SettingsTitle {
-            get {
-                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
     }

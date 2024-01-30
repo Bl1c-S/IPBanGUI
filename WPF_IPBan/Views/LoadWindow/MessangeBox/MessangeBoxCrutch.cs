@@ -6,11 +6,11 @@ internal static class MessangeBoxCrutch
 {
      public static void ErrorBox(string message)
      {
-          DialogMessageBox.InfoBox(Properties.Resources.Error, message);
+          DialogMessageBox.InfoBox(Properties.Messages.Error, message);
      }
      public static void TwoActionBoxAndLeftButtonNameSelect(Action left, Action right)
      {
-          DialogMessageBox.TwoActionBox(left, right, Properties.Resources.LoadSettingsErrorText, Properties.Resources.LoadSettingsErrorTitle, Properties.Resources.Select);
+          DialogMessageBox.TwoActionBox(left, right, Properties.Messages.LoadSettingsErrorText, Properties.Messages.LoadSettingsErrorTitle, Properties.ButtonNames.Select);
      }
 
 }

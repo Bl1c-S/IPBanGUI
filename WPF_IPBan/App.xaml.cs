@@ -10,10 +10,10 @@ using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
 
 namespace WPF_IPBanUtility
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+     /// <summary>
+     /// Interaction logic for App.xaml
+     /// </summary>
+     public partial class App : Application
      {
           private LoadWindowModel? _loadVM;
           private SettingsBuilder _sb = new();
@@ -34,7 +34,17 @@ namespace WPF_IPBanUtility
                     loadWindow.Close();
                     mainWindow.Show();
                }
-               catch (Exception ex) { MessangeBoxCrutch.ErrorBox(ex.Message); }
+               catch (Exception ex)
+               {
+                    try
+                    {
+                         MessangeBoxCrutch.ErrorBox(ex.Message);
+                    }
+                    catch
+                    {
+                         MessageBox.Show(ex.Message);
+                    }
+               }
 
                base.OnStartup(e);
           }

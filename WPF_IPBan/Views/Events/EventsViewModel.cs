@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace WPF_IPBanUtility;
 
-internal class EventsViewModel : PageViewModel
+internal class EventsViewModel : PageViewModelBase
 {
      public LogEventManager LogManager { get; }
      public ObservableCollection<LogEvent> LogEvents { get; set; }
@@ -13,7 +13,7 @@ internal class EventsViewModel : PageViewModel
      public List<ViewModelBase> VMs => _vMs;
      private List<ViewModelBase> _vMs;
 
-     public EventsViewModel(LogEventManager logManager) : base(Properties.PageName.Events)
+     public EventsViewModel(LogEventManager logManager) : base(Properties.PageNames.Events)
      {
           LogManager = logManager;
           LogEvents = new(LogManager.ReadAllLogEvents());

@@ -59,7 +59,7 @@ internal class SelectFolderViewModel : ViewModelBase, ISettingsVMComponent
           }
           catch (Exception e)
           {
-               DialogMessageBox.InfoBox(Properties.Resources.SaveError, e.Message);
+               DialogMessageBox.InfoBox(Properties.Messages.SaveError, e.Message);
           }
      }
 }

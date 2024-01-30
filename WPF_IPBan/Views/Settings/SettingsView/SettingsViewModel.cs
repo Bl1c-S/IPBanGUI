@@ -1,21 +1,24 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Windows.Input;
+using Wpf.Ui.Controls;
 namespace WPF_IPBanUtility;
 
-internal class SettingsViewModel : PageViewModel
+internal class SettingsViewModel : PageViewModelBase
 {
      private readonly SettingsVMsBuilder _settingsVMsBuilder;
-     public List<ISettingsVMComponent> VMs  => _vMs; 
+     public List<ISettingsVMComponent> VMs => _vMs;
      private List<ISettingsVMComponent> _vMs;
 
-     public SettingsViewModel(SettingsVMsBuilder settingsVMsBuilder) : base(Properties.PageName.Settings)
+     public SettingsViewModel(SettingsVMsBuilder settingsVMsBuilder) : base(Properties.PageNames.Settings)
      {
           _settingsVMsBuilder = settingsVMsBuilder;
           _vMs = settingsVMsBuilder.Build();
           ISaveChangedCommand = new RelayCommand(SaveChanged);
           ISetDefaultSettingsCommand = new RelayCommand(SetDefaultSettings);
+          CreatePageButtons();
      }
 
      #region SaveChanged
@@ -36,5 +39,11 @@ internal class SettingsViewModel : PageViewModel
           sb.CreateDefaultSettings(iPBan);
           _vMs = _settingsVMsBuilder.Build();
           OnPropertyChanged(nameof(VMs));
+     }
+
+     public override void CreatePageButtons()
+     {
+          PageButtons.Add(new Button { Content = "Зберегти зміни", Command = ISaveChangedCommand });
+          PageButtons.Add(new Button { Content = "Налаштування за завмовчуванням", Command = ISetDefaultSettingsCommand, Margin = new(4,0,0,0)});
      }
 }
