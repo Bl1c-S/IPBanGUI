@@ -3,14 +3,18 @@
 internal class MainWindowViewModel : ViewModelBase
 {
      private readonly NavigateBarViewModel _navigateBarViewModel;
+     private readonly NavigateTabViewModel _navigateTabViewModel;
      private readonly NavigationService _navigationService;
 
      public NavigateBarViewModel NavigateBarViewModel => _navigateBarViewModel;
-     public ViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
+     public NavigateTabViewModel NavigateTabViewModel => _navigateTabViewModel;
+
+     public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
 
      public MainWindowViewModel(NavigationService navigationService)
      {
           _navigateBarViewModel = new(navigationService);
+          _navigateTabViewModel = new(navigationService);
           _navigationService = navigationService;
 
           _navigationService.Navigate<KeyListViewModel>();

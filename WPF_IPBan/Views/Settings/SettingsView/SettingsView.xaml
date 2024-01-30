@@ -19,28 +19,16 @@
 
         </Grid.Resources>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        
-        
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="0">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding VMs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,4">
-                            <ContentControl  Content="{Binding}" Grid.Row="2" Margin="4" />
+                            <ContentControl  Content="{Binding}" Margin="4" />
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-
-        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Button Content="Зберегти зміни" Command="{Binding ISaveChangedCommand}"/>
-            <Button Content="Налаштування за завмовчуванням" Command="{Binding ISetDefaultSettingsCommand}" Margin="4,0,0,0"/>
-        </StackPanel>
-
     </Grid>
 </UserControl>

@@ -17,7 +17,7 @@ internal class NavigateBarViewModel : ViewModelBase
           NavigateToEvents = new RelayCommand(() => _navigationService.Navigate<EventsViewModel>());
      }
 
-     public PageViewModel? CurrentViewModel => _navigationService.CurrentViewModel;
+     public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
      public string? CurrentPageName => CurrentViewModel?.PageName;
 
      public ICommand NavigateToKeyList { get; }
