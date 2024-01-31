@@ -123,6 +123,12 @@
   <data name="KeyList" xml:space="preserve">
     <value>Ключі</value>
   </data>
+  <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
+    <value>Вибір ключів для відображення</value>
+  </data>
+  <data name="SelectFolderViewTitle" xml:space="preserve">
+    <value>Шлях до кореневої папки IPBan</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
   </data>

@@ -79,6 +79,24 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вибір ключів для відображення.
+        /// </summary>
+        public static string KeysVisibilityControllerViewTitle {
+            get {
+                return ResourceManager.GetString("KeysVisibilityControllerViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Шлях до кореневої папки IPBan.
+        /// </summary>
+        public static string SelectFolderViewTitle {
+            get {
+                return ResourceManager.GetString("SelectFolderViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Налаштування.
         /// </summary>
         public static string Settings {

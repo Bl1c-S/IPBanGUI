@@ -5,9 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_IPBanUtility"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" MaxHeight="250">
+             d:DesignHeight="450" d:DesignWidth="800" MaxHeight="327">
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="{Binding Title}"/>
+            <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="0.5" Margin="0,4,4,4"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding KeyIndentis}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

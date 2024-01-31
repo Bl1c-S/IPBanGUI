@@ -4,10 +4,11 @@ using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Logic_IPBanUtility.Setting;
+using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
 
-internal class SelectFolderViewModel : ViewModelBase, ISettingsVMComponent
+internal class SelectFolderViewModel : SettingsComponentViewModelBase
 {
      private Settings _settings;
 
@@ -26,6 +27,7 @@ internal class SelectFolderViewModel : ViewModelBase, ISettingsVMComponent
 
      public SelectFolderViewModel(Settings settings)
      {
+          Title = Properties.PageNames.SelectFolderViewTitle;
           _settings = settings;
           _dirrectoryPath = GetIPBanFolder();
           IOpenFolderCommand = new RelayCommand(SelectFolder);
@@ -48,7 +50,7 @@ internal class SelectFolderViewModel : ViewModelBase, ISettingsVMComponent
           }
      }
 
-     public void Save()
+     public override void Save()
      {
           try
           {
