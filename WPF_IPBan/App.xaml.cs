@@ -36,14 +36,8 @@ namespace WPF_IPBanUtility
                }
                catch (Exception ex)
                {
-                    try
-                    {
-                         MessangeBoxCrutch.ErrorBox(ex.Message);
-                    }
-                    catch
-                    {
-                         MessageBox.Show(ex.Message);
-                    }
+                    try { MessangeBoxCrutch.ErrorBox(ex.Message); }
+                    catch { MessageBox.Show(ex.Message); }
                }
 
                base.OnStartup(e);

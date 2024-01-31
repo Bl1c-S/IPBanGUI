@@ -122,5 +122,14 @@ namespace WPF_IPBanUtility.Properties {
                 return ResourceManager.GetString("Select", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оновити.
+        /// </summary>
+        internal static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
     }
 }
