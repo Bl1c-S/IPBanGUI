@@ -36,7 +36,7 @@ public class LogEventBuilder
 
      private (string, string) LogSplit(string log)
      {
-          var logParts = log.Split('|');
+          var logParts = log.Split('|'); //Стандартна розмітка лога дільть його на 4 частини.
           var logDate = logParts[0];
           var logMessage = logParts[3];
           return (logDate, logMessage);
