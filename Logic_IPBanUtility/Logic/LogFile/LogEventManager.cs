@@ -29,7 +29,7 @@ public class LogEventManager
      public List<LogEvent> ReadNewLogEvents()
      {
           var newLogs = _fileManager.ReadAllLinesFromIndexToEnd(_logFilePath, _lastLogFileStringCount);
-          var logEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId);
+          var logEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId + 1);
           UpdateContext(newLogs.Count, logEvents.Count);
           return logEvents;
      }
