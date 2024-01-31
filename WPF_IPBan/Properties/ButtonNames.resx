@@ -138,4 +138,7 @@
   <data name="Select" xml:space="preserve">
     <value>Вибрати</value>
   </data>
+  <data name="Update" xml:space="preserve">
+    <value>Оновити</value>
+  </data>
 </root>

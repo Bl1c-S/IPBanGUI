@@ -28,7 +28,7 @@ public class FileManager
 
      public List<string> ReadAllLinesFromIndexToEnd(string filePath, int startLineIndex)
      {
-          var newLines = File.ReadLines(filePath).Skip(startLineIndex - 1);
+          var newLines = File.ReadLines(filePath).Skip(startLineIndex);
           return newLines.ToList();
      }
      public T GetJson<T>(string path)

@@ -1,5 +1,6 @@
 ﻿using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
+using NLog.Fluent;
 
 namespace Logic_IPBanUtility.Logic.LogFile;
 
@@ -8,7 +9,8 @@ public class LogEventManager
      private readonly FileManager _fileManager;
      private readonly LogEventBuilder _logEventBuilder = new();
      private readonly string _logFilePath;
-     private readonly int _lastLogFileStringCount;
+     private int _lastLogFileStringCount;
+     private int _lastLogEventId;
 
      public LogEventManager(Settings settings, FileManager fileManager)
      {
@@ -19,14 +21,22 @@ public class LogEventManager
      public List<LogEvent> ReadAllLogEvents()
      {
           var logs = _fileManager.ReadAllLines(_logFilePath);
-          return _logEventBuilder.GetLogEvents(logs);
+          var logEvents = _logEventBuilder.GetLogEvents(logs);
+          UpdateContext(logs.Count, logEvents.Count);
+          return logEvents;
      }
 
-     public List<LogEvent>? ReadNewLogEvents()
+     public List<LogEvent> ReadNewLogEvents()
      {
           var newLogs = _fileManager.ReadAllLinesFromIndexToEnd(_logFilePath, _lastLogFileStringCount);
-          if (newLogs is null)
-               return null;
-          return _logEventBuilder.GetLogEvents(newLogs, _lastLogFileStringCount);
+          var logEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId);
+          UpdateContext(newLogs.Count, logEvents.Count);
+          return logEvents;
+     }
+
+     private void UpdateContext(int logFileStringCount, int logEventId)
+     {
+          _lastLogFileStringCount += logFileStringCount;
+          _lastLogEventId += logEventId;
      }
 }

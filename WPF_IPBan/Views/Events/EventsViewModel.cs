@@ -1,6 +1,10 @@
-﻿using Logic_IPBanUtility.Logic.LogFile;
+﻿using CommunityToolkit.Mvvm.Input;
+using Logic_IPBanUtility.Logic.LogFile;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
@@ -18,9 +22,32 @@ internal class EventsViewModel : PageViewModelBase
           LogManager = logManager;
           LogEvents = new(LogManager.ReadAllLogEvents());
 
-          _vMs = new() {
-               new LogEventListViewModel(LogEvents)
-          };
+          _vMs = new() { new LogEventListViewModel(LogEvents)};
+
+          IUpdateCommand = new RelayCommand(UpdateLogEvents);
+          CreatePageButtons();
      }
 
+     public ICommand IUpdateCommand { get; }
+     private void UpdateLogEvents()
+     {
+          var newLogs = LogManager.ReadNewLogEvents();
+          if (newLogs.Count == 0)
+               return;
+          foreach (var logEvent in newLogs)
+               LogEvents.Add(logEvent);
+          OnPropertyChanged(nameof(LogEvents));
+     }
+
+
+
+     protected override void CreatePageButtons()
+     {
+          PageButtons.Add(new Button
+          {
+               Content = Properties.ButtonNames.Update,
+               Command = IUpdateCommand,
+               Icon = Wpf.Ui.Common.SymbolRegular.ArrowSync24
+          });
+     }
 }
