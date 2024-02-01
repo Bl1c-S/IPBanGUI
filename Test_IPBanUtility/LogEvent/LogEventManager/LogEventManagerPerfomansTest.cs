@@ -1,4 +1,4 @@
-﻿namespace Test_IPBanUtility.LogEvent.ManagerTest;
+﻿namespace Test_IPBanUtility.LogEventTest.ManagerTest;
 
 [TestClass]
 public class LogEventManagerPerfomansTest

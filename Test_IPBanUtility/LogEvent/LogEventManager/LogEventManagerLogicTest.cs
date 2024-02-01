@@ -2,7 +2,7 @@
 using Logic_IPBanUtility.Setting;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Test_IPBanUtility.LogEvent.ManagerTest;
+namespace Test_IPBanUtility.LogEventTest.ManagerTest;
 
 [TestClass]
 public class LogEventManagerLogicTest

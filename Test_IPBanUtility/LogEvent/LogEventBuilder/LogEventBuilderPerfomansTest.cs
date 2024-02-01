@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Test_IPBanUtility.LogEvent.Builder;
+namespace Test_IPBanUtility.LogEventTest.Builder;
 [TestClass]
 public class LogEventBuilderPerfomansTest
 {
