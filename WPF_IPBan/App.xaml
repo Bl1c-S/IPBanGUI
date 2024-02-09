@@ -9,6 +9,15 @@
                 <ui:ThemesDictionary Theme="Dark" />
                 <ui:ControlsDictionary />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="StandartBorder" TargetType="Border">
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Background" Value="#1F1F1F"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="4"/>
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="4"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -18,7 +18,7 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,16">
+        <Border Style="{StaticResource StandartBorder}" Margin="0,4,4,16">
             <Grid VerticalAlignment="Top">
 
                 <Grid.ColumnDefinitions>
