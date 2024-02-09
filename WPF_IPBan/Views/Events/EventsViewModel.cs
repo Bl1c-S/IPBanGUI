@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility;
 using Logic_IPBanUtility.Logic.LogFile;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Controls;
@@ -28,13 +25,16 @@ internal class EventsViewModel : PageViewModelBase
           CreatePageButtons();
      }
 
+     #region Update
      public ICommand IUpdateCommand { get; }
      private void UpdateLogEvents()
      {
           filterViewModel.ReadNewLogs();
           logEventListViewModel.ObservableLogEventsSet(filterViewModel.LogEvents);
      }
+     #endregion
 
+     #region Filter
      public ICommand IFilterCommand { get; }
      public Visibility FilterVisibility { get; private set; }
      private bool _isEnableVisibility = false;
@@ -47,6 +47,7 @@ internal class EventsViewModel : PageViewModelBase
                FilterVisibility = Visibility.Collapsed;
           OnPropertyChanged(nameof(FilterVisibility));
      }
+     #endregion
 
      protected override void CreatePageButtons()
      {
