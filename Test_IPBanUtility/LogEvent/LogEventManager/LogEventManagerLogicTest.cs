@@ -1,8 +1,5 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Setting;
-using NLog;
-using System.Collections.ObjectModel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Test_IPBanUtility.LogEventTest.ManagerTest;
 
