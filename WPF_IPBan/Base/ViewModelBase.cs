@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Windows.Controls;
 
 namespace WPF_IPBanUtility;
 

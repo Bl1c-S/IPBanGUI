@@ -1,5 +1,6 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Setting;
+using System.Collections.ObjectModel;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Test_IPBanUtility.LogEventTest.ManagerTest;
@@ -12,6 +13,7 @@ public class LogEventManagerLogicTest
 
      SettingsBuilder settingsBuilder = new();
      LogEventManager LE_Manager;
+     ObservableCollection<LogEvent> _logEvents = new();
      string _logFilePath;
 
      public LogEventManagerLogicTest()
@@ -24,7 +26,6 @@ public class LogEventManagerLogicTest
           settingsBuilder.LoadSettings();
           LE_Manager = new(settingsBuilder.Settings!, new());
      }
-
      #region TestReadAllLogEvents
 
      [TestMethod]
@@ -97,13 +98,12 @@ public class LogEventManagerLogicTest
      }
      #endregion
 
-     #region TestReadAllLogEvents
+     #region TestReadNewLogEvents
 
      [TestMethod]
      public void ReadNewLogEvents_WhenNotNew()
      {
           CreateTestFile_When1Current();
-          LE_Manager.ReadAllLogEvents();
           var result = LE_Manager.ReadNewLogEvents();
 
           Assert.AreEqual(0, result.Count);
@@ -113,7 +113,6 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNew1()
      {
           CreateTestFile_When1Current();
-          LE_Manager.ReadAllLogEvents();
           CreateTestFile_When2Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -154,7 +153,6 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_When3NotNew()
      {
           CreateTestFile_When3Current();
-          LE_Manager.ReadAllLogEvents();
           var result = LE_Manager.ReadNewLogEvents();
 
           Assert.AreEqual(0, result.Count);
@@ -174,7 +172,6 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenBad3New1()
      {
           CreateTestFile_When1Current();
-          LE_Manager.ReadAllLogEvents();
           CreateTestFile_When3Bad();
           var result = LE_Manager.ReadNewLogEvents();
 

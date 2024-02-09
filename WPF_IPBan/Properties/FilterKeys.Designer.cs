@@ -22,24 +22,24 @@ namespace WPF_IPBanUtility.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PageNames {
+    internal class FilterKeys {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PageNames() {
+        internal FilterKeys() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.PageNames", typeof(PageNames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.FilterKeys", typeof(FilterKeys).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace WPF_IPBanUtility.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,56 +61,56 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Події.
+        ///   Looks up a localized string similar to Заблоковано IP.
         /// </summary>
-        public static string Events {
+        internal static string BanningIP {
             get {
-                return ResourceManager.GetString("Events", resourceCulture);
+                return ResourceManager.GetString("BanningIP", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ключі.
+        ///   Looks up a localized string similar to Оновлення брандмауера.
         /// </summary>
-        public static string KeyList {
+        internal static string FirewallEntriesUpdated {
             get {
-                return ResourceManager.GetString("KeyList", resourceCulture);
+                return ResourceManager.GetString("FirewallEntriesUpdated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вибір ключів для відображення.
+        ///   Looks up a localized string similar to Забуто невдалий вхід.
         /// </summary>
-        public static string KeysVisibilityControllerViewTitle {
+        internal static string ForgetFailedLogin {
             get {
-                return ResourceManager.GetString("KeysVisibilityControllerViewTitle", resourceCulture);
+                return ResourceManager.GetString("ForgetFailedLogin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Шлях до кореневої папки IPBan.
+        ///   Looks up a localized string similar to Невдалий вхід.
         /// </summary>
-        public static string SelectFolderViewTitle {
+        internal static string LoginFailure {
             get {
-                return ResourceManager.GetString("SelectFolderViewTitle", resourceCulture);
+                return ResourceManager.GetString("LoginFailure", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Налаштування.
+        ///   Looks up a localized string similar to Успішний вхід.
         /// </summary>
-        public static string Settings {
+        internal static string LoginSucceeded {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("LoginSucceeded", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тип події.
+        ///   Looks up a localized string similar to Розблоковано IP.
         /// </summary>
-        public static string TypeFilterTitle {
+        internal static string UnBanningIP {
             get {
-                return ResourceManager.GetString("TypeFilterTitle", resourceCulture);
+                return ResourceManager.GetString("UnBanningIP", resourceCulture);
             }
         }
     }

@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Events" xml:space="preserve">
-    <value>Події</value>
+  <data name="BanningIP" xml:space="preserve">
+    <value>Заблоковано IP</value>
   </data>
-  <data name="KeyList" xml:space="preserve">
-    <value>Ключі</value>
+  <data name="FirewallEntriesUpdated" xml:space="preserve">
+    <value>Оновлення брандмауера</value>
   </data>
-  <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
-    <value>Вибір ключів для відображення</value>
+  <data name="ForgetFailedLogin" xml:space="preserve">
+    <value>Забуто невдалий вхід</value>
   </data>
-  <data name="SelectFolderViewTitle" xml:space="preserve">
-    <value>Шлях до кореневої папки IPBan</value>
+  <data name="LoginFailure" xml:space="preserve">
+    <value>Невдалий вхід</value>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Налаштування</value>
+  <data name="LoginSucceeded" xml:space="preserve">
+    <value>Успішний вхід</value>
   </data>
-  <data name="TypeFilterTitle" xml:space="preserve">
-    <value>Тип події</value>
+  <data name="UnBanningIP" xml:space="preserve">
+    <value>Розблоковано IP</value>
   </data>
 </root>
