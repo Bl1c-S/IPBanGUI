@@ -4,12 +4,14 @@ namespace Logic_IPBanUtility.Setting;
 
 public class Settings
 {
+     public int Version;
      private FileManager _fileManager = new();
      public Config Config;
      public IPBan IPBan;
           
      public Settings(Config config, IPBan iPBan)
      {
+          Version = 100;
           Config = config;
           IPBan = iPBan;
      }
