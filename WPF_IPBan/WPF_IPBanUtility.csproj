@@ -42,6 +42,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ButtonNames.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\FilterKeys.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FilterKeys.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\PageNames.Designer.cs">
       <DependentUpon>PageNames.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -58,6 +63,10 @@
     <EmbeddedResource Update="Properties\ButtonNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ButtonNames.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\FilterKeys.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterKeys.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\PageNames.resx">
       <SubType>Designer</SubType>

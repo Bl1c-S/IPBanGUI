@@ -9,24 +9,25 @@
              d:DataContext="{d:DesignInstance Type=local:EventsViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
         <Grid.Resources>
             <DataTemplate DataType="{x:Type local:LogEventListViewModel}">
-                <local:LogEventListView />
+                <local:LogEventListView/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type local:FilterViewModel}">
+                <local:FilterView/>
+            </DataTemplate>
         </Grid.Resources>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="0">
-            <ItemsControl ItemsSource="{Binding VMs}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,4">
-                            <ContentControl  Content="{Binding}" Grid.Row="2" Margin="4" />
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1"  CornerRadius="4" Padding="4" Margin="0,4,4,16">
+            <Grid VerticalAlignment="Top">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <local:LogEventListView Grid.Column="0" Content="{Binding logEventListViewModel}"/>
+                <local:FilterView Grid.Column="1" Content="{Binding filterViewModel}" Visibility="{Binding FilterVisibility}" Padding="4,0,0,0"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

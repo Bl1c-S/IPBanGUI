@@ -129,6 +129,9 @@
   <data name="Default" xml:space="preserve">
     <value>Замовчуванням</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Фільтри</value>
+  </data>
   <data name="OK" xml:space="preserve">
     <value>ОК</value>
   </data>
