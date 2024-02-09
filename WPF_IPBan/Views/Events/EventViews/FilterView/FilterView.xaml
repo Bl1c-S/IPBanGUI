@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Height="auto" Width="auto">
-        <Border BorderBrush="Gray" Background="#1F1F1F"  BorderThickness="1, 0,0,0"  CornerRadius="0" Padding="8,0" Margin="4">
+        <Border Style="{StaticResource StandartBorder}" BorderThickness="1, 0,0,0"  CornerRadius="0" Padding="8,0">
             <StackPanel>
                 <Label Content="{Binding Title}" FontSize="16"/>
                 <CheckBox Content="{Binding LoginSucceeded.Name}" IsChecked="{Binding LoginSucceeded.IsEnable}"/>
