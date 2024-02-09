@@ -1,5 +1,6 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Setting;
+using NLog;
 using System.Collections.ObjectModel;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -13,7 +14,6 @@ public class LogEventManagerLogicTest
 
      SettingsBuilder settingsBuilder = new();
      LogEventManager LE_Manager;
-     ObservableCollection<LogEvent> _logEvents = new();
      string _logFilePath;
 
      public LogEventManagerLogicTest()
@@ -40,6 +40,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenCurrentLog2()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When2Current();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(2, result.Count);
@@ -51,6 +52,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenCurrentLog3()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(3, result.Count);
@@ -65,6 +67,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenBadLog3()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Bad();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(2, result.Count);
@@ -76,6 +79,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenBadLog2()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When2Bad();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(1, result.Count);
@@ -85,6 +89,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenBadLog1()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When1Bad();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(0, result.Count);
@@ -92,6 +97,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadAllLogEvents_WhenEmptyLog()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_WhenEmpty();
           var result = LE_Manager.ReadAllLogEvents();
           Assert.AreEqual(0, result.Count);
@@ -103,6 +109,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_WhenNotNew()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When1Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -113,6 +120,7 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNew1()
      {
           CreateTestFile_When1Current();
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When2Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -125,7 +133,7 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNew2()
      {
           CreateTestFile_When1Current();
-          LE_Manager.ReadAllLogEvents();
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -139,6 +147,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_When2New1()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When2Current();
           LE_Manager.ReadAllLogEvents();
           CreateTestFile_When3Current();
@@ -152,6 +161,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_When3NotNew()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -161,6 +171,7 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_WhenBad3NotNew()
      {
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Bad();
           LE_Manager.ReadAllLogEvents();
           var result = LE_Manager.ReadNewLogEvents();
@@ -172,6 +183,7 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenBad3New1()
      {
           CreateTestFile_When1Current();
+          LE_Manager = new(settingsBuilder.Settings!, new());
           CreateTestFile_When3Bad();
           var result = LE_Manager.ReadNewLogEvents();
 
