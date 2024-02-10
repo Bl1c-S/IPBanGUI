@@ -18,16 +18,22 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <Border Style="{StaticResource StandartBorder}" Margin="0,4,4,16">
-            <Grid VerticalAlignment="Top">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <local:LogEventListView Grid.Column="0" Content="{Binding logEventListViewModel}"/>
-                <local:FilterView Grid.Column="1" Content="{Binding filterViewModel}" Visibility="{Binding FilterVisibility}" Padding="4,0,0,0"/>
-            </Grid>
-        </Border>
+            <Border Style="{StaticResource StandartBorder}" Grid.Row="0">
+                <Grid VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <local:LogEventListView Grid.Column="0" Content="{Binding LogEventListVM}"/>
+                    <local:FilterView Grid.Column="1" Content="{Binding FilterVM}" Visibility="{Binding FilterVisibility}" Padding="4,0,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

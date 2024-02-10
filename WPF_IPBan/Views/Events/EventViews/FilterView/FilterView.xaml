@@ -11,12 +11,40 @@
         <Border Style="{StaticResource StandartBorder}" BorderThickness="1, 0,0,0"  CornerRadius="0" Padding="8,0">
             <StackPanel>
                 <Label Content="{Binding Title}" FontSize="16"/>
-                <CheckBox Content="{Binding LoginSucceeded.Name}" IsChecked="{Binding LoginSucceeded.IsEnable}"/>
-                <CheckBox Content="{Binding LoginFailure.Name}" IsChecked="{Binding LoginFailure.IsEnable}"/>
-                <CheckBox Content="{Binding ForgetFailedLogin.Name}" IsChecked="{Binding ForgetFailedLogin.IsEnable}"/>
-                <CheckBox Content="{Binding BanningIP.Name}" IsChecked="{Binding BanningIP.IsEnable}"/>
-                <CheckBox Content="{Binding UnBanningIP.Name}" IsChecked="{Binding UnBanningIP.IsEnable}"/>
-                <CheckBox Content="{Binding FirewallEntriesUpdated.Name}" IsChecked="{Binding FirewallEntriesUpdated.IsEnable}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0" Content="{Binding LoginSucceeded.Name}" IsChecked="{Binding LoginSucceeded.IsEnable}"/>
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Content="{Binding LoginFailure.Name}" IsChecked="{Binding LoginFailure.IsEnable}"/>
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="2" Content="{Binding ForgetFailedLogin.Name}" IsChecked="{Binding ForgetFailedLogin.IsEnable}"/>
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="3" Content="{Binding BanningIP.Name}" IsChecked="{Binding BanningIP.IsEnable}"/>
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="4" Content="{Binding UnBanningIP.Name}" IsChecked="{Binding UnBanningIP.IsEnable}"/>
+                    <CheckBox VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="5"  Content="{Binding FirewallEntriesUpdated.Name}" IsChecked="{Binding FirewallEntriesUpdated.IsEnable}"/>
+
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="0" Content="{Binding Statistics.LoginSucceeded}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="1" Content="{Binding Statistics.LoginFailure}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="2" Content="{Binding Statistics.ForgetFailedLogin}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="3" Content="{Binding Statistics.BanningIP}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="4" Content="{Binding Statistics.UnBanningIP}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Grid.Row="5" Content="{Binding Statistics.FirewallEntriesUpdated}"/>
+
+                    <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" Grid.Column="0" Grid.Row="6" Content="{Binding AllLogEvent}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="6" Content="{Binding ShowedLogEventTitle}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" Grid.Column="1" Grid.Row="6" Content="{Binding ShowedLogEvent}"/>
+                </Grid>
             </StackPanel>
         </Border>
     </Grid>

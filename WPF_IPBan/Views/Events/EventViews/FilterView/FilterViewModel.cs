@@ -11,17 +11,27 @@ namespace WPF_IPBanUtility;
 internal class FilterViewModel : ViewModelBase
 {
      public string Title { get => PageNames.TypeFilterTitle; }
+     public List<LogEvent> LogEvents { get; private set; }
 
      public delegate void LogEventHandler(List<LogEvent> logEvents);
      public event LogEventHandler? ObservableLogEventsSet;
      public event LogEventHandler? NewObservableLogEventsAdded;
+     public LogEventStatistics Statistics { get => _manager.Statistics; }
+     public string ShowedLogEventTitle { get => FilterKeys.ShowedLogEvents; }
+     public int ShowedLogEvent { get => LogEvents.Count; }
+     public string AllLogEvent { get => $"{FilterKeys.AllLogEvents}  {Statistics.AllLogEvent}"; }
 
      private delegate void FilterChangedDelegate(FilterKey filterKey);
      private LogEventFilter _filter = new();
      private LogEventManager _manager;
      private Dictionary<LogEventType, FilterKey> _filterKeys = new();
 
-     public List<LogEvent> LogEvents { get; private set; }
+     private void StaticticsChanged()
+     {
+          OnPropertyChanged(nameof(Statistics));
+          OnPropertyChanged(nameof(ShowedLogEvent));
+          OnPropertyChanged(nameof(AllLogEvent));
+     }
 
      public FilterViewModel(LogEventManager manager)
      {
@@ -62,6 +72,7 @@ internal class FilterViewModel : ViewModelBase
           else
                LogEvents = _filter.RemoveEventsByType(LogEvents, changedFilterKey.Type);
           ObservableLogEventsSet?.Invoke(LogEvents);
+          StaticticsChanged();
      }
      public void ReadNewLogs()
      {
@@ -76,5 +87,6 @@ internal class FilterViewModel : ViewModelBase
                LogEvents.AddRange(findedLogs);
           }
           NewObservableLogEventsAdded?.Invoke(LogEvents);
+          StaticticsChanged();
      }
 }
