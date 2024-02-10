@@ -1,11 +1,13 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
+using Logic_IPBanUtility.Logic.LogFile.Models;
 
 namespace Logic_IPBanUtility;
 
 public class LogEventBuilder
 {
      private const string DATEFORMAT = "yyyy-MM-dd HH:mm:ss.ffff";
-     LogMessageParser logMessageParser = new();
+     public LogMessageParser logMessageParser = new();
+     public LogEventStatistics Statistics = new();
 
      public List<LogEvent> GetLogEvents(List<string> logs, int previousId = 1)
      {
@@ -16,6 +18,7 @@ public class LogEventBuilder
                if (logEvent is null)
                     continue;
                logEvents.Add(logEvent);
+               Statistics.AddOneEvent(logEvent.Type);
                ++previousId;
           }
           return logEvents;

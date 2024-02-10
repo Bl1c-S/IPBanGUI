@@ -61,6 +61,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Всього:.
+        /// </summary>
+        internal static string AllLogEvents {
+            get {
+                return ResourceManager.GetString("AllLogEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Заблоковано IP.
         /// </summary>
         internal static string BanningIP {
@@ -102,6 +111,15 @@ namespace WPF_IPBanUtility.Properties {
         internal static string LoginSucceeded {
             get {
                 return ResourceManager.GetString("LoginSucceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Відображено:.
+        /// </summary>
+        internal static string ShowedLogEvents {
+            get {
+                return ResourceManager.GetString("ShowedLogEvents", resourceCulture);
             }
         }
         

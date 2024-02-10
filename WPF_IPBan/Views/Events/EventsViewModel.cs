@@ -8,15 +8,16 @@ namespace WPF_IPBanUtility;
 
 internal class EventsViewModel : PageViewModelBase
 {
-     public LogEventListViewModel logEventListViewModel { get; }
-     public FilterViewModel filterViewModel { get; }
+     public LogEventListViewModel LogEventListVM { get; }
+     public FilterViewModel FilterVM { get; }
 
      public EventsViewModel(LogEventManager logManager) : base(Properties.PageNames.Events)
      {
-          filterViewModel = new FilterViewModel(logManager);
-          logEventListViewModel = new LogEventListViewModel(logManager.LogEvents);
-          filterViewModel.ObservableLogEventsSet += logEventListViewModel.ObservableLogEventsSet;
-          filterViewModel.NewObservableLogEventsAdded += logEventListViewModel.NewObservableLogEventsAdded;
+          FilterVM = new FilterViewModel(logManager);
+          LogEventListVM = new LogEventListViewModel(logManager.LogEvents);
+
+          FilterVM.ObservableLogEventsSet += LogEventListVM.ObservableLogEventsSet;
+          FilterVM.NewObservableLogEventsAdded += LogEventListVM.NewObservableLogEventsAdded;
 
           IUpdateCommand = new RelayCommand(UpdateLogEvents);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
@@ -29,8 +30,8 @@ internal class EventsViewModel : PageViewModelBase
      public ICommand IUpdateCommand { get; }
      private void UpdateLogEvents()
      {
-          filterViewModel.ReadNewLogs();
-          logEventListViewModel.ObservableLogEventsSet(filterViewModel.LogEvents);
+          FilterVM.ReadNewLogs();
+          LogEventListVM.ObservableLogEventsSet(FilterVM.LogEvents);
      }
      #endregion
 
@@ -69,8 +70,8 @@ internal class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
-          filterViewModel.ObservableLogEventsSet -= logEventListViewModel.ObservableLogEventsSet;
-          filterViewModel.NewObservableLogEventsAdded -= logEventListViewModel.NewObservableLogEventsAdded;
+          FilterVM.ObservableLogEventsSet -= LogEventListVM.ObservableLogEventsSet;
+          FilterVM.NewObservableLogEventsAdded -= LogEventListVM.NewObservableLogEventsAdded;
           base.Dispose();
      }
 }
