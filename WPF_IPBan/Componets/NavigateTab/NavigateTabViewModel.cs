@@ -1,6 +1,7 @@
 ﻿namespace WPF_IPBanUtility;
 
 using System.Collections.ObjectModel;
+using System.Windows;
 using Wpf.Ui.Controls;
 
 internal class NavigateTabViewModel : ViewModelBase
@@ -17,6 +18,6 @@ internal class NavigateTabViewModel : ViewModelBase
 
      private void OnCurrentChanged()
      {
-               OnPropertyChanged(nameof(CurrentPageButtons));
+          OnPropertyChanged(nameof(CurrentPageButtons));
      }
 }

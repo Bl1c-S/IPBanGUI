@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;

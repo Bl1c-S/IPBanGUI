@@ -9,15 +9,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DockPanel>
-
-            <ItemsControl ItemsSource="{Binding CurrentPageButtons}" HorizontalAlignment="Right" VerticalAlignment="Center" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </DockPanel>
+        <ItemsControl ItemsSource="{Binding CurrentPageButtons}" HorizontalAlignment="Right" VerticalAlignment="Center" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </UserControl>

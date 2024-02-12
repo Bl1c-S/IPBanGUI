@@ -43,7 +43,7 @@
 
                     <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" Grid.Column="0" Grid.Row="6" Content="{Binding AllLogEvent}"/>
                     <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="6" Content="{Binding ShowedLogEventTitle}"/>
-                    <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" Grid.Column="1" Grid.Row="6" Content="{Binding ShowedLogEvent}"/>
+                    <Label Style="{StaticResource StatisticsLabel}" Padding="0, 16" Grid.Column="1" Grid.Row="6" Content="{Binding ShowedLogEventCount}"/>
                 </Grid>
             </StackPanel>
         </Border>
