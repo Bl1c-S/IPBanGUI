@@ -16,12 +16,11 @@ internal class EventsViewModel : PageViewModelBase
           FilterVM = new FilterViewModel(logManager);
           LogEventListVM = new LogEventListViewModel(logManager.LogEvents);
 
-          FilterVM.ObservableLogEventsSet += LogEventListVM.ObservableLogEventsSet;
-          FilterVM.NewObservableLogEventsAdded += LogEventListVM.NewObservableLogEventsAdded;
+          FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
 
           IUpdateCommand = new RelayCommand(UpdateLogEvents);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
-          FilterVisibility = Visibility.Collapsed;
+          ISearchCommand = new RelayCommand(FilterVM.SearchLogEventByText);
 
           CreatePageButtons();
      }
@@ -31,13 +30,13 @@ internal class EventsViewModel : PageViewModelBase
      private void UpdateLogEvents()
      {
           FilterVM.ReadNewLogs();
-          LogEventListVM.ObservableLogEventsSet(FilterVM.LogEvents);
+          LogEventListVM.ObservableLogEventsSet(FilterVM.ObservebleLogEvent);
      }
      #endregion
 
      #region Filter
      public ICommand IFilterCommand { get; }
-     public Visibility FilterVisibility { get; private set; }
+     public Visibility FilterVisibility { get; private set; }= Visibility.Collapsed;
      private bool _isEnableVisibility = false;
      private void ChangeFilterVisibility()
      {
@@ -48,6 +47,11 @@ internal class EventsViewModel : PageViewModelBase
                FilterVisibility = Visibility.Collapsed;
           OnPropertyChanged(nameof(FilterVisibility));
      }
+     #endregion
+
+     #region Search
+     public string? SearchText { get => FilterVM.SearchedText; set => FilterVM.SearchedText = value; }
+     public ICommand ISearchCommand { get; }
      #endregion
 
      protected override void CreatePageButtons()
@@ -70,8 +74,7 @@ internal class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
-          FilterVM.ObservableLogEventsSet -= LogEventListVM.ObservableLogEventsSet;
-          FilterVM.NewObservableLogEventsAdded -= LogEventListVM.NewObservableLogEventsAdded;
+          FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
           base.Dispose();
      }
 }
