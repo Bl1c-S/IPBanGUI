@@ -113,5 +113,14 @@ namespace WPF_IPBanUtility.Properties {
                 return ResourceManager.GetString("SetDefaultSettingsTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ви можете надіслати нам ваші пропозиції щодо вдосконалення програми або повідомити про помилки, написавши на GitHub, або зв&apos;язатись з нами по електронній пошті, Mail..
+        /// </summary>
+        public static string SupportDescription {
+            get {
+                return ResourceManager.GetString("SupportDescription", resourceCulture);
+            }
+        }
     }
 }

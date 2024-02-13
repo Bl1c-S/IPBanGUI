@@ -132,6 +132,9 @@
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
   </data>
+  <data name="Support" xml:space="preserve">
+    <value>Підтримка</value>
+  </data>
   <data name="TypeFilterTitle" xml:space="preserve">
     <value>Тип події</value>
   </data>
