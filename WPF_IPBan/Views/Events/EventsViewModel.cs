@@ -30,7 +30,6 @@ internal class EventsViewModel : PageViewModelBase
      private void UpdateLogEvents()
      {
           FilterVM.ReadNewLogs();
-          LogEventListVM.ObservableLogEventsSet(FilterVM.ObservebleLogEvent);
      }
      #endregion
 
@@ -74,7 +73,6 @@ internal class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
-          FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
           base.Dispose();
      }
 }
