@@ -17,7 +17,7 @@ internal class MainWindowViewModel : ViewModelBase
           _navigateTabViewModel = new(navigationService);
           _navigationService = navigationService;
 
-          _navigationService.Navigate<KeyListViewModel>();
+          _navigationService.Navigate<EventsViewModel>();
           _navigationService.OnCurrentChanged += OnNavigateChanged;
      }
      private void OnNavigateChanged()
