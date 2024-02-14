@@ -20,11 +20,11 @@
         <StackPanel Grid.Row="0">
 
             <DockPanel VerticalAlignment="Center">
-                <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="Bold" Margin="4,0"/>
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="SemiBold" Margin="4,0"/>
 
                 <DockPanel HorizontalAlignment="Right">
                     <ui:Button Icon="QuestionCircle24"  ToolTip="Коментар до ключа" 
-                               Command="{Binding IInfoBarCommand}" />
+                               Command="{Binding IDescVisibilityChangeCommand}" />
                     <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
                               Command="{Binding ISaveKeyCommand}" />
                     <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
@@ -34,13 +34,10 @@
                 </DockPanel>
             </DockPanel>
 
-            <ContentControl Visibility="{Binding IsInfoBarOpen, Converter={StaticResource BoolToVis}}" Margin="0,4,0,0">
-                <local:InfoBarView DataContext="{Binding InfoBarVM}"  />
-            </ContentControl>
-
+            <TextBlock Text="{Binding Description, Mode=OneWay}" Visibility="{Binding DescriptionVisibility}" 
+                       VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Padding="6"/>
         </StackPanel>
 
-        <TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" Margin="0,4" TextWrapping="Wrap"/>
-
+        <ui:TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" PlaceholderText="Не вказано..." Margin="0,4" TextWrapping="Wrap" />
     </Grid>
 </UserControl>

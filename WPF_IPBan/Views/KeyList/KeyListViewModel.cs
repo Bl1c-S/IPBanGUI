@@ -20,7 +20,7 @@ internal class KeyListViewModel : PageViewModelBase
 
      private readonly ConfigFileManager _cfgManager;
 
-     public KeyListViewModel(ConfigFileManager cfgManager) : base(Properties.PageNames.KeyList)
+     public KeyListViewModel(ConfigFileManager cfgManager) : base(PageNames.KeyList)
      {
           _cfgManager = cfgManager;
           _keyViewModels = CreateKeyViewModels(cfgManager.CreateKeys());

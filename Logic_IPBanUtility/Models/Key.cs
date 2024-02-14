@@ -12,17 +12,17 @@ public class Key
      public string Name => KeyIdenti.Name;
      public bool IsHidden => KeyIdenti.IsHidden;
 
-     public readonly string Comment;
+     public string Description { get; private set; }
 
      public string Context { get; private set; }
      public string Value { get; private set; }
 
-     public Key(int index, string context, string comment, KeyIdenti keyIdenti)
+     public Key(int index, string context, string description, KeyIdenti keyIdenti)
      {
           KeyIdenti = keyIdenti;
           Index = index;
           Context = context;
-          Comment = comment;
+          Description = description;
           Value = GetValue();
      }
      public void InsertValue(string newValue)
