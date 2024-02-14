@@ -88,7 +88,7 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDist [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNam [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultKey {
             get {
@@ -97,7 +97,7 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist\r\nBlacklist.
+        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist.
         /// </summary>
         internal static string DefaultKeyEnable {
             get {
