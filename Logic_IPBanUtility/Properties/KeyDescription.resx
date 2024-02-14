@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BanTime" xml:space="preserve">
+    <value>Тривалість заборони ip-адреси (DD:HH:MM:SS) - 00:00:00:00 до 9999 днів (максимальна тривалість). Цей параметр може містити кілька проміжків часу, розділених комами. Для декількох часових проміжків: Коли попередній час заборони закінчується, наступний невдалий вхід, який спричиняє блокування ip-адреси, призведе до переходу на наступний час заборони. Після того, як минув останній час блокування, ip-адреса буде видалена з бази даних і почнеться відлік з першого часу блокування. Кілька часових проміжків повинні бути в строгому порядку зростання.</value>
+  </data>
+  <data name="Blacklist" xml:space="preserve">
+    <value>Список ip-адрес, cidr-масок, url-адрес, dns-імен або імен користувачів через кому, для блокування назавжди. 
+Для url-адрес заборонено використовувати символ ?, тому якщо вам потрібен рядок запиту, ви повинні створити url-адресу без символів ? і перенаправити її за 302-м редіректом на нову url-адресу з символом ? у ній.</value>
+  </data>
+  <data name="BlacklistRegex" xml:space="preserve">
+    <value>Регулярний вираз для більш розширеного чорного списку. Скорочення: використовуйте *, щоб дозволити будь-яку частину IP-адреси, доменного імені або імені користувача (наприклад, 128.128.128.*).       Приклад регексу, який вносить до чорного списку декілька ip-адрес: ^(128\.128\.128\.*)|(99\.99\.99\.[0-9])$ Детальніше про regex: http://www.regular-expressions.info/</value>
+  </data>
+  <data name="ClearBannedIPAddressesOnRestart" xml:space="preserve">
+    <value>Для очищення та розблокування всіх ip-адрес з брандмауера при перезапуску, встановлюэмо значення ключа "true" для вимкнення "false".</value>
+  </data>
+  <data name="ClearFailedLoginsOnSuccessfulLogin" xml:space="preserve">
+    <value>Чи очищати "true" всі невдалі входи для IP, після успішного входу, ні якщо встановлено значення "false".</value>
+  </data>
+  <data name="CycleTime" xml:space="preserve">
+    <value>Як часто сервіс повинен виконувати профілактичні роботи, такі як блокування ip-адрес, розблокування ip-адрес, перезавантаження конфігурації і т.д. (DD:HH:MM:SS)</value>
+  </data>
+  <data name="ExpireTime" xml:space="preserve">
+    <value>Тривалість часу після останньої невдалої спроби входу, через яку IP буде забуто (лічильник скидається до 0). Встановіть 00:00:00:00 для використання максимальної тривалості. (DD:HH:MM:SS)</value>
+  </data>
+  <data name="FailedLoginAttemptsBeforeBan" xml:space="preserve">
+    <value>Кількість невдалих спроб входу до блокування ip-адреси</value>
+  </data>
+  <data name="FailedLoginAttemptsBeforeBanUserNameWhitelist" xml:space="preserve">
+    <value>Кількість невдалих спроб входу до блокування ip-адреси, якщо ім'я користувача знаходиться у білому списку</value>
+  </data>
+  <data name="FirewallRulePrefix" xml:space="preserve">
+    <value>Ім'я префікса правила для правил брандмауера, повинно містити лише A-Z, 0-9 та _</value>
+  </data>
+  <data name="FirewallRules" xml:space="preserve">
+    <value>Створення правил брандмауера для дозволу або блокування ip-адрес, по одному на рядок. Чудовий спосіб зберегти правила брандмауера.     Формат: назва правила;дозволити або заблокувати;список ip-адрес (через кому);список дозволених портів (через кому); regex платформи 
+Ви можете залишити список дозволених портів порожнім, щоб правило застосовувалося до всіх портів, Ім'я не повинно перевищувати 16 символів Див. https://www.mediawiki.org/wiki/Help:Range_blocks і https://www.mediawiki.org/wiki/Help:Range_blocks/IPv6 Негативний regex: https://stackoverflow. com/questions/23724661/regex-to-negate-the-whole-word Правила блокування мають вищий пріоритет. На брандмауері Windows весь трафік блокується за замовчуванням, тому потрібні тільки правила дозволу, порядок не має значення. Приклад, який дозволяє Reddis з певного ip, і блокує все, окрім ssh, rdp, http/https:       ReddisAllowIP;allow;10. 0.0.1,10.0.0.2,192.168.1.168/24;6379;.       WebOnly;block;0.0.0.0/1,128.0.0.0/1,::/1,8000::/1;22,80,443,3389;^(?:(?!Windows).)+$</value>
+  </data>
+  <data name="MinimumTimeBetweenFailedLoginAttempts" xml:space="preserve">
+    <value>Мінімальний час між невдалими спробами входу для ip-адреси для збільшення лічильника до блокування.</value>
+  </data>
+  <data name="MinimumTimeBetweenSuccessfulLoginAttempts" xml:space="preserve">
+    <value>Мінімальний час між успішними спробами входу для ip-адреси для збільшення лічильника успішних входів.</value>
+  </data>
+  <data name="ProcessInternalIPAddresses" xml:space="preserve">
+    <value>Чи обробляти внутрішні ip-адреси true або false.</value>
+  </data>
+  <data name="ResetFailedLoginCountForUnbannedIPAddresses" xml:space="preserve">
+    <value>Ігнорується, якщо вказано лише один час бану.     Якщо це значення є істинним, то лічильник невдалих спроб входу буде скинуто до 0, що призведе до того, що наступний невдалий вхід почнеться з 1, а потім ip-адреса перейде до наступного часу бану, як тільки лічильник невдалих спроб входу досягне значення FailedLoginAttemptsBeforeBan.     Якщо це значення дорівнює false, то лічильник невдалих спроб входу не буде скинуто, і наступний невдалий вхід призведе до негайного бану ip-адреси на наступний час бану в списку BanTime.</value>
+  </data>
+  <data name="UserNameWhitelist" xml:space="preserve">
+    <value>Список дозволених імен користувачів, розділених комами. UserNameWhitelistMinimumEditDistance перевіряється для імен користувачів, яких немає у списку, щоб визначити, чи слід заборонити невдале ім'я користувача. Регістр ігнорується. Порожні записи дозволено, якщо ви хочете дозволити порожні імена користувачів. ВАЖЛИВО: Це може бути вектором атаки хакера. Якщо він знає, що ви використовуєте IPBan, і його не заблокують одразу, він може знати, що він наблизився до потрібного імені користувача. Переконайтеся, що ваші паролі достатньо складні, і це не повинно бути проблемою.</value>
+  </data>
+  <data name="UserNameWhitelistMinimumEditDistance" xml:space="preserve">
+    <value>Якщо відстань редагування (відстань Левенштейна) імені користувача, що зазнав невдачі, перевищує цю відстань, ім'я користувача буде негайно заборонено.       Регістр ігнорується. Ігнорується, якщо UserNameWhitelist порожній.</value>
+  </data>
+  <data name="UserNameWhitelistRegex" xml:space="preserve">
+    <value>ВИКОРИСТОВУЙТЕ З ОБЕРЕЖНІСТЮ! ЯКЩО НЕ ПОРОЖНІЙ, ТО БУДЬ-ЯКА НЕВДАЛА СПРОБА ВХОДУ, ЩО НЕ ЗБІГАЄТЬСЯ З ІМ'ЯМ КОРИСТУВАЧА, ПРИЗВЕДЕ ДО АВТОМАТИЧНОГО БЛОКУВАННЯ!
+Ім'я користувача в білому списку regex. Будь-яке ім'я користувача, яке не збігається з ним, призведе до негайного блокування, включаючи порожні імена користувачів.</value>
+  </data>
+  <data name="Whitelist" xml:space="preserve">
+    <value>Список ip-адрес, cidr-масок, urls або dns-імен, які ніколи не будуть заблоковані, через кому. Білий список має пріоритет над чорним. Якщо ви використовуєте url, відповідь повинна бути текстом, розділеним переходом на новий рядок, наприклад: https://ts.com/IPv4andIPv6.txt. 
+Для url не допускається використання символів "?", тому якщо вам потрібен рядок запиту, ви повинні створити url без символів ? і перенаправити його за допомогою 302 на новий url з символом ? в ньому. ІР-адреси з цього списку додаються до білого списку правил брандмауера і завжди будуть дозволені.</value>
+  </data>
+  <data name="WhitelistRegex" xml:space="preserve">
+    <value>Регулярний вираз для більш розширеного білого списку. Скорочення: використовуйте *, щоб дозволити будь-яку частину IP-адреси (наприклад, 128.128.128.*). Приклад регулярного виразу, який додає до білого списку кілька IP-адрес: ^(128\.128\.128\.*)|(99\.99\.99\.[0-9])$ Більше інформації про реґекс: http://www.regular-expressions.info/ Цей regex не додається до брандмауера, перед тим, як заборонити ip, він спочатку перевіряється, і якщо він співпадає, то заборона не відбувається.</value>
+  </data>
+</root>
