@@ -20,8 +20,7 @@ internal class SettingsVMsBuilder
           List<ISettingsVMComponent> VMs = new()
           {
                new SelectFolderViewModel(_settings),
-               new KeysVisibilityControllerViewModel(_configFileManager),
-               new SupportViewModel()
+               new KeysVisibilityControllerViewModel(_configFileManager)
           };
           return VMs;
      }

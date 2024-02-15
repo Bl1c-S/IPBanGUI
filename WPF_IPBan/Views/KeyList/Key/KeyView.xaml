@@ -23,7 +23,7 @@
                 <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="SemiBold" Margin="4,0"/>
 
                 <DockPanel HorizontalAlignment="Right">
-                    <ui:Button Icon="QuestionCircle24"  ToolTip="Коментар до ключа" 
+                    <ui:Button Icon="QuestionCircle24"  ToolTip="Опис" 
                                Command="{Binding IDescVisibilityChangeCommand}" />
                     <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
                               Command="{Binding ISaveKeyCommand}" />

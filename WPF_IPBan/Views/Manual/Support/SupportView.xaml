@@ -9,8 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <Label Content="{Binding Title}"/>
-            <TextBlock Text="{Binding SupportDescription}" TextWrapping="Wrap" Padding="120, 10" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding SupportDescription}" Style="{StaticResource ManualParagraph}"/>
             
             <DockPanel HorizontalAlignment="Center">
                 <ui:Hyperlink NavigateUri="{Binding GitHubDiscussions}" Content="GitHub" Icon="ChatSparkle28" Margin="10"/>

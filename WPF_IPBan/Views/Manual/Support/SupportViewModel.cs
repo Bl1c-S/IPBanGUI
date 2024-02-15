@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using WPF_IPBanUtility.Base;
+﻿using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
 

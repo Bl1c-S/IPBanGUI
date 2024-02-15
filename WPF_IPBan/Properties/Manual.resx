@@ -117,28 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Events" xml:space="preserve">
-    <value>Події</value>
+  <data name="Paragraph1" xml:space="preserve">
+    <value>Ви можете налаштувати роботу IPBan за допомогою ключів у відповідному вікні "Ключі". За замовчуванням відображаються тільки декілька ключів, яких достатньо для захисту від підбору пароля. Якщо вас цікавить більше ключів, ви можете увімкнути їх у налаштуваннях програми.</value>
   </data>
-  <data name="KeyList" xml:space="preserve">
-    <value>Ключі</value>
-  </data>
-  <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
-    <value>Вибір ключів для відображення</value>
-  </data>
-  <data name="Manual" xml:space="preserve">
-    <value>Головна</value>
-  </data>
-  <data name="SelectFolderViewTitle" xml:space="preserve">
-    <value>Шлях до кореневої папки IPBan</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Налаштування</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Підтримка</value>
-  </data>
-  <data name="TypeFilterTitle" xml:space="preserve">
-    <value>Тип події</value>
+  <data name="WelcomeParagraph" xml:space="preserve">
+    <value>Ласкаво просимо до IPBanGUI – програми, створеної для контролю доступу до вашого комп'ютера. При використанні віддаленого робочого столу, будь-хто може намагатися підключитися до вашого сервера. Навіть якщо ви використовуєте складні паролі, при невдалій спробі входу система все одно може сильно навантажуватись, особливо якщо цих спроб дуже багато. Це може призвести до проблем у роботі. IPBanGUI допомагає контролювати процес входу на сервер та забезпечує його безпеку.</value>
   </data>
 </root>
