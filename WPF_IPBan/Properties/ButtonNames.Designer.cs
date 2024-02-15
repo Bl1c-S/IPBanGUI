@@ -115,11 +115,29 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Відмінити все.
+        /// </summary>
+        internal static string ReturnAll {
+            get {
+                return ResourceManager.GetString("ReturnAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Зберегти.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зберегти все.
+        /// </summary>
+        internal static string SaveAll {
+            get {
+                return ResourceManager.GetString("SaveAll", resourceCulture);
             }
         }
         

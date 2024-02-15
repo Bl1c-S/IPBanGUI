@@ -11,9 +11,7 @@ public class Key
      public readonly int Index;
      public string Name => KeyIdenti.Name;
      public bool IsHidden => KeyIdenti.IsHidden;
-
      public string Description { get; private set; }
-
      public string Context { get; private set; }
      public string Value { get; private set; }
 
@@ -25,10 +23,13 @@ public class Key
           Description = description;
           Value = GetValue();
      }
-     public void InsertValue(string newValue)
+     public bool InsertValue(string newValue)
      {
+          if (Value == newValue) return false;
+
           Value = newValue;
           Context = Regex.Replace(Context, PATTERN, $"value=\"{newValue}\"");
+          return true;
      }
      private string GetValue()
      {

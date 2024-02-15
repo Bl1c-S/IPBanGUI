@@ -135,8 +135,14 @@
   <data name="OK" xml:space="preserve">
     <value>ОК</value>
   </data>
+  <data name="ReturnAll" xml:space="preserve">
+    <value>Відмінити все</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Зберегти</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Зберегти все</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Вибрати</value>
