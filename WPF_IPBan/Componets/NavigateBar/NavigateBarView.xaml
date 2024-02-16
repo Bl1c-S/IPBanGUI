@@ -15,11 +15,14 @@
 
         <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
 
-            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Ключі}" Icon="TextBulletListSquare24" 
-                       Command = "{Binding NavigateToKeyList}"/>
-
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Головна}" Icon="BookInformation24" 
+           Command = "{Binding NavigateManual}" />
+            
             <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Події}" Icon="ChartMultiple24" 
                        Command = "{Binding NavigateToEvents}" Margin="4,0,0,0"/>
+
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Ключі}" Icon="TextBulletListSquare24" 
+                       Command = "{Binding NavigateToKeyList}" Margin="4,0,0,0"/>
 
             <!--<ui:Button Content="Бекапи" Icon="FolderZip24" 
            Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"/>-->

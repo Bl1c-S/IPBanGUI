@@ -17,11 +17,4 @@ internal class LogEventListViewModel : ViewModelBase
           LogEvents = new(logEvents);
           OnPropertyChanged(nameof(LogEvents));
      }
-
-     public void NewObservableLogEventsAdded(List<LogEvent> logEvents)
-     {
-          foreach (var logEvent in logEvents)
-               LogEvents.Add(logEvent);
-          OnPropertyChanged(nameof(LogEvents));
-     }
 }

@@ -9,8 +9,8 @@
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="IPBanGUI v0.8.0-beta" 
-        Height="600" MinHeight="200" Width="900" MinWidth="650">
+        Title="IPBanGUI v1.0.0" 
+        Height="700" MinHeight="200" Width="1000" MinWidth="650">
     <Grid Margin="8,0">
         <Grid.Resources>
 
@@ -25,8 +25,11 @@
             <DataTemplate DataType="{x:Type local:SettingsViewModel}">
                 <local:SettingsView />
             </DataTemplate>
-        </Grid.Resources>
 
+            <DataTemplate DataType="{x:Type local:ManualViewModel}">
+                <local:ManualView/>
+            </DataTemplate>
+        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

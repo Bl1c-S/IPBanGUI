@@ -88,6 +88,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Головна.
+        /// </summary>
+        public static string Manual {
+            get {
+                return ResourceManager.GetString("Manual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Шлях до кореневої папки IPBan.
         /// </summary>
         public static string SelectFolderViewTitle {
@@ -102,6 +111,15 @@ namespace WPF_IPBanUtility.Properties {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Підтримка.
+        /// </summary>
+        public static string Support {
+            get {
+                return ResourceManager.GetString("Support", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility.Models;
+using Logic_IPBanUtility.Properties;
 using Logic_IPBanUtility.Services;
 using System.Text.Json;
 
@@ -50,12 +51,12 @@ public class SettingsBuilder
      }
      private string[] GetDefaultKeyNames()
      {
-          string keyNames = Properties.Resources.DefaultKey;
+          string keyNames = Resources.DefaultKey;
           return keyNames.Split("\\r\\n");
      }
      private string[] GetEnableDefaultKeyNames()
      {
-          string keyNames = Properties.Resources.DefaultKeyEnable;
+          string keyNames = Resources.DefaultKeyEnable;
           return keyNames.Split("\\r\\n");
      }
      #endregion

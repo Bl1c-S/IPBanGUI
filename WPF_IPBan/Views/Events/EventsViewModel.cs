@@ -30,13 +30,12 @@ internal class EventsViewModel : PageViewModelBase
      private void UpdateLogEvents()
      {
           FilterVM.ReadNewLogs();
-          LogEventListVM.ObservableLogEventsSet(FilterVM.ObservebleLogEvent);
      }
      #endregion
 
      #region Filter
      public ICommand IFilterCommand { get; }
-     public Visibility FilterVisibility { get; private set; }= Visibility.Collapsed;
+     public Visibility FilterVisibility { get; private set; } = Visibility.Collapsed;
      private bool _isEnableVisibility = false;
      private void ChangeFilterVisibility()
      {
@@ -74,7 +73,6 @@ internal class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
-          FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
           base.Dispose();
      }
 }

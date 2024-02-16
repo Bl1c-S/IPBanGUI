@@ -1,96 +1,82 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 using System;
+using System.Windows;
+using Logic_IPBanUtility.Models;
+using System.Windows.Input;
+using Key = Logic_IPBanUtility.Models.Key;
 
 namespace WPF_IPBanUtility;
 
 internal class KeyViewModel : ViewModelBase
 {
-    public KeyViewModel(Logic_IPBanUtility.Models.Key key)
-    {
-        InfoBarVM = new(key.Comment);
-        IsInfoBarOpen = false;
-        _value = key.Value;
+     public KeyViewModel(Key key, Action<Key> saveKey, Action<KeyViewModel> hideKey)
+     {
+          _value = key.Value;
+          Key = key;
 
-        Key = key;
+          SaveKeyEvent += saveKey;
+          HideKeyEvent += hideKey;
 
-        IInfoBarCommand = new RelayCommand(InfoBar);
-        IPreviousCommand = new RelayCommand(PreviousValue);
-        ISaveKeyCommand = new RelayCommand(SaveKey);
-        IHideKeyCommand = new RelayCommand(HideKey);
-    }
-    public event Action<KeyViewModel>? HideKeyEvent;
-    public event Action<Logic_IPBanUtility.Models.Key>? SaveKeyEvent;
+          IDescVisibilityChangeCommand = new RelayCommand(DescriptionVisibilityChange);
+          IPreviousCommand = new RelayCommand(PreviousValue);
+          ISaveKeyCommand = new RelayCommand(SaveKey);
+          IHideKeyCommand = new RelayCommand(HideKey);
+     }
 
-    public Logic_IPBanUtility.Models.Key Key;
-    public string Name => Key.Name;
-    private bool IsChanged => _value != Key.Value;
+     public Key Key;
+     public string Name => Key.Name;
+     public string Description => Key.Description;
 
-    private string _value;
-    public string Value
-    {
-        get => _value;
-        set
-        {
-            _value = value;
-            OnPropertyChanged(nameof(Value));
-        }
-    }
+     private string _value;
+     public string Value
+     {
+          get => _value;
+          set
+          {
+               _value = value;
+               OnPropertyChanged(nameof(Value));
+          }
+     }
 
-    #region InfoBar
-    public ICommand IInfoBarCommand { get; }
-    public InfoBarViewModel? InfoBarVM { get; set; }
+     #region Description
+     public ICommand IDescVisibilityChangeCommand { get; }
+     public Visibility DescriptionVisibility { get; set; } = Visibility.Collapsed;
+     private void DescriptionVisibilityChange()
+     {
+          if (DescriptionVisibility != Visibility.Visible)
+               DescriptionVisibility = Visibility.Visible;
+          else
+               DescriptionVisibility = Visibility.Collapsed;
+          OnPropertyChanged(nameof(DescriptionVisibility));
+     }
+     #endregion
 
-    private bool _isInfoBarOpen;
-    public bool IsInfoBarOpen
-    {
-        get => _isInfoBarOpen;
-        set
-        {
-            _isInfoBarOpen = value;
+     #region SaveChanged
+     public ICommand ISaveKeyCommand { get; }
+     public event Action<Key> SaveKeyEvent;
 
-            if (_isInfoBarOpen)
-                InfoBarVM = new InfoBarViewModel(Key.Comment);
-            else
-                InfoBarVM = null;
+     public void SaveKey()
+     {
+          if (Key.InsertValue(_value))
+               SaveKeyEvent.Invoke(Key);
+     }
+     #endregion
 
-            OnPropertyChanged(nameof(InfoBarVM));
-            OnPropertyChanged(nameof(IsInfoBarOpen));
-        }
-    }
-    private void InfoBar()
-    {
-        IsInfoBarOpen = !IsInfoBarOpen;
-    }
-    #endregion
+     #region ReturnPrevious
+     public ICommand IPreviousCommand { get; }
 
-    #region SaveChanged
-    public ICommand ISaveKeyCommand { get; }
+     public void PreviousValue()
+     {
+          Value = Key.Value;
+     }
+     #endregion
 
-    private void SaveKey()
-    {
-        if (!IsChanged)
-            return;
-
-        Key.InsertValue(_value);
-        SaveKeyEvent?.Invoke(Key);
-    }
-    #endregion
-
-    #region ReturnPrevious
-    public ICommand IPreviousCommand { get; }
-
-    private void PreviousValue()
-    {
-        Value = Key.Value;
-    }
-    #endregion
-
-    #region HideKey
-    public ICommand IHideKeyCommand { get; }
-    private void HideKey()
-    {
-        HideKeyEvent?.Invoke(this);
-    }
-    #endregion
+     #region HideKey
+     public ICommand IHideKeyCommand { get; }
+     public event Action<KeyViewModel> HideKeyEvent;
+     private void HideKey()
+     {
+          HideKeyEvent?.Invoke(this);
+     }
+     #endregion
 }

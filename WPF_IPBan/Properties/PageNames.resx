@@ -126,11 +126,17 @@
   <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
     <value>Вибір ключів для відображення</value>
   </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Головна</value>
+  </data>
   <data name="SelectFolderViewTitle" xml:space="preserve">
     <value>Шлях до кореневої папки IPBan</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Підтримка</value>
   </data>
   <data name="TypeFilterTitle" xml:space="preserve">
     <value>Тип події</value>

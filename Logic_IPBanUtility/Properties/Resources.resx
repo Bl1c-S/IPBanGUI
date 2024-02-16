@@ -127,10 +127,10 @@
     <value>Ім'я користувача:</value>
   </data>
   <data name="DefaultKey" xml:space="preserve">
-    <value>IPThreatApiKey\r\nFailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nTruncateUserNameChars\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nProcessToRunOnBan\r\nProcessToRunOnUnban\r\nFirewallRules\r\nUseDefaultBannedIPAddressHandler\r\nExternalIPAddressUrl\r\nFirewallUriRules\r\nGetUrlUpdate\r\nGetUrlStart\r\nGetUrlStop\r\nGetUrlConfig\r\nIPBanPro_UrlWebSocket</value>
+    <value>FailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nFirewallRules</value>
   </data>
   <data name="DefaultKeyEnable" xml:space="preserve">
-    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist\r\nBlacklist</value>
+    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist</value>
   </data>
   <data name="DirectoryNotFoundException" xml:space="preserve">
     <value>Не знайдено теку: </value>

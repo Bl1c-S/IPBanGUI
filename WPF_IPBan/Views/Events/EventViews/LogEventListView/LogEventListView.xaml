@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ui:DataGrid ItemsSource="{Binding LogEvents, Mode=OneWay}" AutoGenerateColumns="False" BorderThickness="5,1,5,1" CanUserReorderColumns="False">
+        <ui:DataGrid ItemsSource="{Binding LogEvents, Mode=OneWay}" AutoGenerateColumns="False" BorderThickness="5,1,5,1" CanUserReorderColumns="False" HorizontalScrollBarVisibility="Auto">
             <ui:DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
-                <DataGridTextColumn Header="Опис" Binding="{Binding Message}" Width="*"/>
+                <DataGridTextColumn Header="Опис" Binding="{Binding Message}"/>
             </ui:DataGrid.Columns>
         </ui:DataGrid>
     </Grid>

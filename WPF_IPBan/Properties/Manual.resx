@@ -117,52 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Backup" xml:space="preserve">
-    <value>Бекапи</value>
+  <data name="Paragraph1" xml:space="preserve">
+    <value>Ви можете налаштувати роботу IPBan за допомогою ключів у відповідному вікні "Ключі". За замовчуванням відображаються тільки декілька ключів, яких достатньо для захисту від підбору пароля. Якщо вас цікавить більше ключів, ви можете увімкнути їх у налаштуваннях програми.</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Закрити</value>
-  </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Підтвердити</value>
-  </data>
-  <data name="Default" xml:space="preserve">
-    <value>Замовчуванням</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Фільтри</value>
-  </data>
-  <data name="KeysTitle" xml:space="preserve">
-    <value>Ключі</value>
-  </data>
-  <data name="LoadSettingsErrorText" xml:space="preserve">
-    <value>При завантаженні налаштувань виникла помилка. Виберіть теку де розміщується IPBan, після чого IPBan GUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть.</value>
-  </data>
-  <data name="LoadSettingsErrorTitle" xml:space="preserve">
-    <value>Помилка завантаження налаштувань</value>
-  </data>
-  <data name="LogsTitle" xml:space="preserve">
-    <value>Журнал</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>ОК</value>
-  </data>
-  <data name="ReturnAll" xml:space="preserve">
-    <value>Відмінити все</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Зберегти</value>
-  </data>
-  <data name="SaveAll" xml:space="preserve">
-    <value>Зберегти все</value>
-  </data>
-  <data name="SaveError" xml:space="preserve">
-    <value>Помилка збереження</value>
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value>Вибрати</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Оновити</value>
+  <data name="WelcomeParagraph" xml:space="preserve">
+    <value>Ласкаво просимо до IPBanGUI – програми, створеної для контролю доступу до вашого комп'ютера. При використанні віддаленого робочого столу, будь-хто може намагатися підключитися до вашого сервера. Навіть якщо ви використовуєте складні паролі, при невдалій спробі входу система все одно може сильно навантажуватись, особливо якщо цих спроб дуже багато. Це може призвести до проблем у роботі. IPBanGUI допомагає контролювати процес входу на сервер та забезпечує його безпеку.</value>
   </data>
 </root>

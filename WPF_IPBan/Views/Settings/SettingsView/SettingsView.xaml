@@ -17,6 +17,10 @@
                 <local:KeysVisibilityControllerView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type local:SupportViewModel}">
+                <local:SupportView/>
+            </DataTemplate>
+
         </Grid.Resources>
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

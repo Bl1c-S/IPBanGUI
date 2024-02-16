@@ -106,6 +106,42 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ключі.
+        /// </summary>
+        internal static string KeysTitle {
+            get {
+                return ResourceManager.GetString("KeysTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to При завантаженні налаштувань виникла помилка. Виберіть теку де розміщується IPBan, після чого IPBan GUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть..
+        /// </summary>
+        internal static string LoadSettingsErrorText {
+            get {
+                return ResourceManager.GetString("LoadSettingsErrorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Помилка завантаження налаштувань.
+        /// </summary>
+        internal static string LoadSettingsErrorTitle {
+            get {
+                return ResourceManager.GetString("LoadSettingsErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Журнал.
+        /// </summary>
+        internal static string LogsTitle {
+            get {
+                return ResourceManager.GetString("LogsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ОК.
         /// </summary>
         internal static string OK {
@@ -115,11 +151,38 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Відмінити все.
+        /// </summary>
+        internal static string ReturnAll {
+            get {
+                return ResourceManager.GetString("ReturnAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Зберегти.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Зберегти все.
+        /// </summary>
+        internal static string SaveAll {
+            get {
+                return ResourceManager.GetString("SaveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Помилка збереження.
+        /// </summary>
+        internal static string SaveError {
+            get {
+                return ResourceManager.GetString("SaveError", resourceCulture);
             }
         }
         

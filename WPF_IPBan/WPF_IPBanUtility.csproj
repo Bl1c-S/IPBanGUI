@@ -57,6 +57,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Manual.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Manual.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -76,6 +81,10 @@
     <EmbeddedResource Update="Properties\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Manual.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Manual.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
