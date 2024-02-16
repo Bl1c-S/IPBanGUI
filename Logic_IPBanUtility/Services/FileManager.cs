@@ -23,14 +23,6 @@ public class FileManager
                throw new Exception($"Помилка під час збереження файлу {path}. \n{ex.Message}");
           }
      }
-
-     public List<string> ReadAllLines(string filePath) => File.ReadAllLines(filePath).ToList();
-
-     public List<string> ReadAllLinesFromIndexToEnd(string filePath, int startLineIndex)
-     {
-          var newLines = File.ReadLines(filePath).Skip(startLineIndex);
-          return newLines.ToList();
-     }
      public T GetJson<T>(string path)
      {
           var json = File.ReadAllText(path);
@@ -38,5 +30,13 @@ public class FileManager
           if (result is null)
                throw new FileLoadException(path);
           return result;
+     }
+
+     public List<string> ReadAllLines(string filePath) => File.ReadAllLines(filePath).ToList();
+
+     public List<string> ReadAllLinesFromIndexToEnd(string filePath, int startLineIndex)
+     {
+          var newLines = File.ReadLines(filePath).Skip(startLineIndex);
+          return newLines.ToList();
      }
 }

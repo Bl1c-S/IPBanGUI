@@ -1,5 +1,4 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile.Models;
-using Logic_IPBanUtility.Logic.LogFile.Services;
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
 
@@ -13,44 +12,27 @@ public class LogEventManager
           get => _logEvents;
           private set { _logEvents = value; }
      }
-     private List<LogEvent> _logEvents;
+     private List<LogEvent> _logEvents = new();
 
      public LogEventStatistics Statistics => _logEventBuilder.Statistics;
-     private readonly FileManager _fileManager;
+     private readonly StreamFileManager _fileManager = new();
      private readonly LogEventBuilder _logEventBuilder = new();
 
      private readonly string _logFilePath;
-     private int _lastLogFileStringCount;
      private int _lastLogEventId;
 
-     public LogEventManager(Settings settings, FileManager fileManager)
+     public LogEventManager(Settings settings)
      {
           _logFilePath = settings.IPBan.Logfile;
-          _fileManager = fileManager;
-          _logEvents = ReadAllLogEvents();
+          _logEvents = ReadNewLogEvents();
      }
      public List<LogEvent> ReadNewLogEvents()
      {
-          var newLogs = _fileManager.ReadAllLinesFromIndexToEnd(_logFilePath, _lastLogFileStringCount);
+          var newLogs = _fileManager.StreamReadAllNewLines(_logFilePath);
           var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId + 1);
-          UpdateContext(newLogs.Count, newLogEvents.Count);
+          _lastLogEventId += newLogEvents.Count;
           _logEvents.AddRange(newLogEvents);
           LogEventsChanged?.Invoke();
           return newLogEvents;
-     }
-     public List<LogEvent> ReadAllLogEvents()
-     {
-          var logs = _fileManager.ReadAllLines(_logFilePath);
-          var logEvents = _logEventBuilder.GetLogEvents(logs);
-          UpdateContext(logs.Count, logEvents.Count);
-          _logEvents = logEvents;
-          LogEventsChanged?.Invoke();
-          return logEvents;
-     }
-
-     private void UpdateContext(int logFileStringCount, int logEventId)
-     {
-          _lastLogFileStringCount += logFileStringCount;
-          _lastLogEventId += logEventId;
      }
 }
