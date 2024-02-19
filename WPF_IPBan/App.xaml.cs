@@ -15,11 +15,15 @@ namespace WPF_IPBanUtility
      /// </summary>
      public partial class App : Application
      {
+          private OtherExeptionHandler otherExeptionHandler = new();
           private LoadWindowModel? _loadVM;
           private SettingsBuilder _sb = new();
 
           protected override void OnStartup(StartupEventArgs e)
           {
+               AppDomain.CurrentDomain.UnhandledException += otherExeptionHandler.CurrentDomain_UnhandledException;
+               Dispatcher.UnhandledException += otherExeptionHandler.Dispatcher_UnhandledException;
+
                try
                {
                     _loadVM = new LoadWindowModel();

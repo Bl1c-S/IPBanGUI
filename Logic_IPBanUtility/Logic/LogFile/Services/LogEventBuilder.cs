@@ -26,7 +26,10 @@ public class LogEventBuilder
 
      private LogEvent? CreateLogEvent(string log, int id)
      {
-          (var logDate, var logMessage) = LogSplit(log);
+          var logParts = log.Split('|'); //Стандартна розмітка лога дільть його на 4 частини.
+          if (logParts.Length != 4 ) return null;
+
+          (var logDate, var logMessage) = LogSplit(logParts);
 
           var dto = logMessageParser.Parse(logMessage);
           if (dto is null) return null;
@@ -37,9 +40,8 @@ public class LogEventBuilder
           return logEvent;
      }
 
-     private (string, string) LogSplit(string log)
+     private (string, string) LogSplit(string[] logParts)
      {
-          var logParts = log.Split('|'); //Стандартна розмітка лога дільть його на 4 частини.
           var logDate = logParts[0];
           var logMessage = logParts[3];
           return (logDate, logMessage);
