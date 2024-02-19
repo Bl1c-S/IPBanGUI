@@ -11,7 +11,7 @@ internal class EventsViewModel : PageViewModelBase
      public LogEventListViewModel LogEventListVM { get; }
      public FilterViewModel FilterVM { get; }
 
-     public EventsViewModel(LogEventManager logManager) : base(Properties.PageNames.Events)
+     public EventsViewModel(LogFileManager logManager) : base(Properties.PageNames.Events)
      {
           FilterVM = new FilterViewModel(logManager);
           LogEventListVM = new LogEventListViewModel(logManager.LogEvents);

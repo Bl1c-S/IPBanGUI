@@ -17,8 +17,8 @@ internal class FilterViewModel : ViewModelBase
      public event LogEventHandler? ObservableLogEventsChanged;
 
      private LogEventFilter _filter = new();
-     private LogEventManager _manager;
-     public FilterViewModel(LogEventManager manager)
+     private LogFileManager _manager;
+     public FilterViewModel(LogFileManager manager)
      {
           _manager = manager;
           _filteredLogEvents = new(_manager.LogEvents);

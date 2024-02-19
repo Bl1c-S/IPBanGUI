@@ -5,16 +5,16 @@ using NLog;
 namespace Test_IPBanUtility.LogEventTest.ManagerTest;
 
 [TestClass]
-public class LogEventManagerLogicTest
+public class LogFileManagerLogicTest
 {
      string _currentTestLog = "2022-02-22 22:22:22.2222|22|22|Login succeeded, address: 2.2.2.2, user name: ";
      string _badTestLog = "2022-02-22 22:22:22.2222|22|22|";
 
      SettingsBuilder settingsBuilder = new();
-     LogEventManager LE_Manager;
+     LogFileManager LE_Manager;
      string _logFilePath;
 
-     public LogEventManagerLogicTest()
+     public LogFileManagerLogicTest()
      {
           var ipb = IPBan.Create("C:\\Program Files\\IPBan");
           var programFolder = AppDomain.CurrentDomain.BaseDirectory;

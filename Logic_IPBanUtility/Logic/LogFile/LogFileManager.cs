@@ -4,7 +4,7 @@ using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility.Logic.LogFile;
 
-public class LogEventManager
+public class LogFileManager
 {
      public Action? LogEventsChanged;
      public List<LogEvent> LogEvents
@@ -21,7 +21,7 @@ public class LogEventManager
      private readonly string _logFilePath;
      private int _lastLogEventId;
 
-     public LogEventManager(Settings settings)
+     public LogFileManager(Settings settings)
      {
           _logFilePath = settings.IPBan.Logfile;
           _logEvents = ReadNewLogEvents();
