@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility.Logic.LogFile;
+using Logic_IPBanUtility.Logic.LogFile.Services;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Controls;
@@ -14,7 +14,7 @@ internal class EventsViewModel : PageViewModelBase
      public EventsViewModel(LogFileManager logManager) : base(Properties.PageNames.Events)
      {
           FilterVM = new FilterViewModel(logManager);
-          LogEventListVM = new LogEventListViewModel(logManager.LogEvents);
+          LogEventListVM = new LogEventListViewModel(logManager.AllLogEvents);
 
           FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
 

@@ -21,8 +21,8 @@ internal class FilterViewModel : ViewModelBase
      public FilterViewModel(LogFileManager manager)
      {
           _manager = manager;
-          _filteredLogEvents = new(_manager.LogEvents);
-          ObservebleLogEvent = new(_manager.LogEvents);
+          _filteredLogEvents = new(_manager.AllLogEvents);
+          ObservebleLogEvent = new(_manager.AllLogEvents);
           FilterKeysBuild();
      }
 
@@ -90,7 +90,7 @@ internal class FilterViewModel : ViewModelBase
      }
      private void AddFilteredByEventType(LogEventType type)
      {
-          var findedLogs = _filter.FindEventsByType(_manager.LogEvents, type).ToList();
+          var findedLogs = _filter.FindEventsByType(_manager.AllLogEvents, type).ToList();
           _filteredLogEvents.AddRange(findedLogs);
           ApplyLogEventsBySearch(findedLogs);
           SortObservebleLogEvents();
