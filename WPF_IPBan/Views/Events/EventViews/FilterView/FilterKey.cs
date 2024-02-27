@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Logic_IPBanUtility.Logic.LogFile;
 
-namespace Logic_IPBanUtility.Logic.LogFile.Models;
+namespace WPF_IPBanUtility;
 
 public class FilterKey : ObservableObject
 {
-     public delegate void FilterChangedDelegate(FilterKey filterKey);
+     public delegate void FilterChangedDelegate(bool state, LogEventType type);
      private readonly FilterChangedDelegate _filterChanged;
      public LogEventType Type { get; set; }
      public string Name { get; private set; }
@@ -14,7 +15,7 @@ public class FilterKey : ObservableObject
           set
           {
                _isEnable = value;
-               _filterChanged(this);
+               _filterChanged(value, Type);
                OnPropertyChanged(nameof(IsEnable));
           }
      }

@@ -30,22 +30,34 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height ="*"/>
                         </Grid.RowDefinitions>
 
-                        <ui:TextBox Grid.Row="0" Margin="0,0,0,4" PlaceholderText="Пошук..." Icon="Search24" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid Grid.Row="0" Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ui:TextBox Grid.Column="0"  PlaceholderText="Пошук..." Icon="Search24"
+                                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.InputBindings>
-                                <KeyBinding Command="{Binding ISearchCommand}" Key="Enter"/>
-                            </TextBox.InputBindings>
+                                    <KeyBinding Command="{Binding ISearchCommand}" Key="Enter"/>
+                                </TextBox.InputBindings>
                             </ui:TextBox>
-                                
-                            <local:LogEventListView Grid.Row="1" Content="{Binding LogEventListVM}"/>
+
+                            <DatePicker Grid.Column="1" Margin="4,0,0,0" 
+                                        IsTodayHighlighted="True" HorizontalAlignment="Right"
+                                        SelectedDate="{Binding SelectedDate}" DisplayDateStart="{Binding DateStart, Mode=OneWay}" DisplayDateEnd="{Binding DateEnd, Mode=OneWay}"/>
+                        </Grid>
+
+                        <local:LogEventListView Grid.Row="1" Content="{Binding LogEventListVM}"/>
                     </Grid>
-                    
+
                     <local:FilterView Grid.Column="1" Content="{Binding FilterVM}" Visibility="{Binding FilterVisibility}" Padding="4,0,0,0"/>
                 </Grid>
             </Border>

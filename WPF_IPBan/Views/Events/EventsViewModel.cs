@@ -1,26 +1,33 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility.Logic.LogFile.Services;
+using Logic_IPBanUtility.Logic.LogFile;
+using NLog.Filters;
+using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using Wpf.Ui.Controls;
+using Button = Wpf.Ui.Controls.Button;
 
 namespace WPF_IPBanUtility;
 
 public class EventsViewModel : PageViewModelBase
 {
+     public readonly LogEventManager _logEventManager;
      public LogEventListViewModel LogEventListVM { get; }
      public FilterViewModel FilterVM { get; }
 
-     public EventsViewModel(LogFileManager logManager) : base(Properties.PageNames.Events)
+     public EventsViewModel(LogEventManager logEventManager) : base(Properties.PageNames.Events)
      {
-          FilterVM = new FilterViewModel(logManager);
-          LogEventListVM = new LogEventListViewModel(logManager.AllLogEvents);
+          _logEventManager = logEventManager;
+          FilterVM = new FilterViewModel(logEventManager);
+          LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvent);
 
           FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
+          FilterVM.DaysWithLogChanged += UpdateDate;
 
           IUpdateCommand = new RelayCommand(UpdateLogEvents);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
-          ISearchCommand = new RelayCommand(FilterVM.SearchLogEventByText);
+          ISearchCommand = new RelayCommand(FilterVM.SearchLogEvents);
 
           CreatePageButtons();
      }
@@ -36,11 +43,11 @@ public class EventsViewModel : PageViewModelBase
      #region Filter
      public ICommand IFilterCommand { get; }
      public Visibility FilterVisibility { get; private set; }= Visibility.Collapsed;
-     private bool _isEnableVisibility = false;
+     private bool _filterViewVisibility = false;
      private void ChangeFilterVisibility()
      {
-          _isEnableVisibility = !_isEnableVisibility;
-          if (_isEnableVisibility)
+          _filterViewVisibility = !_filterViewVisibility;
+          if (_filterViewVisibility)
                FilterVisibility = Visibility.Visible;
           else
                FilterVisibility = Visibility.Collapsed;
@@ -51,6 +58,25 @@ public class EventsViewModel : PageViewModelBase
      #region Search
      public string? SearchText { get => FilterVM.SearchedText; set => FilterVM.SearchedText = value; }
      public ICommand ISearchCommand { get; }
+     #endregion
+
+     #region DatePicker
+     public DateTime SelectedDate { get => _selectedDate;
+          set
+          {
+               _selectedDate = value;
+               OnPropertyChanged(nameof(SelectedDate));
+               FilterVM.SetSelectedDate(value);
+          }
+     }
+     private DateTime _selectedDate = DateTime.Today;
+     public DateTime DateStart => _logEventManager.DateWithLogs.LastOrDefault();
+     public DateTime DateEnd => _logEventManager.DateWithLogs.FirstOrDefault();
+
+     private void UpdateDate()
+     {
+
+     }
      #endregion
 
      protected override void CreatePageButtons()
