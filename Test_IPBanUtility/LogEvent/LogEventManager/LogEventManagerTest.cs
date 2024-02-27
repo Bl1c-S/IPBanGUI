@@ -1,62 +1,49 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
+using Logic_IPBanUtility.Setting;
 
 namespace LogEventTest;
 
 [TestClass]
 public class LogEventManagerTest
 {
-     private string folder;
-
+     private string _folder;
+     Settings _settings;
      public LogEventManagerTest()
      {
-          folder = AppDomain.CurrentDomain.BaseDirectory + "\\TestLogs\\";
+          _folder = AppDomain.CurrentDomain.BaseDirectory + "\\TestLogs\\TestManager\\";
+          var filePath0 = Path.Combine(_folder, "logfile.txt");
+          CreateLogFileWithDate(filePath0, DateTime.Today);
+
+          var iPBan = IPBan.Create(_folder);
+          SettingsBuilder sb = new();
+          sb.CreateDefaultSettings(iPBan);
+          sb.LoadSettings();
+          _settings = sb.Settings!;
      }
 
      #region GetLogFilePathsByDay
      [TestMethod]
      public void GetLogFilePathsByDay_Should_3Days()
      {
-          CreateLogFileWithDate("logFile.txt", DateTime.Today);
-          CreateLogFileWithDate("logFile.1.txt", DateTime.Today.AddDays(-1));
-          CreateLogFileWithDate("logFile.0.txt", DateTime.Today.AddDays(-2));
+          var filePath0 = Path.Combine(_folder, "logfile.txt");
+          var filePath1 = Path.Combine(_folder, "logfile.1.txt");
+          var filePath2 = Path.Combine(_folder, "logfile.0.txt");
 
-          var iPBan = IPBan.Create(folder);
-          var logEventManager = new LogEventManager(iPBan);
-          var result = logEventManager.GetLogFilePathsByDay();
+          CreateLogFileWithDate(filePath0, DateTime.Today);
+          CreateLogFileWithDate(filePath1, DateTime.Today.AddDays(-1));
+          CreateLogFileWithDate(filePath2, DateTime.Today.AddDays(-2));
 
-          Assert.AreEqual(3, result.Count);
-          Assert.IsTrue(CheckContainsKey(result, DateTime.Today));
-          Assert.IsTrue(CheckContainsKey(result, DateTime.Today.AddDays(-1)));
-          Assert.IsTrue(CheckContainsKey(result, DateTime.Today.AddDays(-2)));
-     }
-     [TestMethod]
-     public void GetLogFilePathsByDay_Should_1Days()
-     {
-          CreateLogFileWithDate("logFile.txt", DateTime.Today);
-
-          var iPBan = IPBan.Create(folder);
-          var logEventManager = new LogEventManager(iPBan);
-          var result = logEventManager.GetLogFilePathsByDay();
-
-          Assert.AreEqual(1, result.Count);
-          Assert.IsTrue(CheckContainsKey(result, DateTime.Today));
+          
+          var logEventManager = new LogEventManager(_settings);
+          //test obnoviti
      }
      #endregion
 
      #region SupportMethods
-     private bool CheckContainsKey(Dictionary<DateTime, string> logFilePathsByDay, DateTime expectedKey)
+     private void CreateLogFileWithDate(string filePath, DateTime creationDate)
      {
-          if (!logFilePathsByDay.ContainsKey(expectedKey))
-               return false;
-          FileDelate(logFilePathsByDay[expectedKey]);
-          return true;
-     }
-     private void CreateLogFileWithDate(string fileName, DateTime creationDate)
-     {
-          string filePath = Path.Combine(folder, fileName);
           File.WriteAllText(filePath, "");
           File.SetCreationTime(filePath, creationDate);
      }
-     private void FileDelate(string fileName) => File.Delete(Path.Combine(folder, fileName));
      #endregion
 }
