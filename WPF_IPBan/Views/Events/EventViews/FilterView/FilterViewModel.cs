@@ -1,13 +1,11 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
-using Logic_IPBanUtility.Logic.LogFile.Models;
-using Logic_IPBanUtility.Logic.LogFile.Services;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
-internal class FilterViewModel : ViewModelBase
+public class FilterViewModel : ViewModelBase
 {
      public string Title { get => PageNames.TypeFilterTitle; }
      public List<LogEvent> ObservebleLogEvent { get; private set; }

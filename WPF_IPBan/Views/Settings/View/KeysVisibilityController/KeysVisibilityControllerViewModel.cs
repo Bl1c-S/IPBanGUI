@@ -5,7 +5,7 @@ using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
 
-internal class KeysVisibilityControllerViewModel : SettingsComponentViewModelBase
+public class KeysVisibilityControllerViewModel : SettingsComponentViewModelBase
 {
      private ConfigFileManager _configFileManager;
      public List<KeyIdenti> KeyIndentis { get; set; }

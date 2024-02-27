@@ -4,7 +4,7 @@ using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
-internal class PageViewModelBase : ViewModelBase
+public class PageViewModelBase : ViewModelBase
 {
      public PageViewModelBase(string pageName)
      {

@@ -6,7 +6,7 @@ using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
-internal class EventsViewModel : PageViewModelBase
+public class EventsViewModel : PageViewModelBase
 {
      public LogEventListViewModel LogEventListVM { get; }
      public FilterViewModel FilterVM { get; }

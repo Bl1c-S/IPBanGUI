@@ -1,5 +1,4 @@
 ﻿using Logic_IPBanUtility.Setting;
-using System.Collections.Generic;
 
 namespace Logic_IPBanUtility.Logic.LogFile;
 

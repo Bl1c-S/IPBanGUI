@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPF_IPBanUtility.Base
 {
-     internal abstract class SettingsComponentViewModelBase : ViewModelBase, ISettingsVMComponent
+     public abstract class SettingsComponentViewModelBase : ViewModelBase, ISettingsVMComponent
      {
           public string? Title { get; protected set; }
           public abstract void Save();

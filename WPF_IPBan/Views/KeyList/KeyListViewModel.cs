@@ -9,7 +9,7 @@ using Key = Logic_IPBanUtility.Models.Key;
 
 namespace WPF_IPBanUtility;
 
-internal class KeyListViewModel : PageViewModelBase
+public class KeyListViewModel : PageViewModelBase
 {
      private readonly ConfigFileManager _cfgManager;
 
