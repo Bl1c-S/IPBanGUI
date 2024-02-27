@@ -1,42 +1,29 @@
-﻿using Logic_IPBanUtility.Logic.LogFile.Models;
-using Logic_IPBanUtility.Services;
+﻿using Logic_IPBanUtility.Services;
 
-namespace Logic_IPBanUtility.Logic.LogFile.Services;
+namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogFileManager
 {
-    public Action? LogEventsChanged;
-    public List<LogEvent> AllLogEvents => _logEvents;
-    private List<LogEvent> _logEvents = new();
+     public Action? LogEventsChanged;
 
-    public LogEventStatistics Statistics => _logEventBuilder.Statistics;
+     private readonly StreamFileManager _fileManager = new();
+     private readonly LogEventBuilder _logEventBuilder = new();
 
-    private readonly StreamFileManager _fileManager = new();
-    private readonly LogEventBuilder _logEventBuilder = new();
+     private readonly string _logFilePath;
+     private int _lastLogEventId;
 
-    private readonly string _logFilePath;
-    private int _lastLogEventId;
-
-    public LogFileManager(string logFilePath)
-    {
-        _logFilePath = logFilePath;
-        _logEvents = ReadNewLogEvents();
-    }
-    public List<LogEvent> ReadNewLogEvents()
-    {
-        var newLogs = _fileManager.StreamReadAllNewLines(_logFilePath);
-        var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId + 1);
-
-        _lastLogEventId += newLogEvents.Count;
-        _logEvents.AddRange(newLogEvents);
-
-        LogEventsChanged?.Invoke();
-        return newLogEvents;
-    }
-     public List<LogEvent> ReadLogEvents(string logFilePath)
+     public LogFileManager(string logFilePath)
      {
-          var logs = _fileManager.StreamReadAllNewLines(logFilePath);
-          var logEvents = _logEventBuilder.GetLogEvents(logs);
-          return logEvents;
+          _logFilePath = logFilePath;
+     }
+     public List<LogEvent> ReadNewLogEvents(bool readFirst = false)
+     {
+          var firstLogID = readFirst ? 0 : _lastLogEventId;
+          var newLogs = _fileManager.StreamReadAllNewLines(_logFilePath, readFirst);
+          var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, firstLogID + 1);
+
+          _lastLogEventId += newLogEvents.Count;
+          LogEventsChanged?.Invoke();
+          return newLogEvents;
      }
 }
