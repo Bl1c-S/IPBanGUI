@@ -74,6 +74,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton(settings);
                     services.AddSingleton<FileManager>();
                     services.AddSingleton<ConfigFileManager>();
+                    services.AddSingleton<LogEventManager>();
 
                     services.AddSingleton<SettingsVMsBuilder>();
                     services.AddTransient<SettingsViewModel>();
