@@ -2,16 +2,16 @@
 
 public class LogEvent
 {
-    public LogEvent(int id, DateTime date, string message, LogEventType type)
+    public LogEvent(int id, TimeSpan time, string message, LogEventType type)
     {
         Id = id;
-        Date = date;
+        Time = time.ToString(@"hh\:mm\:ss");
         Message = message;
         Type = type;
     }
 
     public int Id { get; }
-    public DateTime Date { get; }
+    public string Time { get; }
     public string Message { get; }
     public LogEventType Type { get; }
 }
