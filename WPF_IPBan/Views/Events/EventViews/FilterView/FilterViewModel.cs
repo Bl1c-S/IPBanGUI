@@ -61,13 +61,13 @@ public class FilterViewModel : ViewModelBase
           Clear();
           _selectedDate = date;
           var logs = _manager.GetAllLogEvents(_selectedDate);
-          SetAllLogEventsByFiltersAndSearch(logs);
+          AddLogEventsByFiltersAndSearch(logs);
      }
 
      private DateTime _selectedDate = DateTime.Today;
-     private void SetAllLogEventsByFiltersAndSearch(List<LogEvent> logEvents)
+     private void AddLogEventsByFiltersAndSearch(List<LogEvent> logEvents)
      {
-          _allLogEvents = logEvents;
+          _allLogEvents.AddRange(logEvents);
           foreach (var key in _filterKeys)
           {
                var findedLogs = FilterLogEventsByType(logEvents, key.Key);
@@ -106,12 +106,8 @@ public class FilterViewModel : ViewModelBase
      #region ApplyFilter
      private void ApplyFilter(bool state, LogEventType type)
      {
-          if (state) AddLogEventByType(type);
+          if (state) ProcessLogEventsByType(_allLogEvents, type);
           else RemoveLogEventsByType(type);
-     }
-     private int AddLogEventByType(LogEventType type)
-     {
-          return ProcessLogEventsByType(_allLogEvents, type);
      }
      private void RemoveLogEventsByType(LogEventType type)
      {
@@ -125,26 +121,15 @@ public class FilterViewModel : ViewModelBase
      public void ReadNewLogs()
      {
           var newLogEvents = _manager.GetNewLogEvents(_selectedDate);
-          if (newLogEvents.Count != 0)
-               AddNewLogEventsByFiltersAndSearch(newLogEvents);
-     }
-     private void AddNewLogEventsByFiltersAndSearch(List<LogEvent> newLogEvents)
-     {
-          foreach (var key in _filterKeys)
-               if (key.Value.IsEnable)
-               {
-                    var processCount = ProcessLogEventsByType(newLogEvents, key.Key);
-                    Statistics.AddEvents(key.Key, processCount);
-               }
+          AddLogEventsByFiltersAndSearch(newLogEvents);
      }
      #endregion
 
      #region ProcessLogEvents
-     private int ProcessLogEventsByType(List<LogEvent> logEvents, LogEventType type)
+     private void ProcessLogEventsByType(List<LogEvent> logEvents, LogEventType type)
      {
           var findedLogs = FilterLogEventsByType(logEvents, type);
           AddObservableLogEvents(findedLogs);
-          return findedLogs.Count;
      }
      private List<LogEvent> FilterLogEventsByType(List<LogEvent> newLogEvents, LogEventType type)
      {
@@ -173,6 +158,7 @@ public class FilterViewModel : ViewModelBase
      }
      private void Clear()
      {
+          _allLogEvents.Clear();
           _filteredLogEvents.Clear();
           ObservebleLogEvent.Clear();
           Statistics.Clear();
