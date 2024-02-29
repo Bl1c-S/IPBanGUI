@@ -3,22 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:WPF_IPBanUtility"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type local:SupportViewModel}">
-                <local:SupportView/>
-            </DataTemplate>
-        </Grid.Resources>
-
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
+
+            <StackPanel Margin="100, 10">
+                <!--Старт-->
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding WelcomeParagraph}"/>
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding Paragraph1}"/>
-                <local:SupportView DataContext="{Binding SupportVM}"/>
+
+                <!--Ключі-->
+                <Label Content="{Binding KeyTitle}" Style="{StaticResource ManualTitle}"/>
+                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph1}"/>
+                <Image Source="KeyExemple.png" Style="{StaticResource ManualImage}"/>
+                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph2}"/>
+
+                <!--Події-->
+                <Label Content="{Binding EventTitle}" Style="{StaticResource ManualTitle}"/>
+                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph1}"/>
+                <Image Source="Events.png" Style="{StaticResource ManualImage}"/>
+                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph2}"/>
+
+                <!--Оновленя-->
+                <Label Content="{Binding UpdateTitle}" Style="{StaticResource ManualTitle}"/>
+                <TextBlock Text="{Binding UpdateParagraph1}" Style="{StaticResource ManualParagraph}"/>
+                <ui:Hyperlink NavigateUri="{Binding Updates}" Content="{Binding UpdateTitle}" Icon="ApprovalsApp28" Margin="10" HorizontalAlignment="Center"/>
+                <Image Source="UpdateVersion.png" Style="{StaticResource ManualImage}"/>
+                <TextBlock Text="{Binding UpdateParagraph2}" Style="{StaticResource ManualParagraph}"/>
+                <Image Source="Replace.png" Style="{StaticResource ManualImage}"/>
+                
+                <!--Підтримка-->
+                <Label Content="{Binding SupportTitle}" Style="{StaticResource ManualTitle}"/>
+                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding SupportDescription}" />
+                <DockPanel HorizontalAlignment="Center">
+                    <ui:Hyperlink NavigateUri="{Binding GitHubDiscussions}" Content="GitHub" Icon="ChatSparkle28" Margin="10"/>
+                    <ui:Hyperlink NavigateUri="{Binding SupportMail}" Content="Mail" Icon="Mail28" Margin="10"/>
+                </DockPanel>
+
             </StackPanel>
+            
         </ScrollViewer>
     </Grid>
 </UserControl>

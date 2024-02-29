@@ -1,20 +1,19 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Setting;
-using NLog;
 
-namespace Test_IPBanUtility.LogEventTest.ManagerTest;
+namespace LogEventTest;
 
 [TestClass]
-public class LogEventManagerLogicTest
+public class LogFileManagerLogicTest
 {
      string _currentTestLog = "2022-02-22 22:22:22.2222|22|22|Login succeeded, address: 2.2.2.2, user name: ";
      string _badTestLog = "2022-02-22 22:22:22.2222|22|22|";
 
      SettingsBuilder settingsBuilder = new();
-     LogEventManager LE_Manager;
+     LogFileManager LE_Manager;
      string _logFilePath;
 
-     public LogEventManagerLogicTest()
+     public LogFileManagerLogicTest()
      {
           var ipb = IPBan.Create("C:\\Program Files\\IPBan");
           var programFolder = AppDomain.CurrentDomain.BaseDirectory;
@@ -22,7 +21,7 @@ public class LogEventManagerLogicTest
           ipb.Logfile = _logFilePath;
           settingsBuilder.CreateDefaultSettings(ipb);
           settingsBuilder.LoadSettings();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
      }
      #region TestReadAllLogEvents
 
@@ -30,8 +29,8 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenCurrentLog1()
      {
           CreateTestFile_When1Current();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(1, result.Count);
           Assert.IsTrue(result[0].Message.Contains(_exspectedName0));
           Assert.IsTrue(result[0].Id == 1);
@@ -40,8 +39,8 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenCurrentLog2()
      {
           CreateTestFile_When2Current();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(2, result.Count);
           Assert.IsTrue(result[0].Message.Contains(_exspectedName0));
           Assert.IsTrue(result[0].Id == 1);
@@ -52,8 +51,8 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenCurrentLog3()
      {
           CreateTestFile_When3Current();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(3, result.Count);
           Assert.IsTrue(result[0].Message.Contains(_exspectedName0));
           Assert.IsTrue(result[0].Id == 1);
@@ -67,8 +66,8 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenBadLog3()
      {
           CreateTestFile_When3Bad();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(2, result.Count);
           Assert.IsTrue(result[0].Message.Contains(_exspectedName0));
           Assert.IsTrue(result[0].Id == 1);
@@ -79,8 +78,8 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenBadLog2()
      {
           CreateTestFile_When2Bad();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(1, result.Count);
           Assert.IsTrue(result[0].Message.Contains(_exspectedName1));
           Assert.IsTrue(result[0].Id == 1);
@@ -89,16 +88,16 @@ public class LogEventManagerLogicTest
      public void ReadAllLogEvents_WhenBadLog1()
      {
           CreateTestFile_When1Bad();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(0, result.Count);
      }
      [TestMethod]
      public void ReadAllLogEvents_WhenEmptyLog()
      {
           CreateTestFile_WhenEmpty();
-          LE_Manager = new(settingsBuilder.Settings!);
-          var result = LE_Manager.LogEvents;
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(0, result.Count);
      }
      #endregion
@@ -109,7 +108,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNotNew()
      {
           CreateTestFile_When1Current();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When1Current();
           var result = LE_Manager.ReadNewLogEvents();
           Assert.AreEqual(0, result.Count);
@@ -119,7 +119,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNew1()
      {
           CreateTestFile_When1Current();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When2Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -132,7 +133,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenNew2()
      {
           CreateTestFile_When1Current();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -147,7 +149,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_When2New1()
      {
           CreateTestFile_When2Current();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -159,7 +162,8 @@ public class LogEventManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_When3NotNew()
      {
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -170,7 +174,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenBad3NotNew()
      {
           CreateTestFile_When3Bad();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           var result = LE_Manager.ReadNewLogEvents();
 
           Assert.AreEqual(0, result.Count);
@@ -180,7 +185,8 @@ public class LogEventManagerLogicTest
      public void ReadNewLogEvents_WhenBad3New1()
      {
           CreateTestFile_When1Current();
-          LE_Manager = new(settingsBuilder.Settings!);
+          LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
+          LE_Manager.ReadNewLogEvents();
           CreateTestFile_When3Bad();
           var result = LE_Manager.ReadNewLogEvents();
 
@@ -201,14 +207,14 @@ public class LogEventManagerLogicTest
      string _logTestName1 = "Test1 ,";
      string _logTestName2 = "Test2 , 31";
 
-     private void CreateTestFile_When1Current()
+     protected void CreateTestFile_When1Current()
      {
           string[] testLogs ={
                _currentTestLog + _logTestName0,
           };
           File.WriteAllLines(_logFilePath, testLogs);
      }
-     private void CreateTestFile_When2Current()
+     protected void CreateTestFile_When2Current()
      {
           string[] testLogs ={
                _currentTestLog + _logTestName0,
@@ -216,7 +222,7 @@ public class LogEventManagerLogicTest
           };
           File.WriteAllLines(_logFilePath, testLogs);
      }
-     private void CreateTestFile_When3Current()
+     protected void CreateTestFile_When3Current()
      {
           string[] testLogs ={
                _currentTestLog + _logTestName0,
@@ -226,7 +232,7 @@ public class LogEventManagerLogicTest
           File.WriteAllLines(_logFilePath, testLogs);
      }
 
-     private void CreateTestFile_When3Bad()
+     protected void CreateTestFile_When3Bad()
      {
           string[] testLogs ={
                _currentTestLog + _logTestName0,
@@ -235,7 +241,7 @@ public class LogEventManagerLogicTest
           };
           File.WriteAllLines(_logFilePath, testLogs);
      }
-     private void CreateTestFile_When2Bad()
+     protected void CreateTestFile_When2Bad()
      {
           string[] testLogs ={
                _badTestLog + "23er",
@@ -243,14 +249,14 @@ public class LogEventManagerLogicTest
           };
           File.WriteAllLines(_logFilePath, testLogs);
      }
-     private void CreateTestFile_When1Bad()
+     protected void CreateTestFile_When1Bad()
      {
           string[] testLogs ={
               _badTestLog + "23er",
           };
           File.WriteAllLines(_logFilePath, testLogs);
      }
-     private void CreateTestFile_WhenEmpty()
+     protected void CreateTestFile_WhenEmpty()
      {
           string[] testLogs = { };
           File.WriteAllLines(_logFilePath, testLogs);

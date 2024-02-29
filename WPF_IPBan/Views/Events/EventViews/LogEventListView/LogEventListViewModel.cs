@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace WPF_IPBanUtility;
-internal class LogEventListViewModel : ViewModelBase
+public class LogEventListViewModel : ViewModelBase
 {
      public ObservableCollection<LogEvent> LogEvents { get; set; }
 

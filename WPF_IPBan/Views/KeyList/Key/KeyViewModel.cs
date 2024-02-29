@@ -7,7 +7,7 @@ using Key = Logic_IPBanUtility.Models.Key;
 
 namespace WPF_IPBanUtility;
 
-internal class KeyViewModel : ViewModelBase
+public class KeyViewModel : ViewModelBase
 {
      public KeyViewModel(Key key, Action<Key> saveKey, Action<KeyViewModel> hideKey)
      {

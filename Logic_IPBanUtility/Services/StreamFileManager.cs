@@ -5,14 +5,15 @@
 public class StreamFileManager
 {
      private long _lastPosition;
-     public List<string> StreamReadAllNewLines(string filePath)
+     public List<string> StreamReadAllNewLines(string filePath, bool readFirst = false)
      {
           using (FileStream fs = new(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
           {
                using (StreamReader sr = new(fs))
                {
                     var newLines = new List<string>();
-                    fs.Seek(_lastPosition, SeekOrigin.Begin);
+                    long startReading = readFirst ? 0 : _lastPosition;
+                    fs.Seek(startReading, SeekOrigin.Begin);
 
                     while (true)
                     {

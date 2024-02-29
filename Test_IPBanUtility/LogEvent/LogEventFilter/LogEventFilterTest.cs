@@ -1,7 +1,6 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
-using Logic_IPBanUtility.Logic.LogFile.Services;
 
-namespace Test_IPBanUtility.LogEventTest.Filter;
+namespace LogEventTest;
 
 [TestClass]
 public class LogEventFilterTest
@@ -42,13 +41,13 @@ public class LogEventFilterTest
      public List<LogEvent> TestLogEvents()
      {
           List<LogEvent> logs = new() {
-               new LogEvent(1, DateTime.Now, "1", LogEventType.BanningIP),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.UnBanningIP),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.BanningIP),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.BanningIP),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.BanningIP),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.ForgetFailedLogin),
-               new LogEvent(1, DateTime.Now, "1", LogEventType.ForgetFailedLogin)
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.BanningIP),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.UnBanningIP),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.BanningIP),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.BanningIP),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.BanningIP),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.ForgetFailedLogin),
+               new LogEvent(1, DateTime.Now.TimeOfDay, "1", LogEventType.ForgetFailedLogin)
           };
           return logs;
      }

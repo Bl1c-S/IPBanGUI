@@ -1,13 +1,11 @@
-﻿using Logic_IPBanUtility.Logic.LogFile;
-using Logic_IPBanUtility.Logic.LogFile.Models;
+﻿using System.Globalization;
 
-namespace Logic_IPBanUtility;
+namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogEventBuilder
 {
      private const string DATEFORMAT = "yyyy-MM-dd HH:mm:ss.ffff";
      public LogMessageParser logMessageParser = new();
-     public LogEventStatistics Statistics = new();
 
      public List<LogEvent> GetLogEvents(List<string> logs, int previousId = 1)
      {
@@ -18,7 +16,6 @@ public class LogEventBuilder
                if (logEvent is null)
                     continue;
                logEvents.Add(logEvent);
-               Statistics.AddOneEvent(logEvent.Type);
                ++previousId;
           }
           return logEvents;
@@ -34,9 +31,9 @@ public class LogEventBuilder
           var dto = logMessageParser.Parse(logMessage);
           if (dto is null) return null;
 
-          var date = DateParse(logDate);
+          var time = DateParse(logDate);
 
-          var logEvent = new LogEvent(id, date, dto.Message, dto.Type);
+          var logEvent = new LogEvent(id, time, dto.Message, dto.Type);
           return logEvent;
      }
 
@@ -47,9 +44,9 @@ public class LogEventBuilder
           return (logDate, logMessage);
      }
 
-     private DateTime DateParse(string logDate)
+     private TimeSpan DateParse(string logDate)
      {
-          var result = DateTime.ParseExact(logDate, DATEFORMAT, null);
-          return result;
+          var result = DateTime.ParseExact(logDate, DATEFORMAT, CultureInfo.InvariantCulture);
+          return result.TimeOfDay;
      }
 }

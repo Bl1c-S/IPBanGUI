@@ -1,6 +1,6 @@
 ﻿namespace WPF_IPBanUtility;
 
-internal interface ISettingsVMComponent
+public interface ISettingsVMComponent
 {
      public void Save();
 }

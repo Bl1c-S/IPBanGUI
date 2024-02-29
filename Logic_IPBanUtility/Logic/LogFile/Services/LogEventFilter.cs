@@ -1,15 +1,15 @@
-﻿namespace Logic_IPBanUtility.Logic.LogFile.Services;
+﻿namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogEventFilter
 {
-     public List<LogEvent> RemoveEventsByType(List<LogEvent> logEvents, LogEventType eventType)
+     public List<LogEvent> RemoveLogEventsByType(List<LogEvent> logEvents, LogEventType type)
      {
-          logEvents.RemoveAll(logEvent => logEvent.Type == eventType);
+          logEvents.RemoveAll(log => log.Type == type);
           return logEvents;
      }
-     public IEnumerable<LogEvent> FindEventsByType(List<LogEvent> logEvents, LogEventType eventType)
+     public List<LogEvent> FindEventsByType(List<LogEvent> logEvents, LogEventType type)
      {
-          var filteredLogEvents = logEvents.Where(le => le.Type == eventType);
-          return filteredLogEvents;
+          var filteredLogEvents = logEvents.Where(log => log.Type == type);
+          return filteredLogEvents.ToList();
      }
 }

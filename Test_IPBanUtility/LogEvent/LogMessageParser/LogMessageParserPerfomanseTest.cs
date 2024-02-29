@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Test_IPBanUtility.LogEventTest.LogMessageParserTest;
+namespace LogEventTest;
 
 [TestClass]
 public class LogMessageParserPerfomanseTest

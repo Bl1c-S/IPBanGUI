@@ -7,7 +7,7 @@ using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
-internal class SettingsViewModel : PageViewModelBase
+public class SettingsViewModel : PageViewModelBase
 {
      private readonly SettingsVMsBuilder _settingsVMsBuilder;
      public List<ISettingsVMComponent> VMs => _vMs;

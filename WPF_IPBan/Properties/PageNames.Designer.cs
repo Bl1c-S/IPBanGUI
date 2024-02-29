@@ -131,5 +131,14 @@ namespace WPF_IPBanUtility.Properties {
                 return ResourceManager.GetString("TypeFilterTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оновлення.
+        /// </summary>
+        public static string UpdateTitle {
+            get {
+                return ResourceManager.GetString("UpdateTitle", resourceCulture);
+            }
+        }
     }
 }

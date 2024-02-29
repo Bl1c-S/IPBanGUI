@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WPF_IPBanUtility;
 
-internal class SettingsVMsBuilder
+public class SettingsVMsBuilder
 {
      private Settings _settings;
      private ConfigFileManager _configFileManager;

@@ -1,38 +1,46 @@
-﻿using Logic_IPBanUtility.Logic.LogFile.Models;
-using Logic_IPBanUtility.Services;
-using Logic_IPBanUtility.Setting;
+﻿using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogEventManager
 {
-     public Action? LogEventsChanged;
-     public List<LogEvent> LogEvents
-     {
-          get => _logEvents;
-          private set { _logEvents = value; }
-     }
-     private List<LogEvent> _logEvents = new();
+     public List<DateTime> DateWithLogs => _logFileManagers.Keys.ToList();
+     public Action? DaysWithLogChanged;
 
-     public LogEventStatistics Statistics => _logEventBuilder.Statistics;
-     private readonly StreamFileManager _fileManager = new();
-     private readonly LogEventBuilder _logEventBuilder = new();
-
-     private readonly string _logFilePath;
-     private int _lastLogEventId;
+     private Dictionary<DateTime, LogFileManager> _logFileManagers = new();
+     private Func<Dictionary<DateTime, string>> getDaysWithLogFilePath;
 
      public LogEventManager(Settings settings)
      {
-          _logFilePath = settings.IPBan.Logfile;
-          _logEvents = ReadNewLogEvents();
+          getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
+          _logFileManagers = LoadDaysWithLogs();
      }
-     public List<LogEvent> ReadNewLogEvents()
+     public List<LogEvent> GetNewLogEvents(DateTime date)
      {
-          var newLogs = _fileManager.StreamReadAllNewLines(_logFilePath);
-          var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, _lastLogEventId + 1);
-          _lastLogEventId += newLogEvents.Count;
-          _logEvents.AddRange(newLogEvents);
-          LogEventsChanged?.Invoke();
-          return newLogEvents;
+          var logFileManager = _logFileManagers[date];
+          var logs = logFileManager.ReadNewLogEvents();
+          return logs;
+     }
+     public List<LogEvent> GetAllLogEvents(DateTime date)
+     {
+          UpdateDaysWithLogs();
+          var logFileManager = _logFileManagers[date];
+          var logs = logFileManager.ReadNewLogEvents(true);
+          return logs;
+     }
+     public void UpdateDaysWithLogs()
+     {
+          var updateDateWithLogs = LoadDaysWithLogs();
+          if (updateDateWithLogs.Count == _logFileManagers.Count) return;
+
+          _logFileManagers = updateDateWithLogs;
+          DaysWithLogChanged?.Invoke();
+     }
+     private Dictionary<DateTime, LogFileManager> LoadDaysWithLogs()
+     {
+          Dictionary<DateTime, LogFileManager> dateWithLogs = new();
+          foreach (var day in getDaysWithLogFilePath())
+               dateWithLogs.Add(day.Key, new(day.Value));
+          return dateWithLogs;
      }
 }
