@@ -141,4 +141,7 @@
   <data name="TypeFilterTitle" xml:space="preserve">
     <value>Тип події</value>
   </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Оновлення</value>
+  </data>
 </root>

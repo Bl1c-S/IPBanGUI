@@ -61,16 +61,67 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ви можете налаштувати роботу IPBan за допомогою ключів у відповідному вікні &quot;Ключі&quot;. За замовчуванням відображаються тільки декілька ключів, яких достатньо для захисту від підбору пароля. Якщо вас цікавить більше ключів, ви можете увімкнути їх у налаштуваннях програми..
+        ///   Looks up a localized string similar to Це вікно призначене для перегляду подій за сьогодні, або інший день, який ви можете обрати у випадаючому списку. Ви можете побачити, хто і коли намагався увійти до вашого сервера. У додатковому вікні &quot;Фільтри&quot; ви зможете відфільтрувати список подій за їх типом та переглянути статистику за обраний день..
         /// </summary>
-        internal static string Paragraph1 {
+        internal static string EventParagraph1 {
             get {
-                return ResourceManager.GetString("Paragraph1", resourceCulture);
+                return ResourceManager.GetString("EventParagraph1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ласкаво просимо до IPBanGUI – програми, створеної для контролю доступу до вашого комп&apos;ютера. При використанні віддаленого робочого столу, будь-хто може намагатися підключитися до вашого сервера. Навіть якщо ви використовуєте складні паролі, при невдалій спробі входу система все одно може сильно навантажуватись, особливо якщо цих спроб дуже багато. Це може призвести до проблем у роботі. IPBanGUI допомагає контролювати процес входу на сервер та забезпечує його безпеку..
+        ///   Looks up a localized string similar to Таким чином ви самі зможете відібрати ІР адреси які потрібно заблокувати, або просто бути в курсі, хто та коли входив до вашого сервера..
+        /// </summary>
+        internal static string EventParagraph2 {
+            get {
+                return ResourceManager.GetString("EventParagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Налаштувати роботу IPBan за допомогою ключів можна у відповідному вікні &quot;Ключі&quot;. За замовчуванням відображається тільки декілька ключів, яких достатньо для захисту від підбору пароля. Якщо вас цікавить більше ключів, ви можете увімкнути їх у налаштуваннях програми..
+        /// </summary>
+        internal static string KeyParagraph1 {
+            get {
+                return ResourceManager.GetString("KeyParagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to У кожного ключа є чотири додаткові кнопки.
+        ///- Натиснувши на кнопку питання, з&apos;явиться опис ключа та інструкція з його використання. 
+        ///- Кнопка дискети збереже значення, записане у полі значення ключа. 
+        ///- Кнопка &quot;Повернути&quot;, повертає останнє збережене значення ключа.
+        ///- Натиснувши &quot;Приховати&quot;, ключ залишиться активним і буде виконувати збережене в ньому значення, але не буде відображений у вікні &quot;Ключі&quot;. Щоб знову відобразити його, перейдіть до налаштувань..
+        /// </summary>
+        internal static string KeyParagraph2 {
+            get {
+                return ResourceManager.GetString("KeyParagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для завантаження оновлення, перейдіть на сторінку з версіями, знайдіть версію з зеленою міткою &quot;Latest&quot;. Таким чином помічається остання актуальна версія застосунку. Розгорнувши Assets, завантажте IPBanGUI.zip.
+        /// </summary>
+        internal static string UpdateParagraph1 {
+            get {
+                return ResourceManager.GetString("UpdateParagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Після завантаження архіву, перемістіть вміст завантаженої теки IPBanGUI в теку з вашим IPBanGUI. Зазвичай програма розміщена за шляхом: &quot;C:\Program Files\IPBan\IPBanGUI&quot;. Замініть файли у місці призначення, після чого оновлення буде завершено..
+        /// </summary>
+        internal static string UpdateParagraph2 {
+            get {
+                return ResourceManager.GetString("UpdateParagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ласкаво просимо до IPBanGUI – програми, створеної для контролю доступу до вашого сервера. При використанні віддаленого робочого столу, будь-хто може намагатися підключитися до вашого сервера.
+        ///Навіть якщо ви використовуєте складні паролі, при невдалій спробі входу система все одно може сильно навантажуватись, особливо якщо цих спроб дуже багато.
+        ///Це може призвести до проблем у роботі. IPBanGUI допомагає контролювати процес входу на сервер та забезпечує його безпеку..
         /// </summary>
         internal static string WelcomeParagraph {
             get {
