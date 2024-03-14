@@ -5,25 +5,27 @@ public class IPBan
 {
      private readonly LogFilePathExtractor _logsExtractor;
      private const string _NAME_IPBan = "ipban.config";
+     private const string _NAME_SQLite_DB = "ipban.sqlite";
      public string Folder { get; set; }
      public string Context { get; set; }
      public string Logfile { get; set; }
+     public string Sqlite_db { get; set; }
 
-     public IPBan(string folder, string context, string logfile)
+     public IPBan(string folder, string logfile)
      {
           Folder = folder;
-          Context = context;
+          Context = Path.Combine(folder, _NAME_IPBan);
+          Sqlite_db = Path.Combine(folder, _NAME_SQLite_DB);
           Logfile = logfile;
           _logsExtractor = new(Folder);
      }
 
      public static IPBan Create(string iPBanFolderPath)
      {
-          var context = Path.Combine(iPBanFolderPath, _NAME_IPBan);
           var logExtractor = new LogFilePathExtractor(iPBanFolderPath);
           var logfile = logExtractor.ToDatLogFilePath;
 
-          var iPBan = new IPBan(iPBanFolderPath, context, logfile);
+          var iPBan = new IPBan(iPBanFolderPath, logfile);
           iPBan.CheckExist();
           return iPBan;
      }
@@ -39,6 +41,8 @@ public class IPBan
                throw new FileNotFoundException(m + Context);
           if (!File.Exists(Logfile))
                throw new FileNotFoundException(m + Logfile);
+          if (!File.Exists(Sqlite_db))
+               throw new FileNotFoundException(m + Sqlite_db);
           return true;
      }
 }
