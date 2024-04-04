@@ -4,15 +4,14 @@ namespace Logic_IPBanUtility.Logic.LogFile;
 
 public class LogEventManager
 {
-     public List<DateTime> DateWithLogs => _logFileManagers.Keys.ToList();
      public Action? DaysWithLogChanged;
 
-     private Dictionary<DateTime, LogFileManager> _logFileManagers = new();
-     private Func<Dictionary<DateTime, string>> getDaysWithLogFilePath;
+     private Dictionary<DateTime, LogFileManager> _logFileManagers;
+     private Func<Dictionary<DateTime, string>> _getDaysWithLogFilePath;
 
      public LogEventManager(Settings settings)
      {
-          getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
+          _getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
           _logFileManagers = LoadDaysWithLogs();
      }
      public List<LogEvent> GetNewLogEvents(DateTime date)
@@ -23,23 +22,25 @@ public class LogEventManager
      }
      public List<LogEvent> GetAllLogEvents(DateTime date)
      {
-          UpdateDaysWithLogs();
+          GetDateWithLogs();
           var logFileManager = _logFileManagers[date];
           var logs = logFileManager.ReadNewLogEvents(true);
           return logs;
      }
-     public void UpdateDaysWithLogs()
+     public List<DateTime> GetDateWithLogs()
      {
           var updateDateWithLogs = LoadDaysWithLogs();
-          if (updateDateWithLogs.Count == _logFileManagers.Count) return;
-
-          _logFileManagers = updateDateWithLogs;
-          DaysWithLogChanged?.Invoke();
+          if (updateDateWithLogs.Count != _logFileManagers.Count)
+          {
+               _logFileManagers = updateDateWithLogs;
+               DaysWithLogChanged?.Invoke();
+          }
+          return _logFileManagers.Keys.ToList();
      }
      private Dictionary<DateTime, LogFileManager> LoadDaysWithLogs()
      {
           Dictionary<DateTime, LogFileManager> dateWithLogs = new();
-          foreach (var day in getDaysWithLogFilePath())
+          foreach (var day in _getDaysWithLogFilePath())
                dateWithLogs.Add(day.Key, new(day.Value));
           return dateWithLogs;
      }
