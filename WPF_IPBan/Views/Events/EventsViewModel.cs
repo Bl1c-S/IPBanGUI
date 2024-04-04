@@ -1,10 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Logic.LogFile;
-using NLog.Filters;
 using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Button = Wpf.Ui.Controls.Button;
 
@@ -70,12 +68,13 @@ public class EventsViewModel : PageViewModelBase
           }
      }
      private DateTime _selectedDate = DateTime.Today;
-     public DateTime DateStart => _logEventManager.DateWithLogs.LastOrDefault();
-     public DateTime DateEnd => _logEventManager.DateWithLogs.FirstOrDefault();
+     public DateTime DateStart => _logEventManager.GetDateWithLogs().LastOrDefault();
+     public DateTime DateEnd => _logEventManager.GetDateWithLogs().FirstOrDefault();
 
      private void UpdateDate()
      {
-
+          OnPropertyChanged(nameof(DateStart));
+          OnPropertyChanged(nameof(DateEnd));
      }
      #endregion
 
