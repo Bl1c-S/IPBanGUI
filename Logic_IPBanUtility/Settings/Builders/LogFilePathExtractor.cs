@@ -2,7 +2,7 @@
 
 public class LogFilePathExtractor
 {
-     public readonly string ToDatLogFilePath;
+     public readonly string ToDayLogFilePath;
 
      private readonly string _logsFolder;
      private const string _LOGFILENAME = "logfile.";
@@ -10,7 +10,7 @@ public class LogFilePathExtractor
      public LogFilePathExtractor(string logsFolder)
      {
           _logsFolder = logsFolder;
-          ToDatLogFilePath = Path.Combine(logsFolder, _LOGFILENAME + "txt");
+          ToDayLogFilePath = Path.Combine(logsFolder, _LOGFILENAME + "txt");
      }
      public Dictionary<DateTime, string> GetDaysWithLogFilePath()
      {
