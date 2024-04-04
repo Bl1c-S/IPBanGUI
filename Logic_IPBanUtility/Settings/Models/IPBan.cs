@@ -23,7 +23,7 @@ public class IPBan
      public static IPBan Create(string iPBanFolderPath)
      {
           var logExtractor = new LogFilePathExtractor(iPBanFolderPath);
-          var logfile = logExtractor.ToDatLogFilePath;
+          var logfile = logExtractor.ToDayLogFilePath;
 
           var iPBan = new IPBan(iPBanFolderPath, logfile);
           iPBan.CheckExist();
@@ -39,8 +39,6 @@ public class IPBan
                throw new DirectoryNotFoundException("Не знайдено вказану теку:" + Folder);
           if (!File.Exists(Context))
                throw new FileNotFoundException(m + Context);
-          if (!File.Exists(Logfile))
-               throw new FileNotFoundException(m + Logfile);
           if (!File.Exists(Sqlite_db))
                throw new FileNotFoundException(m + Sqlite_db);
           return true;
