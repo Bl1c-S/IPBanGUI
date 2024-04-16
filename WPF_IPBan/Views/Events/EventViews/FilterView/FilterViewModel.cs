@@ -1,6 +1,7 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
@@ -24,7 +25,11 @@ public class FilterViewModel : ViewModelBase
           _manager = manager;
           FilterKeysBuild();
 
+          _manager.DaysWithLogChanged += UpdateSelectableDateRange;
+          _manager.TodayChanged += TodayChanged;
+
           Statistics.StatisticsChanged += StaticticsChanged;
+          UpdateSelectableDateRange();
           SetSelectedDate(DateTime.Today);
      }
 
@@ -69,6 +74,20 @@ public class FilterViewModel : ViewModelBase
 
           var logs = _manager.GetLogEvents(SelectedDate);
           AddLogEventsByFiltersAndSearch(logs);
+     }
+     public void UpdateSelectableDateRange()
+     {
+          var DateWithLogsRange = _manager.CurrentDayWithLogs;
+          if (DateWithLogsRange.Count > 1)
+          {
+               SelectableDateRangeStart = DateWithLogsRange.LastOrDefault();
+               SelectableDateRangeEnd = DateWithLogsRange.FirstOrDefault();
+          }
+          else
+          {
+               SelectableDateRangeStart = DateTime.Today;
+               SelectableDateRangeEnd = DateTime.Today;
+          }
      }
 
      private DateTime _selectedDate = DateTime.Today;
@@ -124,7 +143,14 @@ public class FilterViewModel : ViewModelBase
      }
      #endregion
 
-     #region NewLogsReading
+     #region Update
+     private void TodayChanged()
+     {
+          Clear();
+          UpdateSelectableDateRange();
+          var logs = _manager.GetLogEvents(SelectedDate);
+          AddLogEventsByFiltersAndSearch(logs);
+     }
      public void ReadNewLogs()
      {
           _manager.CheckDaysWithLogsChanged();
@@ -173,6 +199,8 @@ public class FilterViewModel : ViewModelBase
      }
      public override void Dispose()
      {
+          _manager.DaysWithLogChanged -= UpdateSelectableDateRange;
+          _manager.TodayChanged -= TodayChanged;
           Statistics.StatisticsChanged -= StaticticsChanged;
           base.Dispose();
      }
