@@ -18,12 +18,12 @@ public class EventsViewModel : PageViewModelBase
      {
           _logEventManager = logEventManager;
           FilterVM = new FilterViewModel(logEventManager);
-          LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvent);
+          LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvents);
 
           FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
           FilterVM.DaysWithLogChanged += UpdateDate;
 
-          IUpdateCommand = new RelayCommand(UpdateLogEvents);
+          IUpdateCommand = new RelayCommand(UpdateAll);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
           ISearchCommand = new RelayCommand(FilterVM.SearchLogEvents);
 
@@ -32,10 +32,13 @@ public class EventsViewModel : PageViewModelBase
 
      #region Update
      public ICommand IUpdateCommand { get; }
-     private void UpdateLogEvents()
+     private void UpdateAll()
      {
-          FilterVM.ReadNewLogs();
+          FilterVM.CheckDaysWithLogsChanged();
+          UpdateLogsEventsForSelectedDate();
+          UpdateDate();
      }
+     private void UpdateLogsEventsForSelectedDate() => FilterVM.ReadNewLogs();
      #endregion
 
      #region Filter
@@ -65,6 +68,7 @@ public class EventsViewModel : PageViewModelBase
                _selectedDate = value;
                OnPropertyChanged(nameof(SelectedDate));
                FilterVM.SetSelectedDate(value);
+               OnPropertyChanged(nameof(SelectedDate));
           }
      }
      private DateTime _selectedDate = DateTime.Today;
@@ -73,6 +77,7 @@ public class EventsViewModel : PageViewModelBase
 
      private void UpdateDate()
      {
+          OnPropertyChanged(nameof(SelectedDate));
           OnPropertyChanged(nameof(DateStart));
           OnPropertyChanged(nameof(DateEnd));
      }
@@ -98,6 +103,7 @@ public class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
+          FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
           base.Dispose();
      }
 }
