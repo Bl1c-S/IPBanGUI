@@ -62,6 +62,9 @@ public class FilterViewModel : ViewModelBase
      #endregion
 
      #region DatePicker
+     public DateTime SelectedDate { get; private set; }
+     public DateTime SelectableDateRangeStart { get; private set; }
+     public DateTime SelectableDateRangeEnd { get; private set; }
      public Action? DaysWithLogChanged { get => _manager.DaysWithLogChanged; set => _manager.DaysWithLogChanged = value; }
      public void SetSelectedDate(DateTime date)
      {

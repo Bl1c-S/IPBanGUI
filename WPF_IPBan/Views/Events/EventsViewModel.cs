@@ -71,9 +71,9 @@ public class EventsViewModel : PageViewModelBase
                OnPropertyChanged(nameof(SelectedDate));
           }
      }
-     private DateTime _selectedDate = DateTime.Today;
-     public DateTime DateStart => _logEventManager.GetDateWithLogs().LastOrDefault();
-     public DateTime DateEnd => _logEventManager.GetDateWithLogs().FirstOrDefault();
+     private DateTime _selectedDate => FilterVM.SelectedDate;
+     public DateTime DateStart => FilterVM.SelectableDateRangeStart;
+     public DateTime DateEnd => FilterVM.SelectableDateRangeEnd;
 
      private void UpdateDate()
      {
