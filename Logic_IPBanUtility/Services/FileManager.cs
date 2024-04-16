@@ -39,4 +39,10 @@ public class FileManager
           var newLines = File.ReadLines(filePath).Skip(startLineIndex);
           return newLines.ToList();
      }
+
+     public void DeleteFiles(IEnumerable<string> paths)
+     {
+          foreach (var path in paths)
+               File.Delete(path);
+     }
 }
