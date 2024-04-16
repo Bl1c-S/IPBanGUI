@@ -1,10 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Logic.LogFile;
-using NLog.Filters;
 using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Button = Wpf.Ui.Controls.Button;
 
@@ -12,20 +9,17 @@ namespace WPF_IPBanUtility;
 
 public class EventsViewModel : PageViewModelBase
 {
-     public readonly LogEventManager _logEventManager;
      public LogEventListViewModel LogEventListVM { get; }
      public FilterViewModel FilterVM { get; }
 
      public EventsViewModel(LogEventManager logEventManager) : base(Properties.PageNames.Events)
      {
-          _logEventManager = logEventManager;
           FilterVM = new FilterViewModel(logEventManager);
-          LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvent);
+          LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvents);
 
           FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
-          FilterVM.DaysWithLogChanged += UpdateDate;
 
-          IUpdateCommand = new RelayCommand(UpdateLogEvents);
+          IUpdateCommand = new RelayCommand(UpdateAll);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
           ISearchCommand = new RelayCommand(FilterVM.SearchLogEvents);
 
@@ -34,10 +28,13 @@ public class EventsViewModel : PageViewModelBase
 
      #region Update
      public ICommand IUpdateCommand { get; }
-     private void UpdateLogEvents()
+     private void UpdateAll()
      {
-          FilterVM.ReadNewLogs();
+          FilterVM.CheckDaysWithLogsChanged();
+          UpdateLogsEventsForSelectedDate();
+          UpdateDate();
      }
+     private void UpdateLogsEventsForSelectedDate() => FilterVM.ReadNewLogs();
      #endregion
 
      #region Filter
@@ -64,18 +61,19 @@ public class EventsViewModel : PageViewModelBase
      public DateTime SelectedDate { get => _selectedDate;
           set
           {
-               _selectedDate = value;
-               OnPropertyChanged(nameof(SelectedDate));
                FilterVM.SetSelectedDate(value);
+               OnPropertyChanged(nameof(SelectedDate));
           }
      }
-     private DateTime _selectedDate = DateTime.Today;
-     public DateTime DateStart => _logEventManager.DateWithLogs.LastOrDefault();
-     public DateTime DateEnd => _logEventManager.DateWithLogs.FirstOrDefault();
+     private DateTime _selectedDate => FilterVM.SelectedDate;
+     public DateTime DateStart => FilterVM.SelectableDateRangeStart;
+     public DateTime DateEnd => FilterVM.SelectableDateRangeEnd;
 
      private void UpdateDate()
      {
-
+          OnPropertyChanged(nameof(SelectedDate));
+          OnPropertyChanged(nameof(DateStart));
+          OnPropertyChanged(nameof(DateEnd));
      }
      #endregion
 
@@ -99,6 +97,7 @@ public class EventsViewModel : PageViewModelBase
 
      public override void Dispose()
      {
+          FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
           base.Dispose();
      }
 }

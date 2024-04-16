@@ -17,6 +17,9 @@
                 <local:KeysVisibilityControllerView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type local:ClearLogsViewModel}">
+                <local:ClearLogsView/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

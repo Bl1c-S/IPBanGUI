@@ -1,4 +1,8 @@
-﻿using WPF_IPBanUtility.Properties;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
+using System.Windows.Input;
+using Wpf.Ui.Controls;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
@@ -26,5 +30,21 @@ internal class ManualViewModel : PageViewModelBase
 
      public ManualViewModel() : base(PageNames.Manual)
      {
+          IOpenLinkCommand = new RelayCommand(OpenLink);
+          CreatePageButtons();
+     }
+     private ICommand IOpenLinkCommand { get; }
+     private void OpenLink()
+     {
+          Process.Start(new ProcessStartInfo(Updates) { UseShellExecute = true });
+     }
+     protected override void CreatePageButtons()
+     {
+          PageButtons.Add(new Button
+          {
+               Content = UpdateTitle,
+               Command = IOpenLinkCommand,
+               Icon = Wpf.Ui.Common.SymbolRegular.ApprovalsApp28
+          });
      }
 }

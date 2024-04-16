@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:WPF_IPBanUtility"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Label  Grid.Row="0" Content="{Binding Title}"/>
-        <ui:TextBox Grid.Row="1" Grid.Column="0" Icon="Folder20"  Text="{Binding DirrectoryPath}" IsReadOnly="True"/>
-        <ui:Button  Grid.Row="1" Grid.Column="1" Icon="FolderOpen20" Content="Вибрати папку" Command="{Binding IOpenFolderCommand}" Margin="8,0,0,0"/>
+        <ui:TextBox Grid.Row="1" Grid.Column="0" Icon="Folder24"  Text="{Binding DirrectoryPath}" IsReadOnly="True"/>
+        <ui:Button  Grid.Row="1" Grid.Column="1" Icon="FolderOpen24" Content="Вибрати папку" Command="{Binding IOpenFolderCommand}" Margin="8,0,0,0"/>
     </Grid>
 </UserControl>
