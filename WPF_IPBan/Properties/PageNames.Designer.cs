@@ -61,6 +61,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Журнал подій.
+        /// </summary>
+        public static string ClearLogsTitle {
+            get {
+                return ResourceManager.GetString("ClearLogsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Події.
         /// </summary>
         public static string Events {
