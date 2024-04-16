@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Logic.LogFile;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Button = Wpf.Ui.Controls.Button;
@@ -10,18 +9,15 @@ namespace WPF_IPBanUtility;
 
 public class EventsViewModel : PageViewModelBase
 {
-     public readonly LogEventManager _logEventManager;
      public LogEventListViewModel LogEventListVM { get; }
      public FilterViewModel FilterVM { get; }
 
      public EventsViewModel(LogEventManager logEventManager) : base(Properties.PageNames.Events)
      {
-          _logEventManager = logEventManager;
           FilterVM = new FilterViewModel(logEventManager);
           LogEventListVM = new LogEventListViewModel(FilterVM.ObservebleLogEvents);
 
           FilterVM.ObservableLogEventsChanged += LogEventListVM.ObservableLogEventsSet;
-          FilterVM.DaysWithLogChanged += UpdateDate;
 
           IUpdateCommand = new RelayCommand(UpdateAll);
           IFilterCommand = new RelayCommand(ChangeFilterVisibility);
@@ -65,8 +61,6 @@ public class EventsViewModel : PageViewModelBase
      public DateTime SelectedDate { get => _selectedDate;
           set
           {
-               _selectedDate = value;
-               OnPropertyChanged(nameof(SelectedDate));
                FilterVM.SetSelectedDate(value);
                OnPropertyChanged(nameof(SelectedDate));
           }

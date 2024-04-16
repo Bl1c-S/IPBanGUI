@@ -57,7 +57,7 @@ public class FilterViewModel : ViewModelBase
      private List<LogEvent> FindLogEventsBySearchedText(List<LogEvent> logEvents)
      {
           if (SearchedText is null) return logEvents;
-          return logEvents.FindAll(x => x.Message.Contains(SearchedText));
+          return logEvents.FindAll(x => x.Message.Contains(SearchedText, StringComparison.OrdinalIgnoreCase));
      }
      #endregion
 
@@ -93,7 +93,6 @@ public class FilterViewModel : ViewModelBase
           }
      }
 
-     private DateTime _selectedDate = DateTime.Today;
      private void AddLogEventsByFiltersAndSearch(List<LogEvent> logEvents)
      {
           _allLogEvents.AddRange(logEvents);
