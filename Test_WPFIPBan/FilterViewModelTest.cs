@@ -1,456 +1,440 @@
-using Logic_IPBanUtility.Setting;
-using Logic_IPBanUtility;
 using WPF_IPBanUtility;
-using Logic_IPBanUtility.Logic.LogFile;
+using Test_IPBanUtility.LogEvent;
 
 namespace EventVMsTest
 {
      [TestClass]
      public class FilterViewModelTest
      {
-          private readonly string _folder;
-          private Settings _settings;
+          TestLogEventFileService _testFileManager = new();
 
-          public FilterViewModelTest()
-          {
-               _folder = AppDomain.CurrentDomain.BaseDirectory + "\\TestLogs\\";
-               _settings = CreateSettings(_folder);
-               lgFile = Path.Combine(_folder, "logfile.txt");
-               lgFile0 = Path.Combine(_folder, "logfile.0.txt");
-               lgFile1 = Path.Combine(_folder, "logfile.1.txt");
-               lgFile2 = Path.Combine(_folder, "logfile.2.txt");
-               lgFile3 = Path.Combine(_folder, "logfile.3.txt");
-               lgFile4 = Path.Combine(_folder, "logfile.4.txt");
-               lgFile5 = Path.Combine(_folder, "logfile.5.txt");
-          }
+          #region SelectDate
 
-          #region ReadFirstDaysLogs
           [TestMethod]
-          public void ReadTodayLogs1()
+          public void SelectDay_When0Days()
           {
-               CreateTestFileWhen1Days();
-
-               var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
-
-               TestFileClear();
-               Assert.AreEqual(expected, result);
+               int fileCount = 0;
+               SelectDayTest_WhenFileCount(fileCount);
           }
           [TestMethod]
-          public void ReadTodayLogs2()
+          public void SelectDay_When1Days()
           {
-               CreateTestFileWhen2Days();
-
-               var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 2;
-
-               TestFileClear();
-               Assert.AreEqual(expected, result);
+               int fileCount = 1;
+               SelectDayTest_WhenFileCount(fileCount);
           }
           [TestMethod]
-          public void ReadTodayLogs3()
+          public void SelectDay_When2Days()
           {
-               CreateTestFileWhen3Days();
+               int fileCount = 2;
+               SelectDayTest_WhenFileCount(fileCount);
+          }
+          [TestMethod]
+          public void SelectDay_When3Days()
+          {
+               int fileCount = 3;
+               SelectDayTest_WhenFileCount(fileCount);
+          }
+
+          #region Factory
+          public void SelectDayTest_WhenFileCount(int fileCount)
+          {
+               for (int selectDay = -3; selectDay > 5; selectDay++)
+                    SelectDayTestFactory(fileCount, selectDay);
+          }
+          public FilterViewModel SelectDayTestFactory(int fileCount, int selectDay)
+          {
+               _testFileManager.CreateLogFileWithDate(fileCount);
 
                var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
+               TestDaySelected(filterVM, selectDay);
+               return filterVM;
+          }
+          public void ReSelectDayTestFactory(FilterViewModel filterVM, int reSelectDay)
+          {
+               TestDaySelected(filterVM, reSelectDay);
+          }
+          public void ReSelectDayAndChangeFileCountTestFactory(FilterViewModel filterVM, int reSelectDay, int changeFileCount)
+          {
+               _testFileManager.FileDelete();
+               _testFileManager.CreateLogFileWithDate(changeFileCount);
+               TestDaySelected(filterVM, reSelectDay);
+          }
 
-               TestFileClear();
-               Assert.AreEqual(expected, result);
+          private void TestDaySelected(FilterViewModel filterVM, int selectedDay)
+          {
+               var selectedDateTime = CreateDate(selectedDay);
+               filterVM.SetSelectedDate(selectedDateTime);
+
+               if (filterVM.SelectableDateRangeStart <= filterVM.SelectedDate && filterVM.SelectableDateRangeEnd >= filterVM.SelectedDate)
+                    Assert.IsTrue(1 == filterVM.ObservebleLogEvents.Count || 0 == filterVM.ObservebleLogEvents.Count);
+               else
+                    Assert.AreEqual(filterVM.SelectedDate, filterVM.SelectableDateRangeStart);
           }
           #endregion
-
-          #region ReadSelectedDate
-          [TestMethod]
-          public void ReadSecondDayLogs1()
-          {
-               CreateTestFileWhen2Days();
-
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
-
-               TestFileClear();
-               Assert.AreEqual(expected, result);
-          }
-          [TestMethod]
-          public void ReadSecondDayLogs2()
-          {
-               CreateTestFileWhen3Days();
-
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-2));
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
-
-               TestFileClear();
-               Assert.AreEqual(expected, result);
-          }
-          #endregion
-
-          #region ReSelectDate
-          [TestMethod]
-          public void ReSelectDay1()
-          {
-               CreateTestFileWhen3Days();
-
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-2));
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
-               Assert.AreEqual(expected, result);
-
-               filterVM.SetSelectedDate(DateTime.Today);
-               result = filterVM.ObservebleLogEvent.Count;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
-          }
-          [TestMethod]
-          public void ReSelectDay2()
-          {
-               CreateTestFileWhen2Days();
-
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today);
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 2;
-               Assert.AreEqual(expected, result);
-
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-               expected = 1;
-               result = filterVM.ObservebleLogEvent.Count;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
-          }
           #endregion
 
           #region SearchText
           [TestMethod]
-          public void SearchTextEmpty()
+          public void SearchText_WhenEmpty1()
           {
-               CreateTestFileWhen2Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SearchedText = string.Empty;
-               filterVM.SearchLogEvents();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 2;
+               int simple = 2, custom = 1;
+               int expected = simple + custom;
+               string searchedText = string.Empty, ip = "2.1.2.1", user = "exp";
 
-               TestFileClear();
-               Assert.AreEqual(expected, result);
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
           }
           [TestMethod]
-          public void SearchTextFind1()
+          public void SearchText_WhenEmpty2()
           {
-               CreateTestFileWhen2Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SearchedText = "207";
-               filterVM.SearchLogEvents();
-               var result = filterVM.ObservebleLogEvent[0];
+               int simple = 0, custom = 4;
+               int expected = simple + custom;
+               string searchedText = string.Empty, ip = "2.1.2.1", user = "exp";
 
-               var resultCount = filterVM.ObservebleLogEvent.Count;
-               var expectedCount = 1;
-
-               TestFileClear();
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
           }
           [TestMethod]
-          public void SearchTextFind2()
+          public void SearchText_WhenEmpty3()
           {
-               CreateTestFileWhen2Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SearchedText = "80";
-               filterVM.SearchLogEvents();
-               var result = filterVM.ObservebleLogEvent[0];
+               int simple = 3, custom = 0;
+               int expected = simple + custom;
+               string searchedText = string.Empty, ip = "2.1.2.1", user = "exp";
 
-               var resultCount = filterVM.ObservebleLogEvent.Count;
-               var expectedCount = 2;
-
-               TestFileClear();
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
           }
+
+          [TestMethod]
+          public void SearchText_WhenSimple1()
+          {
+               int simple = 3, custom = 1;
+               int expected = custom;
+               string searchedText = "Ex", ip = "2.1.2.1", user = "exp";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
+          }
+          [TestMethod]
+          public void SearchText_WhenSimple2()
+          {
+               int simple = 1, custom = 5;
+               int expected = custom;
+               string searchedText = "exp", ip = "2.1.2.1", user = "exp";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
+          }
+          [TestMethod]
+          public void SearchText_WhenSimple3()
+          {
+               int simple = 0, custom = 1;
+               int expected = custom;
+               string searchedText = "eX2", ip = "2.1.2.1", user = "ex2p";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
+          }
+          [TestMethod]
+          public void SearchText_WhenSimple4()
+          {
+               int simple = 1, custom = 0;
+               int expected = custom;
+               string searchedText = "2", ip = "2.1.2.1", user = "ex";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
+          }
+          [TestMethod]
+          public void SearchText_WhenSimple5()
+          {
+               int simple = 2, custom = 4;
+               int expected = custom;
+               string searchedText = "2", ip = "2.1.2.1", user = "ex";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SearchTest(searchedInfo);
+               _testFileManager.FileDelete();
+          }
+
+          #region Factory
+          private FilterViewModel SearchTest(SearchedLogFileInfo info, int fileCount = 1)
+          {
+               _testFileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
+                    info.CustomIP, info.CustomUser, fileCount);
+
+               var filterVM = CreateFilterVM(info.SearchedText);
+               filterVM.SearchLogEvents();
+               info.ValidateSearched(filterVM);
+               return filterVM;
+          }
+          private class SearchedLogFileInfo
+          {
+               public int SimpleContent;
+               public int CustomContent;
+               public int ExpectedCountShowed;
+
+               public string SearchedText;
+               public string CustomIP;
+               public string CustomUser;
+
+               public SearchedLogFileInfo(int simpleContent, int customContent, int expectedCountShowed, string searchedText, string customIP, string customUser)
+               {
+                    SimpleContent = simpleContent;
+                    CustomContent = customContent;
+                    ExpectedCountShowed = expectedCountShowed;
+                    SearchedText = searchedText;
+                    CustomIP = customIP;
+                    CustomUser = customUser;
+               }
+
+               public void ValidateSearched(FilterViewModel filterVM)
+               {
+                    ValidateStatistics(filterVM);
+                    foreach (var item in filterVM.ObservebleLogEvents)
+                         Assert.IsTrue(item.Message.Contains(SearchedText, StringComparison.OrdinalIgnoreCase));
+               }
+               private void ValidateStatistics(FilterViewModel filterVM)
+               {
+                    Assert.AreEqual(SimpleContent + CustomContent, filterVM.Statistics.AllLogEvent);
+                    Assert.AreEqual(ExpectedCountShowed, filterVM.ShowedLogEventCount);
+                    Assert.AreEqual(CustomContent, filterVM.Statistics.LoginSucceeded);
+                    Assert.AreEqual(0, filterVM.Statistics.LoginFailure);
+               }
+          }
+          #endregion
           #endregion
 
           #region SearchTextChangeDate
           [TestMethod]
           public void SearchTextChangeDate1()
           {
-               CreateTestFileWhen3Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SearchedText = "211";
-               filterVM.SearchLogEvents();
+               int simple = 2, custom = 4; int expected = custom;
+               string searchedText = "Ex", ip = "2.1.2.1", user = "ex";
 
-               var result = filterVM.ObservebleLogEvent[0];
-               var resultCount = filterVM.ObservebleLogEvent.Count;
-               var expectedCount = 1;
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               var filterVM = SearchTest(searchedInfo);
 
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
-
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-
-               resultCount = filterVM.ObservebleLogEvent.Count;
-               expectedCount = 0;
-
-               Assert.AreEqual(expectedCount, resultCount);
-               TestFileClear();
+               simple = 1; custom = 2; expected = custom;
+               searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SetDateSearchTest(searchedInfo, filterVM);
           }
           [TestMethod]
           public void SearchTextChangeDate2()
           {
-               CreateTestFileWhen3Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-               filterVM.SearchedText = "207";
-               filterVM.SearchLogEvents();
+               int simple = 1, custom = 0; int expected = custom;
+               string searchedText = "1.2", ip = "2.1.2.1", user = "ex";
 
-               var result = filterVM.ObservebleLogEvent[0];
-               var resultCount = filterVM.ObservebleLogEvent.Count;
-               var expectedCount = 1;
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               var filterVM = SearchTest(searchedInfo);
 
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
-
-               filterVM.SetSelectedDate(DateTime.Today);
-               resultCount = filterVM.ObservebleLogEvent.Count;
-               expectedCount = 0;
-
-               Assert.AreEqual(expectedCount, resultCount);
-               TestFileClear();
+               simple = 4; custom = 1; expected = custom;
+               searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SetDateSearchTest(searchedInfo, filterVM);
           }
           [TestMethod]
           public void SearchTextChangeDate3()
           {
-               CreateTestFileWhen3Days();
-               var filterVM = CreateFilterVM();
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-               filterVM.SearchedText = "207";
-               filterVM.SearchLogEvents();
+               int simple = 3, custom = 3; int expected = custom;
+               string searchedText = "X", ip = "2.1.2.1", user = "ex";
 
-               var result = filterVM.ObservebleLogEvent[0];
-               var resultCount = filterVM.ObservebleLogEvent.Count;
-               var expectedCount = 1;
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               var filterVM = SearchTest(searchedInfo);
 
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
-
-               filterVM.SetSelectedDate(DateTime.Today);
-               resultCount = filterVM.ObservebleLogEvent.Count;
-               expectedCount = 0;
-
-               Assert.AreEqual(expectedCount, resultCount);
-
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-               result = filterVM.ObservebleLogEvent[0];
-               resultCount = filterVM.ObservebleLogEvent.Count;
-               expectedCount = 1;
-
-               Assert.IsTrue(result.Message.Contains(filterVM.SearchedText));
-               Assert.AreEqual(expectedCount, resultCount);
-
-               TestFileClear();
+               simple = 0; custom = 10; expected = custom;
+               searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SetDateSearchTest(searchedInfo, filterVM);
           }
+          [TestMethod]
+          public void SearchTextChangeDate4()
+          {
+               int simple = 2, custom = 0; int expected = 0;
+               string searchedText = "hj", ip = "2.1.2.1", user = "ex";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               var filterVM = SearchTest(searchedInfo);
+
+               simple = 0; custom = 1; expected = 0;
+               searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SetDateSearchTest(searchedInfo, filterVM);
+          }
+          [TestMethod]
+          public void SearchTextChangeDate5()
+          {
+               int simple = 2, custom = 0; int expected = simple;
+               string searchedText = string.Empty, ip = "2.1.2.1", user = "ex";
+
+               SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               var filterVM = SearchTest(searchedInfo);
+
+               simple = 5; custom = 0; expected = simple;
+               searchedInfo = new(simple, custom, expected, searchedText, ip, user);
+               SetDateSearchTest(searchedInfo, filterVM);
+          }
+
+          #region Factory
+          private FilterViewModel SetDateSearchTest(SearchedLogFileInfo info, FilterViewModel filterVM)
+          {
+               _testFileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
+                    info.CustomIP, info.CustomUser, 2);
+
+               filterVM.SearchedText = info.SearchedText;
+               filterVM.SetSelectedDate(CreateDate(-1));
+               info.ValidateSearched(filterVM);
+               return filterVM;
+          }
+          #endregion
           #endregion
 
           #region ReadNewLogs
           [TestMethod]
-          public void ReadNewLogs_WhenEmpty()
+          public void ReadNewLogs_WhenFirstEmpty0()
           {
-               var content = string.Empty;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 0;
-               Assert.AreEqual(expected, result);
-
-               filterVM.ReadNewLogs();
-               result = filterVM.ObservebleLogEvent.Count;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
+               var filterVM = FirstReadTest(0);
+               SecondReadTest(filterVM, 0);
           }
           [TestMethod]
-          public void ReadNewLogs_When1NewLog_1()
+          public void ReadNewLogs_WhenFirstEmpty1()
           {
-               var content = string.Empty;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 0;
-               Assert.AreEqual(expected, result);
-
-               content = testlogs1;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               filterVM.ReadNewLogs();
-               result = filterVM.ObservebleLogEvent.Count;
-               expected = 1;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
+               var filterVM = FirstReadTest(0);
+               SecondReadTest(filterVM, 1);
           }
           [TestMethod]
-          public void ReadNewLogs_When1NewLog_2()
+          public void ReadNewLogs_WhenFirstEmpty2()
           {
-               var content = testlogs1;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 1;
-               Assert.AreEqual(expected, result);
-
-               content = testlogs2;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               filterVM.ReadNewLogs();
-               result = filterVM.ObservebleLogEvent.Count;
-               expected = 2;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
+               var filterVM = FirstReadTest(0);
+               SecondReadTest(filterVM, 5);
           }
           [TestMethod]
-          public void ReadNewLogs_When2NewLog()
+          public void ReadNewLogs_WhenOnlyFirst()
           {
-               var content = string.Empty;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
+               var filterVM = FirstReadTest(10);
+               SecondReadTest(filterVM, 10);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenAddedLogs1()
+          {
+               var filterVM = FirstReadTest(10);
+               SecondReadTest(filterVM, 11);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenAddedLogs2()
+          {
+               var filterVM = FirstReadTest(10);
+               SecondReadTest(filterVM, 14);
+          }
+          [TestMethod]
+          public void ReadNewLogs_When2AddedLogs1()
+          {
+               var filterVM = FirstReadTest(10);
+               SecondReadTest(filterVM, 14);
+               SecondReadTest(filterVM, 16);
+          }
+          [TestMethod]
+          public void ReadNewLogs_When2AddedLogs2()
+          {
+               var filterVM = FirstReadTest(10);
+               SecondReadTest(filterVM, 14);
+               SecondReadTest(filterVM, 14);
+          }
+          private FilterViewModel FirstReadTest(int contentCount)
+          {
+               _testFileManager.CreateCustomLogFileWithDate(contentCount);
                var filterVM = CreateFilterVM();
-               var result = filterVM.ObservebleLogEvent.Count;
-               var expected = 0;
-               Assert.AreEqual(expected, result);
-
-               content = testlogs2;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
+               Assert.AreEqual(contentCount, filterVM.ShowedLogEventCount);
+               return filterVM;
+          }
+          private void SecondReadTest(FilterViewModel filterVM, int contentCount)
+          {
+               _testFileManager.CreateCustomLogFileWithDate(contentCount);
                filterVM.ReadNewLogs();
-               result = filterVM.ObservebleLogEvent.Count;
-               expected = 2;
-               Assert.AreEqual(expected, result);
-               TestFileClear();
+               Assert.AreEqual(contentCount, filterVM.ShowedLogEventCount);
           }
           #endregion
 
-          #region Statistics
-
+          #region ReadNewLogsChangeToday
           [TestMethod]
-          public void Statistics_WhenOneFilterDisable_WhenReadNewEmtpy()
+          public void ReadNewLogs_WhenChangeToday_WhenFirst0_Second0()
           {
-               var content = testlogs3;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               Assert.AreEqual(3, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(3, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(2 ,filterVM.Statistics.LoginSucceeded);
-               Assert.AreEqual(1 ,filterVM.Statistics.LoginFailure);
-
-               filterVM.LoginFailure.IsEnable = false;
-               Assert.AreEqual(3, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(2, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(2, filterVM.Statistics.LoginSucceeded);
-               Assert.AreEqual(1, filterVM.Statistics.LoginFailure);
-
-               filterVM.ReadNewLogs();
-               Assert.AreEqual(3, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(2, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(2, filterVM.Statistics.LoginSucceeded);
-               Assert.AreEqual(1, filterVM.Statistics.LoginFailure);
-               TestFileClear();
+               var filterVM = FirstReadTest(0);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 0);
           }
           [TestMethod]
-          public void Statistics_WhenReadNew1Log()
+          public void ReadNewLogs_WhenChangeToday_WhenFirst0_Second3()
           {
-               var content = testlogs1;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               Assert.AreEqual(1, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(1, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(1, filterVM.Statistics.LoginFailure);
-
-               content = testlogs2;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-
-               filterVM.ReadNewLogs();
-               Assert.AreEqual(2, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(2, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(2, filterVM.Statistics.LoginFailure);
-               TestFileClear();
+               var filterVM = FirstReadTest(0);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 3);
           }
           [TestMethod]
-          public void Statistics_DateChange_WhenReadNew1Log()
+          public void ReadNewLogs_WhenChangeToday_WhenFirst1_Second0()
           {
-               var content = testlogs1;
-               CreateLogFileWithDate(lgFile, DateTime.Today, content);
-               var filterVM = CreateFilterVM();
-               Assert.AreEqual(1, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(1, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(1, filterVM.Statistics.LoginFailure);
-
-               content = testlogs3;
-               CreateLogFileWithDate(lgFile0, DateTime.Today.AddDays(-1), content);
-               filterVM.SetSelectedDate(DateTime.Today.AddDays(-1));
-
-               Assert.AreEqual(3, filterVM.Statistics.AllLogEvent);
-               Assert.AreEqual(3, filterVM.ShowedLogEventCount);
-               Assert.AreEqual(2, filterVM.Statistics.LoginSucceeded);
-               Assert.AreEqual(1, filterVM.Statistics.LoginFailure);
-               TestFileClear();
+               var filterVM = FirstReadTest(1);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 0);
           }
+          [TestMethod]
+          public void ReadNewLogs_WhenChangeToday_WhenFirst1_Second1()
+          {
+               var filterVM = FirstReadTest(1);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 1);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenChangeToday_WhenFirst1_Second6()
+          {
+               var filterVM = FirstReadTest(1);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 6);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenChangeToday_WhenFirst3_Second0()
+          {
+               var filterVM = FirstReadTest(3);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 0);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenChangeToday_WhenFirst3_Second2()
+          {
+               var filterVM = FirstReadTest(3);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 2);
+          }
+          [TestMethod]
+          public void ReadNewLogs_WhenChangeToday_WhenFirst6_Second7()
+          {
+               var filterVM = FirstReadTest(6);
+               var today = DateTime.Today.AddDays(1);
+               filterVM.SetToday(today);
+               SecondReadTest(filterVM, 7);
+          }
+
           #endregion
-
           #region Suport
-          private void CreateTestFileWhen1Days()
+          private FilterViewModel CreateFilterVM(string searchedText = "")
           {
-               CreateLogFileWithDate(lgFile, DateTime.Today, testlogs1);
+               var logEventManager = _testFileManager.CreateLogEventManager();
+               return new(logEventManager) { SearchedText = searchedText };
           }
-          private void CreateTestFileWhen2Days()
+          private DateTime CreateDate(int day)
           {
-               CreateLogFileWithDate(lgFile, DateTime.Today, testlogs2);
-               CreateLogFileWithDate(lgFile1, DateTime.Today.AddDays(-1), testlogs1);
-          }
-          private void CreateTestFileWhen3Days()
-          {
-               CreateLogFileWithDate(lgFile, DateTime.Today, testlogs1);
-               CreateLogFileWithDate(lgFile1, DateTime.Today.AddDays(-1), testlogs2);
-               CreateLogFileWithDate(lgFile0, DateTime.Today.AddDays(-2), testlogs1);
-          }
-
-          private string lgFile, lgFile0, lgFile1, lgFile2, lgFile3, lgFile4, lgFile5;
-          private string testlogs1 = "2024-02-15 00:24:19.0287|WARN|IPBan|Login failure: 80.66.88.211, , RDP, 4, 14";
-          private string testlogs2 = "2024-02-15 00:24:03.9379|WARN|IPBan|Login failure: 11.80.222.20, , RDP, 2, 14\r\n2024-02-15 00:45:05.8387|WARN|IPBan|Login failure: 80.66.88.207, , RDP, 2, 14";
-          private string testlogs3 = "2024-01-29 08:11:08.0237|WARN|IPBan|Login succeeded, address: 217.77.219.65, user name: STR_INSTR_3 Kassa, source: RDP\r\n2024-01-29 08:23:09.1471|WARN|IPBan|Login succeeded, address: 217.77.219.65, user name: STR_INSTR_1, source: RDP\r\n2024-02-15 00:45:05.8387|WARN|IPBan|Login failure: 80.66.88.207, , RDP, 2, 14";
-
-
-          private FilterViewModel CreateFilterVM()
-          {
-               var logEventManager = new LogEventManager(_settings);
-               FilterViewModel filterViewModel = new(logEventManager);
-               return filterViewModel;
-          }
-          private Settings CreateSettings(string folder)
-          {
-               var filePath0 = Path.Combine(folder, "logfile.txt");
-               CreateLogFileWithDate(filePath0, DateTime.Today);
-
-               var iPBan = IPBan.Create(folder);
-               SettingsBuilder sb = new();
-               sb.CreateDefaultSettings(iPBan);
-               sb.LoadSettings();
-               return sb.Settings!;
-          }
-
-          private void CreateLogFileWithDate(string filePath, DateTime creationDate, string content = "empty")
-          {
-               File.WriteAllText(filePath, content);
-               File.SetCreationTime(filePath, creationDate);
-          }
-          private void TestFileClear()
-          {
-               File.Delete(lgFile);
-               File.Delete(lgFile0);
-               File.Delete(lgFile1);
-               File.Delete(lgFile2);
-               File.Delete(lgFile3);
-               File.Delete(lgFile4);
-               File.Delete(lgFile5);
+               return DateTime.Now.AddDays(day).Date;
           }
           #endregion
      }
