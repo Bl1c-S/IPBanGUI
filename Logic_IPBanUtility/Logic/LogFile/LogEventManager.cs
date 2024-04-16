@@ -9,36 +9,51 @@ public class LogEventManager
      public DateTime? Today = null;
      public List<DateTime> CurrentDayWithLogs => _logFileManagers.Keys.ToList();
 
-     private Dictionary<DateTime, LogFileManager> _logFileManagers;
+     private Dictionary<DateTime, LogFileManager> _logFileManagers = new();
      private Func<Dictionary<DateTime, string>> _getDaysWithLogFilePath;
 
      public LogEventManager(Settings settings)
      {
           _getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
-          _logFileManagers = LoadDaysWithLogs();
+          CheckDaysWithLogsChanged();
      }
-     public List<LogEvent> GetNewLogEvents(DateTime date)
+     public List<LogEvent> GetLogEvents(DateTime date, bool first = true)
      {
-          var logFileManager = _logFileManagers[date];
-          var logs = logFileManager.ReadNewLogEvents();
+          if (CheckExistLogFileManager(date))
+               return GetLogEventsByDay(date, first);
+          return new();
+     }
+
+     private List<LogEvent> GetLogEventsByDay(DateTime date, bool first = true)
+     {
+          var manager = _logFileManagers[date];
+          var logs = manager.ReadNewLogEvents(first);
           return logs;
      }
-     public List<LogEvent> GetAllLogEvents(DateTime date)
+
+     public void CheckDaysWithLogsChanged()
      {
-          GetDateWithLogs();
-          var logFileManager = _logFileManagers[date];
-          var logs = logFileManager.ReadNewLogEvents(true);
-          return logs;
-     }
-     public List<DateTime> GetDateWithLogs()
-     {
-          var updateDateWithLogs = LoadDaysWithLogs();
-          if (updateDateWithLogs.Count != _logFileManagers.Count)
+          LogFileManagersValidator validator = new(_getDaysWithLogFilePath(), _logFileManagers, Today);
+
+          if (validator.CheckTodayChanged())
           {
-               _logFileManagers = updateDateWithLogs;
+               _logFileManagers = validator.LogFileManagers;
+               TodayChanged?.Invoke();
+          }
+          else if (validator.ChackManagersChanged())
+          {
+               _logFileManagers = validator.LogFileManagers;
                DaysWithLogChanged?.Invoke();
           }
-          return _logFileManagers.Keys.ToList();
+     }
+
+     private bool CheckExistLogFileManager(DateTime date)
+     {
+          if (!_logFileManagers.Keys.Contains(date))
+               return false;
+          return true;
+     }
+
      private class LogFileManagersValidator
      {
           public bool ChangesDetected;
@@ -71,7 +86,7 @@ public class LogEventManager
                          changesDetected = Add(date, path);
                     else if (LogFileManagers[date].LogFilePath != path)
                          changesDetected = Reset(date, path);
-     }
+               }
                return changesDetected;
           }
           private bool RemoveUnusedManagers()
@@ -108,7 +123,7 @@ public class LogEventManager
                return true;
           }
           private bool Remove(DateTime date)
-     {
+          {
                LogFileManagers.Remove(date);
                return true;
           }
