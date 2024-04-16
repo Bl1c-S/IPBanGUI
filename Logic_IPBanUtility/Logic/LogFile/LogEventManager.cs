@@ -39,12 +39,78 @@ public class LogEventManager
                DaysWithLogChanged?.Invoke();
           }
           return _logFileManagers.Keys.ToList();
-     }
-     private Dictionary<DateTime, LogFileManager> LoadDaysWithLogs()
+     private class LogFileManagersValidator
      {
-          Dictionary<DateTime, LogFileManager> dateWithLogs = new();
-          foreach (var day in _getDaysWithLogFilePath())
-               dateWithLogs.Add(day.Key, new(day.Value));
-          return dateWithLogs;
+          public bool ChangesDetected;
+          private DateTime _today;
+
+          public Dictionary<DateTime, LogFileManager> LogFileManagers;
+          private readonly Dictionary<DateTime, string> _newDaysWithLogs;
+
+          public LogFileManagersValidator(Dictionary<DateTime, string> newDaysWithLogs, Dictionary<DateTime, LogFileManager> logFileManagers, DateTime? today)
+          {
+               _newDaysWithLogs = newDaysWithLogs;
+               LogFileManagers = logFileManagers;
+               ChangesDetected = false;
+               _today = today ?? DateTime.Today;
+          }
+          public bool ChackManagersChanged()
+          {
+               var dayAdded = AddedNewDays();
+               var dayRemoved = RemoveUnusedManagers();
+               return dayAdded || dayRemoved;
+          }
+          private bool AddedNewDays()
+          {
+               bool changesDetected = false;
+               foreach (var day in _newDaysWithLogs)
+               {
+                    var date = day.Key;
+                    var path = day.Value;
+                    if (!LogFileManagers.ContainsKey(date))
+                         changesDetected = Add(date, path);
+                    else if (LogFileManagers[date].LogFilePath != path)
+                         changesDetected = Reset(date, path);
+     }
+               return changesDetected;
+          }
+          private bool RemoveUnusedManagers()
+          {
+               bool changesDetected = false;
+               foreach (var manager in LogFileManagers.Keys)
+                    if (!_newDaysWithLogs.ContainsKey(manager))
+                    {
+                         Remove(manager);
+                         changesDetected = true;
+                    }
+               return changesDetected;
+          }
+          public bool CheckTodayChanged()
+          {
+               if (!LogFileManagers.ContainsKey(_today))
+                    return ResetLogFileManagers();
+               return false;
+          }
+          private bool ResetLogFileManagers()
+          {
+               LogFileManagers = _newDaysWithLogs.ToDictionary(kv => kv.Key, kv => new LogFileManager(kv.Value));
+               return true;
+          }
+          private bool Reset(DateTime date, string path)
+          {
+               Remove(date);
+               Add(date, path);
+               return true;
+          }
+          private bool Add(DateTime date, string path)
+          {
+               LogFileManagers.Add(date, new(path));
+               return true;
+          }
+          private bool Remove(DateTime date)
+     {
+               LogFileManagers.Remove(date);
+               return true;
+          }
      }
 }
