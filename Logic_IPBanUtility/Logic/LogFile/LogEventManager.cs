@@ -5,6 +5,9 @@ namespace Logic_IPBanUtility.Logic.LogFile;
 public class LogEventManager
 {
      public Action? DaysWithLogChanged;
+     public Action? TodayChanged;
+     public DateTime? Today = null;
+     public List<DateTime> CurrentDayWithLogs => _logFileManagers.Keys.ToList();
 
      private Dictionary<DateTime, LogFileManager> _logFileManagers;
      private Func<Dictionary<DateTime, string>> _getDaysWithLogFilePath;
