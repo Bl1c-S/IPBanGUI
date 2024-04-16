@@ -83,7 +83,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<ManualViewModel>();
                     services.AddTransient<KeyListViewModel>();
-                    services.AddSingleton<EventsViewModel>();
+                    services.AddTransient<EventsViewModel>();
                }).Build();
                host.Start();
 
