@@ -39,18 +39,18 @@ public class IPAddressDatabaseManager
             }
         }
     }
-    public void Remove(string iPAddressText)
+    public void Remove(IPAddressEntity entity)
     {
         using (var dbContext = new IPAddressesDbContext(_path))
         {
             try
             {
-                dbContext.Remove(iPAddressText);
+                dbContext.Remove(entity.IPAddressText);
                 dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Помилка видалення {iPAddressText} з бази {_path}. \n\r {ex.Message}");
+                throw new Exception($"Помилка видалення {entity.IPAddressText} з бази {_path}. \n\r {ex.Message}");
             }
         }
     }
