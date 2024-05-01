@@ -23,7 +23,7 @@ public class Key
           Description = description;
           Value = GetValue();
      }
-     public bool InsertValue(string newValue)
+     public bool SetValue(string newValue)
      {
           if (Value == newValue) return false;
 

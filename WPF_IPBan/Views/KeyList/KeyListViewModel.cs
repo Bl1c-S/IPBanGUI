@@ -79,7 +79,7 @@ public class KeyListViewModel : PageViewModelBase
           foreach (var keyVM in _keyViewModels)
           {
                var key = keyVM.Key;
-               var isChanged = key.InsertValue(keyVM.Value);
+               var isChanged = key.SetValue(keyVM.Value);
                if (isChanged)
                     keys.Add(key);
           }

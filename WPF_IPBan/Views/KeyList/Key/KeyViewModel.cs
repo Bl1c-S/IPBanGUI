@@ -57,7 +57,7 @@ public class KeyViewModel : ViewModelBase
 
      public void SaveKey()
      {
-          if (Key.InsertValue(_value))
+          if (Key.SetValue(_value))
                SaveKeyEvent.Invoke(Key);
      }
      #endregion
