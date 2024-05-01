@@ -19,7 +19,7 @@ public class KeyBuilder
                newKeys.Add(GetKey(keyIdenti));
           return newKeys;
      }
-     private Key GetKey(KeyIdenti keyIdenti)
+     public Key GetKey(KeyIdenti keyIdenti)
      {
           var keyContext = GetKeyContext(keyIdenti.Name);
           var index = Context.IndexOf(keyContext);
@@ -41,18 +41,6 @@ public class KeyBuilder
      {
           var description = KeyDescription.ResourceManager.GetString(keyName) ?? string.Empty;
           return description;
-     }
-     private string RemoveDoubleSpaces(string input)
-     {
-          while (input.Contains("\t"))
-               input = input.Replace("\t", "\n");
-          return input;
-     }
-     private string RemoveEmptyLine(string input)
-     {
-          while (input.Contains("\n"))
-               input = input.Replace("\n", "");
-          return input;
      }
      #endregion
 }
