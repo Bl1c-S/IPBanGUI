@@ -1,7 +1,8 @@
 ﻿using Logic_IPBanUtility.Logic.IPList;
 using Logic_IPBanUtility.Setting;
+using Test_IPBanUtility;
 
-namespace Test_IPBanUtility.IPManager;
+namespace IPManager;
 
 [TestClass]
 public class IPAddressManagerTest
@@ -138,7 +139,7 @@ public class IPAddressManagerTest
      {
           var manager = _factory.CreateManager();
 
-          for (int id = 0; id < count; id++)
+          for (int id = count - 1; id >= 0; id--)
                manager.Remove(manager.IPAddress[id]);
 
           manager.Update();
@@ -148,7 +149,7 @@ public class IPAddressManagerTest
 
      #endregion
 
-     private class IPAddressManagerTestFactory
+     internal class IPAddressManagerTestFactory
      {
           private readonly Settings _settings;
 
