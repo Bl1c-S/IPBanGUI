@@ -18,12 +18,25 @@ public class ConfigFileManager
           _fileManager = fileManager;
           _contextPath = settings.IPBan.Context;
           _keyIdentiPath = settings.Config.KeyIdenti;
+          UpdateContex();
+     }
 
+     public void UpdateContex()
+     {
           Context = _fileManager.ReadAllLines(_contextPath);
      }
+     public Key GetKey(KeyNames keyName)
+     {
+          UpdateContex();
+          KeyBuilder kb = new(Context);
+          KeyIdenti keyIndenty = new(false, keyName.ToString());
+          return kb.GetKey(keyIndenty);
+     }
+
      public List<Key> CreateKeys()
      {
           var keyIdentis = ReadKeyIndentis();
+          UpdateContex();
           var keys = new KeyBuilder(Context).GetKeys(keyIdentis);
           return keys;
      }
