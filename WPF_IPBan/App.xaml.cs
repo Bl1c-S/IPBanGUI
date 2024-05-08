@@ -1,4 +1,6 @@
 ﻿using Logic_IPBanUtility;
+using Logic_IPBanUtility.Logic.ConfigFile;
+using Logic_IPBanUtility.Logic.IPList;
 using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
@@ -7,13 +9,14 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
+using WPF_IPBanUtility.Views.IPList.IPListView.View;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for App.xaml
-     /// </summary>
-     public partial class App : Application
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
      {
           private OtherExeptionHandler otherExeptionHandler = new();
           private LoadWindowModel? _loadVM;
@@ -74,15 +77,21 @@ namespace WPF_IPBanUtility
                     services.AddSingleton(settings);
                     services.AddSingleton<FileManager>();
                     services.AddSingleton<ConfigFileManager>();
+                    services.AddSingleton<KeyValueManager>();
                     services.AddSingleton<LogEventManager>();
 
+                    services.AddSingleton<IPAddressManager>();
+                    services.AddSingleton<IPBlockedListService>();
+
+                    services.AddSingleton<IPListVMsBuilder>();
                     services.AddSingleton<SettingsVMsBuilder>();
-                    services.AddTransient<SettingsViewModel>();
 
                     services.AddSingleton(s => new NavigationService(s));
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<ManualViewModel>();
+                    services.AddTransient<IPListViewModel>();
                     services.AddTransient<KeyListViewModel>();
+                    services.AddTransient<SettingsViewModel>();
                     services.AddTransient<EventsViewModel>();
                }).Build();
                host.Start();
