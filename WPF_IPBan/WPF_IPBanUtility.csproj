@@ -78,6 +78,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Manual.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\OtherWords.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OtherWords.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Status.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Status.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\ToolTips.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ToolTips.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +116,18 @@
     <EmbeddedResource Update="Properties\Manual.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Manual.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\OtherWords.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OtherWords.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Status.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Status.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\ToolTips.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ToolTips.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

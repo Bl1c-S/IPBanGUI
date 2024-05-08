@@ -9,8 +9,8 @@
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="Torgsoft IPBanGUI v1.3.0"
-        Height="700" MinHeight="200" Width="1000" MinWidth="650">
+        Title="Torgsoft IPBanGUI v1.4.0"
+        Height="700" MinHeight="200" Width="1000" MinWidth="700">
     <Grid Margin="8,0">
         <Grid.Resources>
 
@@ -20,6 +20,10 @@
 
             <DataTemplate DataType="{x:Type local:EventsViewModel}">
                 <local:EventsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type local:IPListViewModel}">
+                <local:IPListView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type local:SettingsViewModel}">
