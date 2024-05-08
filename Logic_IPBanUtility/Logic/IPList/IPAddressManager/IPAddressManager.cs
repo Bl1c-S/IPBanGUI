@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility.Setting;
+using System.Net;
 
 namespace Logic_IPBanUtility.Logic.IPList
 {
@@ -38,7 +39,8 @@ namespace Logic_IPBanUtility.Logic.IPList
           public void Remove(IPAddressEntity iPAddress)
           {
                Update();
-               IPAddress.Remove(iPAddress);
+               var ip = IPAddress.Find(x => x.IPAddressText == iPAddress.IPAddressText)!;
+               IPAddress.Remove(ip);
                _dBManager.Remove(iPAddress);
                IPAddressChanged?.Invoke();
           }
