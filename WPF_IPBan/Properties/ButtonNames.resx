@@ -147,6 +147,9 @@
   <data name="OK" xml:space="preserve">
     <value>ОК</value>
   </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Видалити всі</value>
+  </data>
   <data name="ReturnAll" xml:space="preserve">
     <value>Відмінити все</value>
   </data>

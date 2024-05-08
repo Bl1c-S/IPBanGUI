@@ -61,6 +61,24 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заблоковані - Чорний список.
+        /// </summary>
+        public static string BlackList {
+            get {
+                return ResourceManager.GetString("BlackList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Карантин - Адреси з невдалими спробами входу.
+        /// </summary>
+        public static string BlockList {
+            get {
+                return ResourceManager.GetString("BlockList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Журнал подій.
         /// </summary>
         public static string ClearLogsTitle {
@@ -75,6 +93,15 @@ namespace WPF_IPBanUtility.Properties {
         public static string Events {
             get {
                 return ResourceManager.GetString("Events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ІР.
+        /// </summary>
+        public static string IP {
+            get {
+                return ResourceManager.GetString("IP", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace WPF_IPBanUtility.Properties {
         public static string UpdateTitle {
             get {
                 return ResourceManager.GetString("UpdateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дозволені - Білий список.
+        /// </summary>
+        public static string WhiteList {
+            get {
+                return ResourceManager.GetString("WhiteList", resourceCulture);
             }
         }
     }

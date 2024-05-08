@@ -117,46 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BlackList" xml:space="preserve">
-    <value>Заблоковані - Чорний список</value>
-  </data>
-  <data name="BlockList" xml:space="preserve">
-    <value>Карантин - Адреси з невдалими спробами входу</value>
-  </data>
-  <data name="ClearLogsTitle" xml:space="preserve">
-    <value>Журнал подій</value>
-  </data>
-  <data name="Events" xml:space="preserve">
-    <value>Події</value>
-  </data>
-  <data name="IP" xml:space="preserve">
-    <value>ІР</value>
-  </data>
-  <data name="KeyList" xml:space="preserve">
-    <value>Ключі</value>
-  </data>
-  <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
-    <value>Вибір ключів для відображення</value>
-  </data>
-  <data name="Manual" xml:space="preserve">
-    <value>Головна</value>
-  </data>
-  <data name="SelectFolderViewTitle" xml:space="preserve">
-    <value>Шлях до кореневої папки IPBan</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Налаштування</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Підтримка</value>
-  </data>
-  <data name="TypeFilterTitle" xml:space="preserve">
-    <value>Тип події</value>
-  </data>
-  <data name="UpdateTitle" xml:space="preserve">
-    <value>Оновлення</value>
-  </data>
-  <data name="WhiteList" xml:space="preserve">
-    <value>Дозволені - Білий список</value>
+  <data name="Total" xml:space="preserve">
+    <value>Всего: </value>
   </data>
 </root>
