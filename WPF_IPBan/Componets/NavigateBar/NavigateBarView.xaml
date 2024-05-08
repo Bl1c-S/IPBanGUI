@@ -21,11 +21,11 @@
             <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Події}" Icon="ChartMultiple24" 
                        Command = "{Binding NavigateToEvents}" Margin="4,0,0,0"/>
 
-            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Ключі}" Icon="TextBulletListSquare24" 
-                       Command = "{Binding NavigateToKeyList}" Margin="4,0,0,0"/>
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=ІР}" Icon="ShieldTask24" 
+           Command = "{Binding NavigateToIPList}" Margin="4,0,0,0"/>
 
-            <!--<ui:Button Content="Бекапи" Icon="FolderZip24" 
-           Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"/>-->
+            <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Ключі}" Icon="Key24" 
+                       Command = "{Binding NavigateToKeyList}" Margin="4,0,0,0"/>
 
             <ui:Button Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageName}, ConverterParameter=Налаштування}" Icon="Settings48" 
                        Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"/>
