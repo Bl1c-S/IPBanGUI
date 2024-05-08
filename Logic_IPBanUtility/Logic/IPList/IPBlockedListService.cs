@@ -16,7 +16,7 @@ public class IPBlockedListService
           _keyManager = keyManager;
           _iPManager = iPAddressManager;
      }
-
+     public void Update() => _iPManager.Update();
      public void Add(IPAddressEntity ip) => _iPManager.Add(ip); //For tests
      public void Remove(IPAddressEntity ip) => _iPManager.Remove(ip);
      public void RemoveAll() => _iPManager.RemoveAll();
