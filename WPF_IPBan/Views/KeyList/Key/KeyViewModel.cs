@@ -17,7 +17,7 @@ public class KeyViewModel : ViewModelBase
           SaveKeyEvent += saveKey;
           HideKeyEvent += hideKey;
 
-          IDescVisibilityChangeCommand = new RelayCommand(DescriptionVisibilityChange);
+          IDescriptionVisibilityChangeCommand = new RelayCommand(DescriptionVisibilityChange);
           IPreviousCommand = new RelayCommand(PreviousValue);
           ISaveKeyCommand = new RelayCommand(SaveKey);
           IHideKeyCommand = new RelayCommand(HideKey);
@@ -39,7 +39,7 @@ public class KeyViewModel : ViewModelBase
      }
 
      #region Description
-     public ICommand IDescVisibilityChangeCommand { get; }
+     public ICommand IDescriptionVisibilityChangeCommand { get; }
      public Visibility DescriptionVisibility { get; set; } = Visibility.Collapsed;
      private void DescriptionVisibilityChange()
      {

@@ -24,7 +24,7 @@
 
                 <DockPanel HorizontalAlignment="Right">
                     <ui:Button Icon="QuestionCircle24"  ToolTip="Опис" 
-                               Command="{Binding IDescVisibilityChangeCommand}" />
+                               Command="{Binding IDescriptionVisibilityChangeCommand}" />
                     <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
                               Command="{Binding ISaveKeyCommand}" />
                     <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
