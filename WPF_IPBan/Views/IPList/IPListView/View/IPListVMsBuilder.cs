@@ -12,11 +12,13 @@ public class IPListVMsBuilder
         _iPBlockedListService = iPBlockedListService;
     }
 
-    public List<IPListViewModelBase> Build()
+    public List<IPListViewModelBase> Build(IPListProperties properties)
     {
         return new()
           {
-               new IPBlockedListViewModel(_iPBlockedListService)
+               new IPBlockedListViewModel(_iPBlockedListService, properties.BlockList),
+               new WhiteListViewModel(properties.WhiteList),
+               new BlackListViewModel(properties.BlackList)
           };
     }
 }

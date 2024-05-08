@@ -9,18 +9,16 @@ namespace WPF_IPBanUtility;
 public class IPListViewModel : PageViewModelBase
 {    
      public List<IPListViewModelBase> VMs { get; }
-     public IPListViewModel(IPListVMsBuilder vMsBuilder) : base(Properties.PageNames.IP)
+     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder) : base(Properties.PageNames.IP)
      {
-          VMs = vMsBuilder.Build();
+          VMs = vmsBuilder.Build(properties);
           IUpdateAllCommand = new RelayCommand(UpdateAll);
           CreatePageButtons();
      }
 
      #region Update
      public ICommand IUpdateAllCommand { get; }
-     private void UpdateAll()
-     {
-     }
+     private void UpdateAll() => VMs.ForEach(x => x.Update());
      #endregion
 
      protected override void CreatePageButtons()

@@ -9,7 +9,13 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type local:IPBlockedListViewModel}">
-                <local:IPBlockedListView/>
+                <local:IPItemListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:BlackListViewModel}">
+                <local:IPItemListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:WhiteListViewModel}">
+                <local:IPItemListView/>
             </DataTemplate>
         </Grid.Resources>
         

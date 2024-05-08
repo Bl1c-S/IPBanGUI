@@ -10,7 +10,7 @@ using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility
 {
-     public class IPBlockedViewModel : ViewModelBase
+     public class IPBlockedViewModel : IPUserControlViewModelBase
      {
           private const string format = "MM.dd  HH:mm:ss";
           private readonly IPAddressEntity _iPAddressEntity;

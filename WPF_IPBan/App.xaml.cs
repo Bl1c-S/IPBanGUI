@@ -83,6 +83,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<IPAddressManager>();
                     services.AddSingleton<IPBlockedListService>();
 
+                    services.AddSingleton<IPListProperties>();
                     services.AddSingleton<IPListVMsBuilder>();
                     services.AddSingleton<SettingsVMsBuilder>();
 
