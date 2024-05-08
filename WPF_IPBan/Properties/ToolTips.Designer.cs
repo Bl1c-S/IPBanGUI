@@ -97,7 +97,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Видалити з списку заблокованих.
+        ///   Looks up a localized string similar to Видалити з списку заблокованих | Розблокувати.
         /// </summary>
         internal static string RemoveBlockList {
             get {

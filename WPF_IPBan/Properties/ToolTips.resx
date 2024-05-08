@@ -130,6 +130,6 @@
     <value>Кількість невдалих спроб входу</value>
   </data>
   <data name="RemoveBlockList" xml:space="preserve">
-    <value>Видалити з списку заблокованих</value>
+    <value>Видалити з списку заблокованих | Розблокувати</value>
   </data>
 </root>
