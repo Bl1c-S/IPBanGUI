@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel>
             <Label  Grid.Row="0" Content="{Binding Title}"/>
-            <ui:Button  Grid.Row="1" Grid.Column="1" Icon="DocumentBulletListOff24" Content="Очистити" Command="{Binding IClearLogsCommand}" 
+            <ui:Button  Grid.Row="1" Grid.Column="1" Icon="PaintBrushArrowDown24" Content="Очистити" Command="{Binding IClearLogsCommand}" 
                         ToolTip ="Призведе до видалення всіх файлів з логами подій. Не впливає на список заблокованих IP та інші налаштування."/>
         </StackPanel>
     </Grid>
