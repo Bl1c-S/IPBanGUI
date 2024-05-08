@@ -13,6 +13,7 @@
             <DataTemplate DataType="{x:Type local:LogEventListViewModel}">
                 <local:LogEventListView/>
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type local:FilterViewModel}">
                 <local:FilterView/>
             </DataTemplate>
