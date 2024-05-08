@@ -26,7 +26,6 @@ public class IPAddressEntityDTO
         UserName = userName ?? string.Empty;
     }
 
-
     public IPAddressEntity ToEntity()
     {
         var lastFailedLogin = ConvertUnixDateToNormal(LastFailedLogin);
@@ -45,17 +44,6 @@ public class IPAddressEntityDTO
              ConvertNormalDateToUnix(entity.BanEndDate),
              entity.UserName);
     }
-    private static string[] ToX2Bytes(string IPAddressText)
-    {
-        var ipAddress = System.Net.IPAddress.Parse(IPAddressText);
-        var ipAddressBytes = ipAddress.GetAddressBytes();
-
-        var ipX2Bytes = new string[ipAddressBytes.Length];
-        // Преобразуем каждый байт в его шестнадцатеричное представление и добавляем в новый массив
-        for (int i = 0; i < ipAddressBytes.Length; i++)
-            ipX2Bytes[i] = ipAddressBytes[i].ToString("X2");
-        return ipX2Bytes;
-    }
 
     private static DateTime? ConvertUnixDateToNormal(long? msTime)
     {
@@ -64,6 +52,7 @@ public class IPAddressEntityDTO
         var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(msTime.Value / 10000000 - 62135596800);
         return dateTimeOffset.DateTime;
     }
+
     private static long ConvertNormalDateToUnix(DateTime? dateTime)
     {
         if (dateTime == null) return 0;
