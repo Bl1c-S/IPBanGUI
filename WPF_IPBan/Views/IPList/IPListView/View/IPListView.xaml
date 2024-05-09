@@ -18,15 +18,13 @@
                 <local:IPItemListView/>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding VMs}" VerticalAlignment="Top">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border Style="{StaticResource StandartBorder}" Margin="0,4,4,4">
-                            <ContentControl  Content="{Binding}" Margin="4" MaxHeight="500"/>
-                          </Border>
+                            <ContentControl  Content="{Binding}" Margin="4"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -8,31 +8,19 @@ using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
 
-namespace WPF_IPBanUtility
+namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
 {
      public class IPBlockedViewModel : IPUserControlViewModelBase
      {
           private const string format = "MM.dd  HH:mm:ss";
           private readonly IPAddressEntity _iPAddressEntity;
 
-          public ObservableCollection<Button> Buttons { get; }
-
-          public SymbolRegular StatusIcon { get; }
-          public string StatusTitle { get; }
-          public string Title { get; }
-          public string FailedLoginCountMessage { get; }
-
-          public string? BanDateMessage { get; }
-
-          public IPBlockedViewModel(IPAddressEntity ip, Action<IPAddressEntity> addToWhiteList, Action<IPAddressEntity> addToBlackList, Action<IPAddressEntity> remove, Action<IPBlockedViewModel> dispose)
+          public IPBlockedViewModel(IPAddressEntity ip, Action<IPAddressEntity> addToWhiteList, Action<IPAddressEntity> addToBlackList, Action<IPAddressEntity> remove, Action<IPBlockedViewModel> dispose) :
+               base(ip.IPAddressText)
           {
                _iPAddressEntity = ip;
-               Title = _iPAddressEntity.IPAddressText;
-
-               (StatusIcon, StatusTitle) = SetStatus(_iPAddressEntity.BanEndDate != null);
-               FailedLoginCountMessage = $"{ToolTips.FailedLoginCount} {_iPAddressEntity.FailedLoginCount}";
-
-               BanDateMessage = GetBanDateMessage();
+               SetStatus(_iPAddressEntity.BanEndDate != null);
+               Message = GetBanDateMessage();
 
                IAddToWiteListCommand = new RelayCommand(() => ExecuteAction(addToWhiteList, dispose));
                IAddToBlackListCommand = new RelayCommand(() => ExecuteAction(addToBlackList, dispose));
@@ -49,20 +37,28 @@ namespace WPF_IPBanUtility
                if (banDate == null) return string.Empty;
                else return $"{banDate} - {banEndDate}";
           }
-          private (SymbolRegular, string) SetStatus(bool isBaned)
+          private void SetStatus(bool isBaned)
           {
-               var icon = isBaned ? SymbolRegular.SubtractCircle24 : SymbolRegular.Warning24;
-               var title = isBaned ? Status.Ban : Status.Warn;
-               return (icon, title);
+               var icon = isBaned ? SymbolRegular.Timer24 : SymbolRegular.Warning24;
+               var title = isBaned ? Properties.Status.Ban : Properties.Status.Warn;
+               var message = $"{ToolTips.FailedLoginCount} {_iPAddressEntity.FailedLoginCount}";
+               Status = new(icon, title, message);
+               base.SetStatus();
           }
 
           private void ExecuteAction(Action<IPAddressEntity> action, Action<IPBlockedViewModel> dispose)
           {
-               action.Invoke(_iPAddressEntity);
-               dispose.Invoke(this);
+               try
+               {
+                    action.Invoke(_iPAddressEntity);
+                    dispose.Invoke(this);
+               }
+               catch (Exception ex)
+               {
+                    var copyError = () => { System.Windows.Clipboard.SetText(ex.Message); };
+                    DialogMessageBox.ActionBox(copyError, Messages.Error, $"{ ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
+               }
           }
-
-          private void Copy() => System.Windows.Clipboard.SetText(Title);
 
           private ObservableCollection<Button> CreateButtons()
           {
@@ -74,7 +70,7 @@ namespace WPF_IPBanUtility
                         Command = ICopyCommand,
                         Icon = SymbolRegular.Copy20,
                         ToolTip = ToolTips.Copy,
-                        Margin = new(0, 2,2,2)
+                        Margin = margin
                    },
                    new Button
                    {
