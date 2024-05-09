@@ -97,7 +97,7 @@ namespace Logic_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist.
+        ///   Looks up a localized string similar to FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime.
         /// </summary>
         internal static string DefaultKeyEnable {
             get {

@@ -130,7 +130,7 @@
     <value>FailedLoginAttemptsBeforeBan\r\nFirewallRulePrefix\r\nBanTime\r\nResetFailedLoginCountForUnbannedIPAddresses\r\nClearBannedIPAddressesOnRestart\r\nClearFailedLoginsOnSuccessfulLogin\r\nProcessInternalIPAddresses\r\nExpireTime\r\nCycleTime\r\nMinimumTimeBetweenFailedLoginAttempts\r\nMinimumTimeBetweenSuccessfulLoginAttempts\r\nWhitelist\r\nWhitelistRegex\r\nBlacklist\r\nBlacklistRegex\r\nUserNameWhitelist\r\nUserNameWhitelistRegex\r\nUserNameWhitelistMinimumEditDistance\r\nFailedLoginAttemptsBeforeBanUserNameWhitelist\r\nFirewallRules</value>
   </data>
   <data name="DefaultKeyEnable" xml:space="preserve">
-    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime\r\nWhitelist</value>
+    <value>FailedLoginAttemptsBeforeBan\r\nBanTime\r\nExpireTime</value>
   </data>
   <data name="DirectoryNotFoundException" xml:space="preserve">
     <value>Не знайдено теку: </value>
