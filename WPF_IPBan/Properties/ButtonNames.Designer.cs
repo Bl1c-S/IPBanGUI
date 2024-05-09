@@ -88,6 +88,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Копіювати.
+        /// </summary>
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Замовчуванням.
         /// </summary>
         internal static string Default {

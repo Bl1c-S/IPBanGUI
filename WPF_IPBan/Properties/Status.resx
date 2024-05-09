@@ -120,6 +120,9 @@
   <data name="Ban" xml:space="preserve">
     <value>Заблоковано</value>
   </data>
+  <data name="InWhite" xml:space="preserve">
+    <value>Дозволено</value>
+  </data>
   <data name="Warn" xml:space="preserve">
     <value>Попередження</value>
   </data>

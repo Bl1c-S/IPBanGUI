@@ -123,6 +123,9 @@
   <data name="AddToWiteList" xml:space="preserve">
     <value>Додати до білого списку | Не буде блокуватись</value>
   </data>
+  <data name="BlackListItem" xml:space="preserve">
+    <value>Адреса заблокована назавжди</value>
+  </data>
   <data name="Copy" xml:space="preserve">
     <value>Копіювати до буферу обміну</value>
   </data>
@@ -131,5 +134,11 @@
   </data>
   <data name="RemoveBlockList" xml:space="preserve">
     <value>Видалити з списку заблокованих | Розблокувати</value>
+  </data>
+  <data name="RemoveFromList" xml:space="preserve">
+    <value>Видалити тільки з цього з списку</value>
+  </data>
+  <data name="WiteListItem" xml:space="preserve">
+    <value>Адреса не буде блокуватись</value>
   </data>
 </root>

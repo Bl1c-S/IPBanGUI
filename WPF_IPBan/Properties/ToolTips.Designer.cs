@@ -79,6 +79,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Адреса заблокована назавжди.
+        /// </summary>
+        internal static string BlackListItem {
+            get {
+                return ResourceManager.GetString("BlackListItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Копіювати до буферу обміну.
         /// </summary>
         internal static string Copy {
@@ -102,6 +111,24 @@ namespace WPF_IPBanUtility.Properties {
         internal static string RemoveBlockList {
             get {
                 return ResourceManager.GetString("RemoveBlockList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Видалити тільки з цього з списку.
+        /// </summary>
+        internal static string RemoveFromList {
+            get {
+                return ResourceManager.GetString("RemoveFromList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Адреса не буде блокуватись.
+        /// </summary>
+        internal static string WiteListItem {
+            get {
+                return ResourceManager.GetString("WiteListItem", resourceCulture);
             }
         }
     }

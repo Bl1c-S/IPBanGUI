@@ -61,7 +61,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего: .
+        ///   Looks up a localized string similar to Всього: .
         /// </summary>
         internal static string Total {
             get {
