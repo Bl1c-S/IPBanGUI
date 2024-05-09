@@ -48,6 +48,6 @@
 
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0"/>
 
-        <ContentControl Grid.Row="2" Content="{Binding CurrentViewModel}" Padding="4"  Margin="0,2,0,0"/>
+        <ContentControl Grid.Row="2" Content="{Binding CurrentViewModel}" Margin="4" MaxWidth="1000"/>
     </Grid>
 </Window>

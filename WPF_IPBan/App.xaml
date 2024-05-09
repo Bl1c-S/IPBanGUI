@@ -36,6 +36,7 @@
             </Style>
 
             <Style x:Key="IPListCount" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12"/>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="4,0,16,0"/>
