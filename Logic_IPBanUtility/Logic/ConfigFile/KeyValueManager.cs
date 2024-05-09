@@ -32,11 +32,17 @@ public class KeyValueManager
                _cfgManager.WriteKey(key);
           }
      }
+     public string[] GetIpListWithKey(KeyNames keyName)
+     {
+          var key = _cfgManager.GetKey(keyName);
+          return GetIpList(key.Value);
+     }
      private string RemoveIpFromList(string Ips, string ipToRemove)
      {
-          var old_Ips = Ips.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+          var old_Ips = GetIpList(Ips);
           var updated_Ips = old_Ips.Where(ip => ip != ipToRemove);
           var updated_ips_stringFormat = string.Join(", ", updated_Ips);
           return updated_ips_stringFormat;
      }
+     private string[] GetIpList(string ips) => ips.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
 }
