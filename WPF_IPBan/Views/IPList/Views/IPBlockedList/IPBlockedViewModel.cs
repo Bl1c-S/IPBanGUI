@@ -56,7 +56,7 @@ namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
                catch (Exception ex)
                {
                     var copyError = () => { System.Windows.Clipboard.SetText(ex.Message); };
-                    DialogMessageBox.ActionBox(copyError, Messages.Error, $"{ ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
+                    DialogMessageBox.ActionBox(copyError, Properties.Status.Error, $"{ ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
                }
           }
 
@@ -76,7 +76,7 @@ namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
                    {
                         Command = IAddToWiteListCommand,
                         Icon = SymbolRegular.CheckmarkCircle20,
-                        ToolTip = ToolTips.AddToWiteList,
+                        ToolTip = ToolTips.ToWiteList,
                         Margin = margin
                    },
                    new Button
@@ -90,7 +90,7 @@ namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
                    {
                         Command = IAddToBlackListCommand,
                         Icon = SymbolRegular.Prohibited20,
-                        ToolTip = ToolTips.AddToBlackList,
+                        ToolTip = ToolTips.ToBlackList,
                         Margin = margin
                    }
                };

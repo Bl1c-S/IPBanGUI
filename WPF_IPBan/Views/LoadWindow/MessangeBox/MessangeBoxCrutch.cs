@@ -6,7 +6,7 @@ internal static class MessangeBoxCrutch
 {
      public static void ErrorBox(string message)
      {
-          DialogMessageBox.InfoBox(Properties.Messages.Error, message);
+          DialogMessageBox.InfoBox(Properties.Status.Error, message);
      }
      public static void TwoActionBoxAndLeftButtonNameSelect(Action left, Action right)
      {
