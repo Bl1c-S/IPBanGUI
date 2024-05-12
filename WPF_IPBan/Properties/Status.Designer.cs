@@ -70,11 +70,29 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Помилка.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дозволено.
         /// </summary>
         internal static string InWhite {
             get {
                 return ResourceManager.GetString("InWhite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успішно.
+        /// </summary>
+        internal static string Successfully {
+            get {
+                return ResourceManager.GetString("Successfully", resourceCulture);
             }
         }
         

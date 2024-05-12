@@ -61,24 +61,6 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Додати до чорного списку | Заблокувати назавжди.
-        /// </summary>
-        internal static string AddToBlackList {
-            get {
-                return ResourceManager.GetString("AddToBlackList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Додати до білого списку | Не буде блокуватись.
-        /// </summary>
-        internal static string AddToWiteList {
-            get {
-                return ResourceManager.GetString("AddToWiteList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Адреса заблокована назавжди.
         /// </summary>
         internal static string BlackListItem {
@@ -106,6 +88,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введіть адресу, яка складається з чотирьох чисел від 0 до 255, з роздільником у вигляді крапки..
+        /// </summary>
+        internal static string IncorrectIPAddress {
+            get {
+                return ResourceManager.GetString("IncorrectIPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Видалити з списку заблокованих | Розблокувати.
         /// </summary>
         internal static string RemoveBlockList {
@@ -120,6 +111,24 @@ namespace WPF_IPBanUtility.Properties {
         internal static string RemoveFromList {
             get {
                 return ResourceManager.GetString("RemoveFromList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to до чорного списку | Заблокувати назавжди.
+        /// </summary>
+        internal static string ToBlackList {
+            get {
+                return ResourceManager.GetString("ToBlackList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to до білого списку | Не буде блокуватись.
+        /// </summary>
+        internal static string ToWiteList {
+            get {
+                return ResourceManager.GetString("ToWiteList", resourceCulture);
             }
         }
         

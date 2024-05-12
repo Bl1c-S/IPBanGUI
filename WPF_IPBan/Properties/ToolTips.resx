@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddToBlackList" xml:space="preserve">
-    <value>Додати до чорного списку | Заблокувати назавжди</value>
-  </data>
-  <data name="AddToWiteList" xml:space="preserve">
-    <value>Додати до білого списку | Не буде блокуватись</value>
-  </data>
   <data name="BlackListItem" xml:space="preserve">
     <value>Адреса заблокована назавжди</value>
   </data>
@@ -132,11 +126,20 @@
   <data name="FailedLoginCount" xml:space="preserve">
     <value>Кількість невдалих спроб входу</value>
   </data>
+  <data name="IncorrectIPAddress" xml:space="preserve">
+    <value>Введіть адресу, яка складається з чотирьох чисел від 0 до 255, з роздільником у вигляді крапки.</value>
+  </data>
   <data name="RemoveBlockList" xml:space="preserve">
     <value>Видалити з списку заблокованих | Розблокувати</value>
   </data>
   <data name="RemoveFromList" xml:space="preserve">
     <value>Видалити тільки з цього з списку</value>
+  </data>
+  <data name="ToBlackList" xml:space="preserve">
+    <value>до чорного списку | Заблокувати назавжди</value>
+  </data>
+  <data name="ToWiteList" xml:space="preserve">
+    <value>до білого списку | Не буде блокуватись</value>
   </data>
   <data name="WiteListItem" xml:space="preserve">
     <value>Адреса не буде блокуватись</value>
