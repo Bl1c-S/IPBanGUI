@@ -4,6 +4,7 @@ namespace Logic_IPBanUtility.Logic.ConfigFile;
 
 public class KeyValueManager
 {
+     public Action<KeyNames>? KeyContextChanged;
      private readonly ConfigFileManager _cfgManager;
 
      public KeyValueManager(ConfigFileManager cfgManager)
@@ -11,7 +12,7 @@ public class KeyValueManager
           _cfgManager = cfgManager;
      }
 
-     public void AddIpToKey(KeyNames keyName, string ip)
+     public bool AddIpToKey(KeyNames keyName, string ip)
      {
           var key = _cfgManager.GetKey(keyName);
           var keyChanged = false;
@@ -20,7 +21,12 @@ public class KeyValueManager
           else if (!key.Value.Contains(ip))
                keyChanged = key.SetValue($"{key.Value}, {ip}");
           if (keyChanged)
+          {
                _cfgManager.WriteKey(key);
+               KeyContextChanged?.Invoke(keyName);
+               return true;
+          }
+          return false;
      }
      public void RemoveIpFromKey(KeyNames keyName, string ip)
      {
@@ -30,6 +36,7 @@ public class KeyValueManager
                var newKeyValue = RemoveIpFromList(key.Value, ip);
                key.SetValue(newKeyValue);
                _cfgManager.WriteKey(key);
+               KeyContextChanged?.Invoke(keyName);
           }
      }
      public string[] GetIpListWithKey(KeyNames keyName)
