@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WPF_IPBanUtility;
 
@@ -30,6 +31,11 @@ public static class DialogMessageBox
                messageBox.Close();
           });
 
+          messageBox.KeyDown += new KeyEventHandler((_, _) =>
+          {
+               Leftaction?.Invoke();
+               messageBox.Close();
+          });
           messageBox.ButtonLeftClick += onOk;
           messageBox.ButtonRightClick += onClose;
 
@@ -58,6 +64,11 @@ public static class DialogMessageBox
                messageBox.Close();
           });
 
+          messageBox.KeyDown += new KeyEventHandler((_, _) =>
+          {
+               action?.Invoke();
+               messageBox.Close();
+          });
           messageBox.ButtonLeftClick += onOk;
           messageBox.ButtonRightClick += onClose;
 
@@ -76,6 +87,7 @@ public static class DialogMessageBox
           messageBox.Title = title;
           messageBox.Content = textContent;
 
+          messageBox.KeyDown += new KeyEventHandler((_, _) => { messageBox.Close(); });
           var onOk = new RoutedEventHandler((_, _) => { messageBox.Close(); });
           var onClose = new RoutedEventHandler((_, _) => { messageBox.Close(); });
 
