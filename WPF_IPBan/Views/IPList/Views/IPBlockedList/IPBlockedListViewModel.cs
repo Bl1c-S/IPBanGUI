@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility.Logic.IPList;
+using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,14 +12,12 @@ namespace WPF_IPBanUtility;
 public class IPBlockedListViewModel : IPListViewModelBase
 {
      private readonly IPBlockedListService _iPBlokedListService;
-     private Action? WhiteListChanged;
-     private Action? BlackListChanged;
+     private Action<KeyNames>? ListChanged;
 
-     public IPBlockedListViewModel(IPBlockedListService iPListService, IPListViewProperties properties, Action? whiteListChanged, Action? blackListChanged) : 
+     public IPBlockedListViewModel(IPBlockedListService iPListService, IPListViewProperties properties, Action<KeyNames> iPListChanged) : 
           base(PageNames.BlockList, properties)
      {
-          WhiteListChanged = whiteListChanged;
-          BlackListChanged = blackListChanged;
+          ListChanged = iPListChanged;
           _iPBlokedListService = iPListService;
           IPListChanged();
           _iPBlokedListService.IPsChanged += IPListChanged;
@@ -52,12 +51,12 @@ public class IPBlockedListViewModel : IPListViewModelBase
      private void AddToWhiteList(IPAddressEntity ip)
      {
           _iPBlokedListService.AddToWhiteList(ip);
-          WhiteListChanged?.Invoke();
+          ListChanged?.Invoke(KeyNames.Whitelist);
      }
      private void AddToBlacklist(IPAddressEntity ip)
      {
           _iPBlokedListService.AddToBlacklist(ip);
-          BlackListChanged?.Invoke();
+          ListChanged?.Invoke(KeyNames.Blacklist);
      }
 
      protected override void IPListChanged()
