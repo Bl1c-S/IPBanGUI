@@ -1,5 +1,6 @@
 ﻿using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
+using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility.Logic.IPList;
 
@@ -11,10 +12,10 @@ public class IPBlockedListService
      private readonly IPAddressManager _iPManager;
      private readonly KeyValueManager _keyManager;
 
-     public IPBlockedListService(KeyValueManager keyManager, IPAddressManager iPAddressManager)
+     public IPBlockedListService(KeyValueManager keyManager, Settings settings)
      {
           _keyManager = keyManager;
-          _iPManager = iPAddressManager;
+          _iPManager = new(settings);
      }
      public void Update() => _iPManager.Update();
      public void Add(IPAddressEntity ip) => _iPManager.Add(ip); //For tests

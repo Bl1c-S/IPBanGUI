@@ -41,6 +41,6 @@ public class IPAddressesDbContext : DbContext
      private List<IPAddressEntity> Convert(List<IPAddressEntityDTO> addressesDTO) => addressesDTO.Select(dto => dto.ToEntity()).ToList();
      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
      {
-          optionsBuilder.UseSqlite($"Data Source={_path}");
+          optionsBuilder.UseSqlite($"Data Source={_path};Cache=Shared;Mode=ReadWrite");
      }
 }

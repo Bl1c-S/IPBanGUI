@@ -80,12 +80,11 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<KeyValueManager>();
                     services.AddSingleton<LogEventManager>();
 
-                    services.AddSingleton<IPAddressManager>();
                     services.AddSingleton<IPBlockedListService>();
 
                     services.AddSingleton<IPListProperties>();
-                    services.AddSingleton<IPListVMsBuilder>();
-                    services.AddSingleton<SettingsVMsBuilder>();
+                    services.AddTransient<IPListVMsBuilder>();
+                    services.AddTransient<SettingsVMsBuilder>();
 
                     services.AddSingleton(s => new NavigationService(s));
                     services.AddSingleton<MainWindowViewModel>();
