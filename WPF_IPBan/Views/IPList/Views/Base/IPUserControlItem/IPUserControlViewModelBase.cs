@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
@@ -19,18 +20,24 @@ public class IPUserControlViewModelBase : ViewModelBase
      {
           Title = ip;
      }
-     protected virtual void ExecuteAction(Action<string> action, Action<IPUserControlViewModelBase> dispose)
+     protected virtual Task ExecuteAction(Action<string> action, Action<IPUserControlViewModelBase> dispose)
      {
-          try
+          return Task.Run(() =>
           {
-               action.Invoke(Title);
-               dispose.Invoke(this);
-          }
-          catch (Exception ex)
-          {
-               var copyError = () => { Clipboard.SetText(ex.Message); };
-               DialogMessageBox.ActionBox(copyError, Properties.Status.Error, ex.Message, ButtonNames.Copy);
-          }
+               try
+               {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                         action.Invoke(Title);
+                         dispose.Invoke(this);
+                    });
+               }
+               catch (Exception ex)
+               {
+                    var copyError = () => { Clipboard.SetText(ex.Message); };
+                    DialogMessageBox.ActionBox(copyError, Properties.Status.Error, ex.Message, ButtonNames.Copy);
+               }
+          });          
      }
      protected virtual void SetStatus()
      {

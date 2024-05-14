@@ -2,13 +2,14 @@
 using Logic_IPBanUtility.Logic.IPList;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
 
-namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
+namespace WPF_IPBanUtility
 {
      public class IPBlockedViewModel : IPUserControlViewModelBase
      {
@@ -22,9 +23,9 @@ namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
                SetStatus(_iPAddressEntity.BanEndDate != null);
                Message = GetBanDateMessage();
 
-               IAddToWiteListCommand = new RelayCommand(() => ExecuteAction(addToWhiteList, dispose));
-               IAddToBlackListCommand = new RelayCommand(() => ExecuteAction(addToBlackList, dispose));
-               IRemoveCommand = new RelayCommand(() => ExecuteAction(remove, dispose));
+               IAddToWiteListCommand = new AsyncRelayCommand(() => ExecuteAction(addToWhiteList, dispose));
+               IAddToBlackListCommand = new AsyncRelayCommand(() => ExecuteAction(addToBlackList, dispose));
+               IRemoveCommand = new AsyncRelayCommand(() => ExecuteAction(remove, dispose));
                ICopyCommand = new RelayCommand(Copy);
 
                Buttons = CreateButtons();
@@ -46,18 +47,24 @@ namespace WPF_IPBanUtility.Views.IPList.Views.IPBlockedList
                base.SetStatus();
           }
 
-          private void ExecuteAction(Action<IPAddressEntity> action, Action<IPBlockedViewModel> dispose)
+          private Task ExecuteAction(Action<IPAddressEntity> action, Action<IPBlockedViewModel> dispose)
           {
-               try
+               return Task.Run(() =>
                {
-                    action.Invoke(_iPAddressEntity);
-                    dispose.Invoke(this);
-               }
-               catch (Exception ex)
-               {
-                    var copyError = () => { System.Windows.Clipboard.SetText(ex.Message); };
-                    DialogMessageBox.ActionBox(copyError, Properties.Status.Error, $"{ ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
-               }
+                    try
+                    {
+                         Application.Current.Dispatcher.Invoke(() =>
+                         {
+                              action.Invoke(_iPAddressEntity);
+                              dispose.Invoke(this);
+                         });
+                    }
+                    catch (Exception ex)
+                    {
+                         var copyError = () => { System.Windows.Clipboard.SetText(ex.Message); };
+                         DialogMessageBox.ActionBox(copyError, Properties.Status.Error, $"{ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
+                    }
+               });
           }
 
           private ObservableCollection<Button> CreateButtons()
