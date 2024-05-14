@@ -98,6 +98,8 @@ public class EventsViewModel : PageViewModelBase
      public override void Dispose()
      {
           FilterVM.ObservableLogEventsChanged -= LogEventListVM.ObservableLogEventsSet;
+          FilterVM.Dispose();
+          LogEventListVM.Dispose();
           base.Dispose();
      }
 }

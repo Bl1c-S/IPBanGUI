@@ -3,10 +3,10 @@ using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
-using WPF_IPBanUtility.Views.IPList.Views.IPBlockedList;
 
 namespace WPF_IPBanUtility;
 public class IPBlockedListViewModel : IPListViewModelBase
@@ -14,7 +14,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      private readonly IPBlockedListService _iPBlokedListService;
      private Action<KeyNames>? ListChanged;
 
-     public IPBlockedListViewModel(IPBlockedListService iPListService, IPListViewProperties properties, Action<KeyNames> iPListChanged) : 
+     public IPBlockedListViewModel(IPBlockedListService iPListService, IPListViewProperties properties, Action<KeyNames> iPListChanged) :
           base(PageNames.BlockList, properties)
      {
           ListChanged = iPListChanged;
@@ -61,9 +61,22 @@ public class IPBlockedListViewModel : IPListViewModelBase
 
      protected override void IPListChanged()
      {
+          Cleanup();
           VMs = BuildVMs(_iPBlokedListService.IPs);
           base.IPListChanged();
      }
+
+     private void Cleanup()
+     {
+          if (VMs.Count > 0)
+          {
+               foreach (var item in VMs)
+                    item.Dispose();
+
+               VMs.Clear();
+          }
+     }
+
      public override void Update()
      {
           _iPBlokedListService.Update();
@@ -71,6 +84,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      public override void Dispose()
      {
           _iPBlokedListService.IPsChanged -= IPListChanged;
+          Cleanup();
           base.Dispose();
      }
 }

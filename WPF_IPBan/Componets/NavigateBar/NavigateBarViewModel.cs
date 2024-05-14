@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace WPF_IPBanUtility;
 

@@ -4,12 +4,13 @@ using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
 
-namespace WPF_IPBanUtility.Views.IPList.IPListView.View;
+namespace WPF_IPBanUtility.Views.IPList;
 
-public class IPListVMsBuilder
+public class IPListVMsBuilder : IDisposable
 {
      private readonly IPBlockedListService _iPBlockedListService;
      private readonly KeyValueManager _keyManager;
+     private IPListChangedActions? _listChangedActions;
 
      public IPListVMsBuilder(IPBlockedListService iPBlockedListService, KeyValueManager keyManager)
      {
@@ -21,14 +22,19 @@ public class IPListVMsBuilder
      {
           var whiteList = new WhiteListViewModel(_keyManager, properties.WhiteList);
           var blackList = new BlackListViewModel(_keyManager, properties.BlackList);
+          _listChangedActions = new IPListChangedActions(whiteList.ListChanged, blackList.ListChanged);
+          _keyManager.KeyContextChanged += _listChangedActions.InvokeKey;
 
-          var listChangedActions = new IPListChangedActions(whiteList.ListChanged, blackList.ListChanged);
-          _keyManager.KeyContextChanged += listChangedActions.InvokeKey;
           var iPInputVM = new IPInputViewModel(_keyManager.AddIpToKey, _keyManager.KeyContextChanged);
-
           var ipBlock = new IPBlockedListViewModel(_iPBlockedListService, properties.BlockList, _keyManager.KeyContextChanged);
           var iPListVMs = new List<IPListViewModelBase>() { ipBlock, whiteList, blackList };
           return new(iPListVMs, iPInputVM);
+     }
+
+     public void Dispose()
+     {
+          if (_listChangedActions != null)
+               _keyManager.KeyContextChanged -= _listChangedActions.InvokeKey;
      }
 
      public class IPListVMsResult
@@ -56,9 +62,9 @@ public class IPListVMsBuilder
 
           public void InvokeKey(KeyNames keyName)
           {
-               if(keyName == KeyNames.Whitelist)
+               if (keyName == KeyNames.Whitelist)
                     WhiteList?.Invoke();
-               if(keyName == KeyNames.Blacklist)
+               if (keyName == KeyNames.Blacklist)
                     BlackList?.Invoke();
           }
      }

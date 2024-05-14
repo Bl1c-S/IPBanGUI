@@ -5,8 +5,6 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Text.RegularExpressions;
-using System.Linq;
-using static WPF_IPBanUtility.Views.IPList.IPListView.View.IPListVMsBuilder;
 
 namespace WPF_IPBanUtility;
 

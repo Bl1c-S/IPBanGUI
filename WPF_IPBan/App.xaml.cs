@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
-using WPF_IPBanUtility.Views.IPList.IPListView.View;
+using WPF_IPBanUtility.Views.IPList;
 
 namespace WPF_IPBanUtility
 {
