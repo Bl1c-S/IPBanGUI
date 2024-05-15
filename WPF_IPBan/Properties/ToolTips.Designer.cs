@@ -79,6 +79,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to можна додати.
+        /// </summary>
+        internal static string CurrentIPAddress {
+            get {
+                return ResourceManager.GetString("CurrentIPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Кількість невдалих спроб входу.
         /// </summary>
         internal static string FailedLoginCount {
@@ -93,6 +102,15 @@ namespace WPF_IPBanUtility.Properties {
         internal static string IncorrectIPAddress {
             get {
                 return ResourceManager.GetString("IncorrectIPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to вже додано.
+        /// </summary>
+        internal static string IPAddressExist {
+            get {
+                return ResourceManager.GetString("IPAddressExist", resourceCulture);
             }
         }
         

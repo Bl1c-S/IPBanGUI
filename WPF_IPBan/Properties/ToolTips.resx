@@ -123,11 +123,17 @@
   <data name="Copy" xml:space="preserve">
     <value>Копіювати до буферу обміну</value>
   </data>
+  <data name="CurrentIPAddress" xml:space="preserve">
+    <value>можна додати</value>
+  </data>
   <data name="FailedLoginCount" xml:space="preserve">
     <value>Кількість невдалих спроб входу</value>
   </data>
   <data name="IncorrectIPAddress" xml:space="preserve">
     <value>Введіть адресу, яка складається з чотирьох чисел від 0 до 255, з роздільником у вигляді крапки.</value>
+  </data>
+  <data name="IPAddressExist" xml:space="preserve">
+    <value>вже додано</value>
   </data>
   <data name="RemoveBlockList" xml:space="preserve">
     <value>Видалити з списку заблокованих | Розблокувати</value>
