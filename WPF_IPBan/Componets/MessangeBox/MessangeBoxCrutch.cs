@@ -12,5 +12,4 @@ internal static class MessangeBoxCrutch
      {
           DialogMessageBox.TwoActionBox(left, right, Properties.Messages.LoadSettingsErrorText, Properties.Messages.LoadSettingsErrorTitle, Properties.ButtonNames.Select);
      }
-
 }
