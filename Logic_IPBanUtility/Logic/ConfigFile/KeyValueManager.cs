@@ -12,21 +12,16 @@ public class KeyValueManager
           _cfgManager = cfgManager;
      }
 
-     public bool AddIpToKey(KeyNames keyName, string ip)
+     public void AddIpToKey(KeyNames keyName, string ip)
      {
           var key = _cfgManager.GetKey(keyName);
-          var keyChanged = false;
           if (string.IsNullOrWhiteSpace(key.Value))
-               keyChanged = key.SetValue(ip);
-          else if (!key.Value.Contains(ip))
-               keyChanged = key.SetValue($"{key.Value}, {ip}");
-          if (keyChanged)
-          {
-               _cfgManager.WriteKey(key);
-               KeyContextChanged?.Invoke(keyName);
-               return true;
-          }
-          return false;
+               key.SetValue(ip);
+          else
+               key.SetValue($"{key.Value}, {ip}");
+
+          _cfgManager.WriteKey(key);
+          KeyContextChanged?.Invoke(keyName);
      }
      public void RemoveIpFromKey(KeyNames keyName, string ip)
      {
