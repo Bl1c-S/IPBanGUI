@@ -14,7 +14,7 @@ Foreground="{DynamicResource TextFillColorPrimaryBrush}"
 
     <Grid>
         <StackPanel Margin="60,50,50,50" VerticalAlignment="Center">
-            <Image Source="Logo.png" Height="120" Margin="15,0,0,0"/>
+            <Image Source="/Assets/Logo.png" Height="120" Margin="15,0,0,0"/>
             <TextBlock Text="Torgsoft IPBanGUI" HorizontalAlignment="Center" Margin="20"/>
             <ui:ProgressRing IsIndeterminate="True"/>
         </StackPanel>

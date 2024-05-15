@@ -6,11 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
+    <AssemblyName>IPBanGUI</AssemblyName>
     <ApplicationIcon>TSIP.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\LoadWindow\Logo.png" />
+    <None Remove="Assets\Logo.png" />
     <None Remove="Views\Manual\Events.png" />
     <None Remove="Views\Manual\KeyExemple.png" />
     <None Remove="Views\Manual\Replace.png" />
@@ -18,23 +19,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\LoadWindow\Logo.png">
+    <Content Include="Assets\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="TSIP.ico" />
-    <Content Include="Views\Manual\Events.png">
+    <Content Include="Assets\Events.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Manual\KeyExemple.png">
+    <Content Include="Assets\KeyExemple.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Manual\Replace.png">
+    <Content Include="Assets\Replace.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Manual\UpdateVersion.png">
+    <Content Include="Assets\UpdateVersion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -129,6 +130,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ToolTips.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

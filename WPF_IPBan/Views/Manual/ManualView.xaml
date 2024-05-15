@@ -17,22 +17,22 @@
                 <!--Ключі-->
                 <Label Content="{Binding KeyTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph1}"/>
-                <Image Source="KeyExemple.png" Style="{StaticResource ManualImage}"/>
+                <Image Source="/Assets/KeyExemple.png" Style="{StaticResource ManualImage}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph2}"/>
 
                 <!--Події-->
                 <Label Content="{Binding EventTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph1}"/>
-                <Image Source="Events.png" Style="{StaticResource ManualImage}"/>
+                <Image Source="/Assets/Events.png" Style="{StaticResource ManualImage}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph2}"/>
 
                 <!--Оновленя-->
                 <Label Content="{Binding UpdateTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Text="{Binding UpdateParagraph1}" Style="{StaticResource ManualParagraph}"/>
                 <ui:Hyperlink NavigateUri="{Binding Updates}" Content="{Binding UpdateTitle}" Icon="ApprovalsApp28" Margin="10" HorizontalAlignment="Center"/>
-                <Image Source="UpdateVersion.png" Style="{StaticResource ManualImage}"/>
+                <Image Source="/Assets/UpdateVersion.png" Style="{StaticResource ManualImage}"/>
                 <TextBlock Text="{Binding UpdateParagraph2}" Style="{StaticResource ManualParagraph}"/>
-                <Image Source="Replace.png" Style="{StaticResource ManualImage}"/>
+                <Image Source="/Assets/Replace.png" Style="{StaticResource ManualImage}"/>
                 
                 <!--Підтримка-->
                 <Label Content="{Binding SupportTitle}" Style="{StaticResource ManualTitle}"/>
