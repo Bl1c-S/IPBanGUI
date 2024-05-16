@@ -22,10 +22,10 @@ public class IPListVMsBuilder : IDisposable
      {
           var whiteList = new WhiteListViewModel(_keyManager, properties.WhiteList);
           var blackList = new BlackListViewModel(_keyManager, properties.BlackList);
-          _listChangedActions = new IPListChangedActions(whiteList.ListChanged, blackList.ListChanged);
+          _listChangedActions = new IPListChangedActions(whiteList.ListChanged, blackList.ListChanged, new(() => whiteList.IPs), new(() => blackList.IPs));
           _keyManager.KeyContextChanged += _listChangedActions.InvokeKey;
 
-          var iPInputVM = new IPInputViewModel(_keyManager.AddIpToKey, _keyManager.KeyContextChanged);
+          var iPInputVM = new IPInputViewModel(_keyManager.AddIpToKey, _listChangedActions.GetIPList, _keyManager.KeyContextChanged);
           var ipBlock = new IPBlockedListViewModel(_iPBlockedListService, properties.BlockList, _keyManager.KeyContextChanged);
           var iPListVMs = new List<IPListViewModelBase>() { ipBlock, whiteList, blackList };
           return new(iPListVMs, iPInputVM);
@@ -51,21 +51,34 @@ public class IPListVMsBuilder : IDisposable
 
      public class IPListChangedActions
      {
-          public Action? WhiteList;
-          public Action? BlackList;
+          public Action? WhiteListChanged;
+          public Action? BlackListChanged;
 
-          public IPListChangedActions(Action? whiteList, Action? blackList)
+          private Func<string[]> _whiteIPs;
+          private Func<string[]> _blackIPs;
+
+          public IPListChangedActions(Action? whiteList, Action? blackList, Func<string[]> whiteIPs, Func<string[]> blackIPs)
           {
-               WhiteList = whiteList;
-               BlackList = blackList;
+               WhiteListChanged = whiteList;
+               BlackListChanged = blackList;
+               _whiteIPs = whiteIPs;
+               _blackIPs = blackIPs;
           }
 
           public void InvokeKey(KeyNames keyName)
           {
                if (keyName == KeyNames.Whitelist)
-                    WhiteList?.Invoke();
+                    WhiteListChanged?.Invoke();
                if (keyName == KeyNames.Blacklist)
-                    BlackList?.Invoke();
+                    BlackListChanged?.Invoke();
+          }
+          public string[] GetIPList(KeyNames keyName)
+          {
+               if (keyName == KeyNames.Whitelist)
+                    return _whiteIPs.Invoke();
+               if (keyName == KeyNames.Blacklist)
+                    return _blackIPs.Invoke();
+               return new string[] { };
           }
      }
 }

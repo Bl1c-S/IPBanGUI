@@ -3,21 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
               xmlns:local="clr-namespace:WPF_IPBanUtility"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:IPInputViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel HorizontalAlignment="Left">
-            <ComboBox SelectedIndex="0" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="4">
-                <ComboBoxItem Content="{Binding WhiteList}"/>
-                <ComboBoxItem Content="{Binding BlackList}"/>
+            <ComboBox Margin="4" SelectedIndex="0" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                <ComboBoxItem Content="{Binding WhiteListText}"/>
+                <ComboBoxItem Content="{Binding BlackListText}"/>
             </ComboBox>
 
-            <TextBox Margin="4" ToolTip="{Binding IPValidator.ToolTip}"
-                    MaxLength="15" MinWidth="130" BorderBrush="{Binding IPValidator.CollorField}"
-                     Text="{Binding IPValidator.IpAddress, UpdateSourceTrigger=PropertyChanged}"/>
+            <ui:TextBox Margin="4" MaxLength="15" BorderBrush="{Binding IPValidator.CollorField}"
+                     Text="{Binding IPValidator.IpAddress, UpdateSourceTrigger=PropertyChanged}"
+                     KeyDown="TextBox_KeyDown" ClearButtonEnabled="True"/>
 
+            <TextBlock Margin="4" HorizontalAlignment="Left" Text="{Binding IPValidator.ToolTip}" TextWrapping="WrapWithOverflow" Width="350"/>
+            
             <Button Margin="4" Content="{Binding AddText}" Command="{Binding AddNewIPCommand}" IsEnabled="{Binding IPValidator.IsValidIP}"/>
         </StackPanel>
     </Grid>

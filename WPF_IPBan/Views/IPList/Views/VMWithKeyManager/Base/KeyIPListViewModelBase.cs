@@ -14,7 +14,7 @@ public class KeyIPListViewModelBase : IPListViewModelBase
      private readonly IPStatus _status;
      private KeyNames _keyName;
      public KeyValueManager _keyManager { get; }
-     private string[] _oldIPs = new string[] {};
+     public string[] IPs = new string[] {};
 
      public KeyIPListViewModelBase(KeyNames key, IPStatus status, KeyValueManager keyManager, string title, IPListViewProperties properties) :
           base(title, properties)
@@ -62,23 +62,23 @@ public class KeyIPListViewModelBase : IPListViewModelBase
           var newIps = GetIps();
           var changeFunc = () =>
           {
-               _oldIPs = newIps;
+               IPs = newIps;
                IPListChanged();
                return;
           };
 
-          if (_oldIPs.Length != newIps.Length)
+          if (IPs.Length != newIps.Length)
                changeFunc.Invoke();
-          for (int i = 0; i < _oldIPs.Length; i++)
+          for (int i = 0; i < IPs.Length; i++)
           {
-               if (!_oldIPs[i].Equals(newIps[i], StringComparison.Ordinal))
+               if (!IPs[i].Equals(newIps[i], StringComparison.Ordinal))
                     changeFunc.Invoke();
           }
      }
      protected override void IPListChanged()
      {
-          _oldIPs = GetIps();
-          VMs = new(BuildVMs(_oldIPs));
+          IPs = GetIps();
+          VMs = new(BuildVMs(IPs));
           base.IPListChanged();
      }
      private string[] GetIps() => _keyManager.GetIpListWithKey(_keyName);
