@@ -16,31 +16,31 @@
 
         <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
 
-            <ui:Button Icon="BookInformation24" Command = "{Binding NavigateManual}"
+            <ui:Button Icon="BookInformation24" Command = "{Binding NavigateManual}" ToolTip="Головна"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=Головна}"
                       BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=Головна}" />
 
-            <ui:Button Icon="ChartMultiple24" Command = "{Binding NavigateToEvents}" Margin="4,0,0,0"
+            <ui:Button Icon="ChartMultiple24" Command = "{Binding NavigateToEvents}" ToolTip="Події" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=Події}"
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=Події}"/>
 
-            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" Margin="4,0,0,0"
+            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="ІР" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=ІР}"
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=ІР}"/>
 
-            <ui:Button Icon="Key24" Command = "{Binding NavigateToKeyList}" Margin="4,0,0,0"
+            <ui:Button Icon="Key24" Command = "{Binding NavigateToKeyList}" ToolTip="Ключі" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=Ключі}"
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=Ключі}"/>
 
-            <ui:Button Icon="Settings48" Command = "{Binding NavigateToSettings}" Margin="4,0,0,0"
+            <ui:Button Icon="Settings48" Command = "{Binding NavigateToSettings}" ToolTip="Налаштування" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=Налаштування}" 
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
