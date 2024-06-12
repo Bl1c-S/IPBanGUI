@@ -110,16 +110,16 @@ public class FilterViewModel : ViewModelBase
      private Dictionary<LogEventType, FilterKey> _filterKeys = new();
      private void FilterKeysBuild()
      {
-          AddToFilterKeys(FilterKeys.LoginSucceeded, LogEventType.LoginSucceeded);
-          AddToFilterKeys(FilterKeys.LoginFailure, LogEventType.LoginFailure);
-          AddToFilterKeys(FilterKeys.ForgetFailedLogin, LogEventType.ForgetFailedLogin);
-          AddToFilterKeys(FilterKeys.BanningIP, LogEventType.BanningIP);
-          AddToFilterKeys(FilterKeys.UnBanningIP, LogEventType.UnBanningIP);
-          AddToFilterKeys(FilterKeys.FirewallEntriesUpdated, LogEventType.FirewallEntriesUpdated);
+          AddToFilterKeys(FilterKeys.LoginSucceeded, true, LogEventType.LoginSucceeded);
+          AddToFilterKeys(FilterKeys.LoginFailure, true, LogEventType.LoginFailure);
+          AddToFilterKeys(FilterKeys.ForgetFailedLogin, false, LogEventType.ForgetFailedLogin);
+          AddToFilterKeys(FilterKeys.BanningIP, true, LogEventType.BanningIP);
+          AddToFilterKeys(FilterKeys.UnBanningIP, false, LogEventType.UnBanningIP);
+          AddToFilterKeys(FilterKeys.FirewallEntriesUpdated, false, LogEventType.FirewallEntriesUpdated);
      }
-     private void AddToFilterKeys(string name, LogEventType filteType)
+     private void AddToFilterKeys(string name, bool isEnable, LogEventType filteType)
      {
-          var filterKey = new FilterKey(name, filteType, ApplyFilter);
+          var filterKey = new FilterKey(name, isEnable, filteType, ApplyFilter);
           _filterKeys.Add(filteType, filterKey);
      }
 

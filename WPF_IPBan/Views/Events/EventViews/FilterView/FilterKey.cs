@@ -20,11 +20,11 @@ public class FilterKey : ObservableObject
           }
      }
      private bool _isEnable;
-     public FilterKey(string name, LogEventType type, FilterChangedDelegate filterChanged)
+     public FilterKey(string name, bool isEnable, LogEventType type, FilterChangedDelegate filterChanged)
      {
           Name = name;
           Type = type;
-          _isEnable = true;
+          _isEnable = isEnable;
           _filterChanged = filterChanged;
      }
 }
