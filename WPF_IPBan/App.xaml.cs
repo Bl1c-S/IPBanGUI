@@ -79,6 +79,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<ConfigFileManager>();
                     services.AddSingleton<KeyValueManager>();
                     services.AddSingleton<LogEventManager>();
+                    services.AddSingleton<WinServicesController>();
 
                     services.AddSingleton<IPBlockedListService>();
 

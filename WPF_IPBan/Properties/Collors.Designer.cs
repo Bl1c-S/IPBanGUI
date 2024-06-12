@@ -22,14 +22,14 @@ namespace WPF_IPBanUtility.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Status {
+    internal class Collors {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Status() {
+        internal Collors() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WPF_IPBanUtility.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.Status", typeof(Status).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WPF_IPBanUtility.Properties.Collors", typeof(Collors).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,56 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заблоковано.
+        ///   Looks up a localized string similar to #FFFFC800.
         /// </summary>
-        internal static string Ban {
+        internal static string Active {
             get {
-                return ResourceManager.GetString("Ban", resourceCulture);
+                return ResourceManager.GetString("Active", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Помилка.
+        ///   Looks up a localized string similar to #00000000.
         /// </summary>
-        internal static string Error {
+        internal static string EmptyCollor {
             get {
-                return ResourceManager.GetString("Error", resourceCulture);
+                return ResourceManager.GetString("EmptyCollor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дозволено.
+        ///   Looks up a localized string similar to #FF00C800.
         /// </summary>
-        internal static string InWhite {
+        internal static string GreanCollor {
             get {
-                return ResourceManager.GetString("InWhite", resourceCulture);
+                return ResourceManager.GetString("GreanCollor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Запущено.
+        ///   Looks up a localized string similar to #FF848484.
         /// </summary>
-        internal static string Running {
+        internal static string InActive {
             get {
-                return ResourceManager.GetString("Running", resourceCulture);
+                return ResourceManager.GetString("InActive", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Запускається....
+        ///   Looks up a localized string similar to #FFE60000.
         /// </summary>
-        internal static string Starting {
+        internal static string ReadCollor {
             get {
-                return ResourceManager.GetString("Starting", resourceCulture);
+                return ResourceManager.GetString("ReadCollor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Зупинено.
+        ///   Looks up a localized string similar to #FFFFFF00.
         /// </summary>
-        internal static string Stoped {
+        internal static string YelowCollor {
             get {
-                return ResourceManager.GetString("Stoped", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Зупиняється....
-        /// </summary>
-        internal static string Stoping {
-            get {
-                return ResourceManager.GetString("Stoping", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Успішно.
-        /// </summary>
-        internal static string Successfully {
-            get {
-                return ResourceManager.GetString("Successfully", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Оновлюється.
-        /// </summary>
-        internal static string Updating {
-            get {
-                return ResourceManager.GetString("Updating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Попередження.
-        /// </summary>
-        internal static string Warn {
-            get {
-                return ResourceManager.GetString("Warn", resourceCulture);
+                return ResourceManager.GetString("YelowCollor", resourceCulture);
             }
         }
     }

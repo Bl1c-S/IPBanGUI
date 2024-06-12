@@ -10,7 +10,7 @@ public class IPBan
      public string Context { get; set; }
      public string Logfile { get; set; }
      public string Sqlite_db { get; set; }
-
+     public string ServiceName = "IPBAN";
      public IPBan(string folder, string logfile)
      {
           Folder = folder;

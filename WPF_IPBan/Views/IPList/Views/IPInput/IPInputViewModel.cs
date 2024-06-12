@@ -76,7 +76,7 @@ public class IPInputViewModel : ViewModelBase
 
      public class IPValidation : ObservableObject
      {
-          private string _collorField = EmptyCollor;
+          private string _collorField = Collors.EmptyCollor;
           public string CollorField
           {
                get => _collorField; private set
@@ -85,11 +85,6 @@ public class IPInputViewModel : ViewModelBase
                     OnPropertyChanged(nameof(CollorField));
                }
           }
-
-          private const string ReadCollor = "#FFE60000";
-          private const string YelowCollor = "#FFFFFF00";
-          private const string GreanCollor = "#FF00C800";
-          private const string EmptyCollor = "#00000000";
 
           private bool _isValidIP = false;
           public bool IsValidIP
@@ -137,25 +132,25 @@ public class IPInputViewModel : ViewModelBase
                if (_ipAddress == string.Empty)
                {
                     IsValidIP = false;
-                    CollorField = EmptyCollor;
+                    CollorField = Collors.EmptyCollor;
                     ToolTip = ToolTips.IncorrectIPAddress;
                }
                else if (!RegecxCurrentIpFormatValidate(_ipAddress))
                {
                     IsValidIP = false;
-                    CollorField = ReadCollor;
+                    CollorField = Collors.ReadCollor;
                     ToolTip = ToolTips.IncorrectIPAddress;
                }
                else if (IsNewIP(_ipAddress))
                {
                     IsValidIP = true;
-                    CollorField = GreanCollor;
+                    CollorField = Collors.GreanCollor;
                     ToolTip = $"{_ipAddress} {ToolTips.CurrentIPAddress} {_selectedEndText.Invoke()}";
                }
                else
                {
                     IsValidIP = false;
-                    CollorField = YelowCollor;
+                    CollorField = Collors.YelowCollor;
                     ToolTip = $"{_ipAddress} {ToolTips.IPAddressExist} {_selectedEndText.Invoke()}";
                }
           }

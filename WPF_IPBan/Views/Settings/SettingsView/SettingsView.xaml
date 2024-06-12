@@ -9,8 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type local:SelectFolderViewModel}">
-                <local:SelectFolderView />
+            <DataTemplate DataType="{x:Type local:WinServicesViewModel}">
+                <local:WinServicesView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type local:KeysVisibilityControllerViewModel}">

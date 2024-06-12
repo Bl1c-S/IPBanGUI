@@ -8,6 +8,7 @@
     <UseWindowsForms>True</UseWindowsForms>
     <AssemblyName>IPBanGUI</AssemblyName>
     <ApplicationIcon>TSIP.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,8 +45,6 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
-    <PackageReference Include="NLog" Version="5.2.6" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.5" />
     <PackageReference Include="WPF-UI" Version="2.1.0" />
   </ItemGroup>
 
@@ -58,6 +57,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ButtonNames.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Collors.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Collors.resx</DependentUpon>
     </Compile>
     <Compile Update="Properties\FilterKeys.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -100,6 +104,10 @@
     <EmbeddedResource Update="Properties\ButtonNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ButtonNames.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Collors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Collors.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\FilterKeys.resx">
       <Generator>ResXFileCodeGenerator</Generator>

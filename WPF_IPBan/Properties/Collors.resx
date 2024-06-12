@@ -117,34 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ban" xml:space="preserve">
-    <value>Заблоковано</value>
+  <data name="Active" xml:space="preserve">
+    <value>#FFFFC800</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Помилка</value>
+  <data name="EmptyCollor" xml:space="preserve">
+    <value>#00000000</value>
   </data>
-  <data name="InWhite" xml:space="preserve">
-    <value>Дозволено</value>
+  <data name="GreanCollor" xml:space="preserve">
+    <value>#FF00C800</value>
   </data>
-  <data name="Running" xml:space="preserve">
-    <value>Запущено</value>
+  <data name="InActive" xml:space="preserve">
+    <value>#FF848484</value>
   </data>
-  <data name="Starting" xml:space="preserve">
-    <value>Запускається...</value>
+  <data name="ReadCollor" xml:space="preserve">
+    <value>#FFE60000</value>
   </data>
-  <data name="Stoped" xml:space="preserve">
-    <value>Зупинено</value>
-  </data>
-  <data name="Stoping" xml:space="preserve">
-    <value>Зупиняється...</value>
-  </data>
-  <data name="Successfully" xml:space="preserve">
-    <value>Успішно</value>
-  </data>
-  <data name="Updating" xml:space="preserve">
-    <value>Оновлюється</value>
-  </data>
-  <data name="Warn" xml:space="preserve">
-    <value>Попередження</value>
+  <data name="YelowCollor" xml:space="preserve">
+    <value>#FFFFFF00</value>
   </data>
 </root>

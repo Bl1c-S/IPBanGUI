@@ -13,9 +13,8 @@ public class ClearLogsViewModel : SettingsComponentViewModelBase
      private readonly FileManager _fileManager = new();
      private readonly LogFilePathExtractor _logFilePathExtractor;
      public ICommand IClearLogsCommand { get; set; }
-     public ClearLogsViewModel(Settings settings)
+     public ClearLogsViewModel(Settings settings) : base(Properties.PageNames.ClearLogsTitle)
      {
-          Title = Properties.PageNames.ClearLogsTitle;
           IClearLogsCommand = new RelayCommand(DeleteLogFiles);
           _logFilePathExtractor = new(settings.IPBan.Folder);
      }

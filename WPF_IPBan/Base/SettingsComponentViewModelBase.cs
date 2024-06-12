@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace WPF_IPBanUtility.Base;
 
-namespace WPF_IPBanUtility.Base
+public class SettingsComponentViewModelBase : ViewModelBase, ISettingsVMComponent
 {
-     public abstract class SettingsComponentViewModelBase : ViewModelBase, ISettingsVMComponent
+     public SettingsComponentViewModelBase(string title)
      {
-          public string? Title { get; protected set; }
-          public abstract void Save();
+          Title = title;
      }
+
+     public string Title { get; }
+     public virtual void Save() { }
 }

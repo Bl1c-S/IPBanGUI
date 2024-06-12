@@ -171,6 +171,12 @@
   <data name="Select" xml:space="preserve">
     <value>Вибрати</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Запустити</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Зупинити</value>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>Оновити</value>
   </data>

@@ -10,9 +10,8 @@ public class KeysVisibilityControllerViewModel : SettingsComponentViewModelBase
      private ConfigFileManager _configFileManager;
      public List<KeyIdenti> KeyIndentis { get; set; }
 
-     public KeysVisibilityControllerViewModel(ConfigFileManager configFileManager)
+     public KeysVisibilityControllerViewModel(ConfigFileManager configFileManager) : base(Properties.PageNames.KeysVisibilityControllerViewTitle)
      {
-          Title = Properties.PageNames.KeysVisibilityControllerViewTitle;
           _configFileManager = configFileManager;
           KeyIndentis = configFileManager.ReadKeyIndentis();
      }
