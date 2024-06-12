@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility.Logic.ConfigFile;
+using Logic_IPBanUtility.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPF_IPBanUtility.Views.IPList;
@@ -15,14 +16,19 @@ public class IPListViewModel : PageViewModelBase
      public List<IPListViewModelBase> VMs { get; }
 
      private readonly IPListVMsBuilder _vmsBuilder;
+     private readonly WinServicesController _servicesController;
 
-     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, KeyValueManager keyManager) : base(Properties.PageNames.IP)
+     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, WinServicesController servicesController) : base(Properties.PageNames.IP)
      {
           _vmsBuilder = vmsBuilder;
+          _servicesController = servicesController;
           MyProperties = properties;
           var vmsResult = _vmsBuilder.Build(MyProperties);
           VMs = vmsResult.IPListVMs;
           IPInputVM = vmsResult.IPInputVM;
+
+          foreach (var vm in VMs)
+               vm.VMChanged += PageChanged;
 
           IUpdateAllCommand = new RelayCommand(UpdateAll);
           IAddIPCommand = new RelayCommand(ChangeIPInputVisibility);
@@ -46,6 +52,13 @@ public class IPListViewModel : PageViewModelBase
      private void UpdateAll() => VMs.ForEach(x => x.Update());
      #endregion
 
+     public override bool ApplyChanges()
+     {
+          if (PageHaveChanges)
+               _servicesController.IPBan.Restart().Wait();
+          PageHaveChanges = false; //Для того що двічі не перезавантажувалась служба при закритті вікна.
+          return true;
+     }
      protected override void CreatePageButtons()
      {
           PageButtons.Add(new Button
@@ -65,9 +78,15 @@ public class IPListViewModel : PageViewModelBase
 
      public override void Dispose()
      {
-          IPInputVM.Dispose();
-          VMs.ForEach(vm => vm.Dispose());
+          ApplyChanges();
+          foreach (var vm in VMs)
+          {
+               vm.VMChanged -= PageChanged;
+               vm.Dispose();
+          }
           VMs.Clear();
+
+          IPInputVM.Dispose();
           _vmsBuilder.Dispose();
           base.Dispose();
      }
