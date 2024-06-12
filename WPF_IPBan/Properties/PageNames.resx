@@ -144,6 +144,9 @@
   <data name="SelectFolderViewTitle" xml:space="preserve">
     <value>Шлях до кореневої папки IPBan</value>
   </data>
+  <data name="Services" xml:space="preserve">
+    <value>Служби</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
   </data>

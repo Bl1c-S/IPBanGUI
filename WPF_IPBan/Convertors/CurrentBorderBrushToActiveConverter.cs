@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
-public class CurrentPageNameToActiveConverter : IValueConverter
+public class CurrentBorderBrushToActiveConverter : IValueConverter
 {
      public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
      {
           if (value is string currentPageName && parameter is string selectedPageName)
           {
-               return currentPageName != selectedPageName ? string.Empty : selectedPageName;
+               return currentPageName != selectedPageName ? Collors.InActive : Collors.Active;
           }
           return string.Empty;
      }
