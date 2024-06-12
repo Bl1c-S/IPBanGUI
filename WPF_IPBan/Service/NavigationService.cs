@@ -19,8 +19,11 @@ internal class NavigationService
           if (_currentViewModel != null && _currentViewModel is T)
                return;
 
-          var viewModel = _serviceProvider.GetService<T>() as PageViewModelBase;
+          if (_currentViewModel != null)
+               if (!_currentViewModel.ApplyChanges())
+                    return;
 
+          var viewModel = _serviceProvider.GetService<T>() as PageViewModelBase;
 
           if (viewModel is null)
                return;

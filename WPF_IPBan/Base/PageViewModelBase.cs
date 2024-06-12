@@ -1,19 +1,22 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
 public class PageViewModelBase : ViewModelBase
 {
+     public string PageName { get; set; }
+
+     public bool PageHaveChanges;
+     protected virtual void PageChanged() => PageHaveChanges = true;
+     public ObservableCollection<Button> PageButtons { get; set; }
      public PageViewModelBase(string pageName)
      {
           PageName = pageName;
+          PageHaveChanges = false;
           PageButtons = new ObservableCollection<Button>();
      }
-
-     public string PageName { get; set; }
-     public ObservableCollection<Button> PageButtons { get; set; }
+     public virtual bool ApplyChanges() => true;
 
      protected virtual void CreatePageButtons()
      {
