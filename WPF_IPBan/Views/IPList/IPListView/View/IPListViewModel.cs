@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Services;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
 using Button = Wpf.Ui.Controls.Button;
 
@@ -52,33 +54,53 @@ public class IPListViewModel : PageViewModelBase
      private void UpdateAll() => VMs.ForEach(x => x.Update());
      #endregion
 
-     public override bool ApplyChanges()
+     protected override void PageChanged()
+     {
+          PageButtons[0].Visibility = Visibility.Visible; //Показати іконку, яка інформує про те що відбудеться.
+          base.PageChanged();
+     }
+     public override bool ApplyChanges(ApplyOptions[]? options = null)
      {
           if (PageHaveChanges)
-               _servicesController.IPBan.Restart().Wait();
+          {
+               if (options != null && options.Contains(ApplyOptions.Await))
+                    _servicesController.IPBan.Restart().Wait();
+               else _servicesController.IPBan.Restart();
+          }
           PageHaveChanges = false; //Для того що двічі не перезавантажувалась служба при закритті вікна.
           return true;
      }
      protected override void CreatePageButtons()
      {
+          var activeColor = (Color)ColorConverter.ConvertFromString(Collors.Active);
           PageButtons.Add(new Button
           {
-               Content = Properties.ButtonNames.Add,
+               Icon = Wpf.Ui.Common.SymbolRegular.ErrorCircle24,
+               ToolTip = ToolTips.ReloadIPListView,
+               BorderBrush = new SolidColorBrush(activeColor),
+               Visibility = Visibility.Collapsed
+          }); ;
+          PageButtons.Add(new Button
+          {
+               Content = ButtonNames.Add,
                Command = IAddIPCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.Add24
+               Icon = Wpf.Ui.Common.SymbolRegular.Add24,
+               ToolTip = ToolTips.AddIpView,
+               Margin = new(8, 0, 0, 0)
           });
           PageButtons.Add(new Button
           {
-               Content = Properties.ButtonNames.Update,
+               Content = ButtonNames.Update,
                Command = IUpdateAllCommand,
                Icon = Wpf.Ui.Common.SymbolRegular.ArrowSync24,
+               ToolTip = ToolTips.UpdateIPLists,
                Margin = new(4, 0, 0, 0)
           });
      }
 
      public override void Dispose()
      {
-          ApplyChanges();
+          ApplyChanges(new[] { ApplyOptions.Await });
           foreach (var vm in VMs)
           {
                vm.VMChanged -= PageChanged;

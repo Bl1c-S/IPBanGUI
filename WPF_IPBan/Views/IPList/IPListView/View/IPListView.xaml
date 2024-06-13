@@ -28,6 +28,7 @@
             <Border Grid.Row="0" Style="{StaticResource StandartBorder}" Visibility="{Binding MyProperties.IPInputVisibility}">
                 <local:IPInputView DataContext="{Binding IPInputVM}"/>
             </Border>
+            
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
                 <ItemsControl ItemsSource="{Binding VMs}" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>

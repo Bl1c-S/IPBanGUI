@@ -61,6 +61,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Відкрити вікно додавання нової IP-адреси до списків..
+        /// </summary>
+        internal static string AddIpView {
+            get {
+                return ResourceManager.GetString("AddIpView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адреса заблокована назавжди.
         /// </summary>
         internal static string BlackListItem {
@@ -115,6 +124,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Для застосування змін служба IPBan буде перезавантажена після закриття вікна..
+        /// </summary>
+        internal static string ReloadIPListView {
+            get {
+                return ResourceManager.GetString("ReloadIPListView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Видалити з списку заблокованих | Розблокувати.
         /// </summary>
         internal static string RemoveBlockList {
@@ -147,6 +165,15 @@ namespace WPF_IPBanUtility.Properties {
         internal static string ToWiteList {
             get {
                 return ResourceManager.GetString("ToWiteList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Будуть перезавантажені всі списки IP-адрес..
+        /// </summary>
+        internal static string UpdateIPLists {
+            get {
+                return ResourceManager.GetString("UpdateIPLists", resourceCulture);
             }
         }
         

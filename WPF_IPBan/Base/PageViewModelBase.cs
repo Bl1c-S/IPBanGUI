@@ -16,9 +16,15 @@ public class PageViewModelBase : ViewModelBase
           PageHaveChanges = false;
           PageButtons = new ObservableCollection<Button>();
      }
-     public virtual bool ApplyChanges() => true;
+     public virtual bool ApplyChanges(ApplyOptions[]? options = null) => true;
 
      protected virtual void CreatePageButtons()
      {
      }
+}
+
+public enum ApplyOptions
+{
+     None,
+     Await
 }
