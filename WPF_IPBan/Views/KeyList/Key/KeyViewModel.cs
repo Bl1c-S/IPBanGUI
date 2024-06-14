@@ -1,19 +1,35 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Windows;
-using Logic_IPBanUtility.Models;
 using System.Windows.Input;
 using Key = Logic_IPBanUtility.Models.Key;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
 public class KeyViewModel : ViewModelBase
 {
-     public KeyViewModel(Key key, Action<Key> saveKey, Action<KeyViewModel> hideKey)
+     public Key Key;
+     public string Name => Key.Name;
+     public string Description => Key.Description;
+
+     public string Value
+     {
+          get => _value;
+          set
+          {
+               _value = value;
+               CheckChanges();
+               OnPropertyChanged(nameof(Value));
+          }
+     }
+     private string _value;
+
+     public KeyViewModel(Key key, Action<Key> saveKey, Action<KeyViewModel> hideKey, Action isChangedChange)
      {
           _value = key.Value;
           Key = key;
-
+          IsChangedChange += isChangedChange;
           SaveKeyEvent += saveKey;
           HideKeyEvent += hideKey;
 
@@ -23,20 +39,27 @@ public class KeyViewModel : ViewModelBase
           IHideKeyCommand = new RelayCommand(HideKey);
      }
 
-     public Key Key;
-     public string Name => Key.Name;
-     public string Description => Key.Description;
+     #region Changed
+     public event Action IsChangedChange;
+     public string BorderCollor { get; private set; } = Collors.InActive;
 
-     private string _value;
-     public string Value
+     private bool _isChanged = false;
+     public bool IsChanged
      {
-          get => _value;
-          set
+          get => _isChanged; private set
           {
-               _value = value;
-               OnPropertyChanged(nameof(Value));
+               if (_isChanged != value)
+               {
+                    _isChanged = value;
+                    IsChangedChange.Invoke();
+                    BorderCollor = _isChanged ? Collors.Active : Collors.InActive;
+                    OnPropertyChanged(nameof(IsChanged));
+                    OnPropertyChanged(nameof(BorderCollor));
+               }
           }
      }
+     private void CheckChanges() => IsChanged = Key.Value != _value;
+     #endregion
 
      #region Description
      public ICommand IDescriptionVisibilityChangeCommand { get; }
@@ -58,7 +81,10 @@ public class KeyViewModel : ViewModelBase
      public void SaveKey()
      {
           if (Key.SetValue(_value))
+          {
                SaveKeyEvent.Invoke(Key);
+               CheckChanges();
+          }
      }
      #endregion
 

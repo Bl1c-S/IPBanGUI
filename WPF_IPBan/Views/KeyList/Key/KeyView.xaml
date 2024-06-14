@@ -7,37 +7,41 @@
              mc:Ignorable="d" 
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.Resources>
-            <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        </Grid.Resources>
+    
+    <Border Style="{StaticResource StandartBorder}" Margin="4,4,4,8" BorderBrush="{Binding BorderCollor}">
+        <Grid>
+            <Grid.Resources>
+                <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            </Grid.Resources>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
 
-            <DockPanel VerticalAlignment="Center">
-                <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="SemiBold" Margin="4,0"/>
+            <StackPanel Grid.Row="0">
 
-                <DockPanel HorizontalAlignment="Right">
-                    <ui:Button Icon="QuestionCircle24"  ToolTip="Опис" 
+                <DockPanel VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Name, Mode=OneWay}" FontSize="16" FontWeight="SemiBold" Margin="4,0"/>
+
+                    <DockPanel HorizontalAlignment="Right">
+                        <ui:Button Icon="QuestionCircle24"  ToolTip="Опис" 
                                Command="{Binding IDescriptionVisibilityChangeCommand}" />
-                    <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
+                        <ui:Button Icon="Save28" ToolTip="Зберегти зміни" Margin="4,0,0,0"
                               Command="{Binding ISaveKeyCommand}" />
-                    <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
+                        <ui:Button Icon="ArrowHookUpLeft24" ToolTip="Відмінити зміни" Margin="4,0,0,0" 
                                Command="{Binding IPreviousCommand}"/>
-                    <ui:Button Icon="EyeOff24" ToolTip="Приховати ключ | В налаштуваннях можна знову увімкнути" Margin="4,0,0,0"
+                        <ui:Button Icon="EyeOff24" ToolTip="Приховати ключ | В налаштуваннях можна знову увімкнути" Margin="4,0,0,0"
                                Command="{Binding IHideKeyCommand}"/>
+                    </DockPanel>
                 </DockPanel>
-            </DockPanel>
 
-            <TextBlock Text="{Binding Description, Mode=OneWay}" Visibility="{Binding DescriptionVisibility}" 
+                <TextBlock Text="{Binding Description, Mode=OneWay}" Visibility="{Binding DescriptionVisibility}" 
                        VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Padding="6"/>
-        </StackPanel>
+            </StackPanel>
 
-        <ui:TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay}" PlaceholderText="Не вказано..." Margin="0,4" TextWrapping="Wrap" />
-    </Grid>
+            <ui:TextBox Grid.Row="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Не вказано..." Margin="0,4" TextWrapping="Wrap" />
+        </Grid>
+    </Border>
 </UserControl>

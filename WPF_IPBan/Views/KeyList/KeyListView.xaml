@@ -12,9 +12,7 @@
             <ItemsControl ItemsSource="{Binding KeyViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource StandartBorder}" Margin="4,4,4,8">
-                            <local:KeyView DataContext="{Binding}"/>
-                        </Border>
+                        <local:KeyView DataContext="{Binding}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

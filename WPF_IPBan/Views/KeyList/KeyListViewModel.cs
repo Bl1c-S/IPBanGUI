@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility;
+using Logic_IPBanUtility.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media;
 using WPF_IPBanUtility.Properties;
 using Button = Wpf.Ui.Controls.Button;
 using Key = Logic_IPBanUtility.Models.Key;
@@ -12,16 +15,49 @@ namespace WPF_IPBanUtility;
 public class KeyListViewModel : PageViewModelBase
 {
      private readonly ConfigFileManager _cfgManager;
+     private readonly WinServicesController _servicesController;
 
-     public KeyListViewModel(ConfigFileManager cfgManager) : base(PageNames.KeyList)
+     public KeyListViewModel(ConfigFileManager cfgManager, WinServicesController servicesController) : base(PageNames.KeyList)
      {
           _cfgManager = cfgManager;
+          _servicesController = servicesController;
           _keyViewModels = CreateKeyViewModels(cfgManager.CreateKeys());
 
           ISaveAllCommand = new RelayCommand(SaveAllKey);
           IReturnAllPreviousValueCommand = new RelayCommand(ReturnAllPreviousValue);
           CreatePageButtons();
      }
+
+     #region Changed
+     public string BorderCollor { get; private set; } = Collors.InActive;
+     private bool _allKeySaved = true;
+     public override bool ApplyChanges(ApplyOptions[]? options = null)
+     {
+          if (!_allKeySaved)
+               DialogMessageBox.TwoActionBox(SaveAllKey, ReturnAllPreviousValue,
+                    Messages.KeysChanged, PageNames.KeysChanged, ButtonNames.SaveAll, ButtonNames.ReturnAll);
+          if(PageHaveChanges)
+          {
+          _servicesController.IPBan.Restart();
+          PageHaveChanges = false;
+          }
+          return true;
+     }
+     protected override void PageChanged()
+     {
+          base.PageChanged();
+          ChangeInfoVisibility(PageHaveChanges);
+     }
+     private void SaveAllEnableChanged()
+     {
+          PageChanged();
+          var changedVM = _keyViewModels.FirstOrDefault(vm => vm.IsChanged == true);
+          _allKeySaved = changedVM != null ? false : true;
+          var saveButton = PageButtons.FirstOrDefault(b => b.Icon == Wpf.Ui.Common.SymbolRegular.SaveMultiple24);
+          var borderColor = (Color)ColorConverter.ConvertFromString(_allKeySaved ? Collors.InActive : Collors.Active);
+          saveButton!.BorderBrush = new SolidColorBrush(borderColor);
+     }
+     #endregion
 
      #region KeyViewModel
      private ObservableCollection<KeyViewModel> _keyViewModels;
@@ -48,7 +84,7 @@ public class KeyListViewModel : PageViewModelBase
      {
           if (!key.IsHidden) return null;
 
-          var keyVM = new KeyViewModel(key, SaveKey, HideKey);
+          var keyVM = new KeyViewModel(key, SaveKey, HideKey, SaveAllEnableChanged);
           return keyVM;
      }
      #endregion
@@ -84,6 +120,7 @@ public class KeyListViewModel : PageViewModelBase
                     keys.Add(key);
           }
           _cfgManager.WriteKeys(keys);
+          SaveAllEnableChanged();
      }
      #endregion
 
@@ -94,11 +131,12 @@ public class KeyListViewModel : PageViewModelBase
           foreach (var keyVM in _keyViewModels)
                keyVM.PreviousValue();
      }
-
      #endregion
 
      protected override void CreatePageButtons()
      {
+          base.CreatePageButtons();
+          ChangeInfoMessage(ToolTips.ReloadIPBanService);
           PageButtons.Add(new Button
           {
                Content = ButtonNames.SaveAll,
@@ -118,6 +156,9 @@ public class KeyListViewModel : PageViewModelBase
      #region Dispose
      public override void Dispose()
      {
+          if (PageHaveChanges)
+               _servicesController.IPBan.Restart();
+
           foreach (var keyVM in _keyViewModels)
                KeyVMDispose(keyVM);
 
@@ -127,6 +168,7 @@ public class KeyListViewModel : PageViewModelBase
      {
           keyVM.SaveKeyEvent -= SaveKey;
           keyVM.HideKeyEvent -= HideKey;
+          keyVM.IsChangedChange -= SaveAllEnableChanged;
           keyVM.Dispose();
      }
      #endregion
