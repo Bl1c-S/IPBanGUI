@@ -2,6 +2,7 @@
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
+using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
 
@@ -18,9 +19,9 @@ public class SettingsVMsBuilder
           _controller = controller;
      }
 
-     public List<ISettingsVMComponent> Build()
+     public List<SettingsComponentViewModelBase> Build()
      {
-          List<ISettingsVMComponent> VMs = new()
+          List<SettingsComponentViewModelBase> VMs = new()
           {
                new KeysVisibilityControllerViewModel(_configFileManager),
                new WinServicesViewModel(_controller),

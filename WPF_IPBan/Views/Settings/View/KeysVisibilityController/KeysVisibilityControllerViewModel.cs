@@ -8,16 +8,22 @@ namespace WPF_IPBanUtility;
 public class KeysVisibilityControllerViewModel : SettingsComponentViewModelBase
 {
      private ConfigFileManager _configFileManager;
+     private List<KeyIdenti> _oldKeyIndentis { get; set; }
      public List<KeyIdenti> KeyIndentis { get; set; }
 
      public KeysVisibilityControllerViewModel(ConfigFileManager configFileManager) : base(Properties.PageNames.KeysVisibilityControllerViewTitle)
      {
           _configFileManager = configFileManager;
           KeyIndentis = configFileManager.ReadKeyIndentis();
+          _oldKeyIndentis = KeyIndentis;
      }
      public override void Save()
      {
-          foreach (var key in KeyIndentis)
-               _configFileManager.WriteKeyIdentiChanged(key);
+          if (_oldKeyIndentis.Equals(KeyIndentis))
+          {
+               _oldKeyIndentis = KeyIndentis;
+               foreach (var key in KeyIndentis)
+                    _configFileManager.WriteKeyIdentiChanged(key);
+          }
      }
 }

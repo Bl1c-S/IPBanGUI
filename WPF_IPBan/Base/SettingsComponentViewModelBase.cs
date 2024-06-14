@@ -6,7 +6,8 @@ public class SettingsComponentViewModelBase : ViewModelBase, ISettingsVMComponen
      {
           Title = title;
      }
-
+     protected bool IsChanged = false;
+     protected virtual void Changed() { }
      public string Title { get; }
      public virtual void Save() { }
 }

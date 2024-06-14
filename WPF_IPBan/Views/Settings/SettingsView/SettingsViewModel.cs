@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using Wpf.Ui.Controls;
+using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
 
 public class SettingsViewModel : PageViewModelBase
 {
      private readonly SettingsVMsBuilder _settingsVMsBuilder;
-     public List<ISettingsVMComponent> VMs => _vMs;
-     private List<ISettingsVMComponent> _vMs;
+     public List<SettingsComponentViewModelBase> VMs => _vMs;
+     private List<SettingsComponentViewModelBase> _vMs;
 
      public SettingsViewModel(SettingsVMsBuilder settingsVMsBuilder) : base(Properties.PageNames.Settings)
      {
