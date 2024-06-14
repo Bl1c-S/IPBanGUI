@@ -138,7 +138,7 @@
   <data name="IPAddressExist" xml:space="preserve">
     <value>вже додано</value>
   </data>
-  <data name="ReloadIPListView" xml:space="preserve">
+  <data name="ReloadIPBanService" xml:space="preserve">
     <value>Для застосування змін служба IPBan буде перезавантажена після закриття вікна.</value>
   </data>
   <data name="RemoveBlockList" xml:space="preserve">

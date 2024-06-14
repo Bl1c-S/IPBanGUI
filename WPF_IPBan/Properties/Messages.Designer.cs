@@ -61,6 +61,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Для застосування змін служба IPBan буде перезавантажена після закриття вікна..
+        /// </summary>
+        public static string KeysChanged {
+            get {
+                return ResourceManager.GetString("KeysChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виберіть теку де розміщується IPBan, після чого IPBanGUI буде скинуто до налаштувань за замовчуванням. На налаштування IPBan ці зміни ніяк не вплинуть..
         /// </summary>
         public static string LoadSettingsErrorText {

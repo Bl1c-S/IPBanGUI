@@ -115,6 +115,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не збережені зміни.
+        /// </summary>
+        public static string KeysChanged {
+            get {
+                return ResourceManager.GetString("KeysChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вибір ключів для відображення.
         /// </summary>
         public static string KeysVisibilityControllerViewTitle {

@@ -135,6 +135,9 @@
   <data name="KeyList" xml:space="preserve">
     <value>Ключі</value>
   </data>
+  <data name="KeysChanged" xml:space="preserve">
+    <value>Не збережені зміни</value>
+  </data>
   <data name="KeysVisibilityControllerViewTitle" xml:space="preserve">
     <value>Вибір ключів для відображення</value>
   </data>

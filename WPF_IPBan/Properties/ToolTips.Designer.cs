@@ -126,9 +126,9 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Для застосування змін служба IPBan буде перезавантажена після закриття вікна..
         /// </summary>
-        internal static string ReloadIPListView {
+        internal static string ReloadIPBanService {
             get {
-                return ResourceManager.GetString("ReloadIPListView", resourceCulture);
+                return ResourceManager.GetString("ReloadIPBanService", resourceCulture);
             }
         }
         
