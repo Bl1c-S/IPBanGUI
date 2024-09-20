@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
-using System.Drawing;
+
 using System.Windows.Input;
-using System.Windows.Media;
-using Wpf.Ui.Controls;
+
 using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;

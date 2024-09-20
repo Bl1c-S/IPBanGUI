@@ -3,7 +3,6 @@ using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
