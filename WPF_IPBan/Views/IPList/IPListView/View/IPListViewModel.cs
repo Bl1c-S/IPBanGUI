@@ -19,7 +19,7 @@ public class IPListViewModel : PageViewModelBase
      private readonly IPListVMsBuilder _vmsBuilder;
      private readonly WinServicesController _servicesController;
 
-     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, WinServicesController servicesController) : base(Properties.PageNames.IP)
+     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, WinServicesController servicesController) : base(PageNames.IP)
      {
           _vmsBuilder = vmsBuilder;
           _servicesController = servicesController;
@@ -59,7 +59,7 @@ public class IPListViewModel : PageViewModelBase
           base.PageChanged();
           ChangeInfoVisibility(PageHaveChanges);
      }
-     public override bool ApplyChanges(ApplyOptions[]? options = null)
+     public override void ApplyChanges(ApplyOptions[]? options = null)
      {
           if (PageHaveChanges)
           {
@@ -67,8 +67,7 @@ public class IPListViewModel : PageViewModelBase
                     _servicesController.IPBan.Restart().Wait();
                else _servicesController.IPBan.Restart();
           }
-          PageHaveChanges = false; //Для того що двічі не перезавантажувалась служба при закритті вікна.
-          return true;
+          PageHaveChanges = false;
      }
      #endregion
 

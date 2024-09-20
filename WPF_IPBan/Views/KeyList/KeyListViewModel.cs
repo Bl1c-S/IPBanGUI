@@ -31,7 +31,7 @@ public class KeyListViewModel : PageViewModelBase
      #region Changed
      public string BorderCollor { get; private set; } = Collors.InActive;
      private bool _allKeySaved = true;
-     public override bool ApplyChanges(ApplyOptions[]? options = null)
+     public override void ApplyChanges(ApplyOptions[]? options = null)
      {
           if (!_allKeySaved)
                DialogMessageBox.TwoActionBox(SaveAllKey, ReturnAllPreviousValue,
@@ -41,7 +41,6 @@ public class KeyListViewModel : PageViewModelBase
           _servicesController.IPBan.Restart();
           PageHaveChanges = false;
           }
-          return true;
      }
      protected override void PageChanged()
      {

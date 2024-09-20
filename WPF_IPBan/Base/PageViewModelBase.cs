@@ -20,7 +20,7 @@ public class PageViewModelBase : ViewModelBase
           PageHaveChanges = false;
           PageButtons = new ObservableCollection<Button>();
      }
-     public virtual bool ApplyChanges(ApplyOptions[]? options = null) => true;
+     public virtual void ApplyChanges(ApplyOptions[]? options = null) { }
 
      protected virtual void CreatePageButtons()
      {
@@ -43,6 +43,10 @@ public class PageViewModelBase : ViewModelBase
      {
           PageButtons[INFO].ToolTip = message;
           OnPropertyChanged(nameof(PageButtons));
+     }
+     public override void Dispose()
+     {
+          base.Dispose();
      }
 }
 
