@@ -44,10 +44,6 @@ public class PageViewModelBase : ViewModelBase
           PageButtons[INFO].ToolTip = message;
           OnPropertyChanged(nameof(PageButtons));
      }
-     public override void Dispose()
-     {
-          base.Dispose();
-     }
 }
 
 public enum ApplyOptions

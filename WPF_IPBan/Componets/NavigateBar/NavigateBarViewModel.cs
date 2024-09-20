@@ -6,20 +6,20 @@ namespace WPF_IPBanUtility;
 internal class NavigateBarViewModel : ViewModelBase
 {
      private readonly NavigationService _navigationService;
-
      public NavigateBarViewModel(NavigationService navigationService)
      {
           _navigationService = navigationService;
           _navigationService.OnCurrentChanged += OnCurrentChanged;
 
-          NavigateManual = new RelayCommand(() => _navigationService.Navigate<ManualViewModel>());
-          NavigateToEvents = new RelayCommand(() => _navigationService.Navigate<EventsViewModel>());
-          NavigateToKeyList = new RelayCommand(() => _navigationService.Navigate<KeyListViewModel>());
-          NavigateToIPList = new RelayCommand(() => _navigationService.Navigate<IPListViewModel>());
-          NavigateToSettings = new RelayCommand(() => _navigationService.Navigate<SettingsViewModel>());
+          NavigateManual = new RelayCommand(_navigationService.NavToManual);
+          NavigateToEvents = new RelayCommand(_navigationService.NavToEvents);
+          NavigateToKeyList = new RelayCommand(_navigationService.NavToKeyList);
+          NavigateToIPList = new RelayCommand(_navigationService.NavToIpList);
+          NavigateToSettings = new RelayCommand(_navigationService.NavToSettings);
      }
 
      public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
+
      public string? CurrentPageName => CurrentViewModel?.PageName;
 
      public ICommand NavigateManual { get; }

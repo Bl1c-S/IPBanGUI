@@ -12,29 +12,6 @@
         Title="Torgsoft IPBanGUI v1.4.0"
         Height="700" MinHeight="200" Width="1000" MinWidth="700">
     <Grid Margin="8,0">
-        <Grid.Resources>
-
-            <DataTemplate DataType="{x:Type local:KeyListViewModel}">
-                <local:KeyListView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type local:EventsViewModel}">
-                <local:EventsView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type local:IPListViewModel}">
-                <local:IPListView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type local:SettingsViewModel}">
-                <local:SettingsView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type local:ManualViewModel}">
-                <local:ManualView/>
-            </DataTemplate>
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -48,6 +25,6 @@
 
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0"/>
 
-        <ContentControl Grid.Row="2" Content="{Binding CurrentViewModel}" Margin="4" MaxWidth="1000"/>
+        <ContentPresenter  Grid.Row="2" Content="{Binding CurrentView}" Margin="4" MaxWidth="1000" />
     </Grid>
 </Window>

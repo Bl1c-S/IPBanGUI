@@ -1,15 +1,19 @@
-﻿namespace WPF_IPBanUtility;
+﻿using System.Windows.Controls;
+
+namespace WPF_IPBanUtility;
 
 internal class MainWindowViewModel : ViewModelBase
 {
+     public NavigateBarViewModel NavigateBarViewModel => _navigateBarViewModel;
+     public NavigateTabViewModel NavigateTabViewModel => _navigateTabViewModel;
+
+     public UserControl? CurrentView => _navigationService.CurrentView;
+     public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
+
      private readonly NavigateBarViewModel _navigateBarViewModel;
      private readonly NavigateTabViewModel _navigateTabViewModel;
      private readonly NavigationService _navigationService;
 
-     public NavigateBarViewModel NavigateBarViewModel => _navigateBarViewModel;
-     public NavigateTabViewModel NavigateTabViewModel => _navigateTabViewModel;
-
-     public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
 
      public MainWindowViewModel(NavigationService navigationService)
      {
@@ -17,12 +21,13 @@ internal class MainWindowViewModel : ViewModelBase
           _navigateTabViewModel = new(navigationService);
           _navigationService = navigationService;
 
-          _navigationService.Navigate<ManualViewModel>();
           _navigationService.OnCurrentChanged += OnNavigateChanged;
+          _navigationService.NavToManual();
      }
      private void OnNavigateChanged()
      {
           OnPropertyChanged(nameof(CurrentViewModel));
+          OnPropertyChanged(nameof(CurrentView));
      }
 
      public override void Dispose()
