@@ -34,9 +34,14 @@ public class KeyListViewModel : PageViewModelBase
      public override void ApplyChanges(ApplyOptions[]? options = null)
      {
           if (!_allKeySaved)
-               DialogMessageBox.TwoActionBox(SaveAllKey, ReturnAllPreviousValue,
-                    Messages.KeysChanged, PageNames.KeysChanged, ButtonNames.SaveAll, ButtonNames.ReturnAll);
-          if(PageHaveChanges)
+          {
+               var res = MessageBox.Show(Messages.KeysChanged, PageNames.KeysChanged, MessageBoxButton.YesNo, MessageBoxImage.Information);
+               if (res == MessageBoxResult.Yes)
+                    SaveAllKey();
+               else
+                    ReturnAllPreviousValue();
+          }
+          if (PageHaveChanges)
           {
           _servicesController.IPBan.Restart();
           PageHaveChanges = false;
