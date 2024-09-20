@@ -42,11 +42,7 @@ internal class ManualViewModel : PageViewModelBase
      }
      protected override void CreatePageButtons()
      {
-          PageButtons.Add(new Button
-          {
-               Content = UpdateTitle,
-               Command = IOpenLinkCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.ApprovalsApp28
-          });
+          PageButtons.Add(CreateButtonWithTitle(
+               IOpenLinkCommand, Wpf.Ui.Common.SymbolRegular.ApprovalsApp28, UpdateTitle));
      }
 }

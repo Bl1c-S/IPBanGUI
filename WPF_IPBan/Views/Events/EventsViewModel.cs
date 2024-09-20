@@ -79,20 +79,10 @@ public class EventsViewModel : PageViewModelBase
 
      protected override void CreatePageButtons()
      {
-          PageButtons.Add(new Button
-          {
-               Content = Properties.ButtonNames.Update,
-               Command = IUpdateCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.ArrowSync24
-          });
-
-          PageButtons.Add(new Button
-          {
-               Content = Properties.ButtonNames.Filter,
-               Command = IFilterCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.Filter24,
-               Margin = new(4, 0, 0, 0)
-          });
+          PageButtons.Add(CreateButtonWithTitle(
+               IUpdateCommand, Wpf.Ui.Common.SymbolRegular.ArrowSync24, Properties.ButtonNames.Update));
+          PageButtons.Add(CreateButtonWithTitle(
+               IFilterCommand, Wpf.Ui.Common.SymbolRegular.Filter24, Properties.ButtonNames.Filter, "", new(4, 0, 0, 0)));
      }
 
      public override void Dispose()

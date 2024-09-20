@@ -72,34 +72,10 @@ namespace WPF_IPBanUtility
                Thickness margin = new(2);
                return new()
                {
-                   new Button
-                   {
-                        Command = ICopyCommand,
-                        Icon = SymbolRegular.Copy20,
-                        ToolTip = ToolTips.Copy,
-                        Margin = margin
-                   },
-                   new Button
-                   {
-                        Command = IAddToWiteListCommand,
-                        Icon = SymbolRegular.CheckmarkCircle20,
-                        ToolTip = ToolTips.ToWiteList,
-                        Margin = margin
-                   },
-                   new Button
-                   {
-                        Command = IRemoveCommand,
-                        Icon = SymbolRegular.Delete20,
-                        ToolTip = ToolTips.RemoveBlockList,
-                        Margin = margin
-                   },
-                   new Button
-                   {
-                        Command = IAddToBlackListCommand,
-                        Icon = SymbolRegular.Prohibited20,
-                        ToolTip = ToolTips.ToBlackList,
-                        Margin = margin
-                   }
+                   CreateButton(ICopyCommand, SymbolRegular.Copy20,  ToolTips.Copy, margin),
+                   CreateButton(IAddToWiteListCommand, SymbolRegular.CheckmarkCircle20, ToolTips.ToWiteList, margin),
+                   CreateButton(IRemoveCommand, SymbolRegular.Delete20,ToolTips.RemoveBlockList,margin),
+                   CreateButton(IAddToBlackListCommand, SymbolRegular.Prohibited20, ToolTips.ToBlackList, margin)
                };
           }
 

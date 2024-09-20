@@ -3,12 +3,12 @@ using Logic_IPBanUtility;
 using Logic_IPBanUtility.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_IPBanUtility.Properties;
-using Button = Wpf.Ui.Controls.Button;
 using Key = Logic_IPBanUtility.Models.Key;
 
 namespace WPF_IPBanUtility;
@@ -44,8 +44,8 @@ public class KeyListViewModel : PageViewModelBase
           }
           if (PageHaveChanges)
           {
-          _servicesController.IPBan.Restart();
-          PageHaveChanges = false;
+               _servicesController.IPBan.Restart();
+               PageHaveChanges = false;
           }
      }
      protected override void PageChanged()
@@ -142,20 +142,12 @@ public class KeyListViewModel : PageViewModelBase
      {
           base.CreatePageButtons();
           ChangeInfoMessage(ToolTips.ReloadIPBanService);
-          PageButtons.Add(new Button
-          {
-               Content = ButtonNames.SaveAll,
-               Command = ISaveAllCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.SaveMultiple24
-          });
 
-          PageButtons.Add(new Button
-          {
-               Content = ButtonNames.ReturnAll,
-               Command = IReturnAllPreviousValueCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.ArrowReplyAll24,
-               Margin = new(4, 0, 0, 0)
-          });
+          PageButtons.Add(CreateButtonWithTitle(
+               ISaveAllCommand, Wpf.Ui.Common.SymbolRegular.SaveMultiple24, ButtonNames.SaveAll));
+          PageButtons.Add(CreateButtonWithTitle(
+               IReturnAllPreviousValueCommand, Wpf.Ui.Common.SymbolRegular.ArrowReplyAll24,
+               ButtonNames.ReturnAll, "", new(4, 0, 0, 0)));
      }
 
      #region Dispose

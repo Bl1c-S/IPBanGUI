@@ -51,10 +51,10 @@ public class SettingsViewModel : PageViewModelBase
      }
 
      protected override void CreatePageButtons()
-          {
-          PageButtons.Add(new Button { Content = Properties.ButtonNames.SaveAll, Command = ISaveChangedCommand , 
-               Icon = Wpf.Ui.Common.SymbolRegular.SaveMultiple24 });
-          PageButtons.Add(new Button { Content = Properties.ButtonNames.Default, Command = ISetDefaultSettingsCommand, 
-               Icon = Wpf.Ui.Common.SymbolRegular.LauncherSettings24, Margin = new(4,0,0,0)});
+     {
+          PageButtons.Add(CreateButtonWithTitle(
+               ISaveChangedCommand, Wpf.Ui.Common.SymbolRegular.SaveMultiple24, Properties.ButtonNames.SaveAll));
+          PageButtons.Add(CreateButtonWithTitle(
+               ISetDefaultSettingsCommand, Wpf.Ui.Common.SymbolRegular.LauncherSettings24, Properties.ButtonNames.Default, "", new(4, 0, 0, 0)));
      }
 }

@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
-using Button = Wpf.Ui.Controls.Button;
 
 namespace WPF_IPBanUtility;
 
@@ -75,21 +74,13 @@ public class IPListViewModel : PageViewModelBase
      {
           base.CreatePageButtons();
           ChangeInfoMessage(ToolTips.ReloadIPBanService);
-          PageButtons.Add(new Button
-          {
-               Content = ButtonNames.Add,
-               Command = IAddIPCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.Add24,
-               ToolTip = ToolTips.AddIpView,
-          });
-          PageButtons.Add(new Button
-          {
-               Content = ButtonNames.Update,
-               Command = IUpdateAllCommand,
-               Icon = Wpf.Ui.Common.SymbolRegular.ArrowSync24,
-               ToolTip = ToolTips.UpdateIPLists,
-               Margin = new(4, 0, 0, 0)
-          });
+
+          PageButtons.Add(CreateButtonWithTitle(
+               IAddIPCommand, Wpf.Ui.Common.SymbolRegular.Add24,
+               ButtonNames.Add, ToolTips.AddIpView));
+          PageButtons.Add(CreateButtonWithTitle(
+               IUpdateAllCommand, Wpf.Ui.Common.SymbolRegular.ArrowSync24,
+               ButtonNames.Update, ToolTips.UpdateIPLists, new(4, 0, 0, 0)));
      }
 
      public override void Dispose()
