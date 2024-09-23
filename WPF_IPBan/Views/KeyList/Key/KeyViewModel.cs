@@ -58,7 +58,7 @@ public class KeyViewModel : ViewModelBase
                }
           }
      }
-     private void CheckChanges() => IsChanged = Key.Value != _value;
+     public void CheckChanges() => IsChanged = Key.Value != _value;
      #endregion
 
      #region Description

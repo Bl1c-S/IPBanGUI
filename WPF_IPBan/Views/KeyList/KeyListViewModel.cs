@@ -53,7 +53,7 @@ public class KeyListViewModel : PageViewModelBase
           base.PageChanged();
           ChangeInfoVisibility(PageHaveChanges);
      }
-     private void SaveAllEnableChanged()
+     private void SaveAllButtonEnableChanged()
      {
           PageChanged();
           var changedVM = _keyViewModels.FirstOrDefault(vm => vm.IsChanged == true);
@@ -89,7 +89,7 @@ public class KeyListViewModel : PageViewModelBase
      {
           if (!key.IsHidden) return null;
 
-          var keyVM = new KeyViewModel(key, SaveKey, HideKey, SaveAllEnableChanged);
+          var keyVM = new KeyViewModel(key, SaveKey, HideKey, SaveAllButtonEnableChanged);
           return keyVM;
      }
      #endregion
@@ -122,10 +122,13 @@ public class KeyListViewModel : PageViewModelBase
                var key = keyVM.Key;
                var isChanged = key.SetValue(keyVM.Value);
                if (isChanged)
+               {
                     keys.Add(key);
+                    keyVM.CheckChanges();
+               }
           }
           _cfgManager.WriteKeys(keys);
-          SaveAllEnableChanged();
+          SaveAllButtonEnableChanged();
      }
      #endregion
 
@@ -165,7 +168,7 @@ public class KeyListViewModel : PageViewModelBase
      {
           keyVM.SaveKeyEvent -= SaveKey;
           keyVM.HideKeyEvent -= HideKey;
-          keyVM.IsChangedChange -= SaveAllEnableChanged;
+          keyVM.IsChangedChange -= SaveAllButtonEnableChanged;
           keyVM.Dispose();
      }
      #endregion
