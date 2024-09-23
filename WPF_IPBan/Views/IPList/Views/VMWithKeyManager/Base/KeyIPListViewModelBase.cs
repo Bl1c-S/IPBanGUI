@@ -10,11 +10,11 @@ namespace WPF_IPBanUtility;
 
 public class KeyIPListViewModelBase : IPListViewModelBase
 {
-     public Action? ListChanged;
+     public Action<bool>? ListChanged;
      private readonly IPStatus _status;
      private KeyNames _keyName;
      public KeyValueManager _keyManager { get; }
-     public string[] IPs = new string[] {};
+     public string[] IPs = new string[] { };
 
      public KeyIPListViewModelBase(KeyNames key, IPStatus status, KeyValueManager keyManager, string title, IPListViewProperties properties) :
           base(title, properties)
@@ -55,7 +55,7 @@ public class KeyIPListViewModelBase : IPListViewModelBase
      private void RemoveItem(string ip)
      {
           _keyManager.RemoveIpFromKey(_keyName, ip);
-          ListChanged?.Invoke();
+          ListChanged?.Invoke(true);
      }
      public override void Update()
      {
@@ -75,11 +75,11 @@ public class KeyIPListViewModelBase : IPListViewModelBase
                     changeFunc.Invoke();
           }
      }
-     protected override void IPListChanged()
+     protected override void IPListChanged(bool currentVMChanged = false)
      {
           IPs = GetIps();
           VMs = new(BuildVMs(IPs));
-          base.IPListChanged();
+          base.IPListChanged(currentVMChanged);
      }
      private string[] GetIps() => _keyManager.GetIpListWithKey(_keyName);
 

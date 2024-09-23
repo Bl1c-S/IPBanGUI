@@ -162,9 +162,9 @@ public class LogFileManagerLogicTest
      [TestMethod]
      public void ReadNewLogEvents_When3NotNew()
      {
+          CreateTestFile_When3Current();
           LE_Manager = new(settingsBuilder.Settings!.IPBan.Logfile);
           LE_Manager.ReadNewLogEvents();
-          CreateTestFile_When3Current();
           var result = LE_Manager.ReadNewLogEvents();
 
           Assert.AreEqual(0, result.Count);

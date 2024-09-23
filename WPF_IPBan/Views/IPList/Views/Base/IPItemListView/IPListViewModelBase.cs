@@ -25,12 +25,12 @@ public class IPListViewModelBase : ViewModelBase
           VMs.Remove(vm);
           vm.Dispose();
      }
-     protected virtual void IPListChanged()
+     protected virtual void IPListChanged(bool currentVMChanged = false)
      {
           ItemCount = VMs.Count;
           OnPropertyChanged(nameof(VMs));
           OnPropertyChanged(nameof(ItemCountText));
-          VMChanged?.Invoke();
+          if (currentVMChanged) VMChanged?.Invoke();
      }
      public virtual void Update() { }
 }

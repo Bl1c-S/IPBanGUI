@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Logic_IPBanUtility.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,6 +14,9 @@ public class IPListViewModel : PageViewModelBase
 {
      public IPListProperties MyProperties { get; set; }
      public IPInputViewModel IPInputVM { get; }
+
+     private Action _applyRemove;
+
      public List<IPListViewModelBase> VMs { get; }
 
      private readonly IPListVMsBuilder _vmsBuilder;
@@ -26,6 +30,7 @@ public class IPListViewModel : PageViewModelBase
           var vmsResult = _vmsBuilder.Build(MyProperties);
           VMs = vmsResult.IPListVMs;
           IPInputVM = vmsResult.IPInputVM;
+          _applyRemove = vmsResult.ApplyRemove;
 
           foreach (var vm in VMs)
                vm.VMChanged += PageChanged;
@@ -63,8 +68,15 @@ public class IPListViewModel : PageViewModelBase
           if (PageHaveChanges)
           {
                if (options != null && options.Contains(ApplyOptions.Await))
+               {
+                    _applyRemove.Invoke();
                     _servicesController.IPBan.Restart().Wait();
-               else _servicesController.IPBan.Restart();
+               }
+               else
+               {
+                    _applyRemove.Invoke();
+                    _servicesController.IPBan.Restart();
+               }
           }
           PageHaveChanges = false;
      }

@@ -1,5 +1,5 @@
-﻿using Logic_IPBanUtility.Setting;
-using System.Net;
+﻿using Logic_IPBanUtility.Logic.IPList.Services;
+using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility.Logic.IPList
 {
@@ -8,10 +8,12 @@ namespace Logic_IPBanUtility.Logic.IPList
           public Action? IPAddressChanged;
           public List<IPAddressEntity> IPAddress;
           private readonly IPAddressDatabaseManager _dBManager;
+          private readonly UnBanService _unBanService;
 
           public IPAddressManager(Settings settings)
           {
                _dBManager = new(settings);
+               _unBanService = new(settings);
                IPAddress = _dBManager.GetAll();
           }
 
@@ -40,15 +42,31 @@ namespace Logic_IPBanUtility.Logic.IPList
           {
                Update();
                var ip = IPAddress.Find(x => x.IPAddressText == iPAddress.IPAddressText)!;
-               IPAddress.Remove(ip);
-               _dBManager.Remove(iPAddress);
-               IPAddressChanged?.Invoke();
+
+               if (ip != null) AddToUnBan(ip);
           }
+
+          private void AddToUnBan(IPAddressEntity ip)
+          {
+               IPAddress.Remove(ip);
+               _dBManager.Remove(ip);
+               IPAddressChanged?.Invoke();
+               _unBanService.Add(ip.IPAddressText);
+          }
+
           public void RemoveAll()
           {
+               foreach (var ip in IPAddress)
+                    _unBanService.Add(ip.IPAddressText);
+
                _dBManager.RemoveAll();
                IPAddress.Clear();
                IPAddressChanged?.Invoke();
+          }
+
+          public void ApplyRemove()
+          {
+               _unBanService.CreateFile();
           }
 
           private bool IsNewIP(IPAddressEntity iPAddress)

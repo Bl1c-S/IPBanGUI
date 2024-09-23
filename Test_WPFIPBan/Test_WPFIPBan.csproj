@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
@@ -19,6 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Test_IPBanUtility\Test_IPBanUtility.csproj" />
     <ProjectReference Include="..\WPF_IPBan\WPF_IPBanUtility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IPList\" />
   </ItemGroup>
 
 </Project>

@@ -11,6 +11,7 @@ using WPF_IPBanUtility.Views.IPList;
 namespace WPF_IPBanUtility;
 public class IPBlockedListViewModel : IPListViewModelBase
 {
+     public Action ApplyRemove => _iPBlokedListService.ApplyRemove;
      private readonly IPBlockedListService _iPBlokedListService;
      private Action<KeyNames>? ListChanged;
 
@@ -19,8 +20,8 @@ public class IPBlockedListViewModel : IPListViewModelBase
      {
           ListChanged = iPListChanged;
           _iPBlokedListService = iPListService;
-          IPListChanged();
-          _iPBlokedListService.IPsChanged += IPListChanged;
+          IPBlockListChanged();
+          _iPBlokedListService.IPsChanged += IPBlockListChanged;
      }
 
      private ObservableCollection<IPUserControlViewModelBase> BuildVMs(List<IPAddressEntity> ips)
@@ -59,7 +60,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
           ListChanged?.Invoke(KeyNames.Blacklist);
      }
 
-     protected override void IPListChanged()
+     private void IPBlockListChanged()
      {
           Cleanup();
           VMs = BuildVMs(_iPBlokedListService.IPs);
@@ -83,7 +84,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      }
      public override void Dispose()
      {
-          _iPBlokedListService.IPsChanged -= IPListChanged;
+          _iPBlokedListService.IPsChanged -= IPBlockListChanged;
           Cleanup();
           base.Dispose();
      }

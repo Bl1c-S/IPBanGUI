@@ -1,6 +1,7 @@
 ﻿using Logic_IPBanUtility;
 using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Logic.IPList;
+using Logic_IPBanUtility.Logic.IPList.Services;
 using Logic_IPBanUtility.Logic.LogFile;
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
@@ -13,10 +14,10 @@ using WPF_IPBanUtility.Views.IPList;
 
 namespace WPF_IPBanUtility
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+     /// <summary>
+     /// Interaction logic for App.xaml
+     /// </summary>
+     public partial class App : Application
      {
           private OtherExeptionHandler otherExeptionHandler = new();
           private LoadWindowModel? _loadVM;
@@ -80,6 +81,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<KeyValueManager>();
                     services.AddSingleton<LogEventManager>();
                     services.AddSingleton<WinServicesController>();
+                    services.AddSingleton<UnBanService>();
 
                     services.AddSingleton<IPBlockedListService>();
 
