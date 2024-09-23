@@ -24,24 +24,26 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Border Grid.Row="0" Style="{StaticResource StandartBorder}" Visibility="{Binding MyProperties.IPInputVisibility}">
                 <local:IPInputView DataContext="{Binding IPInputVM}"/>
             </Border>
-            
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
+                          CanContentScroll="True" IsDeferredScrollingEnabled="True">
                 <ItemsControl ItemsSource="{Binding VMs}" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl  Content="{Binding}" Margin="4"/>
+                            <ContentPresenter Content="{Binding}" Margin="4"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
+
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
