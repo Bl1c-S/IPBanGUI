@@ -3,7 +3,6 @@ using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
@@ -20,8 +19,8 @@ public class IPBlockedListViewModel : IPListViewModelBase
      {
           ListChanged = iPListChanged;
           _iPBlokedListService = iPListService;
-          IPBlockListChanged();
-          _iPBlokedListService.IPsChanged += IPBlockListChanged;
+          IPListChanged();
+          _iPBlokedListService.IPsChanged += IPBlickListChanged;
      }
 
      private ObservableCollection<IPUserControlViewModelBase> BuildVMs(List<IPAddressEntity> ips)
@@ -46,7 +45,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
           return new(iPAddressEntity,
                AddToWhiteList,
                AddToBlacklist,
-               _iPBlokedListService.Remove,
+               RemoveWithBlocklist,
                DisposeItem);
      }
      private void AddToWhiteList(IPAddressEntity ip)
@@ -59,12 +58,18 @@ public class IPBlockedListViewModel : IPListViewModelBase
           _iPBlokedListService.AddToBlacklist(ip);
           ListChanged?.Invoke(KeyNames.Blacklist);
      }
+     private void RemoveWithBlocklist(IPAddressEntity ip)
+     {
+          _iPBlokedListService.Remove(ip);
+          IPListChanged(true);
+     }
 
-     private void IPBlockListChanged()
+     private void IPBlickListChanged() => IPListChanged(false);
+     protected override void IPListChanged(bool currentVMChanged = false)
      {
           Cleanup();
           VMs = BuildVMs(_iPBlokedListService.IPs);
-          base.IPListChanged();
+          base.IPListChanged(currentVMChanged);
      }
 
      private void Cleanup()
@@ -84,7 +89,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      }
      public override void Dispose()
      {
-          _iPBlokedListService.IPsChanged -= IPBlockListChanged;
+          _iPBlokedListService.IPsChanged -= IPBlickListChanged;
           Cleanup();
           base.Dispose();
      }

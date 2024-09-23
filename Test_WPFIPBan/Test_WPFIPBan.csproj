@@ -21,8 +21,4 @@
     <ProjectReference Include="..\WPF_IPBan\WPF_IPBanUtility.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="IPList\" />
-  </ItemGroup>
-
 </Project>
