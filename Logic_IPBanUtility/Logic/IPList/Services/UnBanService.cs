@@ -9,7 +9,6 @@ namespace Logic_IPBanUtility.Logic.IPList.Services
      {
           private readonly string filePath;
           private readonly List<string> unBanList = new();
-
           public UnBanService(Settings settings)
           {
                filePath = Path.Combine(settings.IPBan.Folder, "unban.txt");
