@@ -165,4 +165,7 @@
   <data name="WhiteList" xml:space="preserve">
     <value>Дозволені - Білий список</value>
   </data>
+  <data name="Docs" xml:space="preserve">
+    <value>Документація</value>
+  </data>
 </root>

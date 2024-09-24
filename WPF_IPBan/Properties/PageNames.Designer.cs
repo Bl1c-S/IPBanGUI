@@ -88,6 +88,15 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Документація.
+        /// </summary>
+        public static string Docs {
+            get {
+                return ResourceManager.GetString("Docs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Події.
         /// </summary>
         public static string Events {
@@ -97,7 +106,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ІР - бета.
+        ///   Looks up a localized string similar to При великій кількості тимчасово заблокованих IP-адрес виникають проблеми з тривалим відкриттям вікна.
         /// </summary>
         public static string IP {
             get {

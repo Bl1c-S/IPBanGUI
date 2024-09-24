@@ -9,39 +9,36 @@ namespace WPF_IPBanUtility;
 
 internal class ManualViewModel : PageViewModelBase
 {
-     public string WelcomeParagraph { get => Manual.WelcomeParagraph; }
-
-     public string KeyTitle { get => PageNames.KeyList; }
-     public string KeyParagraph1 { get => Manual.KeyParagraph1; }
-     public string KeyParagraph2 { get => Manual.KeyParagraph2; }
-
-     public string EventTitle { get => PageNames.Events; }
-     public string EventParagraph1 { get => Manual.EventParagraph1; }
-     public string EventParagraph2 { get => Manual.EventParagraph2; }
-
+     public string DocsTitle { get => PageNames.Docs; }
+     public string UpdateTitle { get => PageNames.UpdateTitle; }
      public string SupportTitle { get => PageNames.Support; }
      public string SupportDescription { get => Messages.SupportDescription; }
      public string SupportMail { get => "https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/kubarych.torgsoft%40gmail.com?compose=new"; }
      public string GitHubDiscussions { get => "https://github.com/Bl1c-S/IPBanGUI/discussions"; }
-
-     public string UpdateTitle { get => PageNames.UpdateTitle; }
-     public string UpdateParagraph1 { get => Manual.UpdateParagraph1; }
-     public string UpdateParagraph2 { get => Manual.UpdateParagraph2; }
-     public string Updates { get => "https://github.com/Bl1c-S/IPBanGUI/releases"; }
+     public string Updates { get => "https://ipban-gui-docs.torgsoft.ua/update"; }
+     public string DocsSite { get => "https://ipban-gui-docs.torgsoft.ua/"; }
 
      public ManualViewModel() : base(PageNames.Manual)
      {
-          IOpenLinkCommand = new RelayCommand(OpenLink);
+          IOpenUpdateLinkCommand = new RelayCommand(OpenUpdates);
+          IOpenDocsLinkCommand = new RelayCommand(OpenDocs);
           CreatePageButtons();
      }
-     private ICommand IOpenLinkCommand { get; }
-     private void OpenLink()
+     private ICommand IOpenUpdateLinkCommand { get; }
+     private ICommand IOpenDocsLinkCommand { get; }
+     private void OpenUpdates()
      {
           Process.Start(new ProcessStartInfo(Updates) { UseShellExecute = true });
+     }
+     private void OpenDocs()
+     {
+          Process.Start(new ProcessStartInfo(DocsSite) { UseShellExecute = true });
      }
      protected override void CreatePageButtons()
      {
           PageButtons.Add(CreateButtonWithTitle(
-               IOpenLinkCommand, Wpf.Ui.Common.SymbolRegular.ApprovalsApp28, UpdateTitle));
+               IOpenDocsLinkCommand, Wpf.Ui.Common.SymbolRegular.BookQuestionMark24, DocsTitle, "Посилання на сайт документацію"));
+          PageButtons.Add(CreateButtonWithTitle(
+               IOpenUpdateLinkCommand, Wpf.Ui.Common.SymbolRegular.ApprovalsApp28, UpdateTitle, "Посилання на сторінку з оновленнями в документації програми", new(4, 0, 0, 0)));
      }
 }

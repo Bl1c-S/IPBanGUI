@@ -11,29 +11,13 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
 
             <StackPanel Margin="100, 10">
-                <!--Старт-->
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding WelcomeParagraph}"/>
-
-                <!--Ключі-->
-                <Label Content="{Binding KeyTitle}" Style="{StaticResource ManualTitle}"/>
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph1}"/>
-                <Image Source="/Assets/KeyExemple.png" Style="{StaticResource ManualImage}"/>
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding KeyParagraph2}"/>
-
-                <!--Події-->
-                <Label Content="{Binding EventTitle}" Style="{StaticResource ManualTitle}"/>
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph1}"/>
-                <Image Source="/Assets/Events.png" Style="{StaticResource ManualImage}"/>
-                <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding EventParagraph2}"/>
-
-                <!--Оновленя-->
-                <Label Content="{Binding UpdateTitle}" Style="{StaticResource ManualTitle}"/>
-                <TextBlock Text="{Binding UpdateParagraph1}" Style="{StaticResource ManualParagraph}"/>
-                <ui:Hyperlink NavigateUri="{Binding Updates}" Content="{Binding UpdateTitle}" Icon="ApprovalsApp28" Margin="10" HorizontalAlignment="Center"/>
-                <Image Source="/Assets/UpdateVersion.png" Style="{StaticResource ManualImage}"/>
-                <TextBlock Text="{Binding UpdateParagraph2}" Style="{StaticResource ManualParagraph}"/>
-                <Image Source="/Assets/Replace.png" Style="{StaticResource ManualImage}"/>
-                
+                <!--Початок-->
+                <TextBlock Text="Ознайомтесь з призначенням та функціоналом програми в документації."
+                           Style="{StaticResource ManualParagraph}" />
+                <ui:Hyperlink HorizontalAlignment="Center" NavigateUri="{Binding DocsSite}" Content="{Binding DocsTitle}" Icon="BookQuestionMark24" Margin="10"/>
+                <!--Оновлення-->
+                <Label Content="Перелік змін в оновленні Torgsoft IPBanGUI v1.4.0" 
+                       Style="{StaticResource ManualTitle}"/>
                 <!--Підтримка-->
                 <Label Content="{Binding SupportTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding SupportDescription}" />
@@ -43,7 +27,7 @@
                 </DockPanel>
 
             </StackPanel>
-            
+
         </ScrollViewer>
     </Grid>
 </UserControl>
