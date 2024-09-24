@@ -97,7 +97,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ІР.
+        ///   Looks up a localized string similar to ІР - бета.
         /// </summary>
         public static string IP {
             get {

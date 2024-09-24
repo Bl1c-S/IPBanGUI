@@ -3,6 +3,7 @@ using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
@@ -19,8 +20,9 @@ public class IPBlockedListViewModel : IPListViewModelBase
      {
           ListChanged = iPListChanged;
           _iPBlokedListService = iPListService;
+          VMs = BuildVMs(_iPBlokedListService.IPs);
           IPListChanged();
-          _iPBlokedListService.IPsChanged += IPBlickListChanged;
+          _iPBlokedListService.IPsChanged += IPBlockListChanged;
      }
 
      private ObservableCollection<IPUserControlViewModelBase> BuildVMs(List<IPAddressEntity> ips)
@@ -51,24 +53,35 @@ public class IPBlockedListViewModel : IPListViewModelBase
      private void AddToWhiteList(IPAddressEntity ip)
      {
           _iPBlokedListService.AddToWhiteList(ip);
+          RemoveVM(ip);
           ListChanged?.Invoke(KeyNames.Whitelist);
      }
      private void AddToBlacklist(IPAddressEntity ip)
      {
           _iPBlokedListService.AddToBlacklist(ip);
+          RemoveVM(ip);
           ListChanged?.Invoke(KeyNames.Blacklist);
      }
      private void RemoveWithBlocklist(IPAddressEntity ip)
      {
           _iPBlokedListService.Remove(ip);
+          RemoveVM(ip);
+     }
+     private void RemoveVM(IPAddressEntity ip)
+     {
+          var vm = VMs.FirstOrDefault(vm => vm.Title == ip.IPAddressText);
+          if (vm == null) return;
+
+          DisposeItem(vm);
           IPListChanged(true);
      }
 
-     private void IPBlickListChanged() => IPListChanged(false);
+     private void IPBlockListChanged() => IPListChanged(false);
      protected override void IPListChanged(bool currentVMChanged = false)
      {
-          Cleanup();
-          VMs = BuildVMs(_iPBlokedListService.IPs);
+          //Cleanup();
+          //VMs = BuildVMs(_iPBlokedListService.IPs);
+          OnPropertyChanged(nameof(VMs));
           base.IPListChanged(currentVMChanged);
      }
 
@@ -89,7 +102,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      }
      public override void Dispose()
      {
-          _iPBlokedListService.IPsChanged -= IPBlickListChanged;
+          _iPBlokedListService.IPsChanged -= IPBlockListChanged;
           Cleanup();
           base.Dispose();
      }

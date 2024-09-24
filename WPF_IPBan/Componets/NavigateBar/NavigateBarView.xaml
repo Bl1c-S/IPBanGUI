@@ -28,11 +28,13 @@
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=Події}"/>
 
-            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="ІР" Margin="4,0,0,0"
+            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="ІР - бета" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=ІР}"
-                       BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=ІР}"/>
+                ConverterParameter=ІР - бета}"
+                       BorderBrush="OrangeRed"
+                       />
+            <!--BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
+                ConverterParameter=ІР - бета}"-->
 
             <ui:Button Icon="Key24" Command = "{Binding NavigateToKeyList}" ToolTip="Ключі" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
