@@ -48,8 +48,9 @@ public class IPAddressEntityDTO
      private static DateTime? ConvertUnixDateToNormal(long? msTime)
      {
           if (msTime == null || msTime == 0) return null;
-          DateTime dateTime = new DateTime(msTime.Value);
-          return dateTime;
+
+          DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(msTime.Value);
+          return dateTimeOffset.DateTime;
      }
 
      private static long ConvertNormalDateToUnix(DateTime? dateTime)

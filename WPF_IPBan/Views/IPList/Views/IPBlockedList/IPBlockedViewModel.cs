@@ -13,7 +13,7 @@ namespace WPF_IPBanUtility
 {
      public class IPBlockedViewModel : IPUserControlViewModelBase
      {
-          private const string format = "MM.dd  HH:mm:ss";
+          private const string format = "yyyy.MM.dd HH:mm:ss";
           private readonly IPAddressEntity _iPAddressEntity;
 
           public IPBlockedViewModel(IPAddressEntity ip, Action<IPAddressEntity> addToWhiteList, Action<IPAddressEntity> addToBlackList, Action<IPAddressEntity> remove, Action<IPBlockedViewModel> dispose) :
