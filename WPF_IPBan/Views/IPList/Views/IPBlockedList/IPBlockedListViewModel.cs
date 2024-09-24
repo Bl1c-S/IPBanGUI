@@ -76,13 +76,24 @@ public class IPBlockedListViewModel : IPListViewModelBase
           IPListChanged(true);
      }
 
-     private void IPBlockListChanged() => IPListChanged(false);
+     private void IPBlockListChanged()
+     {
+          AddNewVMs();
+          IPListChanged(false);
+     }
      protected override void IPListChanged(bool currentVMChanged = false)
      {
-          //Cleanup();
-          //VMs = BuildVMs(_iPBlokedListService.IPs);
           OnPropertyChanged(nameof(VMs));
           base.IPListChanged(currentVMChanged);
+     }
+
+     private void AddNewVMs()
+     {
+          foreach (var ip in _iPBlokedListService.IPs)
+          {
+               var vm = VMs.FirstOrDefault(vm => vm.Title == ip.IPAddressText);
+               if (vm == null) VMs.Add(CreateVM(ip));
+          }
      }
 
      private void Cleanup()
