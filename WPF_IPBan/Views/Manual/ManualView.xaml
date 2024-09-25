@@ -15,9 +15,7 @@
                 <TextBlock Text="Ознайомтесь з призначенням та функціоналом програми в документації."
                            Style="{StaticResource ManualParagraph}" />
                 <ui:Hyperlink HorizontalAlignment="Center" NavigateUri="{Binding DocsSite}" Content="{Binding DocsTitle}" Icon="BookQuestionMark24" Margin="10"/>
-                <!--Оновлення-->
-                <Label Content="Перелік змін в оновленні Torgsoft IPBanGUI v1.4.0" 
-                       Style="{StaticResource ManualTitle}"/>
+
                 <!--Підтримка-->
                 <Label Content="{Binding SupportTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding SupportDescription}" />

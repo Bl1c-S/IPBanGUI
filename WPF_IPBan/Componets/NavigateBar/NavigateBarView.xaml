@@ -28,7 +28,7 @@
                        BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
                 ConverterParameter=Події}"/>
 
-            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="ІР - бета" Margin="4,0,0,0"
+            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="{Binding IPMes}" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
                 ConverterParameter=ІР - бета}"
                        BorderBrush="OrangeRed"

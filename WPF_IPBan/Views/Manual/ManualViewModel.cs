@@ -15,7 +15,7 @@ internal class ManualViewModel : PageViewModelBase
      public string SupportDescription { get => Messages.SupportDescription; }
      public string SupportMail { get => "https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/kubarych.torgsoft%40gmail.com?compose=new"; }
      public string GitHubDiscussions { get => "https://github.com/Bl1c-S/IPBanGUI/discussions"; }
-     public string Updates { get => "https://ipban-gui-docs.torgsoft.ua/update"; }
+     public string Updates { get => "https://ipban-gui-docs.torgsoft.ua/update/last"; }
      public string DocsSite { get => "https://ipban-gui-docs.torgsoft.ua/"; }
 
      public ManualViewModel() : base(PageNames.Manual)

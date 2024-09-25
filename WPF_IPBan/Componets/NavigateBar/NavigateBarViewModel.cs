@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
@@ -38,4 +39,6 @@ internal class NavigateBarViewModel : ViewModelBase
           _navigationService.OnCurrentChanged -= OnCurrentChanged;
           base.Dispose();
      }
+
+     public string IPMes { get => Messages.IPMes; }
 }
