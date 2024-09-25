@@ -46,13 +46,9 @@ public class KeyListViewModel : PageViewModelBase
           if (PageHaveChanges)
           {
                if (options != null && options.Contains(ApplyOptions.Await))
-               {
                     _servicesController.IPBan.Restart().Wait();
-               }
                else
-               {
                     _servicesController.IPBan.Restart();
-               }
           }
           PageHaveChanges = false;
      }
