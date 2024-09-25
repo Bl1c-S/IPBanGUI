@@ -37,7 +37,10 @@ namespace WPF_IPBanUtility
                     var settings = LoadSettings();
 
                     var Services = CreateServiceProvager(settings);
-                    var mainWindow = new MainWindow() { DataContext = Services.GetRequiredService<MainWindowViewModel>() };
+                    var mainWindow = new MainWindow();
+                    var vm = Services.GetRequiredService<MainWindowViewModel>();
+                    mainWindow.WindowClosing += vm.Window_Closing;
+                    mainWindow.DataContext = vm;
 
                     loadWindow.Close();
                     mainWindow.Show();

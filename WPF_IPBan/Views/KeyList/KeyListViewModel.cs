@@ -32,6 +32,7 @@ public class KeyListViewModel : PageViewModelBase
      #region Changed
      public string BorderCollor { get; private set; } = Collors.InActive;
      private bool _allKeySaved = true;
+
      public override void ApplyChanges(ApplyOptions[]? options = null)
      {
           if (!_allKeySaved)
@@ -44,9 +45,16 @@ public class KeyListViewModel : PageViewModelBase
           }
           if (PageHaveChanges)
           {
-               _servicesController.IPBan.Restart();
-               PageHaveChanges = false;
+               if (options != null && options.Contains(ApplyOptions.Await))
+               {
+                    _servicesController.IPBan.Restart().Wait();
+               }
+               else
+               {
+                    _servicesController.IPBan.Restart();
+               }
           }
+          PageHaveChanges = false;
      }
      protected override void PageChanged()
      {
@@ -156,8 +164,7 @@ public class KeyListViewModel : PageViewModelBase
      #region Dispose
      public override void Dispose()
      {
-          if (PageHaveChanges)
-               _servicesController.IPBan.Restart();
+          ApplyChanges(new[] { ApplyOptions.Await });
 
           foreach (var keyVM in _keyViewModels)
                KeyVMDispose(keyVM);

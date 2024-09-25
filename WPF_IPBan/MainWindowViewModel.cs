@@ -24,6 +24,10 @@ internal class MainWindowViewModel : ViewModelBase
           _navigationService.OnCurrentChanged += OnNavigateChanged;
           _navigationService.NavToManual();
      }
+
+     public void Window_Closing() =>
+          _navigationService.Window_Closing();
+
      private void OnNavigateChanged()
      {
           OnPropertyChanged(nameof(CurrentViewModel));

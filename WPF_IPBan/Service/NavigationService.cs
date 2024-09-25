@@ -23,7 +23,7 @@ internal class NavigationService
      {
           if (_currentViewModel != null && _currentViewModel is T) return;
 
-          if (_currentViewModel != null)_currentViewModel.ApplyChanges();
+          if (_currentViewModel != null) _currentViewModel.ApplyChanges();
 
           var viewModel = _serviceProvider.GetService<T>() as PageViewModelBase;
           if (viewModel is null) return;
@@ -52,4 +52,10 @@ internal class NavigationService
 
      public SettingsView SettingsView { get; private set; } = new();
      public void NavToSettings() => Navigate<SettingsViewModel>(SettingsView);
+
+     internal void Window_Closing()
+     {
+          if (_currentViewModel != null)
+               _currentViewModel.ApplyChanges(new[] { ApplyOptions.Await });
+     }
 }
