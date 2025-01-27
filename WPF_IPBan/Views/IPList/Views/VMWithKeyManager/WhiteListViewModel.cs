@@ -15,7 +15,7 @@ public class WhiteListViewModel : KeyIPListViewModelBase
      {
           var icon = SymbolRegular.CheckmarkCircle20;
           var title = Status.InWhite;
-          var message = ToolTips.WiteListItem;
+          var message = ToolTips.WhiteListItem;
           return new(icon, title, message);
      }
 }
