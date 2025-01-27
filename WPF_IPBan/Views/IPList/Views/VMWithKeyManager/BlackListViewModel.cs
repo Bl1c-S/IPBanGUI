@@ -9,13 +9,11 @@ namespace WPF_IPBanUtility;
 public class BlackListViewModel : KeyIPListViewModelBase
 {
      public BlackListViewModel(KeyValueManager keyManager, IPListViewProperties properties) :
-           base(KeyNames.Blacklist, SetStatus(), keyManager, PageNames.BlackList, properties)
+           base(KeyNames.Blacklist, SetStatus, keyManager, PageNames.BlackList, properties)
      { }
-     private static IPStatus SetStatus()
-     {
-          var icon = SymbolRegular.Prohibited20;
-          var title = Status.Ban;
-          var message = ToolTips.BlackListItem;
-          return new(icon, title, message);
-     }
+     private static readonly IPStatus SetStatus = new(
+          SymbolRegular.Prohibited20,
+          Status.Ban,
+          ToolTips.BlackListItem          
+     );
 }

@@ -9,13 +9,11 @@ namespace WPF_IPBanUtility;
 public class WhiteListViewModel : KeyIPListViewModelBase
 {
      public WhiteListViewModel(KeyValueManager keyManager, IPListViewProperties properties) :
-          base(KeyNames.Whitelist, SetStatus(), keyManager, PageNames.WhiteList, properties)
+          base(KeyNames.Whitelist, SetStatus, keyManager, PageNames.WhiteList, properties)
      { }
-     private static IPStatus SetStatus()
-     {
-          var icon = SymbolRegular.CheckmarkCircle20;
-          var title = Status.InWhite;
-          var message = ToolTips.WhiteListItem;
-          return new(icon, title, message);
-     }
+     private static readonly IPStatus SetStatus = new(
+          SymbolRegular.CheckmarkCircle20,
+          Status.InWhite,
+          ToolTips.WhiteListItem              
+     );
 }
