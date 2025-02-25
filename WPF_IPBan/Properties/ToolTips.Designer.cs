@@ -180,9 +180,9 @@ namespace WPF_IPBanUtility.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Адреса не буде блокуватись.
         /// </summary>
-        internal static string WiteListItem {
+        internal static string WhiteListItem {
             get {
-                return ResourceManager.GetString("WiteListItem", resourceCulture);
+                return ResourceManager.GetString("WhiteListItem", resourceCulture);
             }
         }
     }

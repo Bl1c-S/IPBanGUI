@@ -156,7 +156,7 @@
   <data name="UpdateIPLists" xml:space="preserve">
     <value>Будуть перезавантажені всі списки IP-адрес.</value>
   </data>
-  <data name="WiteListItem" xml:space="preserve">
+  <data name="WhiteListItem" xml:space="preserve">
     <value>Адреса не буде блокуватись</value>
   </data>
 </root>
