@@ -30,11 +30,9 @@
 
             <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="{Binding IPMes}" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=ІР - бета}"
-                       BorderBrush="OrangeRed"
-                       />
-            <!--BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=ІР - бета}"-->
+                ConverterParameter=ІР}"
+                BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter},
+                ConverterParameter=ІР}"/>
 
             <ui:Button Icon="Key24" Command = "{Binding NavigateToKeyList}" ToolTip="Ключі" Margin="4,0,0,0"
                        Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 

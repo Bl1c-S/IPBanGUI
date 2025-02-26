@@ -106,7 +106,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to При великій кількості тимчасово заблокованих IP-адрес виникають проблеми з тривалим відкриттям вікна.
+        ///   Looks up a localized string similar to ІР.
         /// </summary>
         public static string IP {
             get {
