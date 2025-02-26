@@ -29,22 +29,19 @@
                 <local:IPInputView DataContext="{Binding IPInputVM}"/>
             </Border>
 
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" 
-                          CanContentScroll="True" IsDeferredScrollingEnabled="True">
-                <ItemsControl ItemsSource="{Binding VMs}" VerticalAlignment="Top">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+   CanContentScroll="True" IsDeferredScrollingEnabled="True">
 
-                    <ItemsControl.ItemTemplate>
+                <ListBox ItemsSource="{Binding VMs}" VerticalAlignment="Top"
+           VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
+           HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource IPListBoxListItem}">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <ContentPresenter Content="{Binding}" Margin="4"/>
+                            <local:IPItemListView/>
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
-                </ItemsControl>
             </ScrollViewer>
         </Grid>
     </Grid>

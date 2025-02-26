@@ -16,20 +16,21 @@
                 </DockPanel>
             </Expander.Header>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" MaxHeight="500" CanContentScroll="True">
-                <ItemsControl ItemsSource="{Binding VMs}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+              VerticalScrollBarVisibility="Auto" CanContentScroll="True" IsDeferredScrollingEnabled="True">
 
-                    <ItemsControl.ItemTemplate>
+
+                <ListBox ItemsSource="{Binding VMs}" 
+                       VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
+                       HorizontalContentAlignment="Stretch"  MaxHeight="500" 
+                       ItemContainerStyle="{StaticResource IPListBoxItem}">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:IPUserControlView DataContext="{Binding}"/>
+                            <local:IPUserControlView/>
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
             </ScrollViewer>
         </Expander>
     </Grid>
