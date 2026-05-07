@@ -1,6 +1,9 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
+using NLog.Filters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using WPF_IPBanUtility.Properties;
 
@@ -40,10 +43,14 @@ public class FilterViewModel : ViewModelBase
      public string AllLogEvent { get => $"{FilterKeys.AllLogEvents}  {Statistics.AllLogEvent}"; }
      private void StaticticsChanged()
      {
-          OnPropertyChanged(nameof(Statistics));
+          foreach (var filter in Filters)
+          {
+               filter.Count = Statistics.Get(filter.Type);
+          }
+
           OnPropertyChanged(nameof(ShowedLogEventCount));
           OnPropertyChanged(nameof(AllLogEvent));
-     }
+     }    
      #endregion
 
      #region Searching
@@ -96,18 +103,19 @@ public class FilterViewModel : ViewModelBase
      private void AddLogEventsByFiltersAndSearch(List<LogEvent> logEvents)
      {
           _allLogEvents.AddRange(logEvents);
-          foreach (var key in _filterKeys)
+          foreach (var key in Filters)
           {
-               var findedLogs = FilterLogEventsByType(logEvents, key.Key);
-               Statistics.AddEvents(key.Key, findedLogs.Count);
-               if (key.Value.IsEnable)
+               var findedLogs = FilterLogEventsByType(logEvents, key.Type);
+               Statistics.AddEvents(key.Type, findedLogs.Count);
+               if (key.IsEnable)
                     AddObservableLogEvents(findedLogs);
           }
      }
      #endregion
 
      #region FilterKeys
-     private Dictionary<LogEventType, FilterKey> _filterKeys = new();
+     public ObservableCollection<FilterKey> Filters { get; } = new();
+
      private void FilterKeysBuild()
      {
           AddToFilterKeys(FilterKeys.LoginSucceeded, true, LogEventType.LoginSucceeded);
@@ -119,16 +127,21 @@ public class FilterViewModel : ViewModelBase
      }
      private void AddToFilterKeys(string name, bool isEnable, LogEventType filteType)
      {
-          var filterKey = new FilterKey(name, isEnable, filteType, ApplyFilter);
-          _filterKeys.Add(filteType, filterKey);
+          var filter = new FilterKey(name, isEnable, filteType);
+          filter.PropertyChanged += OnFilterChanged;
+          Filters.Add(filter);
+     }
+     private void OnFilterChanged(object? sender, PropertyChangedEventArgs e)
+     {
+          if (e.PropertyName == nameof(FilterKey.IsEnable))
+          {
+               if (sender is FilterKey filter)
+               {
+                    ApplyFilter(filter.IsEnable, filter.Type);
+               }
+          }
      }
 
-     public FilterKey LoginSucceeded { get => _filterKeys[LogEventType.LoginSucceeded]; }
-     public FilterKey LoginFailure { get => _filterKeys[LogEventType.LoginFailure]; }
-     public FilterKey ForgetFailedLogin { get => _filterKeys[LogEventType.ForgetFailedLogin]; }
-     public FilterKey BanningIP { get => _filterKeys[LogEventType.BanningIP]; }
-     public FilterKey UnBanningIP { get => _filterKeys[LogEventType.UnBanningIP]; }
-     public FilterKey FirewallEntriesUpdated { get => _filterKeys[LogEventType.FirewallEntriesUpdated]; }
      #endregion
 
      #region ApplyFilter
@@ -203,6 +216,10 @@ public class FilterViewModel : ViewModelBase
      {
           _manager.DaysWithLogChanged -= UpdateSelectableDateRange;
           _manager.TodayChanged -= TodayChanged;
+
+          foreach (var filter in Filters)
+               filter.PropertyChanged -= OnFilterChanged;
+          
           Statistics.StatisticsChanged -= StaticticsChanged;
           base.Dispose();
      }
