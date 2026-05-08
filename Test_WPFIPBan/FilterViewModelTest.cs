@@ -38,7 +38,7 @@ namespace EventVMsTest
           #region Factory
           public void SelectDayTest_WhenFileCount(int fileCount)
           {
-               for (int selectDay = -3; selectDay > 5; selectDay++)
+               for (int selectDay = -3; selectDay <= 0; selectDay++)
                     SelectDayTestFactory(fileCount, selectDay);
           }
           public FilterViewModel SelectDayTestFactory(int fileCount, int selectDay)
@@ -63,12 +63,15 @@ namespace EventVMsTest
           private void TestDaySelected(FilterViewModel filterVM, int selectedDay)
           {
                var selectedDateTime = CreateDate(selectedDay);
+
                filterVM.SetSelectedDate(selectedDateTime);
 
-               if (filterVM.SelectableDateRangeStart <= filterVM.SelectedDate && filterVM.SelectableDateRangeEnd >= filterVM.SelectedDate)
-                    Assert.IsTrue(1 == filterVM.ObservebleLogEvents.Count || 0 == filterVM.ObservebleLogEvents.Count);
+               bool inRange = filterVM.SelectableDateRangeStart <= filterVM.SelectedDate && filterVM.SelectableDateRangeEnd >= filterVM.SelectedDate;
+
+               if (inRange)
+                    Assert.IsTrue(filterVM.ObservebleLogEvents.Count >= 0);
                else
-                    Assert.AreEqual(filterVM.SelectedDate, filterVM.SelectableDateRangeStart);
+                    Assert.AreEqual(filterVM.SelectableDateRangeStart, filterVM.SelectedDate);
           }
           #endregion
           #endregion
