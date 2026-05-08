@@ -40,14 +40,11 @@ public class EventsViewModel : PageViewModelBase
      #region Filter
      public ICommand IFilterCommand { get; }
      public Visibility FilterVisibility { get; private set; }= Visibility.Collapsed;
-     private bool _filterViewVisibility = false;
      private void ChangeFilterVisibility()
      {
-          _filterViewVisibility = !_filterViewVisibility;
-          if (_filterViewVisibility)
-               FilterVisibility = Visibility.Visible;
-          else
-               FilterVisibility = Visibility.Collapsed;
+          FilterVisibility = FilterVisibility == Visibility.Visible
+               ? Visibility.Collapsed
+               : Visibility.Visible;
           OnPropertyChanged(nameof(FilterVisibility));
      }
      #endregion
