@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using WPF_IPBanUtility.Services;
 
 namespace WPF_IPBanUtility;
 
@@ -22,7 +23,7 @@ internal class MainWindowViewModel : ViewModelBase
           _navigationService = navigationService;
 
           _navigationService.OnCurrentChanged += OnNavigateChanged;
-          _navigationService.NavToManual();
+          _navigationService.NavToFirst();
      }
 
      public void Window_Closing() =>

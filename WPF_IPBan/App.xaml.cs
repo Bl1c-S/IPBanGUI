@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
+using Wpf.Ui.Common;
+using WPF_IPBanUtility.Properties;
+using WPF_IPBanUtility.Services;
 using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
 using WPF_IPBanUtility.Views.IPList;
 
@@ -92,7 +95,17 @@ namespace WPF_IPBanUtility
                     services.AddTransient<IPListVMsBuilder>();
                     services.AddTransient<SettingsVMsBuilder>();
 
-                    services.AddSingleton(s => new NavigationService(s));
+                    services.AddSingleton<NavigationService>(s =>
+                    {
+                         var nav = new NavigationService(s);
+                         nav.Register(new PageRegistration(PageNames.Manual, SymbolRegular.BookInformation24, typeof(ManualViewModel), () => new ManualView()));
+                         nav.Register(new PageRegistration(PageNames.Events, SymbolRegular.ChartMultiple24, typeof(EventsViewModel), () => new EventsView()));
+                         nav.Register(new PageRegistration(PageNames.IP, SymbolRegular.ShieldTask24, typeof(IPListViewModel), () => new IPListView(), Messages.IPMes));
+                         nav.Register(new PageRegistration(PageNames.KeyList, SymbolRegular.Key24, typeof(KeyListViewModel), () => new KeyListView()));
+                         nav.Register(new PageRegistration(PageNames.Settings, SymbolRegular.Settings48, typeof(SettingsViewModel), () => new SettingsView()));
+                         return nav;
+                    });
+                    
                     services.AddSingleton<MainWindowViewModel>();
                     services.AddTransient<ManualViewModel>();
                     services.AddTransient<IPListViewModel>();

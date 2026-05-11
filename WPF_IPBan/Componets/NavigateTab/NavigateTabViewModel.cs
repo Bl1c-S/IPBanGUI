@@ -1,7 +1,9 @@
-﻿namespace WPF_IPBanUtility;
-
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
+using WPF_IPBanUtility.Services;
+
+namespace WPF_IPBanUtility;
+
 
 internal class NavigateTabViewModel : ViewModelBase
 {

@@ -9,45 +9,22 @@
              d:DataContext="{d:DesignInstance Type=local:NavigateBarViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.Resources>
-            <local:CurrentPageNameToActiveConverter x:Key="CurrentPageNameConverter"/>
-            <local:CurrentBorderBrushToActiveConverter x:Key="CurrentBorderBrushConverter"/>
-        </Grid.Resources>
-
-        <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-
-            <ui:Button Icon="BookInformation24" Command = "{Binding NavigateManual}" ToolTip="Головна"
-                       Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=Головна}"
-                      BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=Головна}" />
-
-            <ui:Button Icon="ChartMultiple24" Command = "{Binding NavigateToEvents}" ToolTip="Події" Margin="4,0,0,0"
-                       Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=Події}"
-                       BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=Події}"/>
-
-            <ui:Button Icon="ShieldTask24" Command = "{Binding NavigateToIPList}" ToolTip="{Binding IPMes}" Margin="4,0,0,0"
-                       Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=ІР - бета}"
-                       BorderBrush="OrangeRed"
-                       />
-            <!--BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=ІР - бета}"-->
-
-            <ui:Button Icon="Key24" Command = "{Binding NavigateToKeyList}" ToolTip="Ключі" Margin="4,0,0,0"
-                       Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=Ключі}"
-                       BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=Ключі}"/>
-
-            <ui:Button Icon="Settings48" Command = "{Binding NavigateToSettings}" ToolTip="Налаштування" Margin="4,0,0,0"
-                       Content="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentPageNameConverter}, 
-                ConverterParameter=Налаштування}" 
-                       BorderBrush="{Binding CurrentViewModel.PageName, Converter={StaticResource CurrentBorderBrushConverter}, 
-                ConverterParameter=Налаштування}"/>
-
-        </DockPanel>
+        <ItemsControl ItemsSource="{Binding NavButtons}" VerticalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ui:Button Icon="{Binding Icon}"
+                               Content="{Binding ActiveName}"
+                               Command="{Binding Command}"
+                               ToolTip="{Binding ToolTip}"
+                               Margin="4,0,0,0"
+                               BorderBrush="{Binding ActiveBorder}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>
