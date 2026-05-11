@@ -1,4 +1,5 @@
 ﻿using Logic_IPBanUtility;
+using Logic_IPBanUtility.Interfaces.Services;
 using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Logic.IPList;
 using Logic_IPBanUtility.Logic.IPList.Services;
@@ -84,10 +85,11 @@ namespace WPF_IPBanUtility
                     services.AddSingleton(settings);
                     services.AddSingleton<FileManager>();
                     services.AddSingleton<ConfigFileManager>();
-                    services.AddSingleton<KeyValueManager>();
+                    services.AddSingleton<KeyValueManager>();    
                     services.AddSingleton<LogEventManager>();
                     services.AddSingleton<WinServicesController>();
                     services.AddSingleton<UnBanService>();
+                    services.AddSingleton<IServiceManager, WindowsServiceManager>();
 
                     services.AddSingleton<IPBlockedListService>();
 

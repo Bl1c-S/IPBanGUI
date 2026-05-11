@@ -80,8 +80,8 @@ public class ServiceViewModel : ViewModelBase
                          Collor = Collors.ReadCollor;
                          Icon = SymbolRegular.RecordStop20;
                          break;
-                    case ServiceProcessStatus.Stoping:
-                         Name = Status.Stoping;
+                    case ServiceProcessStatus.Stopping:
+                         Name = Status.Stopping;
                          Collor = Collors.YelowCollor;
                          Icon = SymbolRegular.Record20;
                          break;

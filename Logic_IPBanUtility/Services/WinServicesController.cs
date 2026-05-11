@@ -1,21 +1,23 @@
-﻿using Logic_IPBanUtility.Setting;
+﻿using Logic_IPBanUtility.Interfaces.Services;
+using Logic_IPBanUtility.Setting;
 using System.Runtime.Versioning;
 using System.ServiceProcess;
 
 namespace Logic_IPBanUtility.Services
 {
-     public class WinServicesController
+     public class WinServicesController : IWinServicesController
      {
-          public Service IPBan;
+          public Service IPBan { get; }
 
-          public WinServicesController(Settings settings)
+          public WinServicesController(Settings settings, IServiceManager serviceManager)
           {
-               IPBan = new(settings.IPBan.ServiceName);
+               IPBan = new(settings.IPBan.ServiceName, serviceManager);
           }
 
           [SupportedOSPlatform("windows")]
           public class Service
           {
+               private readonly IServiceManager _manager;
                public string Name { get; }
 
                private ServiceProcessStatus _status;
@@ -32,68 +34,52 @@ namespace Logic_IPBanUtility.Services
                }
                public Action? StatusChanged;
 
-               public Service(string name)
+               public Service(string name, IServiceManager manager)
                {
                     Name = name;
-                    Update();
+                    _manager = manager;
+                    _ = Update(); //fire and forget 
                }
-
                public Task Update() => Task.Run(() =>
                {
-                    using (var serviceController = new ServiceController(Name))
+                    if (_manager.CheckExists(Name))
                     {
-                         if (CheckIfServiceExists(Name))
-                         {
-                              Status = ServiceProcessStatus.UpdatingStatus;
-                              var status = serviceController.Status;
-                              if (status == ServiceControllerStatus.Running)
-                              {
-                                   Status = ServiceProcessStatus.Running;
-                                   return;
-                              }
-                         }
-                         Status = ServiceProcessStatus.Stopped;
+                         var systemStatus = _manager.GetStatus(Name);
+                         Status = systemStatus == ServiceControllerStatus.Running
+                                              ? ServiceProcessStatus.Running
+                                              : ServiceProcessStatus.Stopped;
                     }
+                    else
+                         Status = ServiceProcessStatus.Stopped;
                });
 
-               public Task Start() => Task.Run(() =>
+               public async Task Start()
                {
                     Status = ServiceProcessStatus.Starting;
-                    using (var serviceController = new ServiceController(Name))
+                    await Task.Run(() =>
                     {
-                         if (ServiceControllerStatus.Stopped == serviceController.Status)
-                         {
-                              serviceController.Start();
-                              serviceController.WaitForStatus(ServiceControllerStatus.Running);
-                         }
-                    }
-                    Update();
-               });
-               public Task Stop() => Task.Run(() =>
+                         if (_manager.GetStatus(Name) == ServiceControllerStatus.Stopped)
+                              _manager.Start(Name);
+                    });
+
+                    await Update();
+               }
+               public async Task Stop()
                {
-                    Status = ServiceProcessStatus.Stoping;
-                    using (var serviceController = new ServiceController(Name))
+                    Status = ServiceProcessStatus.Stopping;
+                    await Task.Run(() =>
                     {
-                         if (ServiceControllerStatus.Running == serviceController.Status)
-                         {
-                              serviceController.Stop();
-                              serviceController.WaitForStatus(ServiceControllerStatus.Stopped);
-                         }
-                    }
-                    Update();
-               });
-               public Task Restart() => Task.Run(async () =>
+                         if (_manager.GetStatus(Name) == ServiceControllerStatus.Running)
+                              _manager.Stop(Name);
+                    });
+
+                    await Update();
+               }
+
+               public async Task Restart() 
                {
-                    using (var serviceController = new ServiceController(Name))
-                    {
-                         await Stop();
-                         await Start();
-                    }
-               });
-               public bool CheckIfServiceExists(string serviceName)
-               {
-                    var services = ServiceController.GetServices();
-                    return services.Any(s => s.ServiceName == serviceName);
+                    await Stop();
+                    await Start();
                }
           }
           public enum ServiceProcessStatus
@@ -101,7 +87,7 @@ namespace Logic_IPBanUtility.Services
                Running,
                Stopped,
                Starting,
-               Stoping,
+               Stopping,
                UpdatingStatus
           }
      }
