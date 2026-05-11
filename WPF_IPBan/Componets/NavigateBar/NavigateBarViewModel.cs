@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using WPF_IPBanUtility.Componets.NavigateBar;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Services;
@@ -39,19 +38,6 @@ internal class NavigateBarViewModel : ViewModelBase
                btn.RefreshIsActive();
      }
      public PageViewModelBase? CurrentViewModel => _navigationService.CurrentViewModel;
-
-
-     //public ICommand NavigateManual { get; }
-     //public ICommand NavigateToKeyList { get; }
-     //public ICommand NavigateToIPList { get; }
-     //public ICommand NavigateToSettings { get; }
-     //public ICommand NavigateToEvents { get; }
-
-     //private void OnCurrentChanged()
-     //{
-     //     OnPropertyChanged(nameof(CurrentViewModel));
-     //     OnPropertyChanged(nameof(CurrentPageName));
-     //}
      public override void Dispose()
      {
           _navigationService.OnCurrentChanged -= OnCurrentChanged;
