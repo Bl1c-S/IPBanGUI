@@ -1,14 +1,15 @@
-﻿using Logic_IPBanUtility.Models;
+﻿using Logic_IPBanUtility.Interfaces.Logic;
+using Logic_IPBanUtility.Models;
 using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
 using System.Text.Json;
 
 namespace Logic_IPBanUtility;
 
-public class ConfigFileManager
+public class ConfigFileManager : IConfigFileManager
 {
      private FileManager _fileManager { get; }
-     public List<string> Context = new();
+     public List<string> Context { get; private set; } = new();
 
      private readonly string _contextPath;
      private readonly string _keyIdentiPath;

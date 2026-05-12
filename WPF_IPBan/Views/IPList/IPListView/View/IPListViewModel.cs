@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility.Services;
+using Logic_IPBanUtility.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,9 @@ public class IPListViewModel : PageViewModelBase
      public List<IPListViewModelBase> VMs { get; }
 
      private readonly IPListVMsBuilder _vmsBuilder;
-     private readonly WinServicesController _servicesController;
+     private readonly IWinServicesController _servicesController;
 
-     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, WinServicesController servicesController) : base(PageNames.IP)
+     public IPListViewModel(IPListProperties properties, IPListVMsBuilder vmsBuilder, IWinServicesController servicesController) : base(PageNames.IP)
      {
           _vmsBuilder = vmsBuilder;
           _servicesController = servicesController;

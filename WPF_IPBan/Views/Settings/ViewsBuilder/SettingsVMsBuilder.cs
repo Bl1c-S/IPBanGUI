@@ -1,5 +1,5 @@
-﻿using Logic_IPBanUtility;
-using Logic_IPBanUtility.Services;
+﻿using Logic_IPBanUtility.Interfaces.Logic;
+using Logic_IPBanUtility.Interfaces.Services;
 using Logic_IPBanUtility.Setting;
 using System.Collections.Generic;
 using WPF_IPBanUtility.Base;
@@ -9,10 +9,10 @@ namespace WPF_IPBanUtility;
 public class SettingsVMsBuilder
 {
      private readonly Settings _settings;
-     private readonly ConfigFileManager _configFileManager;
-     private readonly WinServicesController _controller;
+     private readonly IConfigFileManager _configFileManager;
+     private readonly IWinServicesController _controller;
 
-     public SettingsVMsBuilder(Settings settings, ConfigFileManager configFileManager, WinServicesController controller)
+     public SettingsVMsBuilder(Settings settings, IConfigFileManager configFileManager, IWinServicesController controller)
      {
           _settings = settings;
           _configFileManager = configFileManager;

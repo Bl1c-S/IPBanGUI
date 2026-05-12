@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility;
+using Logic_IPBanUtility.Interfaces.Logic;
 using Logic_IPBanUtility.Interfaces.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +15,10 @@ namespace WPF_IPBanUtility;
 
 public class KeyListViewModel : PageViewModelBase
 {
-     private readonly ConfigFileManager _cfgManager;
+     private readonly IConfigFileManager _cfgManager;
      private readonly IWinServicesController _servicesController;
 
-     public KeyListViewModel(ConfigFileManager cfgManager, IWinServicesController servicesController) : base(PageNames.KeyList)
+     public KeyListViewModel(IConfigFileManager cfgManager, IWinServicesController servicesController) : base(PageNames.KeyList)
      {
           _cfgManager = cfgManager;
           _servicesController = servicesController;
