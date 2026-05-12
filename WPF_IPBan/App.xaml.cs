@@ -87,7 +87,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<ConfigFileManager>();
                     services.AddSingleton<KeyValueManager>();    
                     services.AddSingleton<LogEventManager>();
-                    services.AddSingleton<WinServicesController>();
+                    services.AddSingleton<IWinServicesController, WinServicesController>();
                     services.AddSingleton<UnBanService>();
                     services.AddSingleton<IServiceManager, WindowsServiceManager>();
 
