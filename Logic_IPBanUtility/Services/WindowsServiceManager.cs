@@ -1,10 +1,13 @@
 ﻿using Logic_IPBanUtility.Interfaces.Services;
+using System.Runtime.Versioning;
 using System.ServiceProcess;
 
 namespace Logic_IPBanUtility.Services
 {
+     [SupportedOSPlatform("windows")]
      public class WindowsServiceManager : IServiceManager
      {
+
           public ServiceControllerStatus GetStatus(string name)
           {
                using var sc = new ServiceController(name);

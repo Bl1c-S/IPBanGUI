@@ -1,6 +1,5 @@
 ﻿using Logic_IPBanUtility.Interfaces.Services;
 using Logic_IPBanUtility.Setting;
-using System.Runtime.Versioning;
 using System.ServiceProcess;
 
 namespace Logic_IPBanUtility.Services
@@ -14,7 +13,6 @@ namespace Logic_IPBanUtility.Services
                IPBan = new(settings.IPBan.ServiceName, serviceManager);
           }
 
-          [SupportedOSPlatform("windows")]
           public class Service
           {
                private readonly IServiceManager _manager;
