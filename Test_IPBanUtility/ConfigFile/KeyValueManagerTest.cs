@@ -17,7 +17,7 @@ public class KeyValueManagerTest
           TestIPBan _testIPBan = new("TestCfg\\");
           SettingsBuilder sb = new();
           sb.CreateDefaultSettings(_testIPBan.CreateEmptyIPBan());
-          _cfgManager = new ConfigFileManager(sb.Settings!, new());
+          _cfgManager = new ConfigFileManager(sb.Settings!, new Logic_IPBanUtility.Services.FileManager());
           _keyManager = new(_cfgManager);
      }
 
