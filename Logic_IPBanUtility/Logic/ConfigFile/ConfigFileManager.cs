@@ -1,20 +1,18 @@
-﻿using Logic_IPBanUtility.Interfaces.Logic;
+﻿using Logic_IPBanUtility.Interfaces.Services;
 using Logic_IPBanUtility.Models;
-using Logic_IPBanUtility.Services;
 using Logic_IPBanUtility.Setting;
-using System.Text.Json;
 
 namespace Logic_IPBanUtility;
 
-public class ConfigFileManager : IConfigFileManager
+public class ConfigFileManager 
 {
-     private FileManager _fileManager { get; }
+     private IFileManager _fileManager { get; }
      public List<string> Context { get; private set; } = new();
 
      private readonly string _contextPath;
      private readonly string _keyIdentiPath;
 
-     public ConfigFileManager(Settings settings, FileManager fileManager)
+     public ConfigFileManager(Settings settings, IFileManager fileManager)
      {
           _fileManager = fileManager;
           _contextPath = settings.IPBan.Context;
@@ -62,8 +60,7 @@ public class ConfigFileManager : IConfigFileManager
 
           try
           {
-               var jsonKeyIdenti = JsonSerializer.Serialize(keyIdentis);
-               File.WriteAllText(_keyIdentiPath, jsonKeyIdenti);
+               _fileManager.SaveJson(_keyIdentiPath, keyIdentis);
           }
           catch (Exception ex)
           { throw new Exception($"{Properties.Resources.ErrorFileWrite} {_keyIdentiPath} \n {ex.Message}"); }
@@ -72,12 +69,13 @@ public class ConfigFileManager : IConfigFileManager
      public void WriteKey(Key key)
      {
           Context[key.Index] = key.Context;
-          File.WriteAllLines(_contextPath, Context);
+          _fileManager.WriteAllLines(_contextPath, Context);
      }
      public void WriteKeys(IEnumerable<Key> keys)
      {
           foreach (var key in keys)
                Context[key.Index] = key.Context;
-          File.WriteAllLines(_contextPath, Context);
+
+          _fileManager.WriteAllLines(_contextPath, Context);
      }
 }

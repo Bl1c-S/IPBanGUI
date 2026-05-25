@@ -1,5 +1,4 @@
 ﻿using Logic_IPBanUtility;
-using Logic_IPBanUtility.Interfaces.Logic;
 using Logic_IPBanUtility.Interfaces.Services;
 using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Logic.IPList;
@@ -84,8 +83,8 @@ namespace WPF_IPBanUtility
                IHost host = Host.CreateDefaultBuilder().ConfigureServices(services =>
                {
                     services.AddSingleton(settings);
-                    services.AddSingleton<FileManager>();
-                    services.AddSingleton<IConfigFileManager, ConfigFileManager>();
+                    services.AddSingleton<IFileManager, FileManager>();
+                    services.AddSingleton<ConfigFileManager>();
                     services.AddSingleton<KeyValueManager>();    
                     services.AddSingleton<LogEventManager>();
                     services.AddSingleton<IWinServicesController, WinServicesController>();

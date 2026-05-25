@@ -1,14 +1,13 @@
-﻿using Logic_IPBanUtility.Interfaces.Logic;
-using Logic_IPBanUtility.Models;
+﻿using Logic_IPBanUtility.Models;
 
 namespace Logic_IPBanUtility.Logic.ConfigFile;
 
 public class KeyValueManager
 {
      public Action<KeyNames>? KeyContextChanged;
-     private readonly IConfigFileManager _cfgManager;
+     private readonly ConfigFileManager _cfgManager;
 
-     public KeyValueManager(IConfigFileManager cfgManager)
+     public KeyValueManager(ConfigFileManager cfgManager)
      {
           _cfgManager = cfgManager;
      }

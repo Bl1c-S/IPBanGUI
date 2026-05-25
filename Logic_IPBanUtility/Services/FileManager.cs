@@ -1,9 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using Logic_IPBanUtility.Interfaces.Services;
+using Newtonsoft.Json;
 
 namespace Logic_IPBanUtility.Services;
 
-public class FileManager
+public class FileManager : IFileManager
 {
+     public void WriteAllLines(string path, IEnumerable<string> contents)
+     {
+          File.WriteAllLines(path, contents);
+     }
+
+     public void WriteAllText(string path, string contents)
+     {
+          File.WriteAllText(path, contents);
+     }
+
      public void CreateDefaultDirectory(string path)
      {
           if (Directory.Exists(path))
