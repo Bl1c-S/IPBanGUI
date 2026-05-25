@@ -11,6 +11,7 @@ namespace Logic_IPBanUtility.Services
           public WinServicesController(Settings settings, IServiceManager serviceManager)
           {
                IPBan = new(settings.IPBan.ServiceName, serviceManager);
+               _ = IPBan.Update();
           }
 
           public class Service
@@ -36,7 +37,6 @@ namespace Logic_IPBanUtility.Services
                {
                     Name = name;
                     _manager = manager;
-                    _ = Update(); //fire and forget 
                }
                public Task Update() => Task.Run(() =>
                {

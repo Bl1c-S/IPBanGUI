@@ -4,7 +4,7 @@ using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility;
 
-public class ConfigFileManager 
+public class ConfigFileManager
 {
      private IFileManager _fileManager { get; }
      public List<string> Context { get; private set; } = new();
