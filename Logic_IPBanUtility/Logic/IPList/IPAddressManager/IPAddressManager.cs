@@ -1,20 +1,20 @@
-﻿using Logic_IPBanUtility.Logic.IPList.Services;
-using Logic_IPBanUtility.Setting;
+﻿using Logic_IPBanUtility.Logic.IPList.IPAddressManager.Services;
+using Logic_IPBanUtility.Logic.IPList.Services;
 
-namespace Logic_IPBanUtility.Logic.IPList
+namespace Logic_IPBanUtility.Logic.IPList.IPAddressManager
 {
-     public class IPAddressManager
+     public class IpAddressManager
      {
-          public Action? IPAddressChanged;
-          public List<IPAddressEntity> IPAddress;
-          private readonly IPAddressDatabaseManager _dBManager;
+          public Action? IpAddressChanged;
+          public List<IPAddressEntity> IpAddress;
+          private readonly IpAddressDatabaseManager _dBManager;
           private readonly UnBanService _unBanService;
 
-          public IPAddressManager(Settings settings)
+          public IpAddressManager(Settings.Settings settings)
           {
                _dBManager = new(settings);
                _unBanService = new(settings);
-               IPAddress = _dBManager.GetAll();
+               IpAddress = _dBManager.GetAll();
           }
 
           public void Add(IPAddressEntity iPAddress)
@@ -25,27 +25,27 @@ namespace Logic_IPBanUtility.Logic.IPList
                else
                {
                     _dBManager.Add(iPAddress);
-                    IPAddress.Add(iPAddress);
-                    IPAddressChanged?.Invoke();
+                    IpAddress.Add(iPAddress);
+                    IpAddressChanged?.Invoke();
                }
           }
 
           public void Update()
           {
-               if (!IPsEqual()) IPAddressChanged?.Invoke();
+               if (!IPsEqual()) IpAddressChanged?.Invoke();
           }
           private bool IPsEqual()
           {
                var newIPAddressList = _dBManager.GetAll();
-               if (newIPAddressList.Count != IPAddress.Count) return false;
+               if (newIPAddressList.Count != IpAddress.Count) return false;
 
                foreach (var newIp in newIPAddressList)
                {
-                    var ip = IPAddress.FirstOrDefault(ip => ip.IPAddressText == newIp.IPAddressText);
+                    var ip = IpAddress.FirstOrDefault(ip => ip.IPAddressText == newIp.IPAddressText);
                     if (ip == null) return false;
                }
 
-               IPAddress = newIPAddressList;
+               IpAddress = newIPAddressList;
                return true;
           }
           private bool Equal(IPAddressEntity oldIP, IPAddressEntity newIP)
@@ -55,18 +55,18 @@ namespace Logic_IPBanUtility.Logic.IPList
 
           public void Remove(IPAddressEntity iPAddress)
           {
-               var ip = IPAddress.Find(x => x.IPAddressText == iPAddress.IPAddressText)!;
+               var ip = IpAddress.Find(x => x.IPAddressText == iPAddress.IPAddressText)!;
 
                if (ip != null) AddToUnBan(ip);
           }
 
           public void RemoveAll()
           {
-               foreach (var ip in IPAddress)
+               foreach (var ip in IpAddress)
                     _unBanService.Add(ip.IPAddressText);
 
                _dBManager.RemoveAll();
-               IPAddress.Clear();
+               IpAddress.Clear();
           }
 
           public void ApplyRemove()
@@ -76,14 +76,14 @@ namespace Logic_IPBanUtility.Logic.IPList
 
           private void AddToUnBan(IPAddressEntity ip)
           {
-               IPAddress.Remove(ip);
+               IpAddress.Remove(ip);
                _dBManager.Remove(ip);
                _unBanService.Add(ip.IPAddressText);
           }
 
           private bool IsNewIP(IPAddressEntity iPAddress)
           {
-               return !IPAddress.Any(ip => ip.IPAddressText == iPAddress.IPAddressText);
+               return !IpAddress.Any(ip => ip.IPAddressText == iPAddress.IPAddressText);
           }
      }
 }

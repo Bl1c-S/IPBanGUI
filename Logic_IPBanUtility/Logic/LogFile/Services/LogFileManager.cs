@@ -1,6 +1,6 @@
 ﻿using Logic_IPBanUtility.Services;
 
-namespace Logic_IPBanUtility.Logic.LogFile;
+namespace Logic_IPBanUtility.Logic.LogFile.Services;
 
 public class LogFileManager
 {
@@ -18,9 +18,9 @@ public class LogFileManager
      }
      public List<LogEvent> ReadNewLogEvents(bool readFirst = false)
      {
-          var firstLogID = readFirst ? 0 : _lastLogEventId;
+          var firstLogId = readFirst ? 0 : _lastLogEventId;
           var newLogs = _streamFileManager.StreamReadAllNewLines(LogFilePath, readFirst);
-          var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, firstLogID + 1);
+          var newLogEvents = _logEventBuilder.GetLogEvents(newLogs, firstLogId + 1);
 
           _lastLogEventId += newLogEvents.Count;
           LogEventsChanged?.Invoke();

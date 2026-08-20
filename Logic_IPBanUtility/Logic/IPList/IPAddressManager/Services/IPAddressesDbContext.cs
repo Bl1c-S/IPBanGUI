@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 namespace Logic_IPBanUtility.Logic.IPList;
 

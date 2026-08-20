@@ -1,4 +1,4 @@
-﻿namespace Logic_IPBanUtility;
+﻿namespace Logic_IPBanUtility.Settings.Models;
 
 public class Config
 {
@@ -22,6 +22,14 @@ public class Config
 
           var config = new Config(configFolder, settings, keyIdenti);
           return config;
+     }
+     public bool TryCheckExist()
+     {
+          if (!Directory.Exists(ConfigFolder))
+               return false;
+          if (!File.Exists(Settings))
+               return false;
+          return File.Exists(KeyIdenti);
      }
      public void CheckExist()
      {

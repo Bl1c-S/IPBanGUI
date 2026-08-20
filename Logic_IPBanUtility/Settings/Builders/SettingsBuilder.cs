@@ -2,34 +2,40 @@
 using Logic_IPBanUtility.Properties;
 using Logic_IPBanUtility.Services;
 using System.Text.Json;
+using Logic_IPBanUtility.Settings.Models;
 
 namespace Logic_IPBanUtility.Setting;
 
 public class SettingsBuilder
 {
-     public Settings? Settings;
+     public Settings.Settings? Settings;
 
-     FileManager _fileManager = new();
+     readonly FileManager _fileManager = new();
 
-     public void LoadSettings()
+     public bool LoadSettings()
      {
           Config config = Config.Create();
-          config.CheckExist();
-          Settings = _fileManager.GetJson<Settings>(config.Settings);
-          Settings.Config.CheckExist();
+
+          if (!config.TryCheckExist())
+               return false;
+
+          Settings = _fileManager.GetJson<Settings.Settings>(config.Settings);
+          return true;
      }
+
      public void CreateDefaultSettings(IPBan iPBan)
      {
           Config config = Config.Create();
           _fileManager.CreateDefaultDirectory(config.ConfigFolder);
           CreateDefaultKeyIdenty(config.KeyIdenti);
-          Settings settings = new(config, iPBan);
+          Settings.Settings settings = new(config, iPBan);
           settings.Save();
           config.CheckExist();
           Settings = settings;
      }
 
      #region KeyIdenty
+
      private void CreateDefaultKeyIdenty(string filePath)
      {
           var names = GetDefaultKeyNames();
@@ -49,15 +55,18 @@ public class SettingsBuilder
           string JsonKeyIdentiList = JsonSerializer.Serialize(keyIdentis);
           File.WriteAllText(filePath, JsonKeyIdentiList);
      }
+
      private string[] GetDefaultKeyNames()
      {
           string keyNames = Resources.DefaultKey;
           return keyNames.Split("\\r\\n");
      }
+
      private string[] GetEnableDefaultKeyNames()
      {
           string keyNames = Resources.DefaultKeyEnable;
           return keyNames.Split("\\r\\n");
      }
+
      #endregion
 }

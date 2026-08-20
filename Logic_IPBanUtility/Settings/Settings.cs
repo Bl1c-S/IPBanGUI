@@ -1,25 +1,25 @@
 ﻿using Logic_IPBanUtility.Services;
+using Logic_IPBanUtility.Settings.Models;
 
-namespace Logic_IPBanUtility.Setting;
+namespace Logic_IPBanUtility.Settings;
 
 public class Settings
 {
      public int Version;
-     private FileManager _fileManager = new();
      public Config Config;
      public IPBan IPBan;
           
+     private readonly FileManager _fileManager = new();
+     
+     public Settings() 
+     { 
+          //Json Constructor
+     }
      public Settings(Config config, IPBan iPBan)
      {
           Version = 100;
           Config = config;
           IPBan = iPBan;
-     }
-
-     public void SetIPBan(string folder)
-     {
-          IPBan = IPBan.Create(folder);
-          Save();
      }
 
      public void Save()

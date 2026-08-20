@@ -1,4 +1,4 @@
-﻿namespace Logic_IPBanUtility.Logic.LogFile;
+﻿namespace Logic_IPBanUtility.Logic.LogFile.Services;
 
 public class LogEventFilter
 {

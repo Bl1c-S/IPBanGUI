@@ -13,7 +13,7 @@ public class IpAddressManagerTest
      {
           IpBanTestHelper ipBanTestHelper = new();
           _factory = new(ipBanTestHelper.Settings);
-          var context = new IPAddressesDbContext(ipBanTestHelper.IpBan.SqliteDbPath);
+          var context = new IPAddressesDbContext(ipBanTestHelper.IpBan.Sqlite);
           context.Database.EnsureCreated();
      }
 

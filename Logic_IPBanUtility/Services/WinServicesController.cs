@@ -1,17 +1,11 @@
-﻿using Logic_IPBanUtility.Setting;
-using System.Runtime.Versioning;
+﻿using System.Runtime.Versioning;
 using System.ServiceProcess;
 
 namespace Logic_IPBanUtility.Services
 {
      public class WinServicesController
      {
-          public Service IPBan;
-
-          public WinServicesController(Settings settings)
-          {
-               IPBan = new(settings.IPBan.ServiceName);
-          }
+          public Service IPBan = new("IPBAN");
 
           [SupportedOSPlatform("windows")]
           public class Service
@@ -90,7 +84,7 @@ namespace Logic_IPBanUtility.Services
                          await Start();
                     }
                });
-               public bool CheckIfServiceExists(string serviceName)
+               private static bool CheckIfServiceExists(string serviceName)
                {
                     var services = ServiceController.GetServices();
                     return services.Any(s => s.ServiceName == serviceName);

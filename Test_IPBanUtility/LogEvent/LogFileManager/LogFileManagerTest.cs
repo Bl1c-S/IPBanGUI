@@ -14,7 +14,7 @@ public class LogFileManagerTest
      public LogFileManagerTest()
      {
           _ipBanTestHelper = new();
-          _logFileManager = new(_ipBanTestHelper.IpBan.LogfilePath);
+          _logFileManager = new(_ipBanTestHelper.IpBan.Logfile);
      }
      #region TestReadAllLogEvents
 
@@ -248,7 +248,7 @@ public class LogFileManagerTest
      
      private void WriteLogs(string[] testLogs)
      {
-          File.WriteAllLines(_ipBanTestHelper.IpBan.LogfilePath, testLogs);
+          File.WriteAllLines(_ipBanTestHelper.IpBan.Logfile, testLogs);
      }
      #endregion
 }
