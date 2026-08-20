@@ -4,6 +4,7 @@ using Logic_IPBanUtility.Setting;
 using Logic_IPBanUtility.Setting.Builders;
 using System.Linq;
 using System.Windows.Input;
+using Logic_IPBanUtility.Settings;
 using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;
@@ -16,7 +17,7 @@ public class ClearLogsViewModel : SettingsComponentViewModelBase
      public ClearLogsViewModel(Settings settings) : base(Properties.PageNames.ClearLogsTitle)
      {
           IClearLogsCommand = new RelayCommand(DeleteLogFiles);
-          _logFilePathExtractor = new(settings.IPBan.Folder);
+          _logFilePathExtractor = new(settings.IPBan.FolderPath);
      }
      private void DeleteLogFiles()
      {

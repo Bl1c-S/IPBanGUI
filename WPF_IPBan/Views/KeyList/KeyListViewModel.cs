@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Logic_IPBanUtility.Logic.ConfigFile;
 using WPF_IPBanUtility.Properties;
 using Key = Logic_IPBanUtility.Models.Key;
 

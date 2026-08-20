@@ -12,10 +12,10 @@ namespace WPF_IPBanUtility;
 public class IPBlockedListViewModel : IPListViewModelBase
 {
      public Action ApplyRemove => _iPBlokedListService.ApplyRemove;
-     private readonly IPBlockedListService _iPBlokedListService;
+     private readonly IpBlockedListService _iPBlokedListService;
      private Action<KeyNames>? ListChanged;
 
-     public IPBlockedListViewModel(IPBlockedListService iPListService, IPListViewProperties properties, Action<KeyNames> iPListChanged) :
+     public IPBlockedListViewModel(IpBlockedListService iPListService, IPListViewProperties properties, Action<KeyNames> iPListChanged) :
           base(PageNames.BlockList, properties)
      {
           ListChanged = iPListChanged;

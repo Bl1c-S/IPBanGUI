@@ -1,14 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Forms;
 
 namespace WPF_IPBanUtility
 {
      /// <summary>
      /// Interaction logic for LoadWindow.xaml
      /// </summary>
-     public partial class LoadWindow : Window
+     public partial class PreparatoryWindow
      {
-          public LoadWindow()
+          public PreparatoryWindow()
           {
                InitializeComponent();
           }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPF_IPBanUtility.LoadWindow"
+﻿<Window x:Class="WPF_IPBanUtility.PreparatoryWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Background="{DynamicResource ApplicationBackgroundBrush}"
 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-        d:DataContext="{d:DesignInstance Type=local:LoadWindowModel}"
+        d:DataContext="{d:DesignInstance Type=local:PreparatoryViewModel}"
         mc:Ignorable="d"
        Title="Torgsoft IPBanGUI" 
        Height="600" MinHeight="200" Width="800" MinWidth="650">

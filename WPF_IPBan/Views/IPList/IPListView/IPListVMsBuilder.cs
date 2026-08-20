@@ -8,11 +8,11 @@ namespace WPF_IPBanUtility.Views.IPList;
 
 public class IPListVMsBuilder : IDisposable
 {
-     private readonly IPBlockedListService _iPBlockedListService;
+     private readonly IpBlockedListService _iPBlockedListService;
      private readonly KeyValueManager _keyManager;
      private IPListChangedActions? _listChangedActions;
 
-     public IPListVMsBuilder(IPBlockedListService iPBlockedListService, KeyValueManager keyManager)
+     public IPListVMsBuilder(IpBlockedListService iPBlockedListService, KeyValueManager keyManager)
      {
           _iPBlockedListService = iPBlockedListService;
           _keyManager = keyManager;

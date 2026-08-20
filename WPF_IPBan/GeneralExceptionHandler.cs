@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace WPF_IPBanUtility
 {
-     internal class OtherExeptionHandler
+     internal class GeneralExceptionHandler
      {
           public void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
           {
