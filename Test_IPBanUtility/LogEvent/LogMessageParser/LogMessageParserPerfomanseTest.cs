@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace LogEventTest;
+namespace LogEventTests;
 
 [TestClass]
 public class LogMessageParserPerfomanseTest

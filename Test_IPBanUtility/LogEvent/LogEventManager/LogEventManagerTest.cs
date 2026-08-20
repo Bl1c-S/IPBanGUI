@@ -1,12 +1,13 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
+using Test_IPBanUtility.Helpers;
 using Test_IPBanUtility.LogEvent;
 
-namespace LogEventTest;
+namespace LogEventTests;
 
 [TestClass]
 public class LogEventManagerTest
 {
-     TestLogEventFileService testFileManager = new();
+     readonly LogEventFileHelper _fileManager = new();
 
      #region GetDateWithLogs
 
@@ -16,28 +17,28 @@ public class LogEventManagerTest
      {
           int firstFileCount = 0;
           FirstTestDateWithLogs(firstFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_FirstRead_1Days()
      {
           int firstFileCount = 1;
           FirstTestDateWithLogs(firstFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_FirstRead_2Days()
      {
           int firstFileCount = 2;
           FirstTestDateWithLogs(firstFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_FirstRead_10Days()
      {
           int firstFileCount = 3;
           FirstTestDateWithLogs(firstFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      #endregion
 
@@ -49,7 +50,7 @@ public class LogEventManagerTest
           
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Second_1_FirstRead_0Days()
@@ -58,7 +59,7 @@ public class LogEventManagerTest
           
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Second_2_FirstRead_0Days()
@@ -67,7 +68,7 @@ public class LogEventManagerTest
           
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Second_10_FirstRead_0Days()
@@ -76,7 +77,7 @@ public class LogEventManagerTest
           
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      #endregion
 
@@ -89,7 +90,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_1_Second_0_FirstRead_0Days()
@@ -99,7 +100,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_2_Second_0_FirstRead_0Days()
@@ -109,7 +110,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_3_Second_0_FirstRead_0Days()
@@ -119,7 +120,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
 
      [TestMethod]
@@ -130,7 +131,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_0_Second_3_FirstRead_0Days()
@@ -140,7 +141,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_3_Second_0_FirstRead_2Days()
@@ -150,7 +151,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_Third_1_Second_10_FirstRead_0Days()
@@ -160,7 +161,7 @@ public class LogEventManagerTest
           var manager = FirstTestDateWithLogs(firstFileCount);
           NextTestDateWithLogs(manager, secondFileCount);
           NextTestDateWithLogs(manager, thirdFileCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      #endregion
 
@@ -170,35 +171,35 @@ public class LogEventManagerTest
      {
           int firstFileCount = 0, startWithCount = 5;
           StartWithTestDateWithLogs(firstFileCount, startWithCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_1_StartWith_3()
      {
           int firstFileCount = 1, startWithCount = 3;
           StartWithTestDateWithLogs(firstFileCount, startWithCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_2_StartWith_1()
      {
           int firstFileCount = 2, startWithCount = 1;
           StartWithTestDateWithLogs(firstFileCount, startWithCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_10_StartWith_10()
      {
           int firstFileCount = 1, startWithCount = 3;
           StartWithTestDateWithLogs(firstFileCount, startWithCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_Should_5_StartWith_2()
      {
           int firstFileCount = 1, startWithCount = 3;
           StartWithTestDateWithLogs(firstFileCount, startWithCount);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
 
      #endregion
@@ -210,7 +211,7 @@ public class LogEventManagerTest
           int first = 0, second = 0, startWith = 0;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_1_Second_0_StartWith_3()
@@ -218,7 +219,7 @@ public class LogEventManagerTest
           int first = 1, second = 0, startWith = 3;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_1_Second_1_StartWith_1()
@@ -226,7 +227,7 @@ public class LogEventManagerTest
           int first = 1, second = 1, startWith = 1;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_3_Second_2_StartWith_5()
@@ -234,7 +235,7 @@ public class LogEventManagerTest
           int first = 3, second = 2, startWith = 5;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_0_Second_4_StartWith_1()
@@ -242,7 +243,7 @@ public class LogEventManagerTest
           int first = 0, second = 4, startWith = 1;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_4_Second_1_StartWith_0()
@@ -250,7 +251,7 @@ public class LogEventManagerTest
           int first = 4, second = 1, startWith = 0;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_1_Second_2_StartWith_8()
@@ -258,7 +259,7 @@ public class LogEventManagerTest
           int first = 1, second = 2, startWith = 8;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second, startWith);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_0_Second_5_StartWith_10()
@@ -266,7 +267,7 @@ public class LogEventManagerTest
           int first = 0, second = 5, startWith = 10;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second, startWith);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      [TestMethod]
      public void DateWithLogs_First_2_Second_5_StartWith_0()
@@ -274,7 +275,7 @@ public class LogEventManagerTest
           int first = 0, second = 5, startWith = 10;
           var manager = StartWithTestDateWithLogs(first, startWith);
           NextTestDateWithLogs(manager, second, startWith);
-          testFileManager.FileDelete();
+          _fileManager.FilesDelete();
      }
      #endregion
 
@@ -284,8 +285,8 @@ public class LogEventManagerTest
 
      private LogEventManager FirstTestDateWithLogs(int fileCount)
      {
-          testFileManager.CreateLogFileWithDate(fileCount);
-          var logEventManager = testFileManager.CreateLogEventManager();
+          _fileManager.CreateLogFileWithDate(fileCount);
+          var logEventManager = _fileManager.CreateLogEventManager();
           var days = logEventManager.CurrentDayWithLogs;
           for (int id = 0; id < days.Count; id++)
           {
@@ -298,10 +299,10 @@ public class LogEventManagerTest
      }
      private void NextTestDateWithLogs(LogEventManager logEventManager, int fileCount, int startWith  = 0)
      {
-          testFileManager.CreateLogFileWithDate(fileCount, startWith);
+          _fileManager.CreateLogFileWithDate(fileCount, startWith);
           logEventManager.CheckDaysWithLogsChanged();
           var days = logEventManager.CurrentDayWithLogs;
-          testFileManager.CheckDaysCount(days.Count, startWith, fileCount);
+          _fileManager.CheckDaysCount(days.Count, startWith, fileCount);
 
           for (int id = 0; id < days.Count; id++)
           {
@@ -313,8 +314,8 @@ public class LogEventManagerTest
      }
      private LogEventManager StartWithTestDateWithLogs(int fileCount, int startWith)
      {
-          testFileManager.CreateLogFileWithDate(fileCount, startWith);
-          var logEventManager = testFileManager.CreateLogEventManager();
+          _fileManager.CreateLogFileWithDate(fileCount, startWith);
+          var logEventManager = _fileManager.CreateLogEventManager();
           var days = logEventManager.CurrentDayWithLogs;
           for (int id = 0; id < days.Count; id++)
           {
