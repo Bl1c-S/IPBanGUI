@@ -8,13 +8,17 @@ namespace Logic_IPBanUtility.Setting;
 
 public class SettingsBuilder
 {
-     public Settings.Settings? Settings;
+     public Settings.Settings Settings
+     {
+          get { return field ?? throw new NullReferenceException("Settings load failed."); }
+          private set;
+     }
 
      readonly FileManager _fileManager = new();
 
      public bool LoadSettings()
      {
-          Config config = Config.Create();
+          var config = Config.Create();
 
           if (!config.TryCheckExist())
                return false;

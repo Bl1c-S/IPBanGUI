@@ -9,7 +9,7 @@
           private readonly List<string> unBanList = new();
           public UnBanService(Settings.Settings settings)
           {
-               filePath = Path.Combine(settings.IPBan.Folder, "unban.txt");
+               filePath = Path.Combine(settings.IpBan.Folder, "unban.txt");
           }
 
           public void CreateFile() => File.WriteAllLines(filePath, unBanList);

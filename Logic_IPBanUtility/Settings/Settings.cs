@@ -6,9 +6,15 @@ namespace Logic_IPBanUtility.Settings;
 public class Settings
 {
      public int Version;
-     public Config Config;
-     public IPBan IPBan;
-          
+     public Config Config
+     {
+          get { return field ?? throw new NullReferenceException(ToString()); }
+          set;
+     }
+     public IPBan IpBan {
+          get { return field ?? throw new NullReferenceException(ToString()); }
+          set;
+     }
      private readonly FileManager _fileManager = new();
      
      public Settings() 
@@ -19,7 +25,7 @@ public class Settings
      {
           Version = 100;
           Config = config;
-          IPBan = iPBan;
+          IpBan = iPBan;
      }
 
      public void Save()

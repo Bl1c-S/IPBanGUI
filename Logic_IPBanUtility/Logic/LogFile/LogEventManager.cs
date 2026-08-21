@@ -14,7 +14,7 @@ public class LogEventManager
 
      public LogEventManager(Settings.Settings settings)
      {
-          _getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
+          _getDaysWithLogFilePath = settings.IpBan.GetDaysWithLogFilePath;
           CheckDaysWithLogsChanged();
      }
      public List<LogEvent> GetLogEvents(DateTime date, bool first = true)

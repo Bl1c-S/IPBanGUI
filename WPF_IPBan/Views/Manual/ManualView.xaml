@@ -14,14 +14,14 @@
                 <!--Початок-->
                 <TextBlock Text="Ознайомтесь з призначенням та функціоналом програми в документації."
                            Style="{StaticResource ManualParagraph}" />
-                <ui:Hyperlink HorizontalAlignment="Center" NavigateUri="{Binding DocsSite}" Content="{Binding DocsTitle}" Icon="BookQuestionMark24" Margin="10"/>
+                <ui:HyperlinkButton HorizontalAlignment="Center" NavigateUri="{Binding DocsSite}" Content="{Binding DocsTitle}" Icon="BookQuestionMark24" Margin="10"/>
 
                 <!--Підтримка-->
                 <Label Content="{Binding SupportTitle}" Style="{StaticResource ManualTitle}"/>
                 <TextBlock Style="{StaticResource ManualParagraph}" Text="{Binding SupportDescription}" />
                 <DockPanel HorizontalAlignment="Center">
-                    <ui:Hyperlink NavigateUri="{Binding GitHubDiscussions}" Content="GitHub" Icon="ChatSparkle28" Margin="10"/>
-                    <ui:Hyperlink NavigateUri="{Binding SupportMail}" Content="Mail" Icon="Mail28" Margin="10"/>
+                    <ui:HyperlinkButton NavigateUri="{Binding GitHubDiscussions}" Content="GitHub" Icon="ChatSparkle28" Margin="10"/>
+                    <ui:HyperlinkButton NavigateUri="{Binding SupportMail}" Content="Mail" Icon="Mail28" Margin="10"/>
                 </DockPanel>
 
             </StackPanel>

@@ -124,7 +124,7 @@ namespace WPF_IPBanUtility
 
           private void SelectFolder()
           {
-               MessageBoxCrutch.TwoActionBoxAndLeftButtonNameSelect(SelectIpBanAndCreateDfSettings,
+               MessageBoxCrutch.LoadSettingsError(SelectIpBanAndCreateDfSettings,
                     ApplicationStop);
           }
           private static void ErrorHandle(Exception ex)

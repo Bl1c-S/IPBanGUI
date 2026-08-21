@@ -1,99 +1,66 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using MbResult = Wpf.Ui.Controls.MessageBoxResult;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 namespace WPF_IPBanUtility;
 
 public static class DialogMessageBox
 {
-     public static void TwoActionBox(Action Leftaction, Action Rightaction, string message, string title, string actionLeftButtonName = "Ок", string closeRightButtonName = "Закрити")
+     public static async Task TwoActionBoxAsync(
+          Action primaryAction,
+          Action secondaryAction,
+          string message,
+          string title,
+          string primaryActionName,
+          string secondaryActionName)
      {
-          var textContent = new TextBlock();
-          textContent.Text = message;
-          textContent.TextWrapping = TextWrapping.Wrap;
-
-          var messageBox = new Wpf.Ui.Controls.MessageBox();
-          messageBox.ButtonLeftName = actionLeftButtonName;
-          messageBox.ButtonRightName = closeRightButtonName;
-          messageBox.Title = title;
-          messageBox.Content = textContent;
-
-          var onOk = new RoutedEventHandler((_, _) =>
+          var textContent = new TextBlock
           {
-               Leftaction?.Invoke();
-               messageBox.Close();
-          });
+               Text = message,
+               TextWrapping = TextWrapping.Wrap
+          };
 
-          var onClose = new RoutedEventHandler((_, _) =>
+          var messageBox = new MessageBox
           {
-               Rightaction?.Invoke();
-               messageBox.Close();
-          });
+               PrimaryButtonText = primaryActionName,
+               CloseButtonText = secondaryActionName,
+               Title = title,
+               Content = textContent
+          };
 
-          messageBox.KeyDown += new KeyEventHandler((_, _) =>
-          {
-               Leftaction?.Invoke();
-               messageBox.Close();
-          });
-          messageBox.ButtonLeftClick += onOk;
-          messageBox.ButtonRightClick += onClose;
-
-          messageBox.ShowDialog();
-     }
-     public static void ActionBox(Action action, string message, string title, string actionLeftButtonName = "Ок", string closeRightButtonName = "Закрити")
-     {
-          var textContent = new TextBlock();
-          textContent.Text = message;
-          textContent.TextWrapping = TextWrapping.Wrap;
-
-          var messageBox = new Wpf.Ui.Controls.MessageBox();
-          messageBox.ButtonLeftName = actionLeftButtonName;
-          messageBox.ButtonRightName = closeRightButtonName;
-          messageBox.Title = title;
-          messageBox.Content = textContent;
-
-          var onOk = new RoutedEventHandler((_, _) =>
-          {
-               action?.Invoke();
-               messageBox.Close();
-          });
-
-          var onClose = new RoutedEventHandler((_, _) =>
-          {
-               messageBox.Close();
-          });
-
-          messageBox.KeyDown += new KeyEventHandler((_, _) =>
-          {
-               action?.Invoke();
-               messageBox.Close();
-          });
-          messageBox.ButtonLeftClick += onOk;
-          messageBox.ButtonRightClick += onClose;
-
-          messageBox.ShowDialog();
+          var result = await messageBox.ShowDialogAsync();
+          if (result == MbResult.Primary)
+               primaryAction?.Invoke();
+          else
+               secondaryAction?.Invoke();
      }
 
-     public static void InfoBox(string title, string message, string LeftButtonName = "Ок", string closeRightButtonName = "Закрити")
+     public static async Task ActionBoxAsync(
+          Action action,
+          string message,
+          string title,
+          string primaryActionName,
+          string secondaryActionName)
      {
-          var textContent = new TextBlock();
-          textContent.Text = message;
-          textContent.TextWrapping = TextWrapping.Wrap;
+          var textContent = new TextBlock
+          {
+               Text = message,
+               TextWrapping = TextWrapping.Wrap
+          };
 
-          var messageBox = new Wpf.Ui.Controls.MessageBox();
-          messageBox.ButtonLeftName = LeftButtonName;
-          messageBox.ButtonRightName = closeRightButtonName;
-          messageBox.Title = title;
-          messageBox.Content = textContent;
+          var messageBox = new MessageBox()
+          {
+               PrimaryButtonText = primaryActionName,
+               CloseButtonText = secondaryActionName,
+               Title = title,
+               Content = textContent
+          };
 
-          messageBox.KeyDown += new KeyEventHandler((_, _) => { messageBox.Close(); });
-          var onOk = new RoutedEventHandler((_, _) => { messageBox.Close(); });
-          var onClose = new RoutedEventHandler((_, _) => { messageBox.Close(); });
-
-          messageBox.ButtonLeftClick += onOk;
-          messageBox.ButtonRightClick += onClose;
-
-          messageBox.ShowDialog();
+          var result = await messageBox.ShowDialogAsync();
+          if (result == MbResult.Primary)
+               action.Invoke();
      }
 }

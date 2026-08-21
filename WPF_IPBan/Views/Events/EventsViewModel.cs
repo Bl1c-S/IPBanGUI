@@ -3,6 +3,7 @@ using Logic_IPBanUtility.Logic.LogFile;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 
 namespace WPF_IPBanUtility;
@@ -80,9 +81,9 @@ public class EventsViewModel : PageViewModelBase
      protected override void CreatePageButtons()
      {
           PageButtons.Add(CreateButtonWithTitle(
-               IUpdateCommand, Wpf.Ui.Common.SymbolRegular.ArrowSync24, Properties.ButtonNames.Update));
+               IUpdateCommand, SymbolRegular.ArrowSync24, Properties.ButtonNames.Update));
           PageButtons.Add(CreateButtonWithTitle(
-               IFilterCommand, Wpf.Ui.Common.SymbolRegular.Filter24, Properties.ButtonNames.Filter, "", new(4, 0, 0, 0)));
+               IFilterCommand, SymbolRegular.Filter24, Properties.ButtonNames.Filter, "", new(4, 0, 0, 0)));
      }
 
      public override void Dispose()

@@ -17,7 +17,7 @@ public class ClearLogsViewModel : SettingsComponentViewModelBase
      public ClearLogsViewModel(Settings settings) : base(Properties.PageNames.ClearLogsTitle)
      {
           IClearLogsCommand = new RelayCommand(DeleteLogFiles);
-          _logFilePathExtractor = new(settings.IPBan.Folder);
+          _logFilePathExtractor = new(settings.IpBan.Folder);
      }
      private void DeleteLogFiles()
      {

@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_IPBanUtility"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"

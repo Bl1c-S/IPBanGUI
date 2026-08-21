@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using WPF_IPBanUtility.Base;
+using Wpf.Ui.Controls;
+using MessageBoxButton = System.Windows.MessageBoxButton;
+using MessageBoxResult = System.Windows.MessageBoxResult;
 
 namespace WPF_IPBanUtility;
 
@@ -43,7 +46,7 @@ public class SettingsViewModel : PageViewModelBase
      {
           var sb = new SettingsBuilder();
           sb.LoadSettings();
-          var iPBan = sb.Settings!.IPBan; // Якщо ви увійшли в програму, значить ви 100% встановили коректний IPBan.
+          var iPBan = sb.Settings!.IpBan; // Якщо ви увійшли в програму, значить ви 100% встановили коректний IPBan.
           sb.CreateDefaultSettings(iPBan);
           _vMs = _settingsVMsBuilder.Build();
           OnPropertyChanged(nameof(VMs));
@@ -52,8 +55,8 @@ public class SettingsViewModel : PageViewModelBase
      protected override void CreatePageButtons()
      {
           PageButtons.Add(CreateButtonWithTitle(
-               ISaveChangedCommand, Wpf.Ui.Common.SymbolRegular.SaveMultiple24, Properties.ButtonNames.SaveAll));
+               ISaveChangedCommand, SymbolRegular.SaveMultiple24, Properties.ButtonNames.SaveAll));
           PageButtons.Add(CreateButtonWithTitle(
-               ISetDefaultSettingsCommand, Wpf.Ui.Common.SymbolRegular.LauncherSettings24, Properties.ButtonNames.Default, "", new(4, 0, 0, 0)));
+               ISetDefaultSettingsCommand, SymbolRegular.LauncherSettings24, Properties.ButtonNames.Default, "", new(4, 0, 0, 0)));
      }
 }

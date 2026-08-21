@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 
 using WPF_IPBanUtility.Properties;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
@@ -37,8 +38,8 @@ internal class ManualViewModel : PageViewModelBase
      protected override void CreatePageButtons()
      {
           PageButtons.Add(CreateButtonWithTitle(
-               IOpenDocsLinkCommand, Wpf.Ui.Common.SymbolRegular.BookQuestionMark24, DocsTitle, "Посилання на сайт документацію"));
+               IOpenDocsLinkCommand, SymbolRegular.BookQuestionMark24, DocsTitle, "Посилання на сайт документацію"));
           PageButtons.Add(CreateButtonWithTitle(
-               IOpenUpdateLinkCommand, Wpf.Ui.Common.SymbolRegular.ApprovalsApp28, UpdateTitle, "Посилання на сторінку з оновленнями в документації програми", new(4, 0, 0, 0)));
+               IOpenUpdateLinkCommand, SymbolRegular.ApprovalsApp28, UpdateTitle, "Посилання на сторінку з оновленнями в документації програми", new(4, 0, 0, 0)));
      }
 }

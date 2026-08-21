@@ -1,16 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Logic_IPBanUtility;
 using Logic_IPBanUtility.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Logic_IPBanUtility.Logic.ConfigFile;
 using WPF_IPBanUtility.Properties;
+using Wpf.Ui.Controls;
 using Key = Logic_IPBanUtility.Models.Key;
+using MessageBox = System.Windows.MessageBox;
+using MessageBoxButton = System.Windows.MessageBoxButton;
+using MessageBoxResult = System.Windows.MessageBoxResult;
 
 namespace WPF_IPBanUtility;
 
@@ -61,9 +63,9 @@ public class KeyListViewModel : PageViewModelBase
      private void SaveAllButtonEnableChanged()
      {
           PageChanged();
-          var changedVM = _keyViewModels.FirstOrDefault(vm => vm.IsChanged == true);
-          _allKeySaved = changedVM != null ? false : true;
-          var saveButton = PageButtons.FirstOrDefault(b => b.Icon == Wpf.Ui.Common.SymbolRegular.SaveMultiple24);
+          var changedVm = _keyViewModels.FirstOrDefault(vm => vm.IsChanged);
+          _allKeySaved = changedVm != null ? false : true;
+          var saveButton = PageButtons.FirstOrDefault(b => b.Icon == new SymbolIcon(SymbolRegular.SaveMultiple24));
           var borderColor = (Color)ColorConverter.ConvertFromString(_allKeySaved ? Collors.InActive : Collors.Active);
           saveButton!.BorderBrush = new SolidColorBrush(borderColor);
      }
@@ -152,9 +154,9 @@ public class KeyListViewModel : PageViewModelBase
           ChangeInfoMessage(ToolTips.ReloadIPBanService);
 
           PageButtons.Add(CreateButtonWithTitle(
-               ISaveAllCommand, Wpf.Ui.Common.SymbolRegular.SaveMultiple24, ButtonNames.SaveAll));
+               ISaveAllCommand, SymbolRegular.SaveMultiple24, ButtonNames.SaveAll));
           PageButtons.Add(CreateButtonWithTitle(
-               IReturnAllPreviousValueCommand, Wpf.Ui.Common.SymbolRegular.ArrowReplyAll24,
+               IReturnAllPreviousValueCommand, SymbolRegular.ArrowReplyAll24,
                ButtonNames.ReturnAll, "", new(4, 0, 0, 0)));
      }
 

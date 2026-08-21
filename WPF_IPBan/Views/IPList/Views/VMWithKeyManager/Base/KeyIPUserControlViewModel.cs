@@ -3,7 +3,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
@@ -33,14 +32,14 @@ public class KeyIPUserControlViewModel : IPUserControlViewModelBase
                    new Button
                    {
                         Command = ICopyCommand,
-                        Icon = SymbolRegular.Copy20,
+                        Icon = new SymbolIcon(SymbolRegular.Copy20),
                         ToolTip = ToolTips.Copy,
                         Margin = margin
                    },
                    new Button
                    {
                         Command = IRemoveCommand,
-                        Icon = SymbolRegular.Delete20,
+                        Icon = new SymbolIcon(SymbolRegular.Delete20),
                         ToolTip = ToolTips.RemoveFromList,
                         Margin = margin
                    }

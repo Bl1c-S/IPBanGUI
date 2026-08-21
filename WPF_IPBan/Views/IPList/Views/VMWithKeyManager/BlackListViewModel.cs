@@ -1,8 +1,8 @@
 ﻿using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
-using Wpf.Ui.Common;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 

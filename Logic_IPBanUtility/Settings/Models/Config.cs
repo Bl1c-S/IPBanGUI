@@ -2,10 +2,23 @@
 
 public class Config
 {
-     public string ConfigFolder { get; set; }
-     public string Settings { get; set; }
-     public string KeyIdenti { get; set; }
+     public string ConfigFolder {
+          get { return field ?? throw new NullReferenceException(ToString()); }
+          set;
+     }
+     public string Settings {
+          get { return field ?? throw new NullReferenceException(ToString()); }
+          set;
+     }
+     public string KeyIdenti {
+          get { return field ?? throw new NullReferenceException(ToString()); }
+          set;
+     }
 
+     public Config()
+     {
+          //Json Constructor
+     }
      public Config(string configFolder, string settings, string keyIdenti)
      {
           ConfigFolder = configFolder;

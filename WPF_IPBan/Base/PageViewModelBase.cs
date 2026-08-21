@@ -27,7 +27,7 @@ public class PageViewModelBase : ViewModelBase
           var activeColor = (Color)ColorConverter.ConvertFromString(Collors.Active);
           PageButtons.Add(new Button()
           {
-               Icon = Wpf.Ui.Common.SymbolRegular.ErrorCircle24,
+               Icon = new SymbolIcon(SymbolRegular.ErrorCircle24),
                ToolTip = "",
                BorderBrush = new SolidColorBrush(activeColor),
                Visibility = Visibility.Collapsed,

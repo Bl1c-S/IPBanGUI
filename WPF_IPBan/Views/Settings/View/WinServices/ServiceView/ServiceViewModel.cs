@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using static Logic_IPBanUtility.Services.WinServicesController;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Common;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;

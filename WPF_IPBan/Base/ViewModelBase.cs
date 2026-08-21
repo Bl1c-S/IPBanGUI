@@ -2,7 +2,6 @@
 using System;
 using System.Windows.Input;
 using System.Windows;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
@@ -14,7 +13,7 @@ public class ViewModelBase : ObservableObject, IDisposable
           return new()
           {
                Command = command,
-               Icon = icon,
+               Icon = new SymbolIcon(icon),
                ToolTip = toolTip,
                Margin = margin ?? new(0)
           };
@@ -25,7 +24,7 @@ public class ViewModelBase : ObservableObject, IDisposable
           {
                Content = title,
                Command = command,
-               Icon = icon,
+               Icon = new SymbolIcon(icon),
                ToolTip = toolTip,
                Margin = margin ?? new(0),
           };

@@ -15,7 +15,7 @@ public class ConfigFileManager
      public ConfigFileManager(Settings.Settings settings, FileManager fileManager)
      {
           _fileManager = fileManager;
-          _contextPath = settings.IPBan.Context;
+          _contextPath = settings.IpBan.Context;
           _keyIdentiPath = settings.Config.KeyIdenti;
           UpdateContex();
      }

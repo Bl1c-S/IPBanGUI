@@ -5,7 +5,7 @@ public class IpAddressDatabaseManager
      private string _path;
      public IpAddressDatabaseManager(Settings.Settings settings)
      {
-          _path = settings.IPBan.Sqlite;
+          _path = settings.IpBan.Sqlite;
      }
      public void Add(IPAddressEntity entity)
      {
