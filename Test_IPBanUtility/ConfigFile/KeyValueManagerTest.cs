@@ -1,6 +1,5 @@
 ﻿using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
-using Logic_IPBanUtility.Setting;
 using Test_IPBanUtility;
 
 namespace ConfigFileTests;
@@ -15,9 +14,7 @@ public class KeyValueManagerTest
      public KeyValueManagerTest()
      {
           IpBanTestHelper ipBanTestHelper = new();
-          SettingsBuilder sb = new();
-          sb.CreateDefaultSettings(ipBanTestHelper.IpBan);
-          _cfgManager = new ConfigFileManager(sb.Settings!, new());
+          _cfgManager = new ConfigFileManager(ipBanTestHelper.Settings, new());
           _keyManager = new(_cfgManager);
      }
 
