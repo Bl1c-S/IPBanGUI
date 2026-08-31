@@ -18,7 +18,7 @@ public class ViewModelBase : ObservableObject, IDisposable
                Margin = margin ?? new(0)
           };
      }
-     protected Button CreateButtonWithTitle(ICommand command, SymbolRegular icon, string title, string toolTip = "", Thickness? margin = null)
+     protected virtual Button CreateButtonWithTitle(ICommand command, SymbolRegular icon, string title, string toolTip = "", Thickness? margin = null)
      {
           return new Button
           {
@@ -29,8 +29,6 @@ public class ViewModelBase : ObservableObject, IDisposable
                Margin = margin ?? new(0),
           };
      }
-
-     public bool IsEnable = true;
      public virtual void Dispose()
      {
      }

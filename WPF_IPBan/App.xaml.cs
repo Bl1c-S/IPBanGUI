@@ -17,7 +17,7 @@ namespace WPF_IPBanUtility
 {
      public partial class App
      {
-          private readonly GeneralExceptionHandler _generalExceptionHandler = new();
+          private readonly GeneralExceptionHandler _generalExceptionHandler = new(ApplicationStop);
           private readonly PreparatoryViewModel _preparatoryVm = new();
           private readonly SettingsBuilder _sb = new();
 

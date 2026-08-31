@@ -168,4 +168,7 @@
   <data name="Docs" xml:space="preserve">
     <value>Документація</value>
   </data>
+  <data name="Main" xml:space="preserve">
+    <value>Головна</value>
+  </data>
 </root>

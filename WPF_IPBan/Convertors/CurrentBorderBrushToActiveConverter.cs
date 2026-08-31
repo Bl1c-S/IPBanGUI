@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Media;
 using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;
 
-public class CurrentBorderBrushToActiveConverter : IValueConverter
+public class CurrentBorderBrushToActiveConverter : IMultiValueConverter
 {
-     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
      {
-          if (value is string currentPageName && parameter is string selectedPageName)
-          {
-               return currentPageName != selectedPageName ? Collors.InActive : Collors.Active;
-          }
-          return string.Empty;
+          var currentPageName = values.Length > 0 ? values[0] as string : null;
+          var title = values.Length > 1 ? values[1] as string : null;
+          var color = currentPageName is not null && currentPageName == title
+               ? Collors.Active
+               : Collors.InActive;
+
+          return new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
      }
 
-     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
      {
-          throw new NotImplementedException();
+          throw new NotSupportedException();
      }
 }

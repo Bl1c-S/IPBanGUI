@@ -11,7 +11,7 @@ public class PageViewModelBase : ViewModelBase
      private const int INFO = 0;
      public string PageName { get; set; }
 
-     public bool PageHaveChanges;
+     public bool PageHaveChanges = false;
      protected virtual void PageChanged() => PageHaveChanges = true;
      public ObservableCollection<Button> PageButtons { get; set; }
      public PageViewModelBase(string pageName)
