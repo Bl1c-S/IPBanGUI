@@ -24,10 +24,7 @@ public class IPBan
      {
           var logExtractor = new LogFilePathExtractor(iPBanFolderPath);
           var logfile = logExtractor.ToDayLogFilePath;
-
-          var iPBan = new IPBan(iPBanFolderPath, logfile);
-          iPBan.CheckExist();
-          return iPBan;
+          return new (iPBanFolderPath, logfile);
      }
 
      public Dictionary<DateTime, string> GetDaysWithLogFilePath() => _logsExtractor.GetDaysWithLogFilePath();

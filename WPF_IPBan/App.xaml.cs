@@ -73,6 +73,7 @@ namespace WPF_IPBanUtility
                if (path == null) return;
 
                var iPBan = IPBan.Create(path);
+               iPBan.CheckExist();
                _sb.CreateDefaultSettings(iPBan);
           }
 
