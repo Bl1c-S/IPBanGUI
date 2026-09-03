@@ -25,6 +25,6 @@
 
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0"/>
 
-        <ContentPresenter  Grid.Row="2" Content="{Binding CurrentView}" Margin="4" MaxWidth="1000" />
+        <ContentPresenter  Grid.Row="2" Content="{Binding CurrentView}" Margin="4"/>
     </Grid>
 </Window>

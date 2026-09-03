@@ -19,10 +19,9 @@
             <ScrollViewer HorizontalScrollBarVisibility="Disabled"
               VerticalScrollBarVisibility="Auto" CanContentScroll="True" IsDeferredScrollingEnabled="True">
 
-
                 <ListBox ItemsSource="{Binding VMs}" 
                        VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
-                       HorizontalContentAlignment="Stretch"  MaxHeight="500" 
+                       MaxHeight="500" 
                        ItemContainerStyle="{StaticResource IPListBoxItem}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

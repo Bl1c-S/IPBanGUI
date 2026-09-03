@@ -34,7 +34,7 @@
 
                 <ListBox ItemsSource="{Binding VMs}" VerticalAlignment="Top"
            VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
-           HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource IPListBoxListItem}">
+           ItemContainerStyle="{StaticResource IPListBoxListItem}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <local:IPItemListView/>

@@ -7,12 +7,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,2,0,0" Margin="4,0" Visibility="{Binding BorderVisibility}"/>
+            <Border BorderBrush="Gray" BorderThickness="0,2,0,0" Margin="4,0" Visibility="{Binding BorderVisibility}"/>
             <Grid Margin="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width ="150"/>
                     <ColumnDefinition Width ="150"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="170"/>
                 </Grid.ColumnDefinitions>
 
