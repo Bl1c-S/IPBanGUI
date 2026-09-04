@@ -143,4 +143,7 @@
   <data name="IPMes" xml:space="preserve">
     <value>При великій кількості тимчасово заблокованих IP-адрес виникають проблеми з тривалим відкриттям вікна</value>
   </data>
+  <data name="UnHandledError" xml:space="preserve">
+    <value>Не оброблена помилка в додатку</value>
+  </data>
 </root>

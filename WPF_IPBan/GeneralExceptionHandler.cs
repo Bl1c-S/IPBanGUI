@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
+using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility
 {
@@ -29,9 +30,9 @@ namespace WPF_IPBanUtility
                {
                     _isHandlingException = true;
 
-                    var message = "Не оброблена помилка в додатку";
+                    var message = Messages.UnHandledError;
                     MessageBox.Show($"{message}:\n\n{ex.Message}\n\nTrace:\n{ex.StackTrace}", 
-                         "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                         Status.Error, MessageBoxButton.OK, MessageBoxImage.Error);
                }
                finally
                {
