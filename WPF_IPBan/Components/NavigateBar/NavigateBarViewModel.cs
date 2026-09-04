@@ -17,11 +17,21 @@ internal class NavigateBarViewModel : ViewModelBase
           _navigationService = navigationService;
           _navigationService.OnCurrentChanged += OnCurrentChanged;
 
-          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToManual), SymbolRegular.BookInformation24, PageNames.Main, "", new(4, 0, 0, 0))));
-          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToEvents), SymbolRegular.ChartMultiple24, PageNames.Events, "", new(4, 0, 0, 0))));
-          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToIpList), SymbolRegular.ShieldTask24, PageNames.IP, "", new(4, 0, 0, 0))));
-          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToKeyList), SymbolRegular.Key24, PageNames.KeyList, "", new(4, 0, 0, 0))));
-          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToSettings), SymbolRegular.Settings48, PageNames.Settings, "", new(4, 0, 0, 0))));
+          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToManual), 
+               SymbolRegular.BookInformation24, PageNames.Main, "", new(4, 0, 0, 0))));
+          
+          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToEvents), 
+               SymbolRegular.CalendarLtr24, PageNames.Events, "", new(4, 0, 0, 0))));
+          
+          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToIpList), 
+               SymbolRegular.ShieldTask24, PageNames.IP, "", new(4, 0, 0, 0))));
+          
+          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToKeyList), 
+               SymbolRegular.Key24, PageNames.KeyList, "", new(4, 0, 0, 0))));
+          
+          NavButtons.Add(new(CreateButtonWithTitle(new RelayCommand(_navigationService.NavToSettings), 
+               SymbolRegular.Settings48, PageNames.Settings, "", new(4, 0, 0, 0))));
+          
           UpdateNavItems();
      }
 

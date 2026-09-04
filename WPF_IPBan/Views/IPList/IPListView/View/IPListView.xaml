@@ -19,7 +19,7 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <Grid>
+        <Grid HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -34,7 +34,8 @@
 
                 <ListBox ItemsSource="{Binding VMs}" VerticalAlignment="Top"
            VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
-           HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource IPListBoxListItem}">
+           ItemContainerStyle="{StaticResource IPListBoxListItem}"
+           HorizontalContentAlignment="Center">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <local:IPItemListView/>

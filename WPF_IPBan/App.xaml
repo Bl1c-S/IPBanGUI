@@ -31,7 +31,7 @@
             <Style x:Key="IPListBoxItem" TargetType="ListBoxItem">
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Margin" Value="0"/>
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBoxItem">
@@ -89,7 +89,18 @@
 
             <Style x:Key="ManualImage" TargetType="Image">
                 <Setter Property="MaxWidth" Value="700"/>
-            </Style> 
+            </Style>
+
+            <Style x:Key="CenterCellTextStyle" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="CenterColumnHeaderStyle"
+                   TargetType="DataGridColumnHeader"
+                   BasedOn="{StaticResource DefaultUiDataGridColumnHeaderStyle}">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
