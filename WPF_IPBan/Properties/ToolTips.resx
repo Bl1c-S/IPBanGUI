@@ -159,4 +159,16 @@
   <data name="WhiteListItem" xml:space="preserve">
     <value>Адреса не буде блокуватись</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Опис</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Зберегти зміни</value>
+  </data>
+  <data name="RevertChanges" xml:space="preserve">
+    <value>Відмінити зміни</value>
+  </data>
+  <data name="HideKey" xml:space="preserve">
+    <value>Приховати ключ | В налаштуваннях можна знову увімкнути</value>
+  </data>
 </root>
