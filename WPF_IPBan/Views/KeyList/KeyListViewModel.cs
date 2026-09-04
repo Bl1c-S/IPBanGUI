@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using Logic_IPBanUtility.Logic.ConfigFile;
 using WPF_IPBanUtility.Properties;
@@ -26,9 +25,6 @@ public class KeyListViewModel : PageViewModelBase
           _cfgManager = cfgManager;
           _servicesController = servicesController;
           _keyViewModels = CreateKeyViewModels(cfgManager.CreateKeys());
-
-          ISaveAllCommand = new RelayCommand(SaveAllKey);
-          IReturnAllPreviousValueCommand = new RelayCommand(ReturnAllPreviousValue);
           CreatePageButtons();
      }
 
@@ -64,8 +60,8 @@ public class KeyListViewModel : PageViewModelBase
      {
           PageChanged();
           var changedVm = _keyViewModels.FirstOrDefault(vm => vm.IsChanged);
-          _allKeySaved = changedVm != null ? false : true;
-          var saveButton = PageButtons.FirstOrDefault(b => b.Icon == new SymbolIcon(SymbolRegular.SaveMultiple24));
+          _allKeySaved = changedVm == null;
+          var saveButton = PageButtons.FirstOrDefault(b => ReferenceEquals(b.Content, ButtonNames.SaveAll));
           var borderColor = (Color)ColorConverter.ConvertFromString(_allKeySaved ? Collors.InActive : Collors.Active);
           saveButton!.BorderBrush = new SolidColorBrush(borderColor);
      }
@@ -78,7 +74,7 @@ public class KeyListViewModel : PageViewModelBase
           get => _keyViewModels; private set
           {
                _keyViewModels = value;
-               OnPropertyChanged(nameof(KeyViewModels));
+               OnPropertyChanged();
           }
      }
      private ObservableCollection<KeyViewModel> CreateKeyViewModels(List<Key> keys)
@@ -120,7 +116,6 @@ public class KeyListViewModel : PageViewModelBase
      {
           _cfgManager.WriteKey(key);
      }
-     public ICommand ISaveAllCommand { get; }
      private void SaveAllKey()
      {
           var keys = new List<Key>();
@@ -140,7 +135,6 @@ public class KeyListViewModel : PageViewModelBase
      #endregion
 
      #region Previous
-     public ICommand IReturnAllPreviousValueCommand { get; }
      private void ReturnAllPreviousValue()
      {
           foreach (var keyVM in _keyViewModels)
@@ -148,15 +142,14 @@ public class KeyListViewModel : PageViewModelBase
      }
      #endregion
 
-     protected override void CreatePageButtons()
+     protected sealed override void CreatePageButtons()
      {
           base.CreatePageButtons();
           ChangeInfoMessage(ToolTips.ReloadIPBanService);
-
           PageButtons.Add(CreateButtonWithTitle(
-               ISaveAllCommand, SymbolRegular.SaveMultiple24, ButtonNames.SaveAll));
+               new RelayCommand(SaveAllKey), SymbolRegular.SaveMultiple24, ButtonNames.SaveAll));
           PageButtons.Add(CreateButtonWithTitle(
-               IReturnAllPreviousValueCommand, SymbolRegular.ArrowReplyAll24,
+               new RelayCommand(ReturnAllPreviousValue), SymbolRegular.ArrowReplyAll24,
                ButtonNames.ReturnAll, "", new(4, 0, 0, 0)));
      }
 
