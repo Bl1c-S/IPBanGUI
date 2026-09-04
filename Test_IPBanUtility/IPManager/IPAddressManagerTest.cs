@@ -1,20 +1,20 @@
 ﻿using Logic_IPBanUtility.Logic.IPList;
-using Logic_IPBanUtility.Setting;
 using Test_IPBanUtility;
+using Test_IPBanUtility.Factories;
 
-namespace IPManager;
+namespace IpAddressTests;
 
 [TestClass]
-public class IPAddressManagerTest
+public class IpAddressManagerTest
 {
-     private readonly IPAddressManagerTestFactory _factory;
+     private readonly IpAddressManagerTestFactory _factory;
 
-     public IPAddressManagerTest()
+     public IpAddressManagerTest()
      {
-          TestIPBan _testIPBan = new("TestIP\\");
-          SettingsBuilder sb = new();
-          sb.CreateDefaultSettings(_testIPBan.CreateEmptyIPBan());
-          _factory = new(sb.Settings!);
+          IpBanTestHelper ipBanTestHelper = new();
+          _factory = new(ipBanTestHelper.Settings);
+          var context = new IPAddressesDbContext(ipBanTestHelper.IpBan.Sqlite, createIfMissing: true);
+          context.Database.EnsureCreated();
      }
 
      #region Add
@@ -66,7 +66,7 @@ public class IPAddressManagerTest
                manager.Add(ip);
 
           manager.Update();
-          return manager.IPAddress.Count;
+          return manager.IpAddress.Count;
      }
      #endregion
      #endregion
@@ -134,44 +134,19 @@ public class IPAddressManagerTest
           var resultLeft = RemoveSimpleTest(remove);
           Assert.AreEqual(expectedLeft, resultLeft);
      }
-     #region TestFactory
+     #endregion
+     
      private int RemoveSimpleTest(int count)
      {
           var manager = _factory.CreateManager();
 
           for (int id = count - 1; id >= 0; id--)
-               manager.Remove(manager.IPAddress[id]);
+               manager.Remove(manager.IpAddress[id]);
 
           manager.Update();
-          return manager.IPAddress.Count;
+          return manager.IpAddress.Count;
      }
-     #endregion
-
-     #endregion
-
-     internal class IPAddressManagerTestFactory
-     {
-          private readonly Settings _settings;
-
-          public IPAddressManagerTestFactory(Settings settings)
-          {
-               _settings = settings;
-          }
-
-          public IPAddressManager CreateManager()
-          {
-               return new IPAddressManager(_settings);
-          }
-          public List<IPAddressEntity> CreateIP(int count)
-          {
-               List<IPAddressEntity> iPAddresses = new();
-               for (int i = 0; i < count; i++)
-                    iPAddresses.Add(new($"77.255.3.{i}", DateTime.Now, 0, DateTime.Now, DateTime.Now.AddYears(1), null));
-
-               return iPAddresses;
-          }
-     }
-
+     
      private enum ClearOptions
      {
           None,

@@ -1,6 +1,7 @@
 ﻿using Logic_IPBanUtility;
 using Logic_IPBanUtility.Models;
 using System.Collections.Generic;
+using Logic_IPBanUtility.Logic.ConfigFile;
 using WPF_IPBanUtility.Base;
 
 namespace WPF_IPBanUtility;

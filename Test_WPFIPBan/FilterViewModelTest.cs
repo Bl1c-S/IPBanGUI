@@ -1,12 +1,12 @@
+using Test_IPBanUtility.Helpers;
 using WPF_IPBanUtility;
-using Test_IPBanUtility.LogEvent;
 
 namespace EventVMsTest
 {
      [TestClass]
      public class FilterViewModelTest
      {
-          TestLogEventFileService _testFileManager = new();
+          LogEventFileHelper _fileManager = new();
 
           #region SelectDate
 
@@ -43,7 +43,7 @@ namespace EventVMsTest
           }
           public FilterViewModel SelectDayTestFactory(int fileCount, int selectDay)
           {
-               _testFileManager.CreateLogFileWithDate(fileCount);
+               _fileManager.CreateLogFileWithDate(fileCount);
 
                var filterVM = CreateFilterVM();
                TestDaySelected(filterVM, selectDay);
@@ -55,8 +55,8 @@ namespace EventVMsTest
           }
           public void ReSelectDayAndChangeFileCountTestFactory(FilterViewModel filterVM, int reSelectDay, int changeFileCount)
           {
-               _testFileManager.FileDelete();
-               _testFileManager.CreateLogFileWithDate(changeFileCount);
+               _fileManager.FilesDelete();
+               _fileManager.CreateLogFileWithDate(changeFileCount);
                TestDaySelected(filterVM, reSelectDay);
           }
 
@@ -83,7 +83,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenEmpty2()
@@ -94,7 +94,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenEmpty3()
@@ -105,7 +105,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
 
           [TestMethod]
@@ -117,7 +117,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenSimple2()
@@ -128,7 +128,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenSimple3()
@@ -139,7 +139,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenSimple4()
@@ -150,7 +150,7 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
           [TestMethod]
           public void SearchText_WhenSimple5()
@@ -161,13 +161,13 @@ namespace EventVMsTest
 
                SearchedLogFileInfo searchedInfo = new(simple, custom, expected, searchedText, ip, user);
                SearchTest(searchedInfo);
-               _testFileManager.FileDelete();
+               _fileManager.FilesDelete();
           }
 
           #region Factory
           private FilterViewModel SearchTest(SearchedLogFileInfo info, int fileCount = 1)
           {
-               _testFileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
+               _fileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
                     info.CustomIP, info.CustomUser, fileCount);
 
                var filterVM = CreateFilterVM(info.SearchedText);
@@ -282,7 +282,7 @@ namespace EventVMsTest
           #region Factory
           private FilterViewModel SetDateSearchTest(SearchedLogFileInfo info, FilterViewModel filterVM)
           {
-               _testFileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
+               _fileManager.CreateCustomLogFileWithDate(info.SimpleContent, info.CustomContent,
                     info.CustomIP, info.CustomUser, 2);
 
                filterVM.SearchedText = info.SearchedText;
@@ -346,14 +346,14 @@ namespace EventVMsTest
           }
           private FilterViewModel FirstReadTest(int contentCount)
           {
-               _testFileManager.CreateCustomLogFileWithDate(contentCount);
+               _fileManager.CreateCustomLogFileWithDate(contentCount);
                var filterVM = CreateFilterVM();
                Assert.AreEqual(contentCount, filterVM.ShowedLogEventCount);
                return filterVM;
           }
           private void SecondReadTest(FilterViewModel filterVM, int contentCount)
           {
-               _testFileManager.CreateCustomLogFileWithDate(contentCount);
+               _fileManager.CreateCustomLogFileWithDate(contentCount);
                filterVM.ReadNewLogs();
                Assert.AreEqual(contentCount, filterVM.ShowedLogEventCount);
           }
@@ -429,7 +429,7 @@ namespace EventVMsTest
           #region Suport
           private FilterViewModel CreateFilterVM(string searchedText = "")
           {
-               var logEventManager = _testFileManager.CreateLogEventManager();
+               var logEventManager = _fileManager.CreateLogEventManager();
                return new(logEventManager) { SearchedText = searchedText };
           }
           private DateTime CreateDate(int day)

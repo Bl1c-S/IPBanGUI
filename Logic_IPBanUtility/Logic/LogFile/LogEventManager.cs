@@ -1,4 +1,4 @@
-﻿using Logic_IPBanUtility.Setting;
+﻿using Logic_IPBanUtility.Logic.LogFile.Services;
 
 namespace Logic_IPBanUtility.Logic.LogFile;
 
@@ -12,9 +12,9 @@ public class LogEventManager
      private Dictionary<DateTime, LogFileManager> _logFileManagers = new();
      private Func<Dictionary<DateTime, string>> _getDaysWithLogFilePath;
 
-     public LogEventManager(Settings settings)
+     public LogEventManager(Settings.Settings settings)
      {
-          _getDaysWithLogFilePath = settings.IPBan.GetDaysWithLogFilePath;
+          _getDaysWithLogFilePath = settings.IpBan.GetDaysWithLogFilePath;
           CheckDaysWithLogsChanged();
      }
      public List<LogEvent> GetLogEvents(DateTime date, bool first = true)

@@ -35,7 +35,7 @@ public class IPUserControlViewModelBase : ViewModelBase
                catch (Exception ex)
                {
                     var copyError = () => { Clipboard.SetText(ex.Message); };
-                    DialogMessageBox.ActionBox(copyError, Properties.Status.Error, ex.Message, ButtonNames.Copy);
+                    DialogMessageBox.ActionBoxAsync(copyError, Properties.Status.Error, ex.Message, ButtonNames.Copy, ButtonNames.Close).Wait();
                }
           });          
      }

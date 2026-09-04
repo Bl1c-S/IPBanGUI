@@ -1,6 +1,6 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
 
-namespace LogEventTest;
+namespace LogEventTests;
 
 [TestClass]
 public class LogMessageParserTest

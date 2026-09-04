@@ -1,13 +1,11 @@
-﻿using Logic_IPBanUtility.Setting;
+﻿namespace Logic_IPBanUtility.Logic.IPList.IPAddressManager.Services;
 
-namespace Logic_IPBanUtility.Logic.IPList;
-
-public class IPAddressDatabaseManager
+public class IpAddressDatabaseManager
 {
      private string _path;
-     public IPAddressDatabaseManager(Settings settings)
+     public IpAddressDatabaseManager(Settings.Settings settings)
      {
-          _path = settings.IPBan.Sqlite_db;
+          _path = settings.IpBan.Sqlite;
      }
      public void Add(IPAddressEntity entity)
      {

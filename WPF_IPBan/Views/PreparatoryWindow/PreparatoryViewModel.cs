@@ -2,7 +2,7 @@
 
 namespace WPF_IPBanUtility;
 
-internal class LoadWindowModel : ViewModelBase
+internal class PreparatoryViewModel : ViewModelBase
 {
      public string? SelectFolder()
      {

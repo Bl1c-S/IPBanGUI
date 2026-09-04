@@ -9,74 +9,92 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
-using WPF_IPBanUtility.View.LoadWindow.MessangeBox;
+using Logic_IPBanUtility.Settings;
+using WPF_IPBanUtility.Components.MessageBox;
 using WPF_IPBanUtility.Views.IPList;
 
 namespace WPF_IPBanUtility
 {
-     /// <summary>
-     /// Interaction logic for App.xaml
-     /// </summary>
-     public partial class App : Application
+     public partial class App
      {
-          private OtherExeptionHandler otherExeptionHandler = new();
-          private LoadWindowModel? _loadVM;
-          private SettingsBuilder _sb = new();
+          private readonly GeneralExceptionHandler _generalExceptionHandler = new(ApplicationStop);
+          private readonly PreparatoryViewModel _preparatoryVm = new();
+          private readonly SettingsBuilder _sb = new();
 
           protected override void OnStartup(StartupEventArgs e)
           {
-               AppDomain.CurrentDomain.UnhandledException += otherExeptionHandler.CurrentDomain_UnhandledException;
-               Dispatcher.UnhandledException += otherExeptionHandler.Dispatcher_UnhandledException;
+               AppDomain.CurrentDomain.UnhandledException += _generalExceptionHandler.CurrentDomain_UnhandledException;
+               Dispatcher.UnhandledException += _generalExceptionHandler.Dispatcher_UnhandledException;
 
-               try
-               {
-                    _loadVM = new LoadWindowModel();
-                    var loadWindow = new LoadWindow() { DataContext = _loadVM };
-                    loadWindow.Show();
-
-                    var settings = LoadSettings();
-
-                    var Services = CreateServiceProvager(settings);
-                    var mainWindow = new MainWindow();
-                    var vm = Services.GetRequiredService<MainWindowViewModel>();
-                    mainWindow.WindowClosing += vm.Window_Closing;
-                    mainWindow.DataContext = vm;
-
-                    loadWindow.Close();
-                    mainWindow.Show();
-               }
-               catch (Exception ex)
-               {
-                    try { MessangeBoxCrutch.ErrorBox(ex.Message); }
-                    catch { MessageBox.Show(ex.Message); }
-               }
-
+               SafeMainProcess();
                base.OnStartup(e);
           }
 
-          private void SelectIPBanAndCreateDfSettings()
+          private void SafeMainProcess()
           {
-               var path = _loadVM?.SelectFolder();
+               try
+               {
+                    MainProcess();
+               }
+               catch (Exception ex)
+               {
+                    ErrorHandle(ex);
+               }
+          }
+
+          private void MainProcess()
+          {
+               var preparatoryWindow = CreatePreparatoryWindow();
+               preparatoryWindow.Show();
+
+               var mainWindow = CreateMainWindow();
+               preparatoryWindow.Close();
+               mainWindow.Show();
+          }
+          
+          private PreparatoryWindow CreatePreparatoryWindow() =>
+               new() { DataContext = _preparatoryVm };
+
+          private MainWindow CreateMainWindow()
+          {
+               var settings = LoadSettings();
+
+               var services = ConfigureServiceProvider(settings);
+               var mainWindow = new MainWindow();
+               var vm = services.GetRequiredService<MainWindowViewModel>();
+               mainWindow.WindowClosing += vm.Window_Closing;
+               mainWindow.DataContext = vm;
+               return mainWindow;
+          }
+
+          private void SelectIpBanAndCreateDfSettings()
+          {
+               var path = _preparatoryVm.SelectFolder();
                if (path == null) return;
 
                var iPBan = IPBan.Create(path);
+               iPBan.CheckExist();
                _sb.CreateDefaultSettings(iPBan);
           }
 
           private Settings LoadSettings()
           {
-               try { _sb.LoadSettings(); }
+               try
+               {
+                    if (!_sb.LoadSettings())
+                         SelectFolder();
+               }
                catch (Exception ex)
                {
-                    MessangeBoxCrutch.ErrorBox(ex.Message);
-                    MessangeBoxCrutch.TwoActionBoxAndLeftButtonNameSelect(SelectIPBanAndCreateDfSettings, ApplicationStop);
+                    ErrorHandle(ex);
                }
+
                return _sb.Settings!;
           }
 
-          private IServiceProvider CreateServiceProvager(Settings settings)
+          private static IServiceProvider ConfigureServiceProvider(Settings settings)
           {
-               IHost host = Host.CreateDefaultBuilder().ConfigureServices(services =>
+               var host = Host.CreateDefaultBuilder().ConfigureServices(services =>
                {
                     services.AddSingleton(settings);
                     services.AddSingleton<FileManager>();
@@ -86,7 +104,7 @@ namespace WPF_IPBanUtility
                     services.AddSingleton<WinServicesController>();
                     services.AddSingleton<UnBanService>();
 
-                    services.AddSingleton<IPBlockedListService>();
+                    services.AddSingleton<IpBlockedListService>();
 
                     services.AddSingleton<IPListProperties>();
                     services.AddTransient<IPListVMsBuilder>();
@@ -105,7 +123,25 @@ namespace WPF_IPBanUtility
                return host.Services;
           }
 
-          private void ApplicationStop()
+          private void SelectFolder()
+          {
+               MessageBoxCrutch.LoadSettingsError(SelectIpBanAndCreateDfSettings,
+                    ApplicationStop);
+          }
+          private static void ErrorHandle(Exception ex)
+          {
+               try
+               {
+                    MessageBoxCrutch.ErrorBox(ex.Message, ApplicationStop);
+               }
+               catch
+               {
+                    MessageBox.Show(ex.Message);
+               }
+
+               ApplicationStop();
+          }
+          private static void ApplicationStop()
           {
                Current.Shutdown();
                Environment.Exit(0);

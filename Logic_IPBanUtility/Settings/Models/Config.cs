@@ -1,11 +1,15 @@
-﻿namespace Logic_IPBanUtility;
+﻿using Newtonsoft.Json;
+
+namespace Logic_IPBanUtility.Settings.Models;
 
 public class Config
 {
      public string ConfigFolder { get; set; }
      public string Settings { get; set; }
+
      public string KeyIdenti { get; set; }
 
+     [JsonConstructor]
      public Config(string configFolder, string settings, string keyIdenti)
      {
           ConfigFolder = configFolder;
@@ -22,6 +26,14 @@ public class Config
 
           var config = new Config(configFolder, settings, keyIdenti);
           return config;
+     }
+     public bool TryCheckExist()
+     {
+          if (!Directory.Exists(ConfigFolder))
+               return false;
+          if (!File.Exists(Settings))
+               return false;
+          return File.Exists(KeyIdenti);
      }
      public void CheckExist()
      {

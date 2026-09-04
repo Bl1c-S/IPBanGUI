@@ -2,11 +2,11 @@
 using Logic_IPBanUtility.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
@@ -88,10 +88,10 @@ public class IPListViewModel : PageViewModelBase
           ChangeInfoMessage(ToolTips.ReloadIPBanService);
 
           PageButtons.Add(CreateButtonWithTitle(
-               IAddIPCommand, Wpf.Ui.Common.SymbolRegular.Add24,
+               IAddIPCommand, SymbolRegular.Add24,
                ButtonNames.Add, ToolTips.AddIpView));
           PageButtons.Add(CreateButtonWithTitle(
-               IUpdateAllCommand, Wpf.Ui.Common.SymbolRegular.ArrowSync24,
+               IUpdateAllCommand, SymbolRegular.ArrowSync24,
                ButtonNames.Update, ToolTips.UpdateIPLists, new(4, 0, 0, 0)));
      }
 

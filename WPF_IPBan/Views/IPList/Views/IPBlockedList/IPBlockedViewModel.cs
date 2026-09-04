@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Wpf.Ui.Common;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
 
@@ -16,7 +15,9 @@ namespace WPF_IPBanUtility
           private const string format = "yyyy.MM.dd HH:mm:ss";
           private readonly IPAddressEntity _iPAddressEntity;
 
-          public IPBlockedViewModel(IPAddressEntity ip, Action<IPAddressEntity> addToWhiteList, Action<IPAddressEntity> addToBlackList, Action<IPAddressEntity> remove, Action<IPBlockedViewModel> dispose) :
+          public IPBlockedViewModel(IPAddressEntity ip, Action<IPAddressEntity> addToWhiteList,
+               Action<IPAddressEntity> addToBlackList, Action<IPAddressEntity> remove,
+               Action<IPBlockedViewModel> dispose) :
                base(ip.IPAddressText)
           {
                _iPAddressEntity = ip;
@@ -30,14 +31,16 @@ namespace WPF_IPBanUtility
 
                Buttons = CreateButtons();
           }
+
           private string GetBanDateMessage()
           {
                var banDate = _iPAddressEntity.BanDate?.ToString(format);
                var banEndDate = _iPAddressEntity.BanEndDate?.ToString(format);
 
-               if (banDate == null) return string.Empty;
-               else return $"{banDate} - {banEndDate}";
+               if (banDate == null) return string.Empty; 
+               return $"{banDate} - {banEndDate}";
           }
+
           private void SetStatus(bool isBaned)
           {
                var icon = isBaned ? SymbolRegular.Timer24 : SymbolRegular.Warning24;
@@ -61,8 +64,10 @@ namespace WPF_IPBanUtility
                     }
                     catch (Exception ex)
                     {
-                         var copyError = () => { System.Windows.Clipboard.SetText(ex.Message); };
-                         DialogMessageBox.ActionBox(copyError, Properties.Status.Error, $"{ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy);
+                         void CopyError() => Clipboard.SetText(ex.Message);
+
+                         DialogMessageBox.ActionBoxAsync(CopyError, Properties.Status.Error,
+                              $"{ex.Message}\r\n{ex.InnerException}", ButtonNames.Copy, ButtonNames.Close).Wait();
                     }
                });
           }
@@ -72,10 +77,10 @@ namespace WPF_IPBanUtility
                Thickness margin = new(2);
                return new()
                {
-                   CreateButton(ICopyCommand, SymbolRegular.Copy20,  ToolTips.Copy, margin),
-                   CreateButton(IAddToWiteListCommand, SymbolRegular.CheckmarkCircle20, ToolTips.ToWiteList, margin),
-                   CreateButton(IRemoveCommand, SymbolRegular.Delete20,ToolTips.RemoveBlockList,margin),
-                   CreateButton(IAddToBlackListCommand, SymbolRegular.Prohibited20, ToolTips.ToBlackList, margin)
+                    CreateButton(ICopyCommand, SymbolRegular.Copy20, ToolTips.Copy, margin),
+                    CreateButton(IAddToWiteListCommand, SymbolRegular.CheckmarkCircle20, ToolTips.ToWiteList, margin),
+                    CreateButton(IRemoveCommand, SymbolRegular.Delete20, ToolTips.RemoveBlockList, margin),
+                    CreateButton(IAddToBlackListCommand, SymbolRegular.Prohibited20, ToolTips.ToBlackList, margin)
                };
           }
 

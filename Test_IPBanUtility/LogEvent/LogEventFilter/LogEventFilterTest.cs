@@ -1,6 +1,7 @@
 ﻿using Logic_IPBanUtility.Logic.LogFile;
+using Logic_IPBanUtility.Logic.LogFile.Services;
 
-namespace LogEventTest;
+namespace LogEventTests;
 
 [TestClass]
 public class LogEventFilterTest

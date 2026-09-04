@@ -6,11 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_IPBanUtility"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
-        Title="Torgsoft IPBanGUI v1.4.1"
+        Title="Torgsoft IPBanGUI v1.5.0"
         Height="700" MinHeight="200" Width="1000" MinWidth="700">
     <Grid Margin="8,0">
         <Grid.RowDefinitions>

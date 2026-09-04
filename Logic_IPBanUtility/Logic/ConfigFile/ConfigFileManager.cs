@@ -1,9 +1,8 @@
-﻿using Logic_IPBanUtility.Models;
+﻿using System.Text.Json;
+using Logic_IPBanUtility.Models;
 using Logic_IPBanUtility.Services;
-using Logic_IPBanUtility.Setting;
-using System.Text.Json;
 
-namespace Logic_IPBanUtility;
+namespace Logic_IPBanUtility.Logic.ConfigFile;
 
 public class ConfigFileManager
 {
@@ -13,10 +12,10 @@ public class ConfigFileManager
      private readonly string _contextPath;
      private readonly string _keyIdentiPath;
 
-     public ConfigFileManager(Settings settings, FileManager fileManager)
+     public ConfigFileManager(Settings.Settings settings, FileManager fileManager)
      {
           _fileManager = fileManager;
-          _contextPath = settings.IPBan.Context;
+          _contextPath = settings.IpBan.Context;
           _keyIdentiPath = settings.Config.KeyIdenti;
           UpdateContex();
      }

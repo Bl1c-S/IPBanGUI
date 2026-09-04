@@ -1,6 +1,4 @@
-﻿using Logic_IPBanUtility.Setting;
-
-namespace Logic_IPBanUtility.Logic.IPList.Services
+﻿namespace Logic_IPBanUtility.Logic.IPList.Services
 {
      /// <summary>
      /// We have to create a .txt file with the IPs we will not unban
@@ -9,9 +7,9 @@ namespace Logic_IPBanUtility.Logic.IPList.Services
      {
           private readonly string filePath;
           private readonly List<string> unBanList = new();
-          public UnBanService(Settings settings)
+          public UnBanService(Settings.Settings settings)
           {
-               filePath = Path.Combine(settings.IPBan.Folder, "unban.txt");
+               filePath = Path.Combine(settings.IpBan.Folder, "unban.txt");
           }
 
           public void CreateFile() => File.WriteAllLines(filePath, unBanList);

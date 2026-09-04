@@ -1,9 +1,8 @@
 ﻿using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
-using Logic_IPBanUtility.Setting;
 using Test_IPBanUtility;
 
-namespace ConfigFile;
+namespace ConfigFileTests;
 
 [TestClass]
 public class KeyValueManagerTest
@@ -14,10 +13,8 @@ public class KeyValueManagerTest
 
      public KeyValueManagerTest()
      {
-          TestIPBan _testIPBan = new("TestCfg\\");
-          SettingsBuilder sb = new();
-          sb.CreateDefaultSettings(_testIPBan.CreateEmptyIPBan());
-          _cfgManager = new ConfigFileManager(sb.Settings!, new());
+          IpBanTestHelper ipBanTestHelper = new();
+          _cfgManager = new ConfigFileManager(ipBanTestHelper.Settings, new());
           _keyManager = new(_cfgManager);
      }
 

@@ -4,19 +4,20 @@ using System.Windows.Data;
 
 namespace WPF_IPBanUtility;
 
-public class CurrentPageNameToActiveConverter : IValueConverter
+public class CurrentPageNameToActiveConverter : IMultiValueConverter
 {
-     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
      {
-          if (value is string currentPageName && parameter is string selectedPageName)
-          {
-               return currentPageName != selectedPageName ? string.Empty : selectedPageName;
-          }
-          return string.Empty;
+          var currentPageName = values.Length > 0 ? values[0] as string : null;
+          var title = values.Length > 1 ? values[1] as string : null;
+
+          return currentPageName is not null && currentPageName == title
+               ? title ?? string.Empty
+               : string.Empty;
      }
 
-     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
      {
-          throw new NotImplementedException();
+          throw new NotSupportedException();
      }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Logic_IPBanUtility.Logic.LogFile.Services;
 using WPF_IPBanUtility.Properties;
 
 namespace WPF_IPBanUtility;

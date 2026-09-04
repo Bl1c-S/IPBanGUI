@@ -1,19 +1,18 @@
 ﻿using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
-using Logic_IPBanUtility.Setting;
 
 namespace Logic_IPBanUtility.Logic.IPList;
 
-public class IPBlockedListService
+public class IpBlockedListService
 {
      public Action ApplyRemove => _iPManager.ApplyRemove;
-     public List<IPAddressEntity> IPs => _iPManager.IPAddress;
-     public Action? IPsChanged { get => _iPManager.IPAddressChanged; set => _iPManager.IPAddressChanged = value; }
+     public List<IPAddressEntity> IPs => _iPManager.IpAddress;
+     public Action? IPsChanged { get => _iPManager.IpAddressChanged; set => _iPManager.IpAddressChanged = value; }
 
-     private readonly IPAddressManager _iPManager;
+     private readonly IPAddressManager.IpAddressManager _iPManager;
      private readonly KeyValueManager _keyManager;
 
-     public IPBlockedListService(KeyValueManager keyManager, Settings settings)
+     public IpBlockedListService(KeyValueManager keyManager, Settings.Settings settings)
      {
           _keyManager = keyManager;
           _iPManager = new(settings);
