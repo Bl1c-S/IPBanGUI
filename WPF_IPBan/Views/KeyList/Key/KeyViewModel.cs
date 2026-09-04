@@ -1,17 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 using Key = Logic_IPBanUtility.Models.Key;
 using WPF_IPBanUtility.Properties;
+using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
 public class KeyViewModel : ViewModelBase
 {
-     public Key Key;
-     public string Name => Key.Name;
-     public string Description => Key.Description;
+     public Key Key { get; }
+
+     public ObservableCollection<Button> Buttons { get; } = new();
 
      public string Value
      {
@@ -20,9 +21,10 @@ public class KeyViewModel : ViewModelBase
           {
                _value = value;
                CheckChanges();
-               OnPropertyChanged(nameof(Value));
+               OnPropertyChanged();
           }
      }
+
      private string _value;
 
      public KeyViewModel(Key key, Action<Key> saveKey, Action<KeyViewModel> hideKey, Action isChangedChange)
@@ -33,37 +35,52 @@ public class KeyViewModel : ViewModelBase
           SaveKeyEvent += saveKey;
           HideKeyEvent += hideKey;
 
-          IDescriptionVisibilityChangeCommand = new RelayCommand(DescriptionVisibilityChange);
-          IPreviousCommand = new RelayCommand(PreviousValue);
-          ISaveKeyCommand = new RelayCommand(SaveKey);
-          IHideKeyCommand = new RelayCommand(HideKey);
+          Buttons.Add(CreateButton(new RelayCommand(DescriptionVisibilityChange),
+               SymbolRegular.QuestionCircle24, ToolTips.Description, new(4, 0, 0, 0))
+          );
+
+          Buttons.Add(CreateButton(new RelayCommand(SaveKey),
+               SymbolRegular.Save28, ToolTips.SaveChanges, new(4, 0, 0, 0))
+          );
+
+          Buttons.Add(CreateButton(new RelayCommand(PreviousValue),
+               SymbolRegular.ArrowHookUpLeft24, ToolTips.RevertChanges, new(4, 0, 0, 0))
+          );
+
+          Buttons.Add(CreateButton(new RelayCommand(HideKey),
+               SymbolRegular.EyeOff24, ToolTips.HideKey, new(4, 0, 0, 0))
+          );
      }
 
      #region Changed
+
      public event Action IsChangedChange;
      public string BorderCollor { get; private set; } = Collors.InActive;
 
-     private bool _isChanged = false;
+     private bool _isChanged;
+
      public bool IsChanged
      {
-          get => _isChanged; private set
+          get => _isChanged;
+          private set
           {
                if (_isChanged != value)
                {
                     _isChanged = value;
                     IsChangedChange.Invoke();
                     BorderCollor = _isChanged ? Collors.Active : Collors.InActive;
-                    OnPropertyChanged(nameof(IsChanged));
+                    OnPropertyChanged();
                     OnPropertyChanged(nameof(BorderCollor));
                }
           }
      }
+
      public void CheckChanges() => IsChanged = Key.Value != _value;
+
      #endregion
 
-     #region Description
-     public ICommand IDescriptionVisibilityChangeCommand { get; }
      public Visibility DescriptionVisibility { get; set; } = Visibility.Collapsed;
+
      private void DescriptionVisibilityChange()
      {
           if (DescriptionVisibility != Visibility.Visible)
@@ -72,10 +89,7 @@ public class KeyViewModel : ViewModelBase
                DescriptionVisibility = Visibility.Collapsed;
           OnPropertyChanged(nameof(DescriptionVisibility));
      }
-     #endregion
 
-     #region SaveChanged
-     public ICommand ISaveKeyCommand { get; }
      public event Action<Key> SaveKeyEvent;
 
      public void SaveKey()
@@ -86,23 +100,13 @@ public class KeyViewModel : ViewModelBase
                CheckChanges();
           }
      }
-     #endregion
 
-     #region ReturnPrevious
-     public ICommand IPreviousCommand { get; }
+     public void PreviousValue() => Value = Key.Value;
 
-     public void PreviousValue()
-     {
-          Value = Key.Value;
-     }
-     #endregion
-
-     #region HideKey
-     public ICommand IHideKeyCommand { get; }
      public event Action<KeyViewModel> HideKeyEvent;
+
      private void HideKey()
      {
-          HideKeyEvent?.Invoke(this);
+          HideKeyEvent.Invoke(this);
      }
-     #endregion
 }
