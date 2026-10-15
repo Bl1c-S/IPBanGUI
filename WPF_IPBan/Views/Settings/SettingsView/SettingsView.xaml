@@ -25,7 +25,7 @@
             <ItemsControl ItemsSource="{Binding VMs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource StandartBorder}" Margin="0,4,4,4">
+                        <Border Style="{StaticResource StandartBorder}" Margin="20,4,20,4">
                             <ContentControl  Content="{Binding}" Margin="4" />
                         </Border>
                     </DataTemplate>
