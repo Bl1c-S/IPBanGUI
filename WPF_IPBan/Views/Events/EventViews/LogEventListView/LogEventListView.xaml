@@ -11,7 +11,7 @@
                      AutoGenerateColumns="False"
                      BorderThickness="10,1,10,1"
                      CanUserReorderColumns="False"
-                     HorizontalScrollBarVisibility="Auto">
+                     HorizontalScrollBarVisibility="Disabled">
 
             <ui:DataGrid.Columns>
                 <DataGridTextColumn Header="Номер"
@@ -32,7 +32,14 @@
 
                 <DataGridTextColumn Header="Опис"
                                     Binding="{Binding Message, Mode=OneWay}"
-                                    Width="Auto"/>
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </ui:DataGrid.Columns>
         </ui:DataGrid>
     </Grid>

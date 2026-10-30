@@ -20,7 +20,7 @@
             <ItemsControl ItemsSource="{Binding KeyIndentis}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray" Background="#2C2C2C"  BorderThickness="1"  CornerRadius="4" Margin="0,4,4,4" Padding="2,0,2,0">
+                        <Border BorderBrush="Gray" Background="#2C2C2C"  BorderThickness="1"  CornerRadius="4" Margin="0,4,20,4" Padding="2,0,2,0">
                             <StackPanel>
                                 <CheckBox Content="{Binding Name}" IsChecked="{Binding IsHidden}"/>
                             </StackPanel>
