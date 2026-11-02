@@ -12,22 +12,22 @@
                     Visibility="{Binding BorderVisibility}" />
             <Grid Margin="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" MinWidth="150" SharedSizeGroup="StatusCol" />
-                    <ColumnDefinition Width="auto" MinWidth="160" SharedSizeGroup="TitleCol" />
+                    <ColumnDefinition Width="auto" MinWidth="130" SharedSizeGroup="StatusCol" />
+                    <ColumnDefinition Width="auto" MinWidth="130" SharedSizeGroup="TitleCol" />
                     <ColumnDefinition Width="auto" SharedSizeGroup="MessageCol" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <DockPanel Grid.Column="0" ToolTip="{Binding Status.Message}" VerticalAlignment="Center">
-                    <ui:SymbolIcon Symbol="{Binding Status.Icon}" HorizontalAlignment="Left" Margin="6, 2" />
-                    <TextBlock Text="{Binding Status.Title}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <ui:SymbolIcon Symbol="{Binding Status.Icon}" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Status.Title}" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="4, 0"/>
                 </DockPanel>
 
                 <TextBlock Grid.Column="1" Margin="10, 0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                           Text="{Binding Title}" FontSize="16" Padding="2, 0" />
+                           Text="{Binding Title}" FontSize="16" />
 
                 <Label Grid.Column="2" Margin="10, 0" VerticalAlignment="Center" HorizontalAlignment="Left"
-                       Content="{Binding Message}" FontSize="14" Padding="2, 0" />
+                       Content="{Binding Message}" FontSize="14" Padding="24, 0" />
 
                 <ItemsControl Grid.Column="3" ItemsSource="{Binding Buttons}" HorizontalAlignment="Right"
                               VerticalAlignment="Center">

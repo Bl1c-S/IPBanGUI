@@ -60,7 +60,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Заблоковані - Чорний список.
+        ///   Looks up a localized string similar to Чорний список - Заблоковані назавжди.
         /// </summary>
         public static string BlackList {
             get {
@@ -69,7 +69,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Карантин - Адреси з невдалими спробами входу.
+        ///   Looks up a localized string similar to Карантин - Тимчасово заблоковані.
         /// </summary>
         public static string BlockList {
             get {
@@ -213,7 +213,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Дозволені - Білий список.
+        ///   Looks up a localized string similar to Білий список - Завжди дозволені.
         /// </summary>
         public static string WhiteList {
             get {
