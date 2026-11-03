@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BlackList" xml:space="preserve">
-    <value>Заблоковані - Чорний список</value>
+    <value>Чорний список - Заблоковані назавжди</value>
   </data>
   <data name="BlockList" xml:space="preserve">
-    <value>Карантин - Адреси з невдалими спробами входу</value>
+    <value>Карантин - Тимчасово заблоковані</value>
   </data>
   <data name="ClearLogsTitle" xml:space="preserve">
     <value>Журнал подій</value>
@@ -163,7 +163,7 @@
     <value>Оновлення</value>
   </data>
   <data name="WhiteList" xml:space="preserve">
-    <value>Дозволені - Білий список</value>
+    <value>Білий список - Завжди дозволені</value>
   </data>
   <data name="Docs" xml:space="preserve">
     <value>Документація</value>

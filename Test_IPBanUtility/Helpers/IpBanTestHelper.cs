@@ -1,13 +1,13 @@
-﻿using Logic_IPBanUtility.Setting;
+using Logic_IPBanUtility.Setting;
 using Logic_IPBanUtility.Settings;
 
 namespace Test_IPBanUtility;
 
 public class IpBanTestHelper
 {
-     internal readonly Settings Settings;
-     internal IPBan IpBan => Settings.IpBan;
-     internal string Folder => IpBan.Folder;
+     public readonly Settings Settings;
+     public IPBan IpBan => Settings.IpBan;
+     public string Folder => IpBan.Folder;
      private string TestCfg => IpBan.Context;
 
      public IpBanTestHelper()
