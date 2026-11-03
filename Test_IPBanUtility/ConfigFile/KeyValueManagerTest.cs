@@ -1,4 +1,4 @@
-﻿using Logic_IPBanUtility.Logic.ConfigFile;
+using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
 using Test_IPBanUtility;
 
@@ -107,6 +107,25 @@ public class KeyValueManagerTest
           var expectedIPs = $"{testIPs}, {testIPs}";
 
           RemoveTest(testingIPs, expectedIPs);
+     }
+     #endregion
+
+     #region RemoveAllIpsFromKey
+     [TestMethod]
+     public void RemoveAllIpsFromKey_WhenIPsExist()
+     {
+          var testingIPs = "1.1.1.1, 2.2.2.2, 3.3.3.3";
+          SetInitialKeyValues(KeyNames.Whitelist, testingIPs);
+          _keyManager.RemoveAllIpsFromKey(KeyNames.Whitelist);
+          AssertKeyValues(KeyNames.Whitelist, string.Empty);
+     }
+
+     [TestMethod]
+     public void RemoveAllIpsFromKey_WhenEmpty()
+     {
+          SetInitialKeyValues(KeyNames.Whitelist, string.Empty);
+          _keyManager.RemoveAllIpsFromKey(KeyNames.Whitelist);
+          AssertKeyValues(KeyNames.Whitelist, string.Empty);
      }
      #endregion
 
