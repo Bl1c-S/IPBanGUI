@@ -129,6 +129,32 @@ public class KeyValueManagerTest
      }
      #endregion
 
+     #region AddIpsToKey
+     [TestMethod]
+     public void AddIpsToKey_WhenKeyIsEmpty()
+     {
+          SetInitialKeyValues(KeyNames.Blacklist, string.Empty);
+          _keyManager.AddIpsToKey(KeyNames.Blacklist, new[] { "1.1.1.1", "2.2.2.2" });
+          AssertKeyValues(KeyNames.Blacklist, "1.1.1.1, 2.2.2.2");
+     }
+
+     [TestMethod]
+     public void AddIpsToKey_WhenKeyHasValues()
+     {
+          SetInitialKeyValues(KeyNames.Blacklist, "0.0.0.0");
+          _keyManager.AddIpsToKey(KeyNames.Blacklist, new[] { "1.1.1.1", "2.2.2.2" });
+          AssertKeyValues(KeyNames.Blacklist, "0.0.0.0, 1.1.1.1, 2.2.2.2");
+     }
+
+     [TestMethod]
+     public void AddIpsToKey_WhenIpsEmpty_DoesNothing()
+     {
+          SetInitialKeyValues(KeyNames.Blacklist, "0.0.0.0");
+          _keyManager.AddIpsToKey(KeyNames.Blacklist, Array.Empty<string>());
+          AssertKeyValues(KeyNames.Blacklist, "0.0.0.0");
+     }
+     #endregion
+
      #region TestFactory
      private void AddTest(string testingIPs, string expectedIPs, KeyNames name = KeyNames.Whitelist)
      {
