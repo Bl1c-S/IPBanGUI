@@ -33,5 +33,11 @@ public class IpBlockedListService
           Remove(ip);
           _keyManager.AddIpToKey(KeyNames.Blacklist, ip.IPAddressText);
      }
+     public void AddAllToBlacklist()
+     {
+          var currentIps = IPs.Select(ip => ip.IPAddressText).ToList();
+          RemoveAll();
+          _keyManager.AddIpsToKey(KeyNames.Blacklist, currentIps);
+     }
      #endregion
 }
