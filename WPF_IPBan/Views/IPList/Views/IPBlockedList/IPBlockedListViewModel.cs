@@ -9,7 +9,6 @@ using System.Windows;
 using Wpf.Ui.Controls;
 using WPF_IPBanUtility.Properties;
 using WPF_IPBanUtility.Views.IPList;
-using PlacementMode = System.Windows.Controls.Primitives.PlacementMode;
 
 namespace WPF_IPBanUtility;
 
@@ -32,23 +31,21 @@ public class IPBlockedListViewModel : IPListViewModelBase
           VMs = BuildVMs(_ipBlockedListService.IPs);
           IpListChanged();
           _ipBlockedListService.IPsChanged += IpBlockListChanged;
-          
+
           _moveAllToBlackListButton = CreateListHeaderButton(new RelayCommand(OpenConfirmMenuMoveAllToBlackList),
                SymbolRegular.Prohibited20, "Подсказка");
-          
+
           Buttons.Add(_moveAllToBlackListButton);
      }
 
      private void OpenConfirmMenuMoveAllToBlackList()
      {
-          Button button = new()
-          {
-               ContextMenu = CreateContextMenuConfirmation("текст предупреждения", new RelayCommand(AddAllToBlacklist), SymbolRegular.Prohibited20)
-          };
-          button.ContextMenu.PlacementTarget = button;
-          button.ContextMenu.Placement = PlacementMode.Bottom;
-          button.ContextMenu.IsOpen = true;
-          
+          _moveAllToBlackListButton.ContextMenu ??= CreateContextMenuConfirmation(
+               "текст предупреждения",
+               new RelayCommand(AddAllToBlacklist),
+               SymbolRegular.Prohibited20);
+
+          OpenContextMenu(_moveAllToBlackListButton);
      }
 
      public void AddAllToBlacklist()

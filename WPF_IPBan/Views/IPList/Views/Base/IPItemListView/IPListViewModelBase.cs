@@ -26,6 +26,7 @@ public class IPListViewModelBase : ViewModelBase
      public ObservableCollection<IPUserControlViewModelBase> VMs { get; protected set; } = [];
      public ObservableCollection<Button> Buttons { get; } = [];
 
+     private readonly Button _clearAllButton;
 
      protected IPListViewModelBase(string title, IPListViewProperties properties)
      {
@@ -34,19 +35,32 @@ public class IPListViewModelBase : ViewModelBase
 
           IClearAllCommand = new RelayCommand(ClearAll, () => HasItems);
 
-          Buttons.Add(CreateListHeaderButton(
+          _clearAllButton = CreateListHeaderButton(
                new RelayCommand(OpenClearConfirmMenu),
                SymbolRegular.Delete20,
-               "Подсказка"));
+               "Подсказка");
+
+          Buttons.Add(_clearAllButton);
      }
 
      private void OpenClearConfirmMenu()
      {
-          Button button = new()
-          {
-               ContextMenu = CreateContextMenuConfirmation("текст предупреждения", new RelayCommand(ClearAll),
-                    SymbolRegular.Delete20)
-          };
+          _clearAllButton.ContextMenu ??= CreateContextMenuConfirmation(
+               "текст предупреждения",
+               new RelayCommand(ClearAll),
+               SymbolRegular.Delete20);
+
+          OpenContextMenu(_clearAllButton);
+     }
+
+     protected void OpenContextMenu(Button button, ContextMenu? contextMenu = null)
+     {
+          if (contextMenu != null)
+               button.ContextMenu = contextMenu;
+
+          if (button.ContextMenu is null)
+               return;
+
           button.ContextMenu.PlacementTarget = button;
           button.ContextMenu.Placement = PlacementMode.Bottom;
           button.ContextMenu.IsOpen = true;
