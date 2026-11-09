@@ -87,15 +87,6 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to можна додати.
-        /// </summary>
-        internal static string CurrentIPAddress {
-            get {
-                return ResourceManager.GetString("CurrentIPAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Опис.
         /// </summary>
         internal static string Description {
@@ -132,11 +123,29 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to вже додано.
+        ///   Looks up a localized string similar to Вже додано.
         /// </summary>
-        internal static string IPAddressExist {
+        internal static string IPAddressAlreadyAdded {
             get {
-                return ResourceManager.GetString("IPAddressExist", resourceCulture);
+                return ResourceManager.GetString("IPAddressAlreadyAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Можна додати.
+        /// </summary>
+        internal static string IPAddressCanBeAdded {
+            get {
+                return ResourceManager.GetString("IPAddressCanBeAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перемістити всі адреси до списку заблокованих назавжди. Вони будуть заблоковані назавжди..
+        /// </summary>
+        internal static string MoveToBlackList {
+            get {
+                return ResourceManager.GetString("MoveToBlackList", resourceCulture);
             }
         }
         
@@ -146,6 +155,33 @@ namespace WPF_IPBanUtility.Properties {
         internal static string ReloadIPBanService {
             get {
                 return ResourceManager.GetString("ReloadIPBanService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Видалити всі адреси зі списку заблокованих назавжди. Після розблокування до адрес знову застосовуватиметься тимчасове блокування у разі невдалих спроб входу..
+        /// </summary>
+        internal static string RemoveAllBlackList {
+            get {
+                return ResourceManager.GetString("RemoveAllBlackList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Видалити всі адреси зі списку тимчасово заблокованих. Усім адресам буде скинуто лічильники невдалих спроб входу та блокувань..
+        /// </summary>
+        internal static string RemoveAllBlockList {
+            get {
+                return ResourceManager.GetString("RemoveAllBlockList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Видалити всі адреси зі списку дозволених назавжди. Після цього до адрес знову застосовуватиметься тимчасове блокування у разі невдалих спроб входу..
+        /// </summary>
+        internal static string RemoveAllWhiteList {
+            get {
+                return ResourceManager.GetString("RemoveAllWhiteList", resourceCulture);
             }
         }
         
@@ -186,7 +222,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to до чорного списку | Заблокувати назавжди.
+        ///   Looks up a localized string similar to до чорного списку. Завжди буде блокуватись..
         /// </summary>
         internal static string ToBlackList {
             get {
@@ -195,7 +231,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to до білого списку | Не буде блокуватись.
+        ///   Looks up a localized string similar to до білого списку. Ніколи не буде блокуватись..
         /// </summary>
         internal static string ToWiteList {
             get {

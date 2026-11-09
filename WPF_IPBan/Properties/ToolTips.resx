@@ -126,8 +126,8 @@
   <data name="Copy" xml:space="preserve">
     <value>Копіювати до буферу обміну</value>
   </data>
-  <data name="CurrentIPAddress" xml:space="preserve">
-    <value>можна додати</value>
+  <data name="IPAddressCanBeAdded" xml:space="preserve">
+    <value>Можна додати</value>
   </data>
   <data name="FailedLoginCount" xml:space="preserve">
     <value>Кількість невдалих спроб входу</value>
@@ -135,8 +135,8 @@
   <data name="IncorrectIPAddress" xml:space="preserve">
     <value>Введіть адресу, яка складається з чотирьох чисел від 0 до 255, з роздільником у вигляді крапки.</value>
   </data>
-  <data name="IPAddressExist" xml:space="preserve">
-    <value>вже додано</value>
+  <data name="IPAddressAlreadyAdded" xml:space="preserve">
+    <value>Вже додано</value>
   </data>
   <data name="ReloadIPBanService" xml:space="preserve">
     <value>Для застосування змін служба IPBan буде перезавантажена після закриття вікна.</value>
@@ -148,10 +148,10 @@
     <value>Видалити тільки з цього з списку</value>
   </data>
   <data name="ToBlackList" xml:space="preserve">
-    <value>до чорного списку | Заблокувати назавжди</value>
+    <value>до чорного списку. Завжди буде блокуватись.</value>
   </data>
   <data name="ToWiteList" xml:space="preserve">
-    <value>до білого списку | Не буде блокуватись</value>
+    <value>до білого списку. Ніколи не буде блокуватись.</value>
   </data>
   <data name="UpdateIPLists" xml:space="preserve">
     <value>Будуть перезавантажені всі списки IP-адрес.</value>
@@ -170,5 +170,17 @@
   </data>
   <data name="HideKey" xml:space="preserve">
     <value>Приховати ключ | В налаштуваннях можна знову увімкнути</value>
+  </data>
+  <data name="MoveToBlackList" xml:space="preserve">
+    <value>Перемістити всі адреси до списку заблокованих назавжди. Вони будуть заблоковані назавжди.</value>
+  </data>
+  <data name="RemoveAllBlackList" xml:space="preserve">
+    <value>Видалити всі адреси зі списку заблокованих назавжди. Після розблокування до адрес знову застосовуватиметься тимчасове блокування у разі невдалих спроб входу.</value>
+  </data>
+  <data name="RemoveAllWhiteList" xml:space="preserve">
+    <value>Видалити всі адреси зі списку дозволених назавжди. Після цього до адрес знову застосовуватиметься тимчасове блокування у разі невдалих спроб входу.</value>
+  </data>
+  <data name="RemoveAllBlockList" xml:space="preserve">
+    <value>Видалити всі адреси зі списку тимчасово заблокованих. Усім адресам буде скинуто лічильники невдалих спроб входу та блокувань.</value>
   </data>
 </root>
