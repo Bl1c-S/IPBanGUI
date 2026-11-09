@@ -26,6 +26,7 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Style="{StaticResource StandartBorder}"
+                    HorizontalAlignment="Center"
                     Visibility="{Binding MyProperties.IPInputVisibility}">
                 <local:IPInputView DataContext="{Binding IPInputVM}" />
             </Border>
