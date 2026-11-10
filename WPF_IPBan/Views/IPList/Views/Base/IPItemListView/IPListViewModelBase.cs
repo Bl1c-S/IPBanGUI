@@ -82,11 +82,16 @@ public class IPListViewModelBase : ViewModelBase
      protected ContextMenu CreateContextMenuConfirmation(string warningText,
           IRelayCommand command, SymbolRegular icon)
      {
-          var menu = new ContextMenu();
+          var menu = new ContextMenu { Width = 250 };
+
           menu.Items.Add(new MenuItem
           {
-               Header = warningText,
-               IsEnabled = false
+               IsEnabled = false,
+               Header = new TextBlock
+               {
+                    Text = warningText,
+                    TextWrapping = TextWrapping.Wrap
+               }
           });
           menu.Items.Add(new MenuItem
           {

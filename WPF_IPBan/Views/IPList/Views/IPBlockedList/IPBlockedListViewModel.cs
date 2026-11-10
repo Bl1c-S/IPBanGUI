@@ -33,7 +33,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
           _ipBlockedListService.IPsChanged += IpBlockListChanged;
 
           _moveAllToBlackListButton = CreateListHeaderButton(new RelayCommand(OpenConfirmMenuMoveAllToBlackList),
-               SymbolRegular.Prohibited20, "Подсказка");
+               SymbolRegular.Prohibited20, ToolTips.MoveToBlackList);
 
           Buttons.Add(_moveAllToBlackListButton);
      }
@@ -41,7 +41,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
      private void OpenConfirmMenuMoveAllToBlackList()
      {
           _moveAllToBlackListButton.ContextMenu ??= CreateContextMenuConfirmation(
-               "текст предупреждения",
+               ToolTips.MoveToBlackList,
                new RelayCommand(AddAllToBlacklist),
                SymbolRegular.Prohibited20);
 

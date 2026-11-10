@@ -141,7 +141,7 @@ namespace WPF_IPBanUtility.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Перемістити всі адреси до списку заблокованих назавжди. Вони будуть заблоковані назавжди..
+        ///   Looks up a localized string similar to Перемістити всі адреси до чорного списку. Вони будуть заблоковані назавжди..
         /// </summary>
         internal static string MoveToBlackList {
             get {
