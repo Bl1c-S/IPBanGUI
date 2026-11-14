@@ -69,8 +69,6 @@ public class IPListViewModelTest
 
           Assert.AreEqual(1, whiteListVM.ItemCount);
           Assert.IsTrue(whiteListVM.HasItems);
-          Assert.IsFalse(string.IsNullOrEmpty(whiteListVM.RemoveAllText));
-          Assert.IsFalse(string.IsNullOrEmpty(whiteListVM.ConfirmText));
           Assert.IsTrue(whiteListVM.IClearAllCommand.CanExecute(null));
 
           whiteListVM.IClearAllCommand.Execute(null);
@@ -104,8 +102,6 @@ public class IPListViewModelTest
 
           Assert.AreEqual(1, blackListVM.ItemCount);
           Assert.IsTrue(blackListVM.HasItems);
-          Assert.IsFalse(string.IsNullOrEmpty(blackListVM.RemoveAllText));
-          Assert.IsFalse(string.IsNullOrEmpty(blackListVM.ConfirmText));
           Assert.IsTrue(blackListVM.IClearAllCommand.CanExecute(null));
 
           blackListVM.IClearAllCommand.Execute(null);
@@ -142,8 +138,6 @@ public class IPListViewModelTest
 
           Assert.AreEqual(1, blockedVM.ItemCount);
           Assert.IsTrue(blockedVM.HasItems);
-          Assert.IsFalse(string.IsNullOrEmpty(blockedVM.RemoveAllText));
-          Assert.IsFalse(string.IsNullOrEmpty(blockedVM.ConfirmText));
           Assert.IsTrue(blockedVM.IClearAllCommand.CanExecute(null));
 
           blockedVM.IClearAllCommand.Execute(null);

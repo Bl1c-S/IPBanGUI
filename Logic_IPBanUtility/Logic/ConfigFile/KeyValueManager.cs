@@ -1,4 +1,4 @@
-﻿using Logic_IPBanUtility.Models;
+using Logic_IPBanUtility.Models;
 
 namespace Logic_IPBanUtility.Logic.ConfigFile;
 
@@ -23,6 +23,22 @@ public class KeyValueManager
           _cfgManager.WriteKey(key);
           KeyContextChanged?.Invoke(keyName);
      }
+     public void AddIpsToKey(KeyNames keyName, IEnumerable<string> ips)
+     {
+          var ipList = ips.Where(ip => !string.IsNullOrWhiteSpace(ip)).ToList();
+          if (ipList.Count == 0)
+               return;
+
+          var key = _cfgManager.GetKey(keyName);
+          var appended = string.Join(", ", ipList);
+          if (string.IsNullOrWhiteSpace(key.Value))
+               key.SetValue(appended);
+          else
+               key.SetValue($"{key.Value}, {appended}");
+
+          _cfgManager.WriteKey(key);
+          KeyContextChanged?.Invoke(keyName);
+     }
      public void RemoveIpFromKey(KeyNames keyName, string ip)
      {
           var key = _cfgManager.GetKey(keyName);
@@ -33,6 +49,16 @@ public class KeyValueManager
                _cfgManager.WriteKey(key);
                KeyContextChanged?.Invoke(keyName);
           }
+     }
+     public void RemoveAllIpsFromKey(KeyNames keyName)
+     {
+          var key = _cfgManager.GetKey(keyName);
+          if (string.IsNullOrEmpty(key.Value))
+               return;
+
+          key.SetValue(string.Empty);
+          _cfgManager.WriteKey(key);
+          KeyContextChanged?.Invoke(keyName);
      }
      public string[] GetIpListWithKey(KeyNames keyName)
      {

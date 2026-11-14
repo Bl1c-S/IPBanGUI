@@ -145,13 +145,13 @@ public class IPInputViewModel : ViewModelBase
                {
                     IsValidIP = true;
                     CollorField = Collors.GreanCollor;
-                    ToolTip = $"{_ipAddress} {ToolTips.CurrentIPAddress} {_selectedEndText.Invoke()}";
+                    ToolTip = $"{ToolTips.IPAddressCanBeAdded} {_selectedEndText.Invoke()}";
                }
                else
                {
                     IsValidIP = false;
                     CollorField = Collors.YelowCollor;
-                    ToolTip = $"{_ipAddress} {ToolTips.IPAddressExist} {_selectedEndText.Invoke()}";
+                    ToolTip = $"{ToolTips.IPAddressAlreadyAdded} {_selectedEndText.Invoke()}";
                }
           }
           private bool IsNewIP(string ip)

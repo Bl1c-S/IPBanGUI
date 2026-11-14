@@ -1,4 +1,4 @@
-﻿using Logic_IPBanUtility.Logic.ConfigFile;
+using Logic_IPBanUtility.Logic.ConfigFile;
 using Logic_IPBanUtility.Models;
 using System;
 using System.Collections.Generic;
@@ -14,37 +14,38 @@ public class KeyIPListViewModelBase : IPListViewModelBase
      private readonly IPStatus _status;
      private KeyNames _keyName;
      public KeyValueManager _keyManager { get; }
-     public string[] IPs = new string[] { };
+     public string[] IPs = [];
 
-     public KeyIPListViewModelBase(KeyNames key, IPStatus status, KeyValueManager keyManager, string title, IPListViewProperties properties) :
-          base(title, properties)
+     public KeyIPListViewModelBase(KeyNames key, IPStatus status, KeyValueManager keyManager,
+          IPListViewProperties properties) :
+          base(properties)
      {
-          ListChanged += IPListChanged;
+          ListChanged += IpListChanged;
           _status = status;
           _keyName = key;
           _keyManager = keyManager;
-          IPListChanged();
+          IpListChanged();
      }
 
      public ObservableCollection<KeyIPUserControlViewModel> BuildVMs(string[] ips)
      {
-          {
-               var result = new List<KeyIPUserControlViewModel>();
-               if (ips.Length == 0)
-                    return new(result);
-
-               var firstVm = CreateVM(ips[0]);
-               firstVm.BorderVisibility = Visibility.Collapsed;
-               result.Add(firstVm);
-
-               for (var id = 1; id < ips.Length; id++)
-               {
-                    var vm = CreateVM(ips[id]);
-                    result.Add(vm);
-               }
+          var result = new List<KeyIPUserControlViewModel>();
+          if (ips.Length == 0)
                return new(result);
+
+          var firstVm = CreateVM(ips[0]);
+          firstVm.BorderVisibility = Visibility.Collapsed;
+          result.Add(firstVm);
+
+          for (var id = 1; id < ips.Length; id++)
+          {
+               var vm = CreateVM(ips[id]);
+               result.Add(vm);
           }
+
+          return new(result);
      }
+
      public KeyIPUserControlViewModel CreateVM(string ip)
      {
           return new(ip,
@@ -52,40 +53,38 @@ public class KeyIPListViewModelBase : IPListViewModelBase
                RemoveItem,
                DisposeItem);
      }
+
      private void RemoveItem(string ip)
      {
           _keyManager.RemoveIpFromKey(_keyName, ip);
           ListChanged?.Invoke(true);
      }
-     public override void Update()
-     {
-          var newIps = GetIps();
-          var changeFunc = () =>
-          {
-               IPs = newIps;
-               IPListChanged();
-               return;
-          };
 
-          if (IPs.Length != newIps.Length)
-               changeFunc.Invoke();
-          for (int i = 0; i < IPs.Length; i++)
-          {
-               if (!IPs[i].Equals(newIps[i], StringComparison.Ordinal))
-                    changeFunc.Invoke();
-          }
+     public override void RemoveAll()
+     {
+          if (IPs.Length == 0)
+               return;
+
+          _keyManager.RemoveAllIpsFromKey(_keyName);
+          VMs.Clear();
+          ListChanged?.Invoke(true);
      }
-     protected override void IPListChanged(bool currentVMChanged = false)
+
+     protected override void IpListChanged(bool currentVmChanged = false)
      {
           IPs = GetIps();
           VMs = new(BuildVMs(IPs));
-          base.IPListChanged(currentVMChanged);
+          base.IpListChanged(currentVmChanged);
      }
+
      private string[] GetIps() => _keyManager.GetIpListWithKey(_keyName);
 
      public override void Dispose()
      {
-          ListChanged -= IPListChanged;
+          ListChanged -= IpListChanged;
+          foreach (var vm in VMs)
+               vm.Dispose();
+          VMs.Clear();
           base.Dispose();
      }
 }

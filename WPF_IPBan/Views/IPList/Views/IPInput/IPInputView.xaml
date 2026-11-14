@@ -19,7 +19,7 @@
                      Text="{Binding IPValidator.IpAddress, UpdateSourceTrigger=PropertyChanged}"
                      KeyDown="TextBox_KeyDown" ClearButtonEnabled="True"/>
 
-            <TextBlock Margin="4" HorizontalAlignment="Left" Text="{Binding IPValidator.ToolTip}" TextWrapping="WrapWithOverflow" Width="350"/>
+            <TextBlock Margin="4" HorizontalAlignment="Left" Text="{Binding IPValidator.ToolTip}" TextWrapping="WrapWithOverflow" MinWidth="650"/>
             
             <Button Margin="4" Content="{Binding AddText}" Command="{Binding AddNewIPCommand}" IsEnabled="{Binding IPValidator.IsValidIP}"/>
         </StackPanel>

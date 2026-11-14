@@ -33,7 +33,7 @@ public class IPListViewModel : PageViewModelBase
           _applyRemove = vmsResult.ApplyRemove;
 
           foreach (var vm in VMs)
-               vm.VMChanged += PageChanged;
+               vm.VmChanged += PageChanged;
 
           IUpdateAllCommand = new RelayCommand(UpdateAll);
           IAddIPCommand = new RelayCommand(ChangeIPInputVisibility);
@@ -55,6 +55,7 @@ public class IPListViewModel : PageViewModelBase
      #region Update
      public ICommand IUpdateAllCommand { get; }
      private void UpdateAll() => VMs.ForEach(x => x.Update());
+     
      #endregion
 
      #region Changed
@@ -100,7 +101,7 @@ public class IPListViewModel : PageViewModelBase
           ApplyChanges(new[] { ApplyOptions.Await });
           foreach (var vm in VMs)
           {
-               vm.VMChanged -= PageChanged;
+               vm.VmChanged -= PageChanged;
                vm.Dispose();
           }
           VMs.Clear();
