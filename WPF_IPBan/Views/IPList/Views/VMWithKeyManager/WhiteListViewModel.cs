@@ -6,11 +6,9 @@ using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
-public class WhiteListViewModel : KeyIPListViewModelBase
+public class WhiteListViewModel(KeyValueManager keyManager, IPListViewProperties properties)
+     : KeyIPListViewModelBase(KeyNames.Whitelist, SetStatus(), keyManager, properties)
 {
-     public WhiteListViewModel(KeyValueManager keyManager, IPListViewProperties properties) :
-          base(KeyNames.Whitelist, SetStatus(), keyManager, PageNames.WhiteList, properties)
-     { }
      private static IPStatus SetStatus()
      {
           var icon = SymbolRegular.CheckmarkCircle20;

@@ -17,38 +17,37 @@ public class IPBlockedListViewModel : IPListViewModelBase
      private readonly IpBlockedListService _ipBlockedListService;
      private readonly Action<KeyNames>? _listChanged;
      public Action ApplyRemove => _ipBlockedListService.ApplyRemove;
-     public IRelayCommand AddAllToBlackListCommand { get; }
+     private IRelayCommand MoveAllToBlackListCommand { get; }
      private readonly Button _moveAllToBlackListButton;
 
      public IPBlockedListViewModel(IpBlockedListService ipListService, IPListViewProperties properties,
           Action<KeyNames> iPListChanged) :
-          base(PageNames.BlockList, properties)
+          base(properties)
      {
           _listChanged = iPListChanged;
           _ipBlockedListService = ipListService;
-          AddAllToBlackListCommand = new RelayCommand(AddAllToBlacklist, () => HasItems);
+          MoveAllToBlackListCommand = new RelayCommand(AddAllToBlacklist, () => HasItems);
+
+          _moveAllToBlackListButton = CreateListHeaderButton(new RelayCommand(OpenConfirmMenuMoveAllToBlackList),
+               SymbolRegular.Prohibited20, ToolTips.MoveToBlackList);
+          Buttons.Add(_moveAllToBlackListButton);
 
           VMs = BuildVMs(_ipBlockedListService.IPs);
           IpListChanged();
           _ipBlockedListService.IPsChanged += IpBlockListChanged;
-
-          _moveAllToBlackListButton = CreateListHeaderButton(new RelayCommand(OpenConfirmMenuMoveAllToBlackList),
-               SymbolRegular.Prohibited20, ToolTips.MoveToBlackList);
-
-          Buttons.Add(_moveAllToBlackListButton);
      }
 
      private void OpenConfirmMenuMoveAllToBlackList()
      {
           _moveAllToBlackListButton.ContextMenu ??= CreateContextMenuConfirmation(
                ToolTips.MoveToBlackList,
-               new RelayCommand(AddAllToBlacklist),
+               MoveAllToBlackListCommand,
                SymbolRegular.Prohibited20);
 
           OpenContextMenu(_moveAllToBlackListButton);
      }
 
-     public void AddAllToBlacklist()
+     private void AddAllToBlacklist()
      {
           if (VMs.Count == 0)
                return;
@@ -75,7 +74,7 @@ public class IPBlockedListViewModel : IPListViewModelBase
                result.Add(vm);
           }
 
-          return new(result);
+          return new ObservableCollection<IPUserControlViewModelBase>(result);
      }
 
      private IPBlockedViewModel CreateVm(IPAddressEntity iPAddressEntity) => new(
@@ -123,10 +122,8 @@ public class IPBlockedListViewModel : IPListViewModelBase
      protected sealed override void IpListChanged(bool currentVmChanged = false)
      {
           OnPropertyChanged(nameof(VMs));
-          AddAllToBlackListCommand.NotifyCanExecuteChanged();
-          if (_moveAllToBlackListButton != null)
-               _moveAllToBlackListButton.IsEnabled = HasItems;
-
+          MoveAllToBlackListCommand.NotifyCanExecuteChanged();
+          _moveAllToBlackListButton.IsEnabled = HasItems;
           base.IpListChanged(currentVmChanged);
      }
 
@@ -141,13 +138,20 @@ public class IPBlockedListViewModel : IPListViewModelBase
 
      private void Cleanup()
      {
-          if (VMs.Count == 0)
-               return;
-
           foreach (var item in VMs)
                item.Dispose();
 
           VMs.Clear();
+     }
+
+     public override void RemoveAll()
+     {
+          if (VMs.Count == 0)
+               return;
+
+          Cleanup();
+          _ipBlockedListService.RemoveAll();
+          IpListChanged(true);
      }
 
      public override void Dispose()

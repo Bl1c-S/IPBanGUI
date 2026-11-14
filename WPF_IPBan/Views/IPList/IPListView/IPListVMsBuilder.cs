@@ -27,7 +27,7 @@ public class IPListVMsBuilder : IDisposable
 
           var iPInputVM = new IPInputViewModel(_keyManager.AddIpToKey, _listChangedActions.GetIPList, _keyManager.KeyContextChanged);
           var ipBlock = new IPBlockedListViewModel(_iPBlockedListService, properties.BlockList, _keyManager.KeyContextChanged);
-          var iPListVMs = new List<IPListViewModelBase>() { ipBlock, whiteList, blackList };
+          var iPListVMs = new List<IPListViewModelBase> { ipBlock, whiteList, blackList };
 
           return new(iPListVMs, iPInputVM, ipBlock.ApplyRemove);
      }

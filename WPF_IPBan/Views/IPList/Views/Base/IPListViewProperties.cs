@@ -1,13 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WPF_IPBanUtility.Views.IPList;
 
-public class IPListViewProperties : ObservableObject
+public class IPListViewProperties(string title, bool isExpanded) : ObservableObject
 {
-     public bool IsExpanded { get; set; }
-
-     public IPListViewProperties(bool isExpanded)
-     {
-          IsExpanded = isExpanded;
-     }
+     public string Title { get; } = title;
+     public bool IsExpanded { get; set; } = isExpanded;
 }

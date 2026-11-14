@@ -11,9 +11,9 @@ using PlacementMode = System.Windows.Controls.Primitives.PlacementMode;
 
 namespace WPF_IPBanUtility;
 
-public class IPListViewModelBase : ViewModelBase
+public abstract class IPListViewModelBase : ViewModelBase
 {
-     public string Title { get; }
+     public string Title => Properties.Title;
      public IPListViewProperties Properties { get; }
 
      public Action? VmChanged;
@@ -22,35 +22,38 @@ public class IPListViewModelBase : ViewModelBase
      public int ItemCount { get; private set; }
      public bool HasItems => ItemCount > 0;
 
-     public IRelayCommand IClearAllCommand { get; }
      public ObservableCollection<IPUserControlViewModelBase> VMs { get; protected set; } = [];
      public ObservableCollection<Button> Buttons { get; } = [];
 
-     private readonly Button _clearAllButton;
+     private IRelayCommand RemoveAllCommand { get; }
 
-     protected IPListViewModelBase(string title, IPListViewProperties properties)
+     private readonly Button _removeAllButton;
+
+     protected IPListViewModelBase(IPListViewProperties properties)
      {
-          Title = title;
           Properties = properties;
 
-          IClearAllCommand = new RelayCommand(ClearAll, () => HasItems);
+          RemoveAllCommand = new RelayCommand(RemoveAll, () => HasItems);
 
-          _clearAllButton = CreateListHeaderButton(
+          _removeAllButton = CreateListHeaderButton(
                new RelayCommand(OpenClearConfirmMenu),
                SymbolRegular.Delete20,
-               "Подсказка");
+               ToolTips.RemoveFromList);
 
-          Buttons.Add(_clearAllButton);
+          Buttons.Add(_removeAllButton);
      }
+
+     public abstract void RemoveAll();
+     public void ClearAll() => RemoveAll();
 
      private void OpenClearConfirmMenu()
      {
-          _clearAllButton.ContextMenu ??= CreateContextMenuConfirmation(
-               "текст предупреждения",
-               new RelayCommand(ClearAll),
+          _removeAllButton.ContextMenu ??= CreateContextMenuConfirmation(
+               ToolTips.RemoveFromList,
+               RemoveAllCommand,
                SymbolRegular.Delete20);
 
-          OpenContextMenu(_clearAllButton);
+          OpenContextMenu(_removeAllButton);
      }
 
      protected void OpenContextMenu(Button button, ContextMenu? contextMenu = null)
@@ -115,7 +118,7 @@ public class IPListViewModelBase : ViewModelBase
           OnPropertyChanged(nameof(VMs));
           OnPropertyChanged(nameof(ItemCountText));
           OnPropertyChanged(nameof(HasItems));
-          IClearAllCommand.NotifyCanExecuteChanged();
+          RemoveAllCommand.NotifyCanExecuteChanged();
 
           foreach (var b in Buttons)
                b.IsEnabled = HasItems;
@@ -125,10 +128,6 @@ public class IPListViewModelBase : ViewModelBase
      }
 
      public void Update()
-     {
-     }
-
-     public void ClearAll()
      {
      }
 }

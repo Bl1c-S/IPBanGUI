@@ -6,11 +6,9 @@ using Wpf.Ui.Controls;
 
 namespace WPF_IPBanUtility;
 
-public class BlackListViewModel : KeyIPListViewModelBase
+public class BlackListViewModel(KeyValueManager keyManager, IPListViewProperties properties)
+     : KeyIPListViewModelBase(KeyNames.Blacklist, SetStatus(), keyManager, properties)
 {
-     public BlackListViewModel(KeyValueManager keyManager, IPListViewProperties properties) :
-           base(KeyNames.Blacklist, SetStatus(), keyManager, PageNames.BlackList, properties)
-     { }
      private static IPStatus SetStatus()
      {
           var icon = SymbolRegular.Prohibited20;
